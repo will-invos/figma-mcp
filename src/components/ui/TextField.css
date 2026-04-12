@@ -89,12 +89,18 @@
 
 /* ========================================
  * Has-label type: floating label
+ *
+ * Fixed layout: padding always space/150 top/bottom.
+ * Label and input share the same space.
+ * Unfloated: label at 16px centered, input hidden.
+ * Floated: label shrinks to 12px at top, input visible below.
+ * No padding/gap changes → zero layout shift.
  * ======================================== */
 
-/* Default (empty + unfocused): label acts as placeholder at 16px */
 .ui-text-field--has-label .ui-text-field__content {
-  padding-top: var(--space-400);
-  padding-bottom: var(--space-400);
+  padding-top: var(--space-150);
+  padding-bottom: var(--space-150);
+  gap: var(--space-50);
 }
 
 .ui-text-field__label {
@@ -104,27 +110,19 @@
   line-height: 24px;
   color: var(--color-content-subtlest);
   pointer-events: none;
-  transition: font-size 0.15s, line-height 0.15s, color 0.15s, transform 0.15s;
-  transform-origin: left center;
+  transition: font-size 0.15s, line-height 0.15s, color 0.15s;
+  transform-origin: left top;
 }
 
-/* Hide native input in has-label when not floated (label IS the placeholder) */
+/* Input always in flow but invisible when not floated */
 .ui-text-field--has-label .ui-text-field__input {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  opacity: 0;
   height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: height 0.15s, opacity 0.15s;
 }
 
-/* Floated state: focus or has value → data-float on root */
-.ui-text-field--has-label.ui-text-field--float .ui-text-field__content {
-  padding-top: var(--space-150);
-  padding-bottom: var(--space-150);
-  gap: var(--space-50);
-}
-
+/* Floated: label shrinks, input appears */
 .ui-text-field--has-label.ui-text-field--float .ui-text-field__label {
   font-size: 12px;
   line-height: 18px;
@@ -132,9 +130,8 @@
 }
 
 .ui-text-field--has-label.ui-text-field--float .ui-text-field__input {
-  position: static;
+  height: 24px;
   opacity: 1;
-  height: auto;
 }
 
 /* Error label color */
