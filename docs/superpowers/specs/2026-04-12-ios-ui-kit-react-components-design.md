@@ -308,24 +308,53 @@ During implementation, extract actual hex values for both light and dark modes b
 
 Font families:
 - English: `'SF Pro', -apple-system, BlinkMacSystemFont, system-ui, sans-serif`
-- Chinese: `'PingFang TC', 'SF Pro TC', -apple-system, sans-serif`
+- Chinese: `'PingFang TC', -apple-system, sans-serif`
 
-Text style utility classes (iOS platform, from Figma):
+#### iOS Text Styles — English (SF Pro)
 
-| Class | Size | Weight | Line Height | Usage |
-|---|---|---|---|---|
-| `.text-ios-display` | 28px | 700 | 36px | H1, page headline |
-| `.text-ios-heading-large` | 20px | 600 | 28px | H3, dialog title, sheet headline |
-| `.text-ios-body-xlarge` | 19px | 400 | 26px | Extra large body |
-| `.text-ios-body-large` | 17px | 400 | 24px | Default body |
-| `.text-ios-body-medium` | 15px | 400 | 22px | Caption, supporting text |
-| `.text-ios-body-small` | 13px | 400 | 18px | Footnote, tag |
-| `.text-ios-body-xsmall` | 11px | 400 | 16px | Tab title, badge |
-| `.text-ios-label-large` | 17px | 600 | 24px | Button text |
-| `.text-ios-label-medium` | 15px | 600 | 22px | Small button text |
-| `.text-ios-label-small` | 13px | 600 | 18px | Extra small button |
+Values extracted from Figma `get_variable_defs`:
 
-Chinese variants (`-cn` suffix) use PingFang TC with adjusted letter-spacing.
+| Figma Style | Class | Family | Size | Weight | Line Height | Letter Spacing | Usage |
+|---|---|---|---|---|---|---|---|
+| `iOS/Display` | `.text-ios-display` | SF Pro | 28px | Medium (510) | 36px | 0 | H1, page headline, large nav title |
+| `iOS/Display-Regular` | `.text-ios-display-regular` | SF Pro | 28px | Regular (400) | 36px | 0 | H1 regular weight |
+| `iOS/Heading/Large` | `.text-ios-heading-large` | SF Pro | 24px | Semibold (590) | 32px | 0 | H3, page subtitle, dialog title |
+| `iOS/Heading/Medium` | `.text-ios-heading-medium` | SF Pro | 20px | Semibold (590) | 28px | 0 | H4, section title |
+| `iOS/Heading/Small` | `.text-ios-heading-small` | SF Pro | 18px | Semibold (590) | 26px | 0 | H5, section subtitle |
+| `iOS/Body/XLarge` | `.text-ios-body-xlarge` | SF Pro | 18px | Regular (400) | 26px | 0 | Extra large body |
+| `iOS/Body/Large` | `.text-ios-body-large` | SF Pro | 16px | Regular (400) | 24px | 0 | Default body |
+| `iOS/Body/Medium` | `.text-ios-body-medium` | SF Pro | 14px | Regular (400) | 22px | 0 | Caption, supporting text |
+| `iOS/Body/Small` | `.text-ios-body-small` | SF Pro | 12px | Regular (400) | 18px | 0 | Footnote, supporting text, tag |
+| `iOS/Body/XSmall` | `.text-ios-body-xsmall` | SF Pro | 11px | Regular (400) | 16px | 0 | Tab title, badge, tag |
+| `iOS/Label/Large` | `.text-ios-label-large` | SF Pro | 16px | Medium (510) | 24px | 0 | Button |
+| `iOS/Label/Medium` | `.text-ios-label-medium` | SF Pro | 14px | Medium (510) | 22px | 0 | Small button |
+| `iOS/Label/Small` | `.text-ios-label-small` | SF Pro | 12px | Medium (510) | 18px | 0 | Extra small button |
+| `iOS/Label/XSmall` | `.text-ios-label-xsmall` | SF Pro | 10px | Medium (510) | 16px | 0 | Micro label |
+
+#### iOS Text Styles — Chinese (PingFang TC)
+
+| Figma Style | Class | Family | Size | Weight | Line Height | Letter Spacing | Usage |
+|---|---|---|---|---|---|---|---|
+| `iOS/Display-CN` | `.text-ios-display-cn` | PingFang TC | 28px | Medium (500) | 36px | 0 | CN H1, page headline |
+| `iOS/Display-CN-Regular` | `.text-ios-display-cn-regular` | PingFang TC | 28px | Regular (400) | 36px | 0 | CN H1 regular weight |
+| `iOS/Heading-CN/Large` | `.text-ios-heading-cn-large` | PingFang TC | 24px | Medium (500) | 32px | 2px | CN H3, dialog title, sheet headline |
+| `iOS/Heading-CN/Medium` | `.text-ios-heading-cn-medium` | PingFang TC | 20px | Medium (500) | 28px | 2px | CN H4, section title |
+| `iOS/Heading-CN/Small` | `.text-ios-heading-cn-small` | PingFang TC | 18px | Medium (500) | 26px | 2px | CN H5, section subtitle |
+| `iOS/Body-CN/XLarge` | `.text-ios-body-cn-xlarge` | PingFang TC | 18px | Regular (400) | 26px | 4px | CN extra large body |
+| `iOS/Body-CN/Large` | `.text-ios-body-cn-large` | PingFang TC | 16px | Regular (400) | 24px | 4px | CN body |
+| `iOS/Body-CN/Medium` | `.text-ios-body-cn-medium` | PingFang TC | 14px | Regular (400) | 22px | 4px | CN caption, supporting text |
+| `iOS/Body-CN/Small` | `.text-ios-body-cn-small` | PingFang TC | 12px | Regular (400) | 18px | 4px | CN footnote, supporting text, tag |
+| `iOS/Body-CN/XSmall` | `.text-ios-body-cn-xsmall` | PingFang TC | 11px | Regular (400) | 16px | 4px | CN tab title, badge, tag |
+| `iOS/Label-CN/Large` | `.text-ios-label-cn-large` | PingFang TC | 16px | Medium (500) | 24px | 4px | CN button |
+| `iOS/Label-CN/Medium` | `.text-ios-label-cn-medium` | PingFang TC | 14px | Medium (500) | 22px | 4px | CN small button |
+| `iOS/Label-CN/Small` | `.text-ios-label-cn-small` | PingFang TC | 12px | Medium (500) | 18px | 4px | CN extra small button |
+| `iOS/Label-CN/XSmall` | `.text-ios-label-cn-xsmall` | PingFang TC | 10px | Medium (500) | 16px | 4px | CN micro label |
+
+#### Key differences between EN and CN:
+
+- **Font weight:** EN uses SF Pro `Medium (510)`, CN uses PingFang TC `Medium (500)` — different numeric weights
+- **Letter spacing:** EN = `0`, CN Body = `4px`, CN Heading = `2px`, CN Display = `0`
+- **Total text styles:** 28 (14 EN + 14 CN)
 
 ### 2.7 Shadows
 
