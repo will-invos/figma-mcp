@@ -141,10 +141,10 @@
   color: var(--color-content-brand-default);
 }
 .ui-icon-button--outline:hover {
-  background-color: var(--color-background-brand-subtlest);
+  background-color: var(--color-background-transparent-hover);
 }
 .ui-icon-button--outline:active {
-  background-color: var(--color-background-brand-subtle);
+  background-color: var(--color-background-transparent-active);
 }
 
 /* ========================================
