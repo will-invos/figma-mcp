@@ -1,0 +1,94 @@
+.ui-tag {
+  display: inline-flex;
+  align-items: center;
+  border-radius: var(--radius-full);
+  white-space: nowrap;
+}
+
+/* ========================================
+ * Sizes
+ * ======================================== */
+
+.ui-tag--medium {
+  height: 24px;
+  padding: 0 var(--space-250);
+  font-size: 12px;
+  line-height: 18px;
+  font-weight: 400;
+}
+
+.ui-tag--small {
+  height: 20px;
+  padding: 0 var(--space-200);
+  font-size: 10px;
+  line-height: 16px;
+  font-weight: 400;
+}
+
+/* ========================================
+ * Light Variant
+ * ======================================== */
+
+.ui-tag--light.ui-tag--light-neutral {
+  background-color: var(--color-background-neutral-subtle);
+  color: var(--color-content-default);
+}
+
+.ui-tag--light.ui-tag--light-primary {
+  background-color: var(--color-background-brand-subtlest);
+  color: var(--color-content-brand-bold);
+}
+
+.ui-tag--light.ui-tag--light-success {
+  background-color: var(--color-background-success-subtlest);
+  color: var(--color-content-success-bold);
+}
+
+.ui-tag--light.ui-tag--light-danger {
+  background-color: var(--color-background-danger-subtlest);
+  color: var(--color-content-danger-bold);
+}
+
+.ui-tag--light.ui-tag--light-warning {
+  background-color: var(--color-background-warning-subtlest);
+  color: var(--color-content-warning-bold);
+}
+
+.ui-tag--light.ui-tag--light-prize {
+  background-color: var(--color-background-prize-subtlest);
+  color: var(--color-content-prize-bold);
+}
+
+/* ========================================
+ * Bold Variant
+ * ======================================== */
+
+.ui-tag--bold.ui-tag--bold-neutral {
+  background-color: var(--color-background-neutral-default);
+  color: var(--color-content-fixed-white);
+}
+
+.ui-tag--bold.ui-tag--bold-primary {
+  background-color: var(--color-background-brand-default);
+  color: var(--color-content-fixed-white);
+}
+
+.ui-tag--bold.ui-tag--bold-success {
+  background-color: var(--color-background-success-default);
+  color: var(--color-content-fixed-white);
+}
+
+.ui-tag--bold.ui-tag--bold-danger {
+  background-color: var(--color-background-danger-default);
+  color: var(--color-content-fixed-white);
+}
+
+.ui-tag--bold.ui-tag--bold-warning {
+  background-color: var(--color-background-warning-default);
+  color: var(--color-content-fixed-white);
+}
+
+.ui-tag--bold.ui-tag--bold-prize {
+  background-color: var(--color-background-prize-default);
+  color: var(--color-content-fixed-bold);
+}

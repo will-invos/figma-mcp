@@ -1,0 +1,55 @@
+.ui-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-background-danger-default);
+  border-radius: var(--radius-full);
+  flex-shrink: 0;
+}
+
+/* ========================================
+ * Dot variant — fixed square dimensions, no text
+ * ======================================== */
+
+.ui-badge--dot.ui-badge--small {
+  width: 8px;
+  height: 8px;
+}
+
+.ui-badge--dot.ui-badge--medium {
+  width: 10px;
+  height: 10px;
+}
+
+.ui-badge--dot.ui-badge--large {
+  width: 12px;
+  height: 12px;
+}
+
+/* ========================================
+ * Number variant — height-driven, padding for multi-digit
+ * ======================================== */
+
+.ui-badge--number {
+  color: var(--color-content-fixed-white);
+  font-size: 10px;
+  line-height: 16px;
+  font-weight: 510;
+  padding: 0 4px;
+  text-align: center;
+}
+
+.ui-badge--number.ui-badge--small {
+  height: 16px;
+  min-width: 16px;
+}
+
+.ui-badge--number.ui-badge--medium {
+  height: 20px;
+  min-width: 20px;
+}
+
+.ui-badge--number.ui-badge--large {
+  height: 24px;
+  min-width: 24px;
+}
