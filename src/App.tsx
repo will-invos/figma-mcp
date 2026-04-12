@@ -333,7 +333,7 @@ export default function App() {
         </div>
         <div style={{ marginBottom: 16 }}>
           <TextField
-            variant="has-label"
+            variant="inner-label"
             label="Email"
             placeholder="name@example.com"
             value={textValue}
@@ -342,7 +342,7 @@ export default function App() {
         </div>
         <div style={{ marginBottom: 16 }}>
           <TextField
-            variant="has-label"
+            variant="inner-label"
             label="Email (error)"
             placeholder="name@example.com"
             status="error"
@@ -372,7 +372,7 @@ export default function App() {
         <div style={{ marginBottom: 16 }}>
           <Select
             id="category-select"
-            variant="has-label"
+            variant="inner-label"
             label="部門"
             placeholder="請選擇"
             value={selectValue2}
@@ -386,7 +386,7 @@ export default function App() {
         </div>
         <div style={{ marginBottom: 16 }}>
           <Select
-            variant="has-label"
+            variant="inner-label"
             label="Status (error)"
             placeholder="Select status..."
             status="error"

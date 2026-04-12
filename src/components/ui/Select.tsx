@@ -7,8 +7,8 @@ interface SelectOption {
 }
 
 interface SelectProps extends Omit<React.SelectHTMLAttributes<HTMLSelectElement>, 'disabled'> {
-  /** 'simple' = no label, 'has-label' = floating label */
-  variant?: 'simple' | 'has-label';
+  /** 'default' = no label, 'inner-label' = floating label */
+  variant?: 'default' | 'inner-label';
   label?: string;
   placeholder?: string;
   options: SelectOption[];
@@ -21,7 +21,7 @@ interface SelectProps extends Omit<React.SelectHTMLAttributes<HTMLSelectElement>
 const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
   (
     {
-      variant = 'simple',
+      variant = 'default',
       label,
       placeholder,
       options,
@@ -44,14 +44,14 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
 
     const isDisabled = status === 'disabled';
     const isError = status === 'error';
-    const isHasLabel = variant === 'has-label';
+    const isInnerLabel = variant === 'inner-label';
 
     const [hasValue, setHasValue] = useState(() => {
       return Boolean(value || defaultValue);
     });
 
     // Select only floats when it has a value (not on focus)
-    const shouldFloat = isHasLabel && (hasValue || Boolean(value));
+    const shouldFloat = isInnerLabel && (hasValue || Boolean(value));
 
     const handleChange = useCallback(
       (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -79,7 +79,7 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
             <span className="ui-select__leading-icon">{leadingIcon}</span>
           )}
           <div className="ui-select__content">
-            {isHasLabel && (
+            {isInnerLabel && (
               <label className="ui-select__label" htmlFor={selectId}>
                 {shouldFloat ? label : (placeholder || label)}
               </label>

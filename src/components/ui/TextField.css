@@ -3,7 +3,7 @@
  * Figma: Text field (node 3850:4356)
  * Types: Simple | Has label (floating label)
  *
- * has-label behavior:
+ * inner-label behavior:
  *   empty + unfocused → label at 16px as placeholder
  *   focused or filled → label floats to 12px, input visible below
  * ======================================== */
@@ -19,6 +19,7 @@
   display: flex;
   align-items: center;
   gap: var(--space-300);
+  height: 56px;
   padding-left: var(--space-300);
   padding-right: var(--space-300);
   border: 1px solid var(--color-border-default);
@@ -27,6 +28,7 @@
   overflow: hidden;
   cursor: text;
   transition: border-color 0.15s, box-shadow 0.15s;
+  box-sizing: border-box;
 }
 
 /* Focus: 1px border + 1px inset box-shadow = visual 2px */
@@ -81,7 +83,7 @@
  * Simple type
  * ======================================== */
 
-.ui-text-field--simple .ui-text-field__content {
+.ui-text-field--default .ui-text-field__content {
   padding-top: var(--space-400);
   padding-bottom: var(--space-400);
 }
@@ -98,12 +100,12 @@
  * Floated:   label shrinks to 12px at top,
  *            input visible below label.
  *
- * Content padding: space/400 (16px) — same as simple type.
+ * Content padding: space/400 (16px) — same as default type.
  * The visual difference comes from label + input stacking,
  * not from padding changes.
  * ======================================== */
 
-.ui-text-field--has-label .ui-text-field__content {
+.ui-text-field--inner-label .ui-text-field__content {
   padding-top: var(--space-400);
   padding-bottom: var(--space-400);
   position: relative;
@@ -120,7 +122,7 @@
 }
 
 /* Not floated: input is absolute, transparent but focusable */
-.ui-text-field--has-label:not(.ui-text-field--float) .ui-text-field__input {
+.ui-text-field--inner-label:not(.ui-text-field--float) .ui-text-field__input {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -129,19 +131,19 @@
 }
 
 /* Floated: label shrinks, content switches to column layout */
-.ui-text-field--has-label.ui-text-field--float .ui-text-field__content {
+.ui-text-field--inner-label.ui-text-field--float .ui-text-field__content {
   padding-top: var(--space-150);
   padding-bottom: var(--space-150);
   gap: var(--space-50);
 }
 
-.ui-text-field--has-label.ui-text-field--float .ui-text-field__label {
+.ui-text-field--inner-label.ui-text-field--float .ui-text-field__label {
   font-size: 12px;
   line-height: 18px;
   color: var(--color-content-subtle);
 }
 
-.ui-text-field--has-label.ui-text-field--float .ui-text-field__input {
+.ui-text-field--inner-label.ui-text-field--float .ui-text-field__input {
   position: static;
   opacity: 1;
   height: auto;
@@ -149,8 +151,8 @@
 
 /* Error label color — overrides both floated and unfloated states */
 .ui-text-field--error .ui-text-field__label,
-.ui-text-field--has-label.ui-text-field--error:not(.ui-text-field--float) .ui-text-field__label,
-.ui-text-field--has-label.ui-text-field--float.ui-text-field--error .ui-text-field__label {
+.ui-text-field--inner-label.ui-text-field--error:not(.ui-text-field--float) .ui-text-field__label,
+.ui-text-field--inner-label.ui-text-field--float.ui-text-field--error .ui-text-field__label {
   color: var(--color-content-danger-default);
 }
 

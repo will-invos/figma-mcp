@@ -2,8 +2,8 @@ import React, { useId, useState, useCallback } from 'react';
 import './TextField.css';
 
 interface TextFieldProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'disabled' | 'type'> {
-  /** 'simple' = plain input, 'has-label' = floating label that acts as placeholder when empty+unfocused */
-  variant?: 'simple' | 'has-label';
+  /** 'default' = plain input, 'inner-label' = floating label that acts as placeholder when empty+unfocused */
+  variant?: 'default' | 'inner-label';
   label?: string;
   status?: 'default' | 'error' | 'disabled';
   helpText?: string;
@@ -17,7 +17,7 @@ interface TextFieldProps extends Omit<React.InputHTMLAttributes<HTMLInputElement
 const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
   (
     {
-      variant = 'simple',
+      variant = 'default',
       label,
       status = 'default',
       helpText,
@@ -43,7 +43,7 @@ const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
 
     const isDisabled = status === 'disabled';
     const isError = status === 'error';
-    const isHasLabel = variant === 'has-label';
+    const isInnerLabel = variant === 'inner-label';
 
     // Track focus and whether input has value for floating label
     const [focused, setFocused] = useState(false);
@@ -52,7 +52,7 @@ const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
     });
 
     // Float label when focused or has value
-    const shouldFloat = isHasLabel && (focused || hasValue || Boolean(value));
+    const shouldFloat = isInnerLabel && (focused || hasValue || Boolean(value));
 
     const handleFocus = useCallback(
       (e: React.FocusEvent<HTMLInputElement>) => {
@@ -102,7 +102,7 @@ const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
             <span className="ui-text-field__leading-icon">{leadingIcon}</span>
           )}
           <div className="ui-text-field__content">
-            {isHasLabel && label && (
+            {isInnerLabel && label && (
               <label className="ui-text-field__label" htmlFor={inputId}>
                 {label}
               </label>
@@ -115,7 +115,7 @@ const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
               disabled={isDisabled}
               aria-invalid={isError || undefined}
               aria-describedby={helpId}
-              placeholder={isHasLabel ? placeholder : placeholder}
+              placeholder={isInnerLabel ? placeholder : placeholder}
               value={value}
               defaultValue={defaultValue}
               onFocus={handleFocus}

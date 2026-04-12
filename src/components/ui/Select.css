@@ -4,7 +4,7 @@
  * Types: Simple (single-line) | Has label (floating label)
  *
  * Same visual structure as TextField.
- * has-label behavior:
+ * inner-label behavior:
  *   empty + unfocused → label at 16px as placeholder
  *   focused or filled → label floats to 12px, select visible below
  * ======================================== */
@@ -80,7 +80,7 @@
  * Simple type
  * ======================================== */
 
-.ui-select--simple .ui-select__content {
+.ui-select--default .ui-select__content {
   padding-top: var(--space-400);
   padding-bottom: var(--space-400);
 }
@@ -94,13 +94,13 @@
  * ======================================== */
 
 /* Not floated: single-line placeholder layout */
-.ui-select--has-label .ui-select__content {
+.ui-select--inner-label .ui-select__content {
   padding-top: var(--space-400);
   padding-bottom: var(--space-400);
 }
 
 /* Floated: two-line layout */
-.ui-select--has-label.ui-select--float .ui-select__content {
+.ui-select--inner-label.ui-select--float .ui-select__content {
   padding-top: var(--space-150);
   padding-bottom: var(--space-150);
   gap: var(--space-50);
@@ -119,7 +119,7 @@
  * Not floated: select covers entire wrapper as invisible click target.
  * This ensures first click opens the native menu directly.
  */
-.ui-select--has-label .ui-select__input {
+.ui-select--inner-label .ui-select__input {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -129,13 +129,13 @@
 }
 
 /* Floated (has value): label shrinks, select returns to flow */
-.ui-select--has-label.ui-select--float .ui-select__label {
+.ui-select--inner-label.ui-select--float .ui-select__label {
   font-size: 12px;
   line-height: 18px;
   color: var(--color-content-subtle);
 }
 
-.ui-select--has-label.ui-select--float .ui-select__input {
+.ui-select--inner-label.ui-select--float .ui-select__input {
   position: static;
   height: 24px;
   opacity: 1;
@@ -143,7 +143,7 @@
 
 /* Error label color — needs higher specificity to override float state */
 .ui-select--error .ui-select__label,
-.ui-select--has-label.ui-select--float.ui-select--error .ui-select__label {
+.ui-select--inner-label.ui-select--float.ui-select--error .ui-select__label {
   color: var(--color-content-danger-default);
 }
 
