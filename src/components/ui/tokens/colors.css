@@ -145,6 +145,8 @@
   --color-background-neutral-default: #bbbbc8;
   --color-background-neutral-hover: #9b9baa;
   --color-background-neutral-subtle: #edeff3;
+  --color-background-neutral-subtle-hover: #dcdee5;
+  --color-background-neutral-subtle-active: #bbbbc8;
 
   /* Background — Overlay */
   --color-background-overlay-bold: rgba(0, 0, 0, 0.7);
@@ -343,6 +345,8 @@
   --color-background-neutral-default: #3b3c50;
   --color-background-neutral-hover: #575762;
   --color-background-neutral-subtle: #1c1c27;
+  --color-background-neutral-subtle-hover: #252533;
+  --color-background-neutral-subtle-active: #2e2e40;
 
   /* Background — Overlay */
   --color-background-overlay-bold: rgba(0, 0, 0, 0.85);

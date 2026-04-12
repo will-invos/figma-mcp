@@ -61,10 +61,10 @@
   color: var(--color-content-default);
 }
 .ui-icon-button--filled.ui-icon-button--filled-neutral:hover {
-  background-color: var(--color-background-neutral-hover);
+  background-color: var(--color-background-neutral-subtle-hover);
 }
 .ui-icon-button--filled.ui-icon-button--filled-neutral:active {
-  background-color: var(--color-background-neutral-active);
+  background-color: var(--color-background-neutral-subtle-active);
 }
 
 /* filled — danger */
