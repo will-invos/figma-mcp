@@ -79,9 +79,9 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
             <span className="ui-select__leading-icon">{leadingIcon}</span>
           )}
           <div className="ui-select__content">
-            {isHasLabel && label && (
+            {isHasLabel && (
               <label className="ui-select__label" htmlFor={selectId}>
-                {label}
+                {shouldFloat ? label : (placeholder || label)}
               </label>
             )}
             <select
