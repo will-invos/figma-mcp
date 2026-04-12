@@ -1,0 +1,88 @@
+.ui-list-item {
+  display: flex;
+  align-items: center;
+  padding: 0 var(--space-600);
+  border-bottom: 1px solid var(--color-border-divider);
+  background-color: var(--color-background-default);
+  gap: var(--space-300);
+}
+
+/* ========================================
+ * Content Sizes
+ * ======================================== */
+
+.ui-list-item--compact {
+  min-height: 48px;
+}
+
+.ui-list-item--1-line {
+  min-height: 56px;
+}
+
+.ui-list-item--2-lines {
+  min-height: 72px;
+}
+
+/* ========================================
+ * States
+ * ======================================== */
+
+.ui-list-item--clickable {
+  cursor: pointer;
+}
+
+.ui-list-item--clickable:hover {
+  background-color: var(--color-background-neutral-subtle);
+}
+
+.ui-list-item--disabled {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+/* ========================================
+ * Inner Elements
+ * ======================================== */
+
+.ui-list-item__leading {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+
+.ui-list-item__content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-50);
+}
+
+.ui-list-item__headline {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+  color: var(--color-content-default);
+}
+
+.ui-list-item__description {
+  font-size: 14px;
+  line-height: 22px;
+  font-weight: 400;
+  color: var(--color-content-subtle);
+}
+
+.ui-list-item__trailing {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+
+.ui-list-item__trailing-text {
+  font-size: 14px;
+  line-height: 22px;
+  color: var(--color-content-subtle);
+}
+
+.ui-list-item__chevron {
+  color: var(--color-content-subtlest);
+}
