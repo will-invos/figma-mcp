@@ -7,6 +7,8 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   colorType?: 'primary' | 'neutral' | 'danger' | 'prize' | 'donation' | 'white' | 'inverse' | 'secondary';
   size?: 'large' | 'medium' | 'small';
   loading?: boolean;
+  leadingIcon?: React.ReactNode;
+  trailingIcon?: React.ReactNode;
 }
 
 /**
@@ -33,13 +35,16 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       disabled,
       children,
       className,
+      leadingIcon,
+      trailingIcon,
       ...rest
     },
     ref
   ) => {
+    // Outline has a single color scheme; filled/ghost/text use colorType sub-class
     const variantColorClass =
-      variant === 'outline' || variant === 'text'
-        ? `ui-button--${variant}`
+      variant === 'outline'
+        ? 'ui-button--outline'
         : `ui-button--${variant} ui-button--${variant}-${colorType}`;
 
     const classes = [
@@ -51,7 +56,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       .filter(Boolean)
       .join(' ');
 
-    const spinnerSize = size === 'large' ? 'medium' : size === 'medium' ? 'small' : 'small';
+    const spinnerSize = size === 'large' ? 'medium' : 'small';
     const spinnerColor = resolveSpinnerColor(variant, colorType);
 
     return (
@@ -62,7 +67,19 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         data-loading={loading || undefined}
         {...rest}
       >
-        {loading ? <Spinner size={spinnerSize} color={spinnerColor} /> : children}
+        {loading ? (
+          <Spinner size={spinnerSize} color={spinnerColor} />
+        ) : (
+          <>
+            {leadingIcon && (
+              <span className="ui-button__leading">{leadingIcon}</span>
+            )}
+            <span className="ui-button__content">{children}</span>
+            {trailingIcon && (
+              <span className="ui-button__trailing">{trailingIcon}</span>
+            )}
+          </>
+        )}
       </button>
     );
   }

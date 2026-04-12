@@ -1,15 +1,19 @@
+/* ========================================
+ * Base
+ * ======================================== */
+
 .ui-button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: var(--space-200);
   border: none;
   cursor: pointer;
   font-family: var(--font-family);
-  transition: background-color 0.15s;
+  transition: background-color 0.15s, opacity 0.15s;
   text-decoration: none;
   white-space: nowrap;
   outline: none;
+  box-sizing: border-box;
 }
 
 /* ========================================
@@ -18,7 +22,7 @@
 
 .ui-button--large {
   height: 48px;
-  padding: 0 20px;
+  padding: 12px;
   border-radius: var(--radius-300);
   font-size: 16px;
   line-height: 24px;
@@ -27,7 +31,7 @@
 
 .ui-button--medium {
   height: 38px;
-  padding: 0 16px;
+  padding: 8px;
   border-radius: var(--radius-250);
   font-size: 14px;
   line-height: 22px;
@@ -36,11 +40,89 @@
 
 .ui-button--small {
   height: 30px;
-  padding: 0 12px;
+  padding: 6px;
   border-radius: var(--radius-200);
   font-size: 12px;
   line-height: 18px;
   font-weight: 510;
+}
+
+/* ========================================
+ * Internal structure: leading / content / trailing
+ * ======================================== */
+
+.ui-button__leading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ui-button__content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ui-button__trailing {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Leading/content/trailing padding per size */
+.ui-button--large .ui-button__content {
+  padding-left: 8px;
+  padding-right: 8px;
+}
+.ui-button--large .ui-button__leading {
+  padding-left: 6px;
+}
+.ui-button--large .ui-button__trailing {
+  padding-right: 6px;
+}
+
+.ui-button--medium .ui-button__content {
+  padding-left: 6px;
+  padding-right: 6px;
+}
+.ui-button--medium .ui-button__leading {
+  padding-left: 4px;
+}
+.ui-button--medium .ui-button__trailing {
+  padding-right: 4px;
+}
+
+.ui-button--small .ui-button__content {
+  padding-left: 4px;
+  padding-right: 4px;
+}
+.ui-button--small .ui-button__leading {
+  padding-left: 2px;
+}
+.ui-button--small .ui-button__trailing {
+  padding-right: 2px;
+}
+
+/* ========================================
+ * Icon sizing per size
+ * ======================================== */
+
+.ui-button--large svg,
+.ui-button--large img {
+  width: 20px;
+  height: 20px;
+}
+
+.ui-button--medium svg,
+.ui-button--medium img {
+  width: 16px;
+  height: 16px;
+}
+
+.ui-button--small svg,
+.ui-button--small img {
+  width: 14px;
+  height: 14px;
 }
 
 /* ========================================
@@ -110,15 +192,13 @@
 /* filled — white */
 .ui-button--filled.ui-button--filled-white {
   background-color: var(--color-background-fixed-white);
-  color: var(--color-content-brand-default);
+  color: var(--color-content-fixed-brand);
 }
 .ui-button--filled.ui-button--filled-white:hover {
-  background-color: var(--color-background-fixed-white);
-  opacity: 0.9;
+  opacity: 0.8;
 }
 .ui-button--filled.ui-button--filled-white:active {
-  background-color: var(--color-background-fixed-white);
-  opacity: 0.8;
+  opacity: 0.6;
 }
 
 /* ========================================
@@ -126,15 +206,15 @@
  * ======================================== */
 
 .ui-button--outline {
-  background-color: transparent;
+  background-color: var(--color-background-transparent-default);
   border: 1.5px solid var(--color-border-brand);
   color: var(--color-content-brand-default);
 }
 .ui-button--outline:hover {
-  background-color: var(--color-background-brand-subtlest);
+  background-color: var(--color-background-transparent-hover);
 }
 .ui-button--outline:active {
-  background-color: var(--color-background-brand-subtle);
+  background-color: var(--color-background-transparent-active);
 }
 
 /* ========================================
@@ -143,7 +223,7 @@
 
 /* ghost — primary */
 .ui-button--ghost.ui-button--ghost-primary {
-  background-color: var(--color-background-transparent-default);
+  background-color: transparent;
   color: var(--color-content-brand-default);
 }
 .ui-button--ghost.ui-button--ghost-primary:hover {
@@ -155,28 +235,38 @@
 
 /* ghost — inverse */
 .ui-button--ghost.ui-button--ghost-inverse {
-  background-color: var(--color-background-transparent-default);
+  background-color: transparent;
   color: var(--color-content-inverse-bold);
 }
 .ui-button--ghost.ui-button--ghost-inverse:hover {
   background-color: rgba(255, 255, 255, 0.1);
 }
 .ui-button--ghost.ui-button--ghost-inverse:active {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.15);
 }
 
 /* ========================================
  * Text Variant
+ * Override size styles: no height, padding, radius, or background
  * ======================================== */
 
 .ui-button--text {
+  height: auto;
+  padding: 0;
+  border-radius: 0;
   background-color: transparent;
   border: none;
-  padding-left: 0;
-  padding-right: 0;
+  gap: 4px;
 }
+
 .ui-button--text:hover {
   background-color: transparent;
+  opacity: 0.8;
+}
+
+.ui-button--text:active {
+  background-color: transparent;
+  opacity: 0.6;
 }
 
 /* text — primary */
@@ -192,6 +282,18 @@
 /* text — inverse */
 .ui-button--text.ui-button--text-inverse {
   color: var(--color-content-inverse-bold);
+}
+
+/* Text variant: remove internal structure padding */
+.ui-button--text .ui-button__content {
+  padding-left: 0;
+  padding-right: 0;
+}
+.ui-button--text .ui-button__leading {
+  padding-left: 0;
+}
+.ui-button--text .ui-button__trailing {
+  padding-right: 0;
 }
 
 /* ========================================
