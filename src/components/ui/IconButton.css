@@ -18,25 +18,53 @@
 .ui-icon-button--large {
   width: 52px;
   height: 52px;
-  border-radius: var(--radius-300);
+  padding: var(--space-300);
+  border-radius: var(--radius-full);
+  font-size: 28px;
+}
+.ui-icon-button--large > svg,
+.ui-icon-button--large > img {
+  width: 28px;
+  height: 28px;
 }
 
 .ui-icon-button--medium {
   width: 40px;
   height: 40px;
-  border-radius: var(--radius-300);
+  padding: var(--space-200);
+  border-radius: var(--radius-full);
+  font-size: 24px;
+}
+.ui-icon-button--medium > svg,
+.ui-icon-button--medium > img {
+  width: 24px;
+  height: 24px;
 }
 
 .ui-icon-button--small {
   width: 32px;
   height: 32px;
-  border-radius: var(--radius-200);
+  padding: var(--space-150);
+  border-radius: var(--radius-full);
+  font-size: 20px;
+}
+.ui-icon-button--small > svg,
+.ui-icon-button--small > img {
+  width: 20px;
+  height: 20px;
 }
 
 .ui-icon-button--xsmall {
   width: 24px;
   height: 24px;
-  border-radius: var(--radius-150);
+  padding: var(--space-100);
+  border-radius: var(--radius-full);
+  font-size: 16px;
+}
+.ui-icon-button--xsmall > svg,
+.ui-icon-button--xsmall > img {
+  width: 16px;
+  height: 16px;
 }
 
 /* ========================================
