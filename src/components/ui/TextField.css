@@ -19,7 +19,6 @@
   display: flex;
   align-items: center;
   gap: var(--space-300);
-  min-height: 56px;
   padding-left: var(--space-300);
   padding-right: var(--space-300);
   border: 1px solid var(--color-border-default);
