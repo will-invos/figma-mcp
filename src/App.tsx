@@ -115,6 +115,7 @@ export default function App() {
   const [dialogOpen, setDialogOpen] = useState(false)
   const [sheetOpen, setSheetOpen] = useState(false)
   const [checkboxChecked, setCheckboxChecked] = useState(false)
+  const [checkboxErrorChecked, setCheckboxErrorChecked] = useState(false)
   const [radioValue, setRadioValue] = useState('a')
   const [switchOn, setSwitchOn] = useState(false)
   const [listSwitchChecked, setListSwitchChecked] = useState(false)
@@ -405,7 +406,7 @@ export default function App() {
               Accept terms and conditions
             </Checkbox>
             <Checkbox checked={false} disabled>Disabled</Checkbox>
-            <Checkbox checked={false} status="error">Error state</Checkbox>
+            <Checkbox checked={checkboxErrorChecked} onChange={setCheckboxErrorChecked} status="error">Error state</Checkbox>
           </div>
         </div>
 
