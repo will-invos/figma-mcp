@@ -121,6 +121,7 @@ export default function App() {
   const [listCheckboxChecked, setListCheckboxChecked] = useState(false)
   const [textValue, setTextValue] = useState('')
   const [selectValue, setSelectValue] = useState('')
+  const [selectValue2, setSelectValue2] = useState('')
 
   const toggleDark = () => {
     const next = !darkMode
@@ -300,11 +301,10 @@ export default function App() {
         <div style={{ marginBottom: 12 }}>
           <p style={labelStyle}>Ghost</p>
           <div style={rowStyle}>
-            <IconButton variant="ghost" colorType="primary" size="medium" aria-label="Heart"><HeartIcon /></IconButton>
-            <IconButton variant="ghost" colorType="neutral" size="medium" aria-label="Heart"><HeartIcon /></IconButton>
-            <IconButton variant="ghost" colorType="danger" size="medium" aria-label="Heart"><HeartIcon /></IconButton>
-            <IconButton variant="ghost" colorType="prize" size="medium" aria-label="Heart"><HeartIcon /></IconButton>
-            <IconButton variant="ghost" colorType="donation" size="medium" aria-label="Heart"><HeartIcon /></IconButton>
+            <IconButton variant="ghost" colorType="primary" size="large" aria-label="Star"><StarIcon /></IconButton>
+            <IconButton variant="ghost" colorType="primary" size="medium" aria-label="Star"><StarIcon /></IconButton>
+            <IconButton variant="ghost" colorType="primary" size="small" aria-label="Star"><StarIcon /></IconButton>
+            <IconButton variant="ghost" colorType="primary" size="xsmall" aria-label="Star"><StarIcon /></IconButton>
           </div>
         </div>
 
@@ -315,7 +315,7 @@ export default function App() {
             <IconButton variant="filled" colorType="primary" size="medium" loading aria-label="Loading"><PlusIcon /></IconButton>
             <IconButton variant="filled" colorType="primary" size="medium" disabled aria-label="Disabled"><PlusIcon /></IconButton>
             <IconButton variant="outline" colorType="primary" size="medium" loading aria-label="Loading"><StarIcon /></IconButton>
-            <IconButton variant="ghost" colorType="primary" size="medium" disabled aria-label="Disabled"><HeartIcon /></IconButton>
+            <IconButton variant="ghost" colorType="primary" size="medium" disabled aria-label="Disabled"><PlusIcon /></IconButton>
           </div>
         </div>
       </section>
@@ -358,7 +358,8 @@ export default function App() {
 
         <div style={{ marginBottom: 16 }}>
           <Select
-            placeholder="Choose one..."
+            id="department-select"
+            placeholder="請選擇"
             value={selectValue}
             onChange={e => setSelectValue(e.target.value)}
             options={[
@@ -370,11 +371,12 @@ export default function App() {
         </div>
         <div style={{ marginBottom: 16 }}>
           <Select
+            id="category-select"
             variant="has-label"
-            label="Category"
-            placeholder="Choose one..."
-            value={selectValue}
-            onChange={e => setSelectValue(e.target.value)}
+            label="部門"
+            placeholder="請選擇"
+            value={selectValue2}
+            onChange={e => setSelectValue2(e.target.value)}
             options={[
               { label: 'Design', value: 'design' },
               { label: 'Engineering', value: 'engineering' },
