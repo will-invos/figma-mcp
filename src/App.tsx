@@ -386,45 +386,88 @@ export default function App() {
       <section style={sectionStyle}>
         <h2 style={sectionHeadingStyle}>List Items</h2>
         <div style={{ borderRadius: 12, overflow: 'hidden', border: '1px solid var(--color-border, #e5e4e7)' }}>
+          {/* Default type */}
           <ListItem
-            headline="Navigate somewhere"
+            headline="Default — None"
+          />
+          <ListItem
+            headline="Default — Drill-in"
+            trailing="drill-in"
+            onClick={() => {}}
+          />
+          <ListItem
+            headline="Default — Text"
+            trailingText="Detail"
+            trailing="text"
+          />
+          <ListItem
+            headline="Default — Switch"
+            trailing="switch"
+            trailingChecked={listSwitchChecked}
+            onTrailingChange={setListSwitchChecked}
+          />
+          <ListItem
+            headline="Default — Checkbox"
+            trailing="checkbox"
+            trailingChecked={listCheckboxChecked}
+            onTrailingChange={setListCheckboxChecked}
+          />
+          <ListItem
+            headline="Default — Spinner"
+            trailing="spinner"
+          />
+          {/* Has description type */}
+          <ListItem
+            headline="Description — Drill-in"
             type="has-description"
             description="Tap to go to the next screen"
             trailing="drill-in"
             onClick={() => {}}
           />
           <ListItem
-            headline="Trailing text"
-            trailingText="Detail"
+            headline="Description — Text"
+            type="has-description"
+            description="Supporting info here"
             trailing="text"
+            trailingText="Detail"
           />
           <ListItem
-            headline="Toggle feature"
+            headline="Description — Switch"
+            type="has-description"
+            description="Toggle this feature on or off"
             trailing="switch"
             trailingChecked={listSwitchChecked}
             onTrailingChange={setListSwitchChecked}
           />
           <ListItem
-            headline="Select item"
+            headline="Description — Checkbox"
+            type="has-description"
+            description="Select this option"
             trailing="checkbox"
             trailingChecked={listCheckboxChecked}
             onTrailingChange={setListCheckboxChecked}
           />
           <ListItem
-            headline="Loading state"
-            trailing="spinner"
-          />
-          <ListItem
-            headline="Custom icon"
+            headline="Description — Icon"
+            type="has-description"
+            description="Custom trailing icon"
             trailing="icon"
             trailingIcon={<StarIcon />}
           />
+          {/* Compact type */}
           <ListItem
-            headline="Compact item"
+            headline="Compact — Drill-in"
             type="compact"
             trailing="drill-in"
             onClick={() => {}}
           />
+          <ListItem
+            headline="Compact — Text"
+            type="compact"
+            trailing="text"
+            trailingText="Info"
+          />
+          {/* Disabled */}
           <ListItem
             headline="Disabled item"
             type="has-description"
