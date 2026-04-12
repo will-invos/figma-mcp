@@ -41,11 +41,9 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
   ) => {
     const classes = [
       'ui-alert',
+      `ui-alert--${variant}`,
       `ui-alert--${colorType}`,
-      variant === 'full-width' && 'ui-alert--full-width',
-    ]
-      .filter(Boolean)
-      .join(' ');
+    ].join(' ');
 
     return (
       <div ref={ref} className={classes} role="alert">
