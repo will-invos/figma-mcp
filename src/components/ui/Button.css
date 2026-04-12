@@ -1,0 +1,206 @@
+.ui-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-200);
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-family);
+  transition: background-color 0.15s;
+  text-decoration: none;
+  white-space: nowrap;
+  outline: none;
+}
+
+/* ========================================
+ * Sizes
+ * ======================================== */
+
+.ui-button--large {
+  height: 48px;
+  padding: 0 20px;
+  border-radius: var(--radius-300);
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 510;
+}
+
+.ui-button--medium {
+  height: 38px;
+  padding: 0 16px;
+  border-radius: var(--radius-250);
+  font-size: 14px;
+  line-height: 22px;
+  font-weight: 510;
+}
+
+.ui-button--small {
+  height: 30px;
+  padding: 0 12px;
+  border-radius: var(--radius-200);
+  font-size: 12px;
+  line-height: 18px;
+  font-weight: 510;
+}
+
+/* ========================================
+ * Filled Variant
+ * ======================================== */
+
+/* filled — primary */
+.ui-button--filled.ui-button--filled-primary {
+  background-color: var(--color-background-brand-default);
+  color: var(--color-content-fixed-white);
+}
+.ui-button--filled.ui-button--filled-primary:hover {
+  background-color: var(--color-background-brand-hover);
+}
+.ui-button--filled.ui-button--filled-primary:active {
+  background-color: var(--color-background-brand-active);
+}
+
+/* filled — neutral */
+.ui-button--filled.ui-button--filled-neutral {
+  background-color: var(--color-background-neutral-subtle);
+  color: var(--color-content-default);
+}
+.ui-button--filled.ui-button--filled-neutral:hover {
+  background-color: var(--color-background-neutral-hover);
+}
+.ui-button--filled.ui-button--filled-neutral:active {
+  background-color: var(--color-background-neutral-active);
+}
+
+/* filled — danger */
+.ui-button--filled.ui-button--filled-danger {
+  background-color: var(--color-background-danger-default);
+  color: var(--color-content-fixed-white);
+}
+.ui-button--filled.ui-button--filled-danger:hover {
+  background-color: var(--color-background-danger-hover);
+}
+.ui-button--filled.ui-button--filled-danger:active {
+  background-color: var(--color-background-danger-active);
+}
+
+/* filled — prize */
+.ui-button--filled.ui-button--filled-prize {
+  background-color: var(--color-background-prize-default);
+  color: var(--color-content-fixed-bold);
+}
+.ui-button--filled.ui-button--filled-prize:hover {
+  background-color: var(--color-background-prize-hover);
+}
+.ui-button--filled.ui-button--filled-prize:active {
+  background-color: var(--color-background-prize-active);
+}
+
+/* filled — donation */
+.ui-button--filled.ui-button--filled-donation {
+  background-color: var(--color-background-donation-default);
+  color: var(--color-content-fixed-white);
+}
+.ui-button--filled.ui-button--filled-donation:hover {
+  background-color: var(--color-background-donation-hover);
+}
+.ui-button--filled.ui-button--filled-donation:active {
+  background-color: var(--color-background-donation-active);
+}
+
+/* filled — white */
+.ui-button--filled.ui-button--filled-white {
+  background-color: var(--color-background-fixed-white);
+  color: var(--color-content-brand-default);
+}
+.ui-button--filled.ui-button--filled-white:hover {
+  background-color: var(--color-background-fixed-white);
+  opacity: 0.9;
+}
+.ui-button--filled.ui-button--filled-white:active {
+  background-color: var(--color-background-fixed-white);
+  opacity: 0.8;
+}
+
+/* ========================================
+ * Outline Variant
+ * ======================================== */
+
+.ui-button--outline {
+  background-color: transparent;
+  border: 1.5px solid var(--color-border-brand);
+  color: var(--color-content-brand-default);
+}
+.ui-button--outline:hover {
+  background-color: var(--color-background-brand-subtlest);
+}
+.ui-button--outline:active {
+  background-color: var(--color-background-brand-subtle);
+}
+
+/* ========================================
+ * Ghost Variant
+ * ======================================== */
+
+/* ghost — primary */
+.ui-button--ghost.ui-button--ghost-primary {
+  background-color: var(--color-background-transparent-default);
+  color: var(--color-content-brand-default);
+}
+.ui-button--ghost.ui-button--ghost-primary:hover {
+  background-color: var(--color-background-transparent-hover);
+}
+.ui-button--ghost.ui-button--ghost-primary:active {
+  background-color: var(--color-background-transparent-active);
+}
+
+/* ghost — inverse */
+.ui-button--ghost.ui-button--ghost-inverse {
+  background-color: var(--color-background-transparent-default);
+  color: var(--color-content-inverse-bold);
+}
+.ui-button--ghost.ui-button--ghost-inverse:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+.ui-button--ghost.ui-button--ghost-inverse:active {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* ========================================
+ * Text Variant
+ * ======================================== */
+
+.ui-button--text {
+  background-color: transparent;
+  border: none;
+  padding-left: 0;
+  padding-right: 0;
+}
+.ui-button--text:hover {
+  background-color: transparent;
+}
+
+/* text — primary */
+.ui-button--text.ui-button--text-primary {
+  color: var(--color-content-brand-default);
+}
+
+/* text — secondary */
+.ui-button--text.ui-button--text-secondary {
+  color: var(--color-content-neutral-default);
+}
+
+/* text — inverse */
+.ui-button--text.ui-button--text-inverse {
+  color: var(--color-content-inverse-bold);
+}
+
+/* ========================================
+ * States
+ * ======================================== */
+
+.ui-button:disabled,
+.ui-button[data-loading] {
+  opacity: 0.4;
+  pointer-events: none;
+  cursor: not-allowed;
+}
