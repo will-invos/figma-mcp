@@ -33,8 +33,6 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       className,
       value,
       defaultValue,
-      onFocus,
-      onBlur,
       onChange,
       ...rest
     },
@@ -48,29 +46,12 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
     const isError = status === 'error';
     const isHasLabel = variant === 'has-label';
 
-    const [focused, setFocused] = useState(false);
     const [hasValue, setHasValue] = useState(() => {
       return Boolean(value || defaultValue);
     });
 
-    const shouldFloat = isHasLabel && (focused || hasValue || Boolean(value));
-
-    const handleFocus = useCallback(
-      (e: React.FocusEvent<HTMLSelectElement>) => {
-        setFocused(true);
-        onFocus?.(e);
-      },
-      [onFocus]
-    );
-
-    const handleBlur = useCallback(
-      (e: React.FocusEvent<HTMLSelectElement>) => {
-        setFocused(false);
-        setHasValue(e.target.value !== '');
-        onBlur?.(e);
-      },
-      [onBlur]
-    );
+    // Select only floats when it has a value (not on focus)
+    const shouldFloat = isHasLabel && (hasValue || Boolean(value));
 
     const handleChange = useCallback(
       (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -91,13 +72,9 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       .filter(Boolean)
       .join(' ');
 
-    const handleWrapperClick = useCallback(() => {
-      document.getElementById(selectId)?.focus();
-    }, [selectId]);
-
     return (
       <div className={rootClasses}>
-        <div className="ui-select__input-wrapper" onClick={handleWrapperClick}>
+        <div className="ui-select__input-wrapper">
           {leadingIcon && (
             <span className="ui-select__leading-icon">{leadingIcon}</span>
           )}
@@ -116,8 +93,6 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
               aria-describedby={helpId}
               value={value}
               defaultValue={defaultValue}
-              onFocus={handleFocus}
-              onBlur={handleBlur}
               onChange={handleChange}
               {...rest}
             >
