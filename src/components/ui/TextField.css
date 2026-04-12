@@ -134,8 +134,9 @@
   opacity: 1;
 }
 
-/* Error label color */
-.ui-text-field--error .ui-text-field__label {
+/* Error label color — needs higher specificity to override float state */
+.ui-text-field--error .ui-text-field__label,
+.ui-text-field--has-label.ui-text-field--float.ui-text-field--error .ui-text-field__label {
   color: var(--color-content-danger-default);
 }
 
