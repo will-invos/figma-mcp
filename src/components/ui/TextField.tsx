@@ -1,8 +1,8 @@
-import React, { useId } from 'react';
+import React, { useId, useState, useCallback } from 'react';
 import './TextField.css';
 
 interface TextFieldProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'disabled' | 'type'> {
-  /** 'simple' = no label inside input, 'has-label' = floating label inside input */
+  /** 'simple' = plain input, 'has-label' = floating label that acts as placeholder when empty+unfocused */
   variant?: 'simple' | 'has-label';
   label?: string;
   status?: 'default' | 'error' | 'disabled';
@@ -27,6 +27,12 @@ const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
       inputType,
       id,
       className,
+      value,
+      defaultValue,
+      onFocus,
+      onBlur,
+      onChange,
+      placeholder,
       ...rest
     },
     ref
@@ -37,10 +43,46 @@ const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
 
     const isDisabled = status === 'disabled';
     const isError = status === 'error';
+    const isHasLabel = variant === 'has-label';
+
+    // Track focus and whether input has value for floating label
+    const [focused, setFocused] = useState(false);
+    const [hasValue, setHasValue] = useState(() => {
+      return Boolean(value || defaultValue);
+    });
+
+    // Float label when focused or has value
+    const shouldFloat = isHasLabel && (focused || hasValue || Boolean(value));
+
+    const handleFocus = useCallback(
+      (e: React.FocusEvent<HTMLInputElement>) => {
+        setFocused(true);
+        onFocus?.(e);
+      },
+      [onFocus]
+    );
+
+    const handleBlur = useCallback(
+      (e: React.FocusEvent<HTMLInputElement>) => {
+        setFocused(false);
+        setHasValue(e.target.value.length > 0);
+        onBlur?.(e);
+      },
+      [onBlur]
+    );
+
+    const handleChange = useCallback(
+      (e: React.ChangeEvent<HTMLInputElement>) => {
+        setHasValue(e.target.value.length > 0);
+        onChange?.(e);
+      },
+      [onChange]
+    );
 
     const rootClasses = [
       'ui-text-field',
       `ui-text-field--${variant}`,
+      shouldFloat && 'ui-text-field--float',
       isError && 'ui-text-field--error',
       isDisabled && 'ui-text-field--disabled',
       className,
@@ -48,14 +90,19 @@ const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
       .filter(Boolean)
       .join(' ');
 
+    // Click wrapper to focus input
+    const handleWrapperClick = useCallback(() => {
+      document.getElementById(inputId)?.focus();
+    }, [inputId]);
+
     return (
       <div className={rootClasses}>
-        <div className="ui-text-field__input-wrapper">
+        <div className="ui-text-field__input-wrapper" onClick={handleWrapperClick}>
           {leadingIcon && (
             <span className="ui-text-field__leading-icon">{leadingIcon}</span>
           )}
           <div className="ui-text-field__content">
-            {variant === 'has-label' && label && (
+            {isHasLabel && label && (
               <label className="ui-text-field__label" htmlFor={inputId}>
                 {label}
               </label>
@@ -68,6 +115,12 @@ const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
               disabled={isDisabled}
               aria-invalid={isError || undefined}
               aria-describedby={helpId}
+              placeholder={isHasLabel ? placeholder : placeholder}
+              value={value}
+              defaultValue={defaultValue}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
+              onChange={handleChange}
               {...rest}
             />
           </div>

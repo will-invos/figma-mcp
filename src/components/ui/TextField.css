@@ -1,7 +1,11 @@
 /* ========================================
  * TextField
  * Figma: Text field (node 3850:4356)
- * Types: Simple | Has label
+ * Types: Simple | Has label (floating label)
+ *
+ * has-label behavior:
+ *   empty + unfocused → label at 16px as placeholder
+ *   focused or filled → label floats to 12px, input visible below
  * ======================================== */
 
 .ui-text-field {
@@ -32,13 +36,13 @@
   box-shadow: inset 0 0 0 1px var(--color-border-brand);
 }
 
-/* Error: same technique */
+/* Error */
 .ui-text-field--error .ui-text-field__input-wrapper {
   border-color: var(--color-border-danger);
   box-shadow: inset 0 0 0 1px var(--color-border-danger);
 }
 
-/* Disabled state: bg changes to disable token, no opacity */
+/* Disabled */
 .ui-text-field--disabled .ui-text-field__input-wrapper {
   background-color: var(--color-background-disable);
   pointer-events: none;
@@ -62,7 +66,7 @@
   color: var(--color-content-subtlest);
 }
 
-/* --- Content area (label + input stacked) --- */
+/* --- Content area --- */
 
 .ui-text-field__content {
   display: flex;
@@ -71,31 +75,69 @@
   min-width: 0;
   min-height: 0;
   justify-content: center;
+  position: relative;
 }
 
-/* Simple type: single line, vertical padding for centering */
+/* ========================================
+ * Simple type
+ * ======================================== */
+
 .ui-text-field--simple .ui-text-field__content {
   padding-top: var(--space-400);
   padding-bottom: var(--space-400);
 }
 
-/* Has-label type: tighter vertical padding */
+/* ========================================
+ * Has-label type: floating label
+ * ======================================== */
+
+/* Default (empty + unfocused): label acts as placeholder at 16px */
 .ui-text-field--has-label .ui-text-field__content {
+  padding-top: var(--space-400);
+  padding-bottom: var(--space-400);
+}
+
+.ui-text-field__label {
+  font-family: var(--font-family);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  color: var(--color-content-subtlest);
+  pointer-events: none;
+  transition: font-size 0.15s, line-height 0.15s, color 0.15s, transform 0.15s;
+  transform-origin: left center;
+}
+
+/* Hide native input in has-label when not floated (label IS the placeholder) */
+.ui-text-field--has-label .ui-text-field__input {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  opacity: 0;
+  height: 0;
+}
+
+/* Floated state: focus or has value → data-float on root */
+.ui-text-field--has-label.ui-text-field--float .ui-text-field__content {
   padding-top: var(--space-150);
   padding-bottom: var(--space-150);
   gap: var(--space-50);
 }
 
-/* --- Floating label (inside input, for Has-label type) --- */
-
-.ui-text-field__label {
-  font-family: var(--font-family);
+.ui-text-field--has-label.ui-text-field--float .ui-text-field__label {
   font-size: 12px;
-  font-weight: 400;
   line-height: 18px;
   color: var(--color-content-subtle);
 }
 
+.ui-text-field--has-label.ui-text-field--float .ui-text-field__input {
+  position: static;
+  opacity: 1;
+  height: auto;
+}
+
+/* Error label color */
 .ui-text-field--error .ui-text-field__label {
   color: var(--color-content-danger-default);
 }
