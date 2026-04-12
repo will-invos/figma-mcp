@@ -1,6 +1,12 @@
+/* ========================================
+ * Checkbox Item
+ * Figma: Checkbox item (node 6005:5565)
+ * States: Enabled/Error/Disabled × Checked/Unchecked
+ * ======================================== */
+
 .ui-checkbox {
   display: inline-flex;
-  align-items: center;
+  align-items: flex-start;
   gap: var(--space-200);
   cursor: pointer;
   user-select: none;
@@ -16,40 +22,58 @@
   pointer-events: none;
 }
 
-/* Custom indicator box */
+/* Indicator: 24×24 outer, 22×22 inner background centered */
 .ui-checkbox__indicator {
   flex-shrink: 0;
   width: 24px;
   height: 24px;
-  border-radius: var(--radius-150);
-  border: 1.5px solid var(--color-border-default);
-  background-color: var(--color-background-default);
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background-color 0.15s, border-color 0.15s;
-  position: relative;
 }
 
-/* Checked state — filled brand background + white checkmark */
-.ui-checkbox__input:checked + .ui-checkbox__indicator {
+.ui-checkbox__indicator::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 22px;
+  height: 22px;
+  border-radius: var(--radius-150);
+  border: 2px solid var(--color-border-default);
+  background-color: var(--color-background-default);
+  transition: background-color 0.15s, border-color 0.15s;
+  box-sizing: border-box;
+}
+
+/* Checked: brand fill, no border visible */
+.ui-checkbox__input:checked + .ui-checkbox__indicator::before {
   background-color: var(--color-background-brand-default);
   border-color: var(--color-background-brand-default);
 }
 
-.ui-checkbox__input:checked + .ui-checkbox__indicator::after {
+/* Checkmark icon: 16×16 white SVG, shown when checked */
+.ui-checkbox__indicator::after {
   content: '';
-  display: block;
-  width: 14px;
-  height: 14px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14' fill='none'%3E%3Cpath d='M2 7l4 4 6-6' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  display: none;
+  position: relative;
+  z-index: 1;
+  width: 16px;
+  height: 16px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M3 8l3.5 3.5L13 5' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
 }
 
+.ui-checkbox__input:checked + .ui-checkbox__indicator::after {
+  display: block;
+}
+
 /* Error state */
-.ui-checkbox--error .ui-checkbox__indicator {
+.ui-checkbox--error .ui-checkbox__indicator::before {
   border-color: var(--color-border-danger);
 }
 
@@ -60,10 +84,25 @@
   cursor: not-allowed;
 }
 
-/* Label text */
+/* Content: label + optional description */
+.ui-checkbox__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-50);
+}
+
 .ui-checkbox__label {
+  font-family: var(--font-family);
   font-size: 16px;
-  line-height: 24px;
   font-weight: 400;
+  line-height: 24px;
   color: var(--color-content-default);
+}
+
+.ui-checkbox__description {
+  font-family: var(--font-family);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 22px;
+  color: var(--color-content-subtle);
 }

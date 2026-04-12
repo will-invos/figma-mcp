@@ -7,6 +7,7 @@ interface CheckboxProps {
   disabled?: boolean;
   status?: 'default' | 'error';
   children?: React.ReactNode;
+  description?: string;
 }
 
 const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
@@ -17,6 +18,7 @@ const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
       disabled = false,
       status = 'default',
       children,
+      description,
     },
     ref
   ) => {
@@ -43,8 +45,11 @@ const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
           aria-invalid={status === 'error' || undefined}
         />
         <span className="ui-checkbox__indicator" aria-hidden="true" />
-        {children && (
-          <span className="ui-checkbox__label">{children}</span>
+        {(children || description) && (
+          <span className="ui-checkbox__content">
+            {children && <span className="ui-checkbox__label">{children}</span>}
+            {description && <span className="ui-checkbox__description">{description}</span>}
+          </span>
         )}
       </label>
     );
