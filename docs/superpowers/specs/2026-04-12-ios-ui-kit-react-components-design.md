@@ -43,124 +43,225 @@ Figma token path → CSS variable, `/` becomes `-`:
 | `space/400` | `--space-400` |
 | `radius/300` | `--radius-300` |
 
-### 2.3 Color Tokens (Light + Dark)
+### 2.3 Color Token Inventory (142 tokens)
 
-```css
-:root {
-  /* Content */
-  --color-content-bold: #101119;
-  --color-content-default: #3b3c43;
-  --color-content-plain: #000000;
-  --color-content-subtle: #737380;
-  --color-content-subtlest: #9b9baa;
-  --color-content-brand-default: #3560ff;
-  --color-content-brand-bold: #2440b3;
-  --color-content-brand-hover: #2d4edb;
-  --color-content-brand-active: #2440b3;
-  --color-content-brand-subtle: #8da4ff;
-  --color-content-danger-default: #e5484d;
-  --color-content-danger-bold: #c13438;
-  --color-content-success-default: #30a46c;
-  --color-content-success-bold: #1d7d4e;
-  --color-content-inverse-bold: #ffffff;
-  --color-content-inverse-plain: #f0f0f5;
-  --color-content-inverse-subtle: #bbbbc8;
-  --color-content-fixed-white: #ffffff;
-  --color-content-fixed-black: #000000;
-  --color-content-link-default: #3560ff;
+The complete list of semantic color tokens from the Figma "Semantic: Colors" variable collection. All 142 tokens must be defined as CSS variables in `colors.css` for both `:root` (light) and `[data-theme="dark"]`.
 
-  /* Background */
-  --color-background-plain: #ffffff;
-  --color-background-default: #ffffff;
-  --color-background-brand-boldest: #1a2f8f;
-  --color-background-brand-bold: #3560ff;
-  --color-background-brand-default: #4d7aff;
-  --color-background-brand-hover: #2d4edb;
-  --color-background-brand-active: #2440b3;
-  --color-background-brand-subtle: #e8eeff;
-  --color-background-brand-subtlest: #f5f7ff;
-  --color-background-danger-bold: #e5484d;
-  --color-background-danger-hover: #d23b3f;
-  --color-background-danger-subtle: #ffe5e5;
-  --color-background-danger-subtlest: #fff5f5;
-  --color-background-success-subtle: #ddf3e4;
-  --color-background-success-subtlest: #f2fcf5;
-  --color-background-warning-subtle: #fff0d1;
-  --color-background-warning-subtlest: #fffbe5;
-  --color-background-neutral-bold: #737380;
-  --color-background-neutral-subtle: #f0f0f5;
-  --color-background-neutral-subtle-hover: #e8e8f0;
-  --color-background-neutral-subtle-active: #dddde8;
-  --color-background-inverse-plain: #101119;
-  --color-background-overlay-bold: rgba(0, 0, 0, 0.5);
+> **Note:** Hex values below are light-mode defaults extracted from Figma. Dark-mode values will be extracted during implementation via `get_variable_defs` on relevant Figma nodes.
 
-  /* Border */
-  --color-border-default: #bbbbc8;
-  --color-border-bold: #9b9baa;
-  --color-border-subtle: #edeff3;
-  --color-border-brand: #3560ff;
-  --color-border-danger: #e5484d;
-  --color-border-success: #30a46c;
-  --color-border-warning: #f5a623;
-  --color-border-inverse-bold: #ffffff;
-  --color-border-fixed-black: #000000;
-  --color-border-fixed-white: #ffffff;
+#### Content tokens (53) — scope: TEXT_FILL, SHAPE_FILL
 
-  /* Shadow */
-  --color-shadow-bold: rgba(0, 0, 0, 0.12);
-  --color-shadow-sheet: rgba(0, 0, 0, 0.08);
-}
-
-[data-theme="dark"] {
-  /* Content */
-  --color-content-bold: #f0f0f5;
-  --color-content-default: #dddde8;
-  --color-content-plain: #ffffff;
-  --color-content-subtle: #9b9baa;
-  --color-content-subtlest: #737380;
-  --color-content-brand-default: #8da4ff;
-  --color-content-brand-bold: #a8bbff;
-  --color-content-danger-default: #ff8589;
-  --color-content-success-default: #5dd99a;
-  --color-content-inverse-bold: #101119;
-  --color-content-inverse-plain: #1c1c27;
-  --color-content-link-default: #8da4ff;
-
-  /* Background */
-  --color-background-plain: #101119;
-  --color-background-default: #101119;
-  --color-background-brand-bold: #3560ff;
-  --color-background-brand-default: #2d4edb;
-  --color-background-brand-hover: #3560ff;
-  --color-background-brand-active: #4d7aff;
-  --color-background-brand-subtle: #1a2040;
-  --color-background-brand-subtlest: #131828;
-  --color-background-danger-bold: #e5484d;
-  --color-background-danger-subtle: #3a1618;
-  --color-background-danger-subtlest: #261314;
-  --color-background-success-subtle: #132d1f;
-  --color-background-warning-subtle: #332810;
-  --color-background-neutral-bold: #9b9baa;
-  --color-background-neutral-subtle: #1c1c27;
-  --color-background-neutral-subtle-hover: #252533;
-  --color-background-neutral-subtle-active: #2e2e40;
-  --color-background-inverse-plain: #f0f0f5;
-  --color-background-overlay-bold: rgba(0, 0, 0, 0.7);
-
-  /* Border */
-  --color-border-default: #3b3c50;
-  --color-border-bold: #505068;
-  --color-border-subtle: #252533;
-  --color-border-brand: #5580ff;
-  --color-border-danger: #ff8589;
-  --color-border-success: #5dd99a;
-  --color-border-warning: #ffc145;
-
-  /* Shadow */
-  --color-shadow-bold: rgba(0, 0, 0, 0.3);
-  --color-shadow-sheet: rgba(0, 0, 0, 0.2);
-}
 ```
+/* Base */
+color/content/bold
+color/content/default
+color/content/plain
+color/content/subtle
+color/content/subtlest
+
+/* Brand */
+color/content/brand/active
+color/content/brand/bold
+color/content/brand/default
+color/content/brand/gradient/primary
+color/content/brand/gradient/secondary
+color/content/brand/hover
+color/content/brand/subtle
+
+/* Danger */
+color/content/danger/active
+color/content/danger/bold
+color/content/danger/default
+color/content/danger/hover
+color/content/danger/subtle
+
+/* Donation */
+color/content/donation/active
+color/content/donation/bold
+color/content/donation/default
+color/content/donation/hover
+color/content/donation/subtle
+
+/* Fixed */
+color/content/fixed/black
+color/content/fixed/bold
+color/content/fixed/brand
+color/content/fixed/default
+color/content/fixed/white
+
+/* Inverse */
+color/content/inverse/bold
+color/content/inverse/brand
+color/content/inverse/default
+color/content/inverse/plain
+color/content/inverse/subtle
+
+/* Link */
+color/content/link/active
+color/content/link/default
+color/content/link/hover
+
+/* Neutral */
+color/content/neutral/active
+color/content/neutral/default
+color/content/neutral/hover
+
+/* Prize */
+color/content/prize/active
+color/content/prize/bold
+color/content/prize/default
+color/content/prize/hover
+color/content/prize/subtle
+
+/* Success */
+color/content/success/active
+color/content/success/bold
+color/content/success/default
+color/content/success/hover
+color/content/success/subtle
+
+/* Warning */
+color/content/warning/active
+color/content/warning/bold
+color/content/warning/default
+color/content/warning/hover
+color/content/warning/subtle
+```
+
+#### Background tokens (66) — scope: FRAME_FILL, SHAPE_FILL, EFFECT_COLOR
+
+```
+/* Base */
+color/background/default
+color/background/disable
+color/background/elevated-brand
+color/background/plain
+color/background/skeleton
+color/background/sunken
+color/background/toast
+
+/* Brand */
+color/background/brand/active
+color/background/brand/bold
+color/background/brand/boldest
+color/background/brand/default
+color/background/brand/hover
+color/background/brand/subtle
+color/background/brand/subtlest
+
+/* Danger */
+color/background/danger/active
+color/background/danger/bold
+color/background/danger/boldest
+color/background/danger/default
+color/background/danger/hover
+color/background/danger/subtle
+color/background/danger/subtlest
+
+/* Donation */
+color/background/donation/active
+color/background/donation/bold
+color/background/donation/boldest
+color/background/donation/default
+color/background/donation/hover
+color/background/donation/subtle
+color/background/donation/subtlest
+
+/* Fixed */
+color/background/fixed/black
+color/background/fixed/transparent/black
+color/background/fixed/transparent/white
+color/background/fixed/white
+
+/* Inverse */
+color/background/inverse/default
+color/background/inverse/plain
+color/background/inverse/sunken
+
+/* Neutral */
+color/background/neutral/active
+color/background/neutral/bold
+color/background/neutral/bold-hover
+color/background/neutral/default
+color/background/neutral/hover
+color/background/neutral/subtle
+
+/* Overlay */
+color/background/overlay/bold
+color/background/overlay/default
+
+/* Prize */
+color/background/prize/active
+color/background/prize/bold
+color/background/prize/boldest
+color/background/prize/default
+color/background/prize/hover
+color/background/prize/subtle
+color/background/prize/subtlest
+
+/* Success */
+color/background/success/active
+color/background/success/bold
+color/background/success/boldest
+color/background/success/default
+color/background/success/hover
+color/background/success/subtle
+color/background/success/subtlest
+
+/* Transparent */
+color/background/transparent/active
+color/background/transparent/default
+color/background/transparent/hover
+
+/* Warning */
+color/background/warning/active
+color/background/warning/bold
+color/background/warning/boldest
+color/background/warning/default
+color/background/warning/hover
+color/background/warning/subtle
+color/background/warning/subtlest
+```
+
+#### Border tokens (18) — scope: STROKE
+
+```
+color/border/bold
+color/border/boldest
+color/border/brand
+color/border/brand-subtle
+color/border/danger
+color/border/default
+color/border/divider
+color/border/donation
+color/border/fixed/black
+color/border/fixed/bold
+color/border/inverse/bold
+color/border/inverse/divider
+color/border/inverse/plain
+color/border/plain
+color/border/prize
+color/border/subtle
+color/border/success
+color/border/warning
+```
+
+#### Shadow tokens (5) — scope: ALL_SCOPES
+
+```
+color/shadow/bold
+color/shadow/default
+color/shadow/fixed/bold
+color/shadow/glow/default
+color/shadow/sheet
+```
+
+#### Implementation approach for hex values
+
+During implementation, extract actual hex values for both light and dark modes by:
+1. Using `get_variable_defs` on Figma nodes that consume these tokens
+2. Cross-referencing with the Figma color swatch page (node `330:98801`)
+3. Each token becomes `--{token-path-with-dashes}` in CSS, e.g. `color/content/brand/default` → `--color-content-brand-default`
 
 ### 2.4 Spacing Tokens
 
