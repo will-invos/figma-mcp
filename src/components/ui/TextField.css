@@ -90,57 +90,68 @@
 /* ========================================
  * Has-label type: floating label
  *
- * Fixed layout — zero jitter:
- *   padding: space/150 (6px) top/bottom
- *   gap: space/50 (2px)
- *   label: always height 18px (fixed box, font changes inside)
- *   input: always height 24px (opacity toggles visibility)
- *   Total: 6 + 18 + 2 + 24 + 6 = 56px (matches min-height)
+ * Content area uses position relative, fixed padding.
+ * Label and input are positioned so that the content
+ * area is always the same height (no jitter).
  *
- * Unfloated: label font 16px visually centered, input invisible
- * Floated: label font 12px at top, input visible
+ * Unfloated: label centered at 16px (acts as placeholder),
+ *            input is absolute overlay (invisible but focusable).
+ * Floated:   label shrinks to 12px at top,
+ *            input visible below label.
+ *
+ * Content padding: space/400 (16px) — same as simple type.
+ * The visual difference comes from label + input stacking,
+ * not from padding changes.
  * ======================================== */
 
 .ui-text-field--has-label .ui-text-field__content {
+  padding-top: var(--space-400);
+  padding-bottom: var(--space-400);
+  position: relative;
+}
+
+.ui-text-field__label {
+  font-family: var(--font-family);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  color: var(--color-content-subtlest);
+  pointer-events: none;
+  transition: font-size 0.15s, line-height 0.15s, color 0.15s;
+}
+
+/* Not floated: input is absolute, transparent but focusable */
+.ui-text-field--has-label:not(.ui-text-field--float) .ui-text-field__input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+
+/* Floated: label shrinks, content switches to column layout */
+.ui-text-field--has-label.ui-text-field--float .ui-text-field__content {
   padding-top: var(--space-150);
   padding-bottom: var(--space-150);
   gap: var(--space-50);
 }
 
-.ui-text-field__label {
-  font-family: var(--font-family);
-  height: 18px;
-  display: flex;
-  align-items: center;
+.ui-text-field--has-label.ui-text-field--float .ui-text-field__label {
   font-size: 12px;
-  font-weight: 400;
   line-height: 18px;
   color: var(--color-content-subtle);
-  pointer-events: none;
-  transition: font-size 0.15s, color 0.15s;
 }
 
-/* Input always in flow at fixed height, opacity toggles */
-.ui-text-field--has-label .ui-text-field__input {
-  height: 24px;
-  opacity: 0;
-  transition: opacity 0.15s;
-}
-
-/* Not floated: label enlarges to look like placeholder */
-.ui-text-field--has-label:not(.ui-text-field--float) .ui-text-field__label {
-  font-size: 16px;
-  color: var(--color-content-subtlest);
-}
-
-/* Floated: input becomes visible */
 .ui-text-field--has-label.ui-text-field--float .ui-text-field__input {
+  position: static;
   opacity: 1;
+  height: auto;
 }
 
 /* Error label color — overrides both floated and unfloated states */
 .ui-text-field--error .ui-text-field__label,
-.ui-text-field--has-label.ui-text-field--error:not(.ui-text-field--float) .ui-text-field__label {
+.ui-text-field--has-label.ui-text-field--error:not(.ui-text-field--float) .ui-text-field__label,
+.ui-text-field--has-label.ui-text-field--float.ui-text-field--error .ui-text-field__label {
   color: var(--color-content-danger-default);
 }
 
