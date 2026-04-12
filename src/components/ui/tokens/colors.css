@@ -1,0 +1,410 @@
+/*
+ * Semantic Color Tokens
+ * Generated from Figma design system
+ * Naming: color/{category}/{variant} → --color-{category}-{variant}
+ *
+ * Light mode (:root) — 142 tokens
+ * Dark mode ([data-theme="dark"]) — overrides for non-fixed tokens
+ */
+
+:root {
+  /* ========================================
+   * Content
+   * ======================================== */
+
+  /* Content — Base */
+  --color-content-bold: #101119;
+  --color-content-default: #3b3c43;
+  --color-content-plain: #000000;
+  --color-content-subtle: #737380;
+  --color-content-subtlest: #9b9baa;
+
+  /* Content — Brand */
+  --color-content-brand-default: #3560ff;
+  --color-content-brand-bold: #2b38c8;
+  --color-content-brand-hover: #2f4be6;
+  --color-content-brand-active: #2b38c8;
+  --color-content-brand-subtle: #8da4ff;
+  --color-content-brand-gradient-primary: #3560ff;
+  --color-content-brand-gradient-secondary: #8da4ff;
+
+  /* Content — Danger */
+  --color-content-danger-default: #f4252d;
+  --color-content-danger-bold: #b30913;
+  --color-content-danger-hover: #dd0815;
+  --color-content-danger-active: #b30913;
+  --color-content-danger-subtle: #ff8589;
+
+  /* Content — Donation */
+  --color-content-donation-default: #f61372;
+  --color-content-donation-bold: #a3094a;
+  --color-content-donation-hover: #d60c5f;
+  --color-content-donation-active: #a3094a;
+  --color-content-donation-subtle: #ff6baa;
+
+  /* Content — Fixed (do NOT change in dark mode) */
+  --color-content-fixed-black: #000000;
+  --color-content-fixed-bold: #101119;
+  --color-content-fixed-brand: #3560ff;
+  --color-content-fixed-default: #3b3c43;
+  --color-content-fixed-white: #ffffff;
+
+  /* Content — Inverse */
+  --color-content-inverse-bold: #f7f8f9;
+  --color-content-inverse-brand: #8da4ff;
+  --color-content-inverse-default: #dcdee5;
+  --color-content-inverse-plain: #f7f8f9;
+  --color-content-inverse-subtle: #9b9baa;
+
+  /* Content — Link */
+  --color-content-link-default: #3560ff;
+  --color-content-link-hover: #2f4be6;
+  --color-content-link-active: #2b38c8;
+
+  /* Content — Neutral */
+  --color-content-neutral-default: #737380;
+  --color-content-neutral-hover: #575762;
+  --color-content-neutral-active: #3b3c43;
+
+  /* Content — Prize */
+  --color-content-prize-default: #ffc423;
+  --color-content-prize-bold: #9c6a05;
+  --color-content-prize-hover: #f1ad00;
+  --color-content-prize-active: #c78b07;
+  --color-content-prize-subtle: #ffd86b;
+
+  /* Content — Success */
+  --color-content-success-default: #00bd64;
+  --color-content-success-bold: #007746;
+  --color-content-success-hover: #00a357;
+  --color-content-success-active: #007746;
+  --color-content-success-subtle: #5dd99a;
+
+  /* Content — Warning */
+  --color-content-warning-default: #ff8710;
+  --color-content-warning-bold: #a54200;
+  --color-content-warning-hover: #e07000;
+  --color-content-warning-active: #a54200;
+  --color-content-warning-subtle: #ffb86b;
+
+  /* ========================================
+   * Background
+   * ======================================== */
+
+  /* Background — Base */
+  --color-background-default: #ffffff;
+  --color-background-disable: #f0f0f5;
+  --color-background-elevated-brand: #eef1fe;
+  --color-background-plain: #ffffff;
+  --color-background-skeleton: #edeff3;
+  --color-background-sunken: #f7f8f9;
+  --color-background-toast: #101119;
+
+  /* Background — Brand */
+  --color-background-brand-active: #2b38c8;
+  --color-background-brand-bold: #3560ff;
+  --color-background-brand-boldest: #1a2f8f;
+  --color-background-brand-default: #3560ff;
+  --color-background-brand-hover: #2f4be6;
+  --color-background-brand-subtle: #d6e5ff;
+  --color-background-brand-subtlest: #eef1fe;
+
+  /* Background — Danger */
+  --color-background-danger-active: #b30913;
+  --color-background-danger-bold: #f4252d;
+  --color-background-danger-boldest: #8c0610;
+  --color-background-danger-default: #f4252d;
+  --color-background-danger-hover: #dd0815;
+  --color-background-danger-subtle: #ffdede;
+  --color-background-danger-subtlest: #fff0f0;
+
+  /* Background — Donation */
+  --color-background-donation-active: #a3094a;
+  --color-background-donation-bold: #f61372;
+  --color-background-donation-boldest: #7a0638;
+  --color-background-donation-default: #f61372;
+  --color-background-donation-hover: #d60c5f;
+  --color-background-donation-subtle: #ffd6e8;
+  --color-background-donation-subtlest: #fff0f6;
+
+  /* Background — Fixed (do NOT change in dark mode) */
+  --color-background-fixed-black: #000000;
+  --color-background-fixed-transparent-black: rgba(0, 0, 0, 0.5);
+  --color-background-fixed-transparent-white: rgba(255, 255, 255, 0.5);
+  --color-background-fixed-white: #ffffff;
+
+  /* Background — Inverse */
+  --color-background-inverse-default: #1c1c27;
+  --color-background-inverse-plain: #101119;
+  --color-background-inverse-sunken: #0a0a12;
+
+  /* Background — Neutral */
+  --color-background-neutral-active: #9b9baa;
+  --color-background-neutral-bold: #737380;
+  --color-background-neutral-bold-hover: #575762;
+  --color-background-neutral-default: #bbbbc8;
+  --color-background-neutral-hover: #9b9baa;
+  --color-background-neutral-subtle: #edeff3;
+
+  /* Background — Overlay */
+  --color-background-overlay-bold: rgba(0, 0, 0, 0.7);
+  --color-background-overlay-default: rgba(0, 0, 0, 0.5);
+
+  /* Background — Prize */
+  --color-background-prize-active: #c78b07;
+  --color-background-prize-bold: #ffc423;
+  --color-background-prize-boldest: #7a5203;
+  --color-background-prize-default: #ffc423;
+  --color-background-prize-hover: #f1ad00;
+  --color-background-prize-subtle: #fff1cd;
+  --color-background-prize-subtlest: #fffae5;
+
+  /* Background — Success */
+  --color-background-success-active: #007746;
+  --color-background-success-bold: #00bd64;
+  --color-background-success-boldest: #004d2d;
+  --color-background-success-default: #00bd64;
+  --color-background-success-hover: #00a357;
+  --color-background-success-subtle: #d5fbe5;
+  --color-background-success-subtlest: #f0fdf5;
+
+  /* Background — Transparent */
+  --color-background-transparent-active: rgba(0, 0, 0, 0.2);
+  --color-background-transparent-default: rgba(0, 0, 0, 0);
+  --color-background-transparent-hover: rgba(0, 0, 0, 0.1);
+
+  /* Background — Warning */
+  --color-background-warning-active: #a54200;
+  --color-background-warning-bold: #ff8710;
+  --color-background-warning-boldest: #6b2a00;
+  --color-background-warning-default: #ff8710;
+  --color-background-warning-hover: #e07000;
+  --color-background-warning-subtle: #ffedcd;
+  --color-background-warning-subtlest: #fff8ed;
+
+  /* ========================================
+   * Border
+   * ======================================== */
+  --color-border-bold: #9b9baa;
+  --color-border-boldest: #737380;
+  --color-border-brand: #3560ff;
+  --color-border-brand-subtle: #8da4ff;
+  --color-border-danger: #f4252d;
+  --color-border-default: #b8bdc7;
+  --color-border-divider: rgba(0, 0, 0, 0.1);
+  --color-border-donation: #f61372;
+  --color-border-fixed-black: #000000;
+  --color-border-fixed-bold: #101119;
+  --color-border-inverse-bold: #f7f8f9;
+  --color-border-inverse-divider: rgba(255, 255, 255, 0.1);
+  --color-border-inverse-plain: #3b3c50;
+  --color-border-plain: #dcdee5;
+  --color-border-prize: #ffc423;
+  --color-border-subtle: #edeff3;
+  --color-border-success: #00bd64;
+  --color-border-warning: #ff8710;
+
+  /* ========================================
+   * Shadow
+   * ======================================== */
+  --color-shadow-bold: rgba(22, 25, 29, 0.12);
+  --color-shadow-default: rgba(22, 25, 29, 0.2);
+  --color-shadow-fixed-bold: rgba(0, 0, 0, 0.12);
+  --color-shadow-glow-default: rgba(53, 96, 255, 0.3);
+  --color-shadow-sheet: rgba(22, 25, 29, 0.08);
+}
+
+/* ==========================================
+ * Dark Mode Overrides
+ * Fixed tokens are NOT overridden.
+ * ========================================== */
+[data-theme="dark"] {
+  /* ========================================
+   * Content — Dark Mode
+   * ======================================== */
+
+  /* Content — Base: light ↔ dark inversion */
+  --color-content-bold: #f7f8f9;
+  --color-content-default: #dcdee5;
+  --color-content-plain: #ffffff;
+  --color-content-subtle: #9b9baa;
+  --color-content-subtlest: #737380;
+
+  /* Content — Brand: slightly lighter for dark-bg visibility */
+  --color-content-brand-default: #5a80ff;
+  --color-content-brand-bold: #8da4ff;
+  --color-content-brand-hover: #7090ff;
+  --color-content-brand-active: #5a80ff;
+  --color-content-brand-subtle: #3560ff;
+  --color-content-brand-gradient-primary: #5a80ff;
+  --color-content-brand-gradient-secondary: #3560ff;
+
+  /* Content — Danger: lighter for dark-bg readability */
+  --color-content-danger-default: #ff6b6f;
+  --color-content-danger-bold: #ff8589;
+  --color-content-danger-hover: #ff565a;
+  --color-content-danger-active: #ff6b6f;
+  --color-content-danger-subtle: #b30913;
+
+  /* Content — Donation: lighter for dark-bg readability */
+  --color-content-donation-default: #ff6baa;
+  --color-content-donation-bold: #ff8dbe;
+  --color-content-donation-hover: #ff4d9a;
+  --color-content-donation-active: #ff6baa;
+  --color-content-donation-subtle: #a3094a;
+
+  /* Content — Inverse: invert back to dark values */
+  --color-content-inverse-bold: #101119;
+  --color-content-inverse-brand: #2b38c8;
+  --color-content-inverse-default: #3b3c43;
+  --color-content-inverse-plain: #101119;
+  --color-content-inverse-subtle: #575762;
+
+  /* Content — Link: lighter for dark-bg readability */
+  --color-content-link-default: #5a80ff;
+  --color-content-link-hover: #7090ff;
+  --color-content-link-active: #8da4ff;
+
+  /* Content — Neutral: lighter tones */
+  --color-content-neutral-default: #9b9baa;
+  --color-content-neutral-hover: #bbbbc8;
+  --color-content-neutral-active: #dcdee5;
+
+  /* Content — Prize: lighter for dark-bg readability */
+  --color-content-prize-default: #ffd86b;
+  --color-content-prize-bold: #ffc423;
+  --color-content-prize-hover: #ffce45;
+  --color-content-prize-active: #ffd86b;
+  --color-content-prize-subtle: #9c6a05;
+
+  /* Content — Success: lighter for dark-bg readability */
+  --color-content-success-default: #5dd99a;
+  --color-content-success-bold: #7be5ae;
+  --color-content-success-hover: #3dd086;
+  --color-content-success-active: #5dd99a;
+  --color-content-success-subtle: #007746;
+
+  /* Content — Warning: lighter for dark-bg readability */
+  --color-content-warning-default: #ffb86b;
+  --color-content-warning-bold: #ffc98a;
+  --color-content-warning-hover: #ffa74a;
+  --color-content-warning-active: #ffb86b;
+  --color-content-warning-subtle: #a54200;
+
+  /* ========================================
+   * Background — Dark Mode
+   * ======================================== */
+
+  /* Background — Base */
+  --color-background-default: #101119;
+  --color-background-disable: #1c1c27;
+  --color-background-elevated-brand: #1a2050;
+  --color-background-plain: #101119;
+  --color-background-skeleton: #272736;
+  --color-background-sunken: #0a0a12;
+  --color-background-toast: #dcdee5;
+
+  /* Background — Brand */
+  --color-background-brand-active: #1a2f8f;
+  --color-background-brand-bold: #3560ff;
+  --color-background-brand-boldest: #5a80ff;
+  --color-background-brand-default: #3560ff;
+  --color-background-brand-hover: #2b38c8;
+  --color-background-brand-subtle: #1a2050;
+  --color-background-brand-subtlest: #141836;
+
+  /* Background — Danger */
+  --color-background-danger-active: #8c0610;
+  --color-background-danger-bold: #f4252d;
+  --color-background-danger-boldest: #ff6b6f;
+  --color-background-danger-default: #f4252d;
+  --color-background-danger-hover: #b30913;
+  --color-background-danger-subtle: #3d0a0e;
+  --color-background-danger-subtlest: #2a0809;
+
+  /* Background — Donation */
+  --color-background-donation-active: #7a0638;
+  --color-background-donation-bold: #f61372;
+  --color-background-donation-boldest: #ff6baa;
+  --color-background-donation-default: #f61372;
+  --color-background-donation-hover: #a3094a;
+  --color-background-donation-subtle: #3d0820;
+  --color-background-donation-subtlest: #2a0616;
+
+  /* Background — Inverse: flip to light */
+  --color-background-inverse-default: #f7f8f9;
+  --color-background-inverse-plain: #ffffff;
+  --color-background-inverse-sunken: #edeff3;
+
+  /* Background — Neutral */
+  --color-background-neutral-active: #575762;
+  --color-background-neutral-bold: #9b9baa;
+  --color-background-neutral-bold-hover: #bbbbc8;
+  --color-background-neutral-default: #3b3c50;
+  --color-background-neutral-hover: #575762;
+  --color-background-neutral-subtle: #1c1c27;
+
+  /* Background — Overlay */
+  --color-background-overlay-bold: rgba(0, 0, 0, 0.85);
+  --color-background-overlay-default: rgba(0, 0, 0, 0.7);
+
+  /* Background — Prize */
+  --color-background-prize-active: #9c6a05;
+  --color-background-prize-bold: #ffc423;
+  --color-background-prize-boldest: #ffd86b;
+  --color-background-prize-default: #ffc423;
+  --color-background-prize-hover: #c78b07;
+  --color-background-prize-subtle: #3d2e08;
+  --color-background-prize-subtlest: #2a2005;
+
+  /* Background — Success */
+  --color-background-success-active: #004d2d;
+  --color-background-success-bold: #00bd64;
+  --color-background-success-boldest: #5dd99a;
+  --color-background-success-default: #00bd64;
+  --color-background-success-hover: #007746;
+  --color-background-success-subtle: #0a2e1a;
+  --color-background-success-subtlest: #061f12;
+
+  /* Background — Transparent */
+  --color-background-transparent-active: rgba(255, 255, 255, 0.2);
+  --color-background-transparent-default: rgba(255, 255, 255, 0);
+  --color-background-transparent-hover: rgba(255, 255, 255, 0.1);
+
+  /* Background — Warning */
+  --color-background-warning-active: #6b2a00;
+  --color-background-warning-bold: #ff8710;
+  --color-background-warning-boldest: #ffb86b;
+  --color-background-warning-default: #ff8710;
+  --color-background-warning-hover: #a54200;
+  --color-background-warning-subtle: #3d1e05;
+  --color-background-warning-subtlest: #2a1503;
+
+  /* ========================================
+   * Border — Dark Mode
+   * ======================================== */
+  --color-border-bold: #575762;
+  --color-border-boldest: #9b9baa;
+  --color-border-brand: #5a80ff;
+  --color-border-brand-subtle: #3560ff;
+  --color-border-danger: #ff6b6f;
+  --color-border-default: #3b3c50;
+  --color-border-divider: rgba(255, 255, 255, 0.1);
+  --color-border-donation: #ff6baa;
+  --color-border-inverse-bold: #101119;
+  --color-border-inverse-divider: rgba(0, 0, 0, 0.1);
+  --color-border-inverse-plain: #dcdee5;
+  --color-border-plain: #272736;
+  --color-border-prize: #ffd86b;
+  --color-border-subtle: #1c1c27;
+  --color-border-success: #5dd99a;
+  --color-border-warning: #ffb86b;
+
+  /* ========================================
+   * Shadow — Dark Mode (increased opacity)
+   * ======================================== */
+  --color-shadow-bold: rgba(0, 0, 0, 0.28);
+  --color-shadow-default: rgba(0, 0, 0, 0.4);
+  --color-shadow-glow-default: rgba(53, 96, 255, 0.4);
+  --color-shadow-sheet: rgba(0, 0, 0, 0.2);
+}
