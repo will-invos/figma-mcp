@@ -41,10 +41,28 @@
   padding-right: calc(var(--space-300) - 1px);
 }
 
-/* Disabled state */
+/* Disabled state: bg changes to disable token, no opacity */
 .ui-text-field--disabled .ui-text-field__input-wrapper {
-  opacity: 0.4;
+  background-color: var(--color-background-disable);
   pointer-events: none;
+  cursor: default;
+}
+
+.ui-text-field--disabled .ui-text-field__input {
+  color: var(--color-content-subtle);
+}
+
+.ui-text-field--disabled .ui-text-field__input::placeholder {
+  color: var(--color-content-subtlest);
+}
+
+.ui-text-field--disabled .ui-text-field__label {
+  color: var(--color-content-subtle);
+}
+
+.ui-text-field--disabled .ui-text-field__leading-icon,
+.ui-text-field--disabled .ui-text-field__trailing-icon {
+  color: var(--color-content-subtlest);
 }
 
 /* --- Content area (label + input stacked) --- */
