@@ -388,6 +388,7 @@ export default function App() {
         <div style={{ borderRadius: 12, overflow: 'hidden', border: '1px solid var(--color-border, #e5e4e7)' }}>
           <ListItem
             headline="Navigate somewhere"
+            type="has-description"
             description="Tap to go to the next screen"
             trailing="drill-in"
             onClick={() => {}}
@@ -420,12 +421,13 @@ export default function App() {
           />
           <ListItem
             headline="Compact item"
-            contentSize="compact"
+            type="compact"
             trailing="drill-in"
             onClick={() => {}}
           />
           <ListItem
             headline="Disabled item"
+            type="has-description"
             description="This item cannot be tapped"
             trailing="drill-in"
             disabled

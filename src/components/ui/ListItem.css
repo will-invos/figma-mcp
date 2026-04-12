@@ -1,26 +1,65 @@
+/* ========================================
+ * List Item
+ * Figma: List item (node 3754:2508)
+ *
+ * Structure: outer (px 16, flex-col, position relative)
+ *            > container (flex row, gap 16, items-start)
+ *            > divider (absolute, bottom 0, left/right 16px)
+ *
+ * Types: Default (py 16), Has description (py 16), Compact (py 12)
+ * ======================================== */
+
 .ui-list-item {
   display: flex;
-  align-items: center;
-  padding: 0 var(--space-600);
-  border-bottom: 1px solid var(--color-border-divider);
+  flex-direction: column;
+  align-items: flex-start;
+  padding-left: var(--space-400);
+  padding-right: var(--space-400);
   background-color: var(--color-background-default);
-  gap: var(--space-300);
+  position: relative;
+  font-family: var(--font-family);
+}
+
+/* --- Container (inner row) --- */
+
+.ui-list-item__container {
+  display: flex;
+  gap: var(--space-400);
+  align-items: flex-start;
+  width: 100%;
+}
+
+/* --- Divider: absolute bottom, inset by padding --- */
+
+.ui-list-item__divider {
+  position: absolute;
+  bottom: 0;
+  left: var(--space-400);
+  right: var(--space-400);
+  height: 1px;
+  border-bottom: 1px solid var(--color-border-subtle);
 }
 
 /* ========================================
- * Content Sizes
+ * Types (content padding)
  * ======================================== */
 
-.ui-list-item--compact {
-  min-height: 48px;
+/* Default: py 16 → total 16+24+16 = 56px */
+.ui-list-item--default .ui-list-item__content {
+  padding-top: var(--space-400);
+  padding-bottom: var(--space-400);
 }
 
-.ui-list-item--1-line {
-  min-height: 56px;
+/* Has description: py 16 → total 16+24+2+22+16 = 80px */
+.ui-list-item--has-description .ui-list-item__content {
+  padding-top: var(--space-400);
+  padding-bottom: var(--space-400);
 }
 
-.ui-list-item--2-lines {
-  min-height: 72px;
+/* Compact: py 12 → total 12+24+12 = 48px */
+.ui-list-item--compact .ui-list-item__content {
+  padding-top: var(--space-300);
+  padding-bottom: var(--space-300);
 }
 
 /* ========================================
@@ -35,54 +74,105 @@
   background-color: var(--color-background-neutral-subtle);
 }
 
-.ui-list-item--disabled {
+/* Disabled: opacity on container only (divider stays full) */
+.ui-list-item--disabled .ui-list-item__container {
   opacity: 0.4;
+}
+
+.ui-list-item--disabled {
   pointer-events: none;
 }
 
 /* ========================================
- * Inner Elements
+ * Leading elements
  * ======================================== */
 
-.ui-list-item__leading {
+/* Leading icon: 24×24, py matches content py */
+.ui-list-item__leading-icon {
   flex-shrink: 0;
   display: flex;
   align-items: center;
+  justify-content: center;
+  padding-top: var(--space-400);
+  padding-bottom: var(--space-400);
 }
 
+.ui-list-item--compact .ui-list-item__leading-icon {
+  padding-top: var(--space-300);
+  padding-bottom: var(--space-300);
+}
+
+.ui-list-item__leading-icon > svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* Leading extra: 40×40 slot (avatar/thumbnail), py matches content py */
+.ui-list-item__leading-extra {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  padding-top: var(--space-400);
+  padding-bottom: var(--space-400);
+}
+
+.ui-list-item--compact .ui-list-item__leading-extra {
+  padding-top: var(--space-100);
+  padding-bottom: var(--space-100);
+}
+
+/* ========================================
+ * Content
+ * ======================================== */
+
 .ui-list-item__content {
-  flex: 1;
+  flex: 1 0 0;
+  min-width: 0;
+  min-height: 0;
   display: flex;
   flex-direction: column;
   gap: var(--space-50);
+  justify-content: center;
 }
 
 .ui-list-item__headline {
   font-size: 16px;
-  line-height: 24px;
   font-weight: 400;
+  line-height: 24px;
   color: var(--color-content-default);
 }
 
 .ui-list-item__description {
   font-size: 14px;
-  line-height: 22px;
   font-weight: 400;
+  line-height: 22px;
   color: var(--color-content-subtle);
 }
+
+/* ========================================
+ * Trailing elements
+ * ======================================== */
 
 .ui-list-item__trailing {
   flex-shrink: 0;
   display: flex;
   align-items: center;
+  justify-content: flex-end;
+  align-self: stretch;
 }
 
 .ui-list-item__trailing-text {
   font-size: 14px;
+  font-weight: 400;
   line-height: 22px;
   color: var(--color-content-subtle);
 }
 
 .ui-list-item__chevron {
   color: var(--color-content-subtlest);
+}
+
+.ui-list-item__chevron > svg {
+  width: 20px;
+  height: 20px;
 }

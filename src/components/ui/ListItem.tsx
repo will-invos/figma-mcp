@@ -7,13 +7,16 @@ import './ListItem.css';
 interface ListItemProps {
   headline: string;
   description?: string;
-  contentSize?: '1-line' | '2-lines' | 'compact';
-  trailing?: 'none' | 'drill-in' | 'text' | 'switch' | 'checkbox' | 'icon' | 'spinner';
+  /** 'default' = 56px, 'has-description' = 80px, 'compact' = 48px */
+  type?: 'default' | 'has-description' | 'compact';
+  trailing?: 'none' | 'drill-in' | 'text' | 'text-button' | 'cta' | 'switch' | 'checkbox' | 'icon' | 'spinner';
   trailingText?: string;
   trailingChecked?: boolean;
   onTrailingChange?: (value: boolean) => void;
   trailingIcon?: React.ReactNode;
-  leading?: React.ReactNode;
+  leadingIcon?: React.ReactNode;
+  leadingExtra?: React.ReactNode;
+  showDivider?: boolean;
   disabled?: boolean;
   onClick?: () => void;
 }
@@ -24,7 +27,6 @@ const ChevronRightIcon = () => (
     height="20"
     viewBox="0 0 20 20"
     fill="none"
-    xmlns="http://www.w3.org/2000/svg"
     aria-hidden="true"
   >
     <path
@@ -42,13 +44,15 @@ const ListItem = React.forwardRef<HTMLDivElement, ListItemProps>(
     {
       headline,
       description,
-      contentSize = '1-line',
+      type = 'default',
       trailing = 'none',
       trailingText,
       trailingChecked,
       onTrailingChange,
       trailingIcon,
-      leading,
+      leadingIcon,
+      leadingExtra,
+      showDivider = true,
       disabled = false,
       onClick,
     },
@@ -58,7 +62,7 @@ const ListItem = React.forwardRef<HTMLDivElement, ListItemProps>(
 
     const classes = [
       'ui-list-item',
-      `ui-list-item--${contentSize}`,
+      `ui-list-item--${type}`,
       isClickable && 'ui-list-item--clickable',
       disabled && 'ui-list-item--disabled',
     ]
@@ -77,6 +81,12 @@ const ListItem = React.forwardRef<HTMLDivElement, ListItemProps>(
           return (
             <span className="ui-list-item__trailing">
               <span className="ui-list-item__trailing-text">{trailingText}</span>
+            </span>
+          );
+        case 'text-button':
+          return (
+            <span className="ui-list-item__trailing">
+              <span className="ui-list-item__trailing-text" style={{ color: 'var(--color-content-brand-default)' }}>{trailingText}</span>
             </span>
           );
         case 'switch':
@@ -109,6 +119,10 @@ const ListItem = React.forwardRef<HTMLDivElement, ListItemProps>(
               <Spinner size="small" color="neutral" />
             </span>
           );
+        case 'cta':
+          return (
+            <span className="ui-list-item__trailing">{trailingIcon}</span>
+          );
         case 'none':
         default:
           return null;
@@ -121,14 +135,22 @@ const ListItem = React.forwardRef<HTMLDivElement, ListItemProps>(
 
     return (
       <div ref={ref} className={classes} {...interactiveProps}>
-        {leading && <span className="ui-list-item__leading">{leading}</span>}
-        <div className="ui-list-item__content">
-          <span className="ui-list-item__headline">{headline}</span>
-          {description && (
-            <span className="ui-list-item__description">{description}</span>
+        <div className="ui-list-item__container">
+          {leadingExtra && (
+            <span className="ui-list-item__leading-extra">{leadingExtra}</span>
           )}
+          {leadingIcon && (
+            <span className="ui-list-item__leading-icon">{leadingIcon}</span>
+          )}
+          <div className="ui-list-item__content">
+            <span className="ui-list-item__headline">{headline}</span>
+            {description && type === 'has-description' && (
+              <span className="ui-list-item__description">{description}</span>
+            )}
+          </div>
+          {renderTrailing()}
         </div>
-        {renderTrailing()}
+        {showDivider && <div className="ui-list-item__divider" />}
       </div>
     );
   }
