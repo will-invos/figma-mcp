@@ -1,0 +1,66 @@
+.ui-radio {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-200);
+  cursor: pointer;
+  user-select: none;
+}
+
+/* Visually hidden native input */
+.ui-radio__input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  margin: 0;
+  pointer-events: none;
+}
+
+/* Custom indicator circle */
+.ui-radio__indicator {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 1.5px solid var(--color-border-default);
+  background-color: var(--color-background-default);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.15s, border-color 0.15s;
+  position: relative;
+}
+
+/* Checked state — brand border + inner dot */
+.ui-radio__input:checked + .ui-radio__indicator {
+  border-color: var(--color-background-brand-default);
+}
+
+.ui-radio__input:checked + .ui-radio__indicator::after {
+  content: '';
+  display: block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--color-background-brand-default);
+}
+
+/* Error state */
+.ui-radio--error .ui-radio__indicator {
+  border-color: var(--color-border-danger);
+}
+
+/* Disabled state */
+.ui-radio--disabled {
+  opacity: 0.4;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
+/* Label text */
+.ui-radio__label {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+  color: var(--color-content-default);
+}
