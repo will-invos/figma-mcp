@@ -1,3 +1,13 @@
+/* ========================================
+ * Switch
+ * Figma: Switch (node 3768:1688)
+ * Track: 48×28, radius/600 (24px)
+ * Knob: 24×24, radius/full, fixed/white
+ * On: brand/default track, knob right
+ * Off: neutral/default track, knob left
+ * Disabled: opacity 0.4
+ * ======================================== */
+
 .ui-switch {
   display: inline-flex;
   align-items: center;
@@ -18,36 +28,36 @@
 /* Track */
 .ui-switch__track {
   position: relative;
-  width: 51px;
-  height: 31px;
-  border-radius: var(--radius-full);
+  width: 48px;
+  height: 28px;
+  border-radius: var(--radius-600);
   background-color: var(--color-background-neutral-default);
   transition: background-color 0.2s;
 }
 
-/* Thumb */
+/* Knob */
 .ui-switch__thumb {
   position: absolute;
   top: 2px;
   left: 2px;
-  width: 27px;
-  height: 27px;
-  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  border-radius: var(--radius-full);
   background-color: var(--color-background-fixed-white);
   box-shadow: var(--shadow-small);
-  transition: transform 0.2s;
+  transition: left 0.2s;
 }
 
-/* Checked state — brand track + shifted thumb */
+/* Checked: brand track + knob to right */
 .ui-switch__input:checked ~ .ui-switch__track {
   background-color: var(--color-background-brand-default);
 }
 
 .ui-switch__input:checked ~ .ui-switch__track .ui-switch__thumb {
-  transform: translateX(20px);
+  left: 22px; /* 48 - 24 - 2 = 22 */
 }
 
-/* Disabled state */
+/* Disabled */
 .ui-switch--disabled {
   opacity: 0.4;
   pointer-events: none;
