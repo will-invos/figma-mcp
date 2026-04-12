@@ -255,6 +255,19 @@ export default function App() {
 
         <div style={{ marginBottom: 16 }}>
           <Select
+            placeholder="Choose one..."
+            value={selectValue}
+            onChange={e => setSelectValue(e.target.value)}
+            options={[
+              { label: 'Design', value: 'design' },
+              { label: 'Engineering', value: 'engineering' },
+              { label: 'Product', value: 'product' },
+            ]}
+          />
+        </div>
+        <div style={{ marginBottom: 16 }}>
+          <Select
+            variant="has-label"
             label="Category"
             placeholder="Choose one..."
             value={selectValue}
@@ -268,6 +281,7 @@ export default function App() {
         </div>
         <div style={{ marginBottom: 16 }}>
           <Select
+            variant="has-label"
             label="Status (error)"
             placeholder="Select status..."
             status="error"

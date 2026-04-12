@@ -1,70 +1,235 @@
+/* ========================================
+ * Select
+ * Figma: Select (node 4083:6123)
+ * Types: Simple (single-line) | Has label (floating label)
+ *
+ * Same visual structure as TextField.
+ * has-label behavior:
+ *   empty + unfocused → label at 16px as placeholder
+ *   focused or filled → label floats to 12px, select visible below
+ * ======================================== */
+
 .ui-select {
   display: flex;
   flex-direction: column;
-  gap: var(--space-150);
 }
 
-.ui-select__label {
-  font-size: 14px;
-  line-height: 22px;
-  font-weight: 400;
-  color: var(--color-content-bold);
+/* --- Select container --- */
+
+.ui-select__input-wrapper {
+  display: flex;
+  align-items: center;
+  gap: var(--space-300);
+  min-height: 56px;
+  padding-left: var(--space-300);
+  padding-right: var(--space-300);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-300);
+  background-color: var(--color-background-default);
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+  transition: border-color 0.15s, box-shadow 0.15s;
 }
 
-.ui-select__wrapper {
+/* Focus: 1px border + 1px inset box-shadow = visual 2px */
+.ui-select__input-wrapper:focus-within {
+  border-color: var(--color-border-brand);
+  box-shadow: inset 0 0 0 1px var(--color-border-brand);
+}
+
+/* Error */
+.ui-select--error .ui-select__input-wrapper {
+  border-color: var(--color-border-danger);
+  box-shadow: inset 0 0 0 1px var(--color-border-danger);
+}
+
+/* Disabled */
+.ui-select--disabled .ui-select__input-wrapper {
+  background-color: var(--color-background-disable);
+  pointer-events: none;
+  cursor: default;
+}
+
+.ui-select--disabled .ui-select__input {
+  color: var(--color-content-subtle);
+}
+
+.ui-select--disabled .ui-select__label {
+  color: var(--color-content-subtle);
+}
+
+.ui-select--disabled .ui-select__leading-icon,
+.ui-select--disabled .ui-select__chevron {
+  color: var(--color-content-subtlest);
+}
+
+/* --- Content area --- */
+
+.ui-select__content {
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 0;
+  min-width: 0;
+  min-height: 0;
+  justify-content: center;
   position: relative;
 }
 
+/* ========================================
+ * Simple type
+ * ======================================== */
+
+.ui-select--simple .ui-select__content {
+  padding-top: var(--space-400);
+  padding-bottom: var(--space-400);
+}
+
+/* ========================================
+ * Has-label type: floating label
+ *
+ * Fixed layout: padding always space/150 top/bottom.
+ * No padding/gap changes → zero layout shift.
+ * ======================================== */
+
+.ui-select--has-label .ui-select__content {
+  padding-top: var(--space-150);
+  padding-bottom: var(--space-150);
+  gap: var(--space-50);
+}
+
+.ui-select__label {
+  font-family: var(--font-family);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  color: var(--color-content-subtlest);
+  pointer-events: none;
+  transition: font-size 0.15s, line-height 0.15s, color 0.15s;
+  transform-origin: left top;
+}
+
+/* Select always in flow but invisible when not floated */
+.ui-select--has-label .ui-select__input {
+  height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: height 0.15s, opacity 0.15s;
+}
+
+/* Floated: label shrinks, select appears */
+.ui-select--has-label.ui-select--float .ui-select__label {
+  font-size: 12px;
+  line-height: 18px;
+  color: var(--color-content-subtle);
+}
+
+.ui-select--has-label.ui-select--float .ui-select__input {
+  height: 24px;
+  opacity: 1;
+}
+
+/* Error label color — needs higher specificity to override float state */
+.ui-select--error .ui-select__label,
+.ui-select--has-label.ui-select--float.ui-select--error .ui-select__label {
+  color: var(--color-content-danger-default);
+}
+
+/* --- Native select element --- */
+
 .ui-select__input {
   appearance: none;
-  height: 56px;
-  border-radius: var(--radius-300);
-  border: 1.5px solid var(--color-border-default);
-  padding: 0 40px 0 var(--space-400);
-  font-size: 16px;
-  line-height: 24px;
-  font-weight: 400;
-  color: var(--color-content-default);
-  background-color: var(--color-background-default);
-  font-family: var(--font-family);
-  outline: none;
-  box-sizing: border-box;
+  display: block;
   width: 100%;
+  border: none;
+  outline: none;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  font-family: var(--font-family);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  color: var(--color-content-default);
   cursor: pointer;
 }
 
-.ui-select__input:focus {
-  border-color: var(--color-border-brand);
-  outline: none;
-}
-
 .ui-select--error .ui-select__input {
-  border-color: var(--color-border-danger);
+  color: var(--color-content-danger-default);
 }
 
-.ui-select--disabled {
-  opacity: 0.4;
-  pointer-events: none;
-}
+/* --- Chevron icon --- */
 
 .ui-select__chevron {
-  position: absolute;
-  right: var(--space-400);
-  top: 50%;
-  transform: translateY(-50%);
-  color: var(--color-content-subtle);
-  pointer-events: none;
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
   display: flex;
   align-items: center;
+  justify-content: center;
+  color: var(--color-content-subtle);
+  pointer-events: none;
 }
 
-.ui-select__help {
-  font-size: 12px;
-  line-height: 18px;
-  font-weight: 400;
+.ui-select__chevron > svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* --- Leading icon --- */
+
+.ui-select__leading-icon {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: var(--color-content-subtle);
 }
 
-.ui-select--error .ui-select__help {
+.ui-select__leading-icon > svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* --- Help text (below select) --- */
+
+.ui-select__help {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-200);
+  padding-top: var(--space-200);
+}
+
+.ui-select__help-icon {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: flex-start;
+  padding-top: 1px;
+  color: var(--color-content-subtle);
+}
+
+.ui-select__help-icon > svg {
+  width: 16px;
+  height: 16px;
+}
+
+.ui-select--error .ui-select__help-icon {
+  color: var(--color-content-danger-default);
+}
+
+.ui-select__help-text {
+  flex: 1 0 0;
+  font-family: var(--font-family);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 18px;
+  color: var(--color-content-subtle);
+}
+
+.ui-select--error .ui-select__help-text {
   color: var(--color-content-danger-default);
 }

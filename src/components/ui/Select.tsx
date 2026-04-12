@@ -1,4 +1,4 @@
-import React, { useId } from 'react';
+import React, { useId, useState, useCallback } from 'react';
 import './Select.css';
 
 interface SelectOption {
@@ -7,23 +7,35 @@ interface SelectOption {
 }
 
 interface SelectProps extends Omit<React.SelectHTMLAttributes<HTMLSelectElement>, 'disabled'> {
+  /** 'simple' = no label, 'has-label' = floating label */
+  variant?: 'simple' | 'has-label';
   label?: string;
   placeholder?: string;
   options: SelectOption[];
   status?: 'default' | 'error' | 'disabled';
   helpText?: string;
+  helpIcon?: React.ReactNode;
+  leadingIcon?: React.ReactNode;
 }
 
 const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
   (
     {
+      variant = 'simple',
       label,
       placeholder,
       options,
       status = 'default',
       helpText,
+      helpIcon,
+      leadingIcon,
       id,
       className,
+      value,
+      defaultValue,
+      onFocus,
+      onBlur,
+      onChange,
       ...rest
     },
     ref
@@ -34,9 +46,44 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
 
     const isDisabled = status === 'disabled';
     const isError = status === 'error';
+    const isHasLabel = variant === 'has-label';
 
-    const classes = [
+    const [focused, setFocused] = useState(false);
+    const [hasValue, setHasValue] = useState(() => {
+      return Boolean(value || defaultValue);
+    });
+
+    const shouldFloat = isHasLabel && (focused || hasValue || Boolean(value));
+
+    const handleFocus = useCallback(
+      (e: React.FocusEvent<HTMLSelectElement>) => {
+        setFocused(true);
+        onFocus?.(e);
+      },
+      [onFocus]
+    );
+
+    const handleBlur = useCallback(
+      (e: React.FocusEvent<HTMLSelectElement>) => {
+        setFocused(false);
+        setHasValue(e.target.value !== '');
+        onBlur?.(e);
+      },
+      [onBlur]
+    );
+
+    const handleChange = useCallback(
+      (e: React.ChangeEvent<HTMLSelectElement>) => {
+        setHasValue(e.target.value !== '');
+        onChange?.(e);
+      },
+      [onChange]
+    );
+
+    const rootClasses = [
       'ui-select',
+      `ui-select--${variant}`,
+      shouldFloat && 'ui-select--float',
       isError && 'ui-select--error',
       isDisabled && 'ui-select--disabled',
       className,
@@ -44,42 +91,50 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       .filter(Boolean)
       .join(' ');
 
+    const handleWrapperClick = useCallback(() => {
+      document.getElementById(selectId)?.focus();
+    }, [selectId]);
+
     return (
-      <div className={classes}>
-        {label && (
-          <label className="ui-select__label" htmlFor={selectId}>
-            {label}
-          </label>
-        )}
-        <div className="ui-select__wrapper">
-          <select
-            ref={ref}
-            id={selectId}
-            className="ui-select__input"
-            disabled={isDisabled}
-            aria-invalid={isError || undefined}
-            aria-describedby={helpId}
-            {...rest}
-          >
-            {placeholder && (
-              <option value="" disabled>
-                {placeholder}
-              </option>
+      <div className={rootClasses}>
+        <div className="ui-select__input-wrapper" onClick={handleWrapperClick}>
+          {leadingIcon && (
+            <span className="ui-select__leading-icon">{leadingIcon}</span>
+          )}
+          <div className="ui-select__content">
+            {isHasLabel && label && (
+              <label className="ui-select__label" htmlFor={selectId}>
+                {label}
+              </label>
             )}
-            {options.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </select>
-          <span className="ui-select__chevron" aria-hidden="true">
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 20 20"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
+            <select
+              ref={ref}
+              id={selectId}
+              className="ui-select__input"
+              disabled={isDisabled}
+              aria-invalid={isError || undefined}
+              aria-describedby={helpId}
+              value={value}
+              defaultValue={defaultValue}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
+              onChange={handleChange}
+              {...rest}
             >
+              {placeholder && (
+                <option value="" disabled>
+                  {placeholder}
+                </option>
+              )}
+              {options.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+          </div>
+          <span className="ui-select__chevron" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
               <path
                 d="M5 7.5L10 12.5L15 7.5"
                 stroke="currentColor"
@@ -91,9 +146,12 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
           </span>
         </div>
         {helpText && (
-          <span id={helpId} className="ui-select__help">
-            {helpText}
-          </span>
+          <div id={helpId} className="ui-select__help">
+            {helpIcon && (
+              <span className="ui-select__help-icon">{helpIcon}</span>
+            )}
+            <span className="ui-select__help-text">{helpText}</span>
+          </div>
         )}
       </div>
     );
