@@ -1,0 +1,83 @@
+.ui-alert {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-300);
+  padding: var(--space-300) var(--space-400);
+  border-radius: var(--radius-200);
+}
+
+/* ========================================
+ * Variants
+ * ======================================== */
+
+.ui-alert--full-width {
+  border-radius: 0;
+}
+
+/* ========================================
+ * Color Types
+ * ======================================== */
+
+.ui-alert--primary {
+  background-color: var(--color-background-brand-subtlest);
+  color: var(--color-content-brand-bold);
+}
+
+.ui-alert--neutral {
+  background-color: var(--color-background-neutral-subtle);
+  color: var(--color-content-default);
+}
+
+.ui-alert--success {
+  background-color: var(--color-background-success-subtlest);
+  color: var(--color-content-success-bold);
+}
+
+.ui-alert--warning {
+  background-color: var(--color-background-warning-subtlest);
+  color: var(--color-content-warning-bold);
+}
+
+.ui-alert--danger {
+  background-color: var(--color-background-danger-subtlest);
+  color: var(--color-content-danger-bold);
+}
+
+.ui-alert--prize {
+  background-color: var(--color-background-prize-subtlest);
+  color: var(--color-content-prize-bold);
+}
+
+/* ========================================
+ * Inner Elements
+ * ======================================== */
+
+.ui-alert__icon {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ui-alert__content {
+  flex: 1;
+  font-size: 14px;
+  line-height: 22px;
+  font-weight: 400;
+}
+
+.ui-alert__close {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
