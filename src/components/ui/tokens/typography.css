@@ -1,0 +1,115 @@
+:root {
+  --font-family: 'SF Pro', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+}
+
+.text-ios-display {
+  font-family: var(--font-family);
+  font-size: 28px;
+  font-weight: 510;
+  line-height: 36px;
+  letter-spacing: 0;
+}
+
+.text-ios-display-regular {
+  font-family: var(--font-family);
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 36px;
+  letter-spacing: 0;
+}
+
+.text-ios-heading-large {
+  font-family: var(--font-family);
+  font-size: 24px;
+  font-weight: 590;
+  line-height: 32px;
+  letter-spacing: 0;
+}
+
+.text-ios-heading-medium {
+  font-family: var(--font-family);
+  font-size: 20px;
+  font-weight: 590;
+  line-height: 28px;
+  letter-spacing: 0;
+}
+
+.text-ios-heading-small {
+  font-family: var(--font-family);
+  font-size: 18px;
+  font-weight: 590;
+  line-height: 26px;
+  letter-spacing: 0;
+}
+
+.text-ios-body-xlarge {
+  font-family: var(--font-family);
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 26px;
+  letter-spacing: 0;
+}
+
+.text-ios-body-large {
+  font-family: var(--font-family);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0;
+}
+
+.text-ios-body-medium {
+  font-family: var(--font-family);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 22px;
+  letter-spacing: 0;
+}
+
+.text-ios-body-small {
+  font-family: var(--font-family);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 18px;
+  letter-spacing: 0;
+}
+
+.text-ios-body-xsmall {
+  font-family: var(--font-family);
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0;
+}
+
+.text-ios-label-large {
+  font-family: var(--font-family);
+  font-size: 16px;
+  font-weight: 510;
+  line-height: 24px;
+  letter-spacing: 0;
+}
+
+.text-ios-label-medium {
+  font-family: var(--font-family);
+  font-size: 14px;
+  font-weight: 510;
+  line-height: 22px;
+  letter-spacing: 0;
+}
+
+.text-ios-label-small {
+  font-family: var(--font-family);
+  font-size: 12px;
+  font-weight: 510;
+  line-height: 18px;
+  letter-spacing: 0;
+}
+
+.text-ios-label-xsmall {
+  font-family: var(--font-family);
+  font-size: 10px;
+  font-weight: 510;
+  line-height: 16px;
+  letter-spacing: 0;
+}
