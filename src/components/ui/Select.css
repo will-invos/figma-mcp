@@ -86,53 +86,59 @@
 }
 
 /* ========================================
- * Has-label type: floating label
+ * Has-label type
  *
- * Fixed layout: padding always space/150 top/bottom.
- * No padding/gap changes → zero layout shift.
+ * Not floated (no value): label at 16px as placeholder, centered.
+ *   select is absolute overlay (invisible but clickable).
+ * Floated (has value): label 12px at top + select visible below.
  * ======================================== */
 
+/* Not floated: single-line placeholder layout */
 .ui-select--has-label .ui-select__content {
+  padding-top: var(--space-400);
+  padding-bottom: var(--space-400);
+}
+
+/* Floated: two-line layout */
+.ui-select--has-label.ui-select--float .ui-select__content {
   padding-top: var(--space-150);
   padding-bottom: var(--space-150);
   gap: var(--space-50);
 }
 
-/*
- * Fixed layout: label + select always in flow at fixed heights.
- * Content is always: label(24px) + gap(2px) + select(24px) = 50px.
- * Label height is fixed at 24px regardless of font-size.
- * No height changes on float toggle → zero layout shift.
- */
-
 .ui-select__label {
   font-family: var(--font-family);
-  height: 24px;
-  display: flex;
-  align-items: center;
   font-size: 16px;
   font-weight: 400;
   line-height: 24px;
   color: var(--color-content-subtlest);
   pointer-events: none;
-  transition: font-size 0.15s, color 0.15s;
 }
 
-/* Select always in flow, always clickable */
+/*
+ * Not floated: select covers entire wrapper as invisible click target.
+ * This ensures first click opens the native menu directly.
+ */
 .ui-select--has-label .ui-select__input {
-  height: 24px;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
   cursor: pointer;
 }
 
-/* Not floated: select invisible but clickable */
-.ui-select--has-label:not(.ui-select--float) .ui-select__input {
-  opacity: 0;
-}
-
-/* Floated (has value): label shrinks visually, select visible */
+/* Floated (has value): label shrinks, select returns to flow */
 .ui-select--has-label.ui-select--float .ui-select__label {
   font-size: 12px;
+  line-height: 18px;
   color: var(--color-content-subtle);
+}
+
+.ui-select--has-label.ui-select--float .ui-select__input {
+  position: static;
+  height: 24px;
+  opacity: 1;
 }
 
 /* Error label color — needs higher specificity to override float state */
