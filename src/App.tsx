@@ -89,11 +89,11 @@ const sectionHeadingStyle: React.CSSProperties = {
   fontWeight: 600,
   textTransform: 'uppercase',
   letterSpacing: '0.08em',
-  color: 'var(--color-text-secondary, #888)',
+  color: 'var(--color-content-subtle)',
   marginBottom: 12,
   marginTop: 0,
   paddingBottom: 8,
-  borderBottom: '1px solid var(--color-border, #e5e4e7)',
+  borderBottom: '1px solid var(--color-border-subtle)',
 }
 
 const rowStyle: React.CSSProperties = {
@@ -107,7 +107,7 @@ const rowStyle: React.CSSProperties = {
 const labelStyle: React.CSSProperties = {
   margin: '0 0 6px',
   fontSize: 12,
-  color: '#888',
+  color: 'var(--color-content-subtlest)',
 }
 
 export default function App() {
@@ -139,7 +139,7 @@ export default function App() {
     >
       {/* Header */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 32 }}>
-        <h1 style={{ margin: 0, fontSize: 22, fontWeight: 700 }}>iOS UI Kit</h1>
+        <h1 style={{ margin: 0, fontSize: 22, fontWeight: 700, color: 'var(--color-content-bold)' }}>iOS UI Kit</h1>
         <button
           onClick={toggleDark}
           style={{
@@ -148,8 +148,9 @@ export default function App() {
             gap: 6,
             padding: '6px 12px',
             borderRadius: 20,
-            border: '1px solid var(--color-border, #e5e4e7)',
-            background: 'transparent',
+            border: '1px solid var(--color-border-default)',
+            background: 'var(--color-background-default)',
+            color: 'var(--color-content-default)',
             cursor: 'pointer',
             fontSize: 13,
             fontWeight: 500,
@@ -172,10 +173,7 @@ export default function App() {
             <Button size="large" variant="filled" colorType="primary">Primary</Button>
             <Button size="large" variant="filled" colorType="neutral">Neutral</Button>
             <Button size="large" variant="filled" colorType="danger">Danger</Button>
-          </div>
-          <div style={{ ...rowStyle, marginTop: 6 }}>
             <Button size="large" variant="filled" colorType="prize">Prize</Button>
-            <Button size="large" variant="filled" colorType="donation">Donation</Button>
             <Button size="large" variant="filled" colorType="white">White</Button>
           </div>
         </div>
@@ -186,6 +184,7 @@ export default function App() {
             <Button size="medium" variant="filled" colorType="neutral">Neutral</Button>
             <Button size="medium" variant="filled" colorType="danger">Danger</Button>
             <Button size="medium" variant="filled" colorType="prize">Prize</Button>
+            <Button size="medium" variant="filled" colorType="white">White</Button>
           </div>
         </div>
         <div style={{ marginBottom: 12 }}>
@@ -195,6 +194,7 @@ export default function App() {
             <Button size="small" variant="filled" colorType="neutral">Neutral</Button>
             <Button size="small" variant="filled" colorType="danger">Danger</Button>
             <Button size="small" variant="filled" colorType="prize">Prize</Button>
+            <Button size="small" variant="filled" colorType="white">White</Button>
           </div>
         </div>
 
@@ -255,7 +255,6 @@ export default function App() {
             <IconButton variant="filled" colorType="neutral" size="large" aria-label="Add"><PlusIcon /></IconButton>
             <IconButton variant="filled" colorType="danger" size="large" aria-label="Add"><PlusIcon /></IconButton>
             <IconButton variant="filled" colorType="prize" size="large" aria-label="Add"><PlusIcon /></IconButton>
-            <IconButton variant="filled" colorType="donation" size="large" aria-label="Add"><PlusIcon /></IconButton>
           </div>
         </div>
         <div style={{ marginBottom: 12 }}>
@@ -265,7 +264,6 @@ export default function App() {
             <IconButton variant="filled" colorType="neutral" size="medium" aria-label="Add"><PlusIcon /></IconButton>
             <IconButton variant="filled" colorType="danger" size="medium" aria-label="Add"><PlusIcon /></IconButton>
             <IconButton variant="filled" colorType="prize" size="medium" aria-label="Add"><PlusIcon /></IconButton>
-            <IconButton variant="filled" colorType="donation" size="medium" aria-label="Add"><PlusIcon /></IconButton>
           </div>
         </div>
         <div style={{ marginBottom: 12 }}>
@@ -275,7 +273,6 @@ export default function App() {
             <IconButton variant="filled" colorType="neutral" size="small" aria-label="Add"><PlusIcon /></IconButton>
             <IconButton variant="filled" colorType="danger" size="small" aria-label="Add"><PlusIcon /></IconButton>
             <IconButton variant="filled" colorType="prize" size="small" aria-label="Add"><PlusIcon /></IconButton>
-            <IconButton variant="filled" colorType="donation" size="small" aria-label="Add"><PlusIcon /></IconButton>
           </div>
         </div>
         <div style={{ marginBottom: 12 }}>
@@ -285,7 +282,6 @@ export default function App() {
             <IconButton variant="filled" colorType="neutral" size="xsmall" aria-label="Add"><PlusIcon /></IconButton>
             <IconButton variant="filled" colorType="danger" size="xsmall" aria-label="Add"><PlusIcon /></IconButton>
             <IconButton variant="filled" colorType="prize" size="xsmall" aria-label="Add"><PlusIcon /></IconButton>
-            <IconButton variant="filled" colorType="donation" size="xsmall" aria-label="Add"><PlusIcon /></IconButton>
           </div>
         </div>
 
@@ -401,7 +397,7 @@ export default function App() {
         </div>
 
         <div style={{ marginBottom: 12 }}>
-          <p style={{ margin: '0 0 8px', fontSize: 12, color: '#888' }}>Checkbox</p>
+          <p style={{ margin: '0 0 8px', fontSize: 12, color: 'var(--color-content-subtlest)' }}>Checkbox</p>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
             <Checkbox checked={checkboxChecked} onChange={setCheckboxChecked}>
               Accept terms and conditions
@@ -412,7 +408,7 @@ export default function App() {
         </div>
 
         <div style={{ marginBottom: 12 }}>
-          <p style={{ margin: '0 0 8px', fontSize: 12, color: '#888' }}>Radio</p>
+          <p style={{ margin: '0 0 8px', fontSize: 12, color: 'var(--color-content-subtlest)' }}>Radio</p>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
             <Radio name="demo" value="a" checked={radioValue === 'a'} onChange={() => setRadioValue('a')}>Option A</Radio>
             <Radio name="demo" value="b" checked={radioValue === 'b'} onChange={() => setRadioValue('b')}>Option B</Radio>
@@ -421,7 +417,7 @@ export default function App() {
         </div>
 
         <div style={{ marginBottom: 12 }}>
-          <p style={{ margin: '0 0 8px', fontSize: 12, color: '#888' }}>Switch</p>
+          <p style={{ margin: '0 0 8px', fontSize: 12, color: 'var(--color-content-subtlest)' }}>Switch</p>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
             <Switch checked={switchOn} onChange={setSwitchOn} />
             <Switch checked={true} disabled />
@@ -434,7 +430,7 @@ export default function App() {
         <h2 style={sectionHeadingStyle}>Tags &amp; Badges</h2>
 
         <div style={{ marginBottom: 8 }}>
-          <p style={{ margin: '0 0 6px', fontSize: 12, color: '#888' }}>Tags — light</p>
+          <p style={{ margin: '0 0 6px', fontSize: 12, color: 'var(--color-content-subtlest)' }}>Tags — light</p>
           <div style={rowStyle}>
             <Tag colorType="neutral">Neutral</Tag>
             <Tag colorType="primary">Primary</Tag>
@@ -446,7 +442,7 @@ export default function App() {
         </div>
 
         <div style={{ marginBottom: 8 }}>
-          <p style={{ margin: '0 0 6px', fontSize: 12, color: '#888' }}>Tags — bold</p>
+          <p style={{ margin: '0 0 6px', fontSize: 12, color: 'var(--color-content-subtlest)' }}>Tags — bold</p>
           <div style={rowStyle}>
             <Tag variant="bold" colorType="neutral">Neutral</Tag>
             <Tag variant="bold" colorType="primary">Primary</Tag>
@@ -456,7 +452,7 @@ export default function App() {
         </div>
 
         <div style={{ marginBottom: 8 }}>
-          <p style={{ margin: '0 0 6px', fontSize: 12, color: '#888' }}>Tags — sizes</p>
+          <p style={{ margin: '0 0 6px', fontSize: 12, color: 'var(--color-content-subtlest)' }}>Tags — sizes</p>
           <div style={rowStyle}>
             <Tag size="medium">Medium</Tag>
             <Tag size="small">Small</Tag>
@@ -464,7 +460,7 @@ export default function App() {
         </div>
 
         <div style={{ marginBottom: 8 }}>
-          <p style={{ margin: '0 0 6px', fontSize: 12, color: '#888' }}>Badges</p>
+          <p style={{ margin: '0 0 6px', fontSize: 12, color: 'var(--color-content-subtlest)' }}>Badges</p>
           <div style={rowStyle}>
             <Badge variant="dot" size="small" />
             <Badge variant="dot" size="medium" />
@@ -492,7 +488,7 @@ export default function App() {
       {/* List Items */}
       <section style={sectionStyle}>
         <h2 style={sectionHeadingStyle}>List Items</h2>
-        <div style={{ borderRadius: 12, overflow: 'hidden', border: '1px solid var(--color-border, #e5e4e7)' }}>
+        <div style={{ borderRadius: 12, overflow: 'hidden', border: '1px solid var(--color-border-subtle)' }}>
           {/* Default type */}
           <ListItem
             headline="Default — None"
@@ -634,7 +630,7 @@ export default function App() {
           }
         >
           <div style={{ padding: '16px 0' }}>
-            <p style={{ margin: 0, color: 'var(--color-text-secondary, #888)', fontSize: 14 }}>
+            <p style={{ margin: 0, color: 'var(--color-content-subtle)', fontSize: 14 }}>
               Sheet content goes here. Swipe down or tap outside to dismiss.
             </p>
           </div>
@@ -651,7 +647,7 @@ export default function App() {
       <section style={sectionStyle}>
         <h2 style={sectionHeadingStyle}>Spinner</h2>
         <div style={{ marginBottom: 8 }}>
-          <p style={{ margin: '0 0 6px', fontSize: 12, color: '#888' }}>Sizes</p>
+          <p style={{ margin: '0 0 6px', fontSize: 12, color: 'var(--color-content-subtlest)' }}>Sizes</p>
           <div style={{ ...rowStyle, alignItems: 'center' }}>
             <Spinner size="small" />
             <Spinner size="medium" />
@@ -659,11 +655,11 @@ export default function App() {
           </div>
         </div>
         <div style={{ marginBottom: 8 }}>
-          <p style={{ margin: '0 0 6px', fontSize: 12, color: '#888' }}>Colors</p>
+          <p style={{ margin: '0 0 6px', fontSize: 12, color: 'var(--color-content-subtlest)' }}>Colors</p>
           <div style={{ ...rowStyle, alignItems: 'center' }}>
             <Spinner size="medium" color="brand" />
             <Spinner size="medium" color="neutral" />
-            <span style={{ background: '#222', borderRadius: 8, padding: 8, display: 'flex' }}>
+            <span style={{ background: 'var(--color-background-inverse-plain)', borderRadius: 8, padding: 8, display: 'flex' }}>
               <Spinner size="medium" color="white" />
             </span>
           </div>
