@@ -1,4 +1,19 @@
-@keyframes fadeIn {
+/* ========================================
+ * Dialog
+ * Figma: Dialog (node 6663:10360)
+ *
+ * Structure: outer (rounded, overflow hidden)
+ *   > body (p 24, gap 24, flex-col)
+ *     > content (gap 16: title + description)
+ *   > footer (px 24, pb 24)
+ *     > actions
+ *
+ * Width: 345px, max-width: 376px
+ * Border radius: radius/400 (16px)
+ * CTA types: 1 button, 2 buttons (row), 2 buttons straight (col)
+ * ======================================== */
+
+@keyframes ui-dialog-fade-in {
   from {
     opacity: 0;
     transform: scale(0.95);
@@ -20,34 +35,94 @@
 }
 
 .ui-dialog {
-  background: var(--color-background-default);
-  max-width: 320px;
-  width: calc(100% - 48px);
-  border-radius: var(--radius-600);
-  box-shadow: var(--shadow-large);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 345px;
+  max-width: 376px;
+  border-radius: var(--radius-400);
+  overflow: hidden;
+  animation: ui-dialog-fade-in 0.2s ease;
+  font-family: var(--font-family);
+}
+
+/* --- Body --- */
+
+.ui-dialog__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-600);
+  align-items: center;
   padding: var(--space-600);
-  animation: fadeIn 0.2s ease;
+  background-color: var(--color-background-default);
+  width: 100%;
+}
+
+/* --- Content (title + description) --- */
+
+.ui-dialog__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-400);
+  align-items: flex-start;
+  width: 100%;
 }
 
 .ui-dialog__title {
   font-size: 24px;
+  font-weight: 510;
   line-height: 32px;
-  font-weight: 590;
   color: var(--color-content-bold);
   margin: 0;
 }
 
 .ui-dialog__description {
   font-size: 16px;
-  line-height: 24px;
   font-weight: 400;
-  color: var(--color-content-subtle);
-  margin-top: var(--space-200);
+  line-height: 24px;
+  color: var(--color-content-default);
+  margin: 0;
 }
+
+/* --- Footer --- */
+
+.ui-dialog__footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 var(--space-600) var(--space-600);
+  background-color: var(--color-background-default);
+  width: 100%;
+}
+
+/* --- Actions: 2 buttons (row) --- */
 
 .ui-dialog__actions {
   display: flex;
-  gap: var(--space-200);
-  margin-top: var(--space-600);
-  justify-content: flex-end;
+  gap: var(--space-400);
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 48px;
+}
+
+.ui-dialog__actions > button {
+  flex: 1 0 0;
+  min-width: 0;
+}
+
+/* --- Actions: 2 buttons straight (column) --- */
+
+.ui-dialog__actions--straight {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-500);
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.ui-dialog__actions--straight > button {
+  width: 100%;
 }
