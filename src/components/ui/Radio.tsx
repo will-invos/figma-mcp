@@ -9,6 +9,7 @@ interface RadioProps {
   name?: string;
   value?: string;
   children?: React.ReactNode;
+  description?: string;
 }
 
 const Radio = React.forwardRef<HTMLInputElement, RadioProps>(
@@ -21,6 +22,7 @@ const Radio = React.forwardRef<HTMLInputElement, RadioProps>(
       name,
       value,
       children,
+      description,
     },
     ref
   ) => {
@@ -49,8 +51,11 @@ const Radio = React.forwardRef<HTMLInputElement, RadioProps>(
           aria-invalid={status === 'error' || undefined}
         />
         <span className="ui-radio__indicator" aria-hidden="true" />
-        {children && (
-          <span className="ui-radio__label">{children}</span>
+        {(children || description) && (
+          <span className="ui-radio__content">
+            {children && <span className="ui-radio__label">{children}</span>}
+            {description && <span className="ui-radio__description">{description}</span>}
+          </span>
         )}
       </label>
     );

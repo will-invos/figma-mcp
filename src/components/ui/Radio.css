@@ -1,6 +1,12 @@
+/* ========================================
+ * Radio Item
+ * Figma: Radio item (node 6005:5524)
+ * States: Enabled/Error/Disabled × Checked/Unchecked
+ * ======================================== */
+
 .ui-radio {
   display: inline-flex;
-  align-items: center;
+  align-items: flex-start;
   gap: var(--space-200);
   cursor: pointer;
   user-select: none;
@@ -16,37 +22,54 @@
   pointer-events: none;
 }
 
-/* Custom indicator circle */
+/* Indicator: 24×24 outer, 22×22 inner circle centered */
 .ui-radio__indicator {
   flex-shrink: 0;
   width: 24px;
   height: 24px;
-  border-radius: 50%;
-  border: 1.5px solid var(--color-border-default);
-  background-color: var(--color-background-default);
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background-color 0.15s, border-color 0.15s;
-  position: relative;
 }
 
-/* Checked state — brand border + inner dot */
-.ui-radio__input:checked + .ui-radio__indicator {
+.ui-radio__indicator::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid var(--color-border-default);
+  background-color: var(--color-background-default);
+  transition: border-color 0.15s;
+  box-sizing: border-box;
+}
+
+/* Selected: brand border + 8px brand center dot */
+.ui-radio__input:checked + .ui-radio__indicator::before {
   border-color: var(--color-background-brand-default);
 }
 
-.ui-radio__input:checked + .ui-radio__indicator::after {
+.ui-radio__indicator::after {
   content: '';
-  display: block;
+  display: none;
+  position: relative;
+  z-index: 1;
   width: 8px;
   height: 8px;
   border-radius: 50%;
   background-color: var(--color-background-brand-default);
 }
 
+.ui-radio__input:checked + .ui-radio__indicator::after {
+  display: block;
+}
+
 /* Error state */
-.ui-radio--error .ui-radio__indicator {
+.ui-radio--error .ui-radio__indicator::before {
   border-color: var(--color-border-danger);
 }
 
@@ -57,10 +80,25 @@
   cursor: not-allowed;
 }
 
-/* Label text */
+/* Content: label + optional description */
+.ui-radio__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-50);
+}
+
 .ui-radio__label {
+  font-family: var(--font-family);
   font-size: 16px;
-  line-height: 24px;
   font-weight: 400;
+  line-height: 24px;
   color: var(--color-content-default);
+}
+
+.ui-radio__description {
+  font-family: var(--font-family);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 22px;
+  color: var(--color-content-subtle);
 }
