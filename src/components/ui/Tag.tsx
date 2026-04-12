@@ -5,6 +5,8 @@ interface TagProps {
   variant?: 'light' | 'bold';
   colorType?: 'neutral' | 'primary' | 'success' | 'danger' | 'warning' | 'prize';
   size?: 'medium' | 'small';
+  leadingIcon?: React.ReactNode;
+  trailingIcon?: React.ReactNode;
   children: React.ReactNode;
 }
 
@@ -14,6 +16,8 @@ const Tag = React.forwardRef<HTMLSpanElement, TagProps>(
       variant = 'light',
       colorType = 'neutral',
       size = 'medium',
+      leadingIcon,
+      trailingIcon,
       children,
     },
     ref
@@ -21,15 +25,14 @@ const Tag = React.forwardRef<HTMLSpanElement, TagProps>(
     const classes = [
       'ui-tag',
       `ui-tag--${size}`,
-      `ui-tag--${variant}`,
       `ui-tag--${variant}-${colorType}`,
-    ]
-      .filter(Boolean)
-      .join(' ');
+    ].join(' ');
 
     return (
       <span ref={ref} className={classes}>
+        {leadingIcon && <span className="ui-tag__icon">{leadingIcon}</span>}
         {children}
+        {trailingIcon && <span className="ui-tag__icon">{trailingIcon}</span>}
       </span>
     );
   }

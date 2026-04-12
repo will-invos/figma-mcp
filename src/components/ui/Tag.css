@@ -1,8 +1,16 @@
+/* ========================================
+ * Basic Tag
+ * Figma: Basic tag (node 3903:5379)
+ *
+ * Medium: px 8, py 4, gap 6, font 14/22 weight 510, radius/200, icon 14
+ * Small:  px 6, py 2, gap 4, font 12/18 weight 510, radius/150, icon 12
+ * ======================================== */
+
 .ui-tag {
   display: inline-flex;
   align-items: center;
-  border-radius: var(--radius-full);
   white-space: nowrap;
+  font-family: var(--font-family);
 }
 
 /* ========================================
@@ -10,51 +18,84 @@
  * ======================================== */
 
 .ui-tag--medium {
-  height: 24px;
-  padding: 0 var(--space-250);
-  font-size: 12px;
-  line-height: 18px;
-  font-weight: 400;
+  padding: var(--space-100) var(--space-200);
+  gap: var(--space-150);
+  border-radius: var(--radius-200);
+  font-size: 14px;
+  font-weight: 510;
+  line-height: 22px;
+}
+
+.ui-tag--medium .ui-tag__icon {
+  width: 14px;
+  height: 14px;
+}
+
+.ui-tag--medium .ui-tag__icon > svg {
+  width: 14px;
+  height: 14px;
 }
 
 .ui-tag--small {
-  height: 20px;
-  padding: 0 var(--space-200);
-  font-size: 10px;
-  line-height: 16px;
-  font-weight: 400;
+  padding: var(--space-50) var(--space-150);
+  gap: var(--space-100);
+  border-radius: var(--radius-150);
+  font-size: 12px;
+  font-weight: 510;
+  line-height: 18px;
+}
+
+.ui-tag--small .ui-tag__icon {
+  width: 12px;
+  height: 12px;
+}
+
+.ui-tag--small .ui-tag__icon > svg {
+  width: 12px;
+  height: 12px;
+}
+
+/* ========================================
+ * Icon slots
+ * ======================================== */
+
+.ui-tag__icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* ========================================
  * Light Variant
  * ======================================== */
 
-.ui-tag--light.ui-tag--light-neutral {
+.ui-tag--light-neutral {
   background-color: var(--color-background-neutral-subtle);
   color: var(--color-content-default);
 }
 
-.ui-tag--light.ui-tag--light-primary {
+.ui-tag--light-primary {
   background-color: var(--color-background-brand-subtlest);
   color: var(--color-content-brand-bold);
 }
 
-.ui-tag--light.ui-tag--light-success {
+.ui-tag--light-success {
   background-color: var(--color-background-success-subtlest);
   color: var(--color-content-success-bold);
 }
 
-.ui-tag--light.ui-tag--light-danger {
+.ui-tag--light-danger {
   background-color: var(--color-background-danger-subtlest);
   color: var(--color-content-danger-bold);
 }
 
-.ui-tag--light.ui-tag--light-warning {
+.ui-tag--light-warning {
   background-color: var(--color-background-warning-subtlest);
   color: var(--color-content-warning-bold);
 }
 
-.ui-tag--light.ui-tag--light-prize {
+.ui-tag--light-prize {
   background-color: var(--color-background-prize-subtlest);
   color: var(--color-content-prize-bold);
 }
@@ -63,32 +104,32 @@
  * Bold Variant
  * ======================================== */
 
-.ui-tag--bold.ui-tag--bold-neutral {
-  background-color: var(--color-background-neutral-default);
+.ui-tag--bold-neutral {
+  background-color: var(--color-background-neutral-bold);
   color: var(--color-content-fixed-white);
 }
 
-.ui-tag--bold.ui-tag--bold-primary {
+.ui-tag--bold-primary {
   background-color: var(--color-background-brand-default);
   color: var(--color-content-fixed-white);
 }
 
-.ui-tag--bold.ui-tag--bold-success {
+.ui-tag--bold-success {
   background-color: var(--color-background-success-default);
   color: var(--color-content-fixed-white);
 }
 
-.ui-tag--bold.ui-tag--bold-danger {
+.ui-tag--bold-danger {
   background-color: var(--color-background-danger-default);
   color: var(--color-content-fixed-white);
 }
 
-.ui-tag--bold.ui-tag--bold-warning {
+.ui-tag--bold-warning {
   background-color: var(--color-background-warning-default);
   color: var(--color-content-fixed-white);
 }
 
-.ui-tag--bold.ui-tag--bold-prize {
+.ui-tag--bold-prize {
   background-color: var(--color-background-prize-default);
   color: var(--color-content-fixed-bold);
 }
