@@ -35,12 +35,6 @@ const PlusIcon = () => (
   </svg>
 )
 
-const BellIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <path d="M10 2a6 6 0 0 0-6 6v3l-1.5 2.5h15L16 11V8a6 6 0 0 0-6-6zM8.5 17a1.5 1.5 0 0 0 3 0" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-  </svg>
-)
-
 const InfoIcon = () => (
   <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <circle cx="8" cy="8" r="6" stroke="currentColor" strokeWidth="1.5"/>
@@ -110,6 +104,12 @@ const rowStyle: React.CSSProperties = {
   marginBottom: 8,
 }
 
+const labelStyle: React.CSSProperties = {
+  margin: '0 0 6px',
+  fontSize: 12,
+  color: '#888',
+}
+
 export default function App() {
   const [darkMode, setDarkMode] = useState(false)
   const [dialogOpen, setDialogOpen] = useState(false)
@@ -165,40 +165,80 @@ export default function App() {
       <section style={sectionStyle}>
         <h2 style={sectionHeadingStyle}>Buttons</h2>
 
-        <div style={{ marginBottom: 8 }}>
-          <p style={{ margin: '0 0 6px', fontSize: 12, color: '#888' }}>Variants</p>
+        {/* Filled — all colorTypes × all sizes */}
+        <div style={{ marginBottom: 12 }}>
+          <p style={labelStyle}>Filled — Large</p>
           <div style={rowStyle}>
-            <Button size="small" variant="filled" colorType="primary">Filled</Button>
-            <Button size="small" variant="outline" colorType="primary">Outline</Button>
-            <Button size="small" variant="ghost" colorType="primary">Ghost</Button>
-            <Button size="small" variant="text" colorType="primary">Text</Button>
+            <Button size="large" variant="filled" colorType="primary">Primary</Button>
+            <Button size="large" variant="filled" colorType="neutral">Neutral</Button>
+            <Button size="large" variant="filled" colorType="danger">Danger</Button>
+          </div>
+          <div style={{ ...rowStyle, marginTop: 6 }}>
+            <Button size="large" variant="filled" colorType="prize">Prize</Button>
+            <Button size="large" variant="filled" colorType="donation">Donation</Button>
+            <Button size="large" variant="filled" colorType="white">White</Button>
+          </div>
+        </div>
+        <div style={{ marginBottom: 12 }}>
+          <p style={labelStyle}>Filled — Medium</p>
+          <div style={rowStyle}>
+            <Button size="medium" variant="filled" colorType="primary">Primary</Button>
+            <Button size="medium" variant="filled" colorType="neutral">Neutral</Button>
+            <Button size="medium" variant="filled" colorType="danger">Danger</Button>
+            <Button size="medium" variant="filled" colorType="prize">Prize</Button>
+          </div>
+        </div>
+        <div style={{ marginBottom: 12 }}>
+          <p style={labelStyle}>Filled — Small</p>
+          <div style={rowStyle}>
+            <Button size="small" variant="filled" colorType="primary">Primary</Button>
+            <Button size="small" variant="filled" colorType="neutral">Neutral</Button>
+            <Button size="small" variant="filled" colorType="danger">Danger</Button>
+            <Button size="small" variant="filled" colorType="prize">Prize</Button>
           </div>
         </div>
 
-        <div style={{ marginBottom: 8 }}>
-          <p style={{ margin: '0 0 6px', fontSize: 12, color: '#888' }}>Color types</p>
+        {/* Outline */}
+        <div style={{ marginBottom: 12 }}>
+          <p style={labelStyle}>Outline</p>
           <div style={rowStyle}>
-            <Button size="small" colorType="primary">Primary</Button>
-            <Button size="small" colorType="neutral">Neutral</Button>
-            <Button size="small" colorType="danger">Danger</Button>
-            <Button size="small" colorType="prize">Prize</Button>
+            <Button size="large" variant="outline">Large</Button>
+            <Button size="medium" variant="outline">Medium</Button>
+            <Button size="small" variant="outline">Small</Button>
           </div>
         </div>
 
-        <div style={{ marginBottom: 8 }}>
-          <p style={{ margin: '0 0 6px', fontSize: 12, color: '#888' }}>Sizes</p>
+        {/* Ghost */}
+        <div style={{ marginBottom: 12 }}>
+          <p style={labelStyle}>Ghost</p>
           <div style={rowStyle}>
-            <Button size="large" colorType="primary">Large</Button>
-            <Button size="medium" colorType="primary">Medium</Button>
-            <Button size="small" colorType="primary">Small</Button>
+            <Button size="large" variant="ghost" colorType="primary">Primary</Button>
+            <Button size="medium" variant="ghost" colorType="primary">Medium</Button>
+            <Button size="small" variant="ghost" colorType="primary">Small</Button>
           </div>
         </div>
 
-        <div style={{ marginBottom: 8 }}>
-          <p style={{ margin: '0 0 6px', fontSize: 12, color: '#888' }}>States</p>
+        {/* Text */}
+        <div style={{ marginBottom: 12 }}>
+          <p style={labelStyle}>Text</p>
           <div style={rowStyle}>
-            <Button size="small" colorType="primary" loading>Loading</Button>
-            <Button size="small" colorType="primary" disabled>Disabled</Button>
+            <Button size="large" variant="text" colorType="primary">Primary</Button>
+            <Button size="large" variant="text" colorType="secondary">Secondary</Button>
+          </div>
+          <div style={{ ...rowStyle, marginTop: 6 }}>
+            <Button size="medium" variant="text" colorType="primary">Medium</Button>
+            <Button size="small" variant="text" colorType="primary">Small</Button>
+          </div>
+        </div>
+
+        {/* States */}
+        <div style={{ marginBottom: 12 }}>
+          <p style={labelStyle}>States</p>
+          <div style={rowStyle}>
+            <Button size="medium" colorType="primary" loading>Loading</Button>
+            <Button size="medium" colorType="primary" disabled>Disabled</Button>
+            <Button size="medium" colorType="neutral" loading>Loading</Button>
+            <Button size="medium" colorType="neutral" disabled>Disabled</Button>
           </div>
         </div>
       </section>
@@ -206,14 +246,81 @@ export default function App() {
       {/* Icon Buttons */}
       <section style={sectionStyle}>
         <h2 style={sectionHeadingStyle}>Icon Buttons</h2>
-        <div style={rowStyle}>
-          <IconButton variant="filled" colorType="primary" size="large" aria-label="Add"><PlusIcon /></IconButton>
-          <IconButton variant="filled" colorType="neutral" size="large" aria-label="Bell"><BellIcon /></IconButton>
-          <IconButton variant="outline" colorType="primary" size="medium" aria-label="Star"><StarIcon /></IconButton>
-          <IconButton variant="ghost" colorType="primary" size="medium" aria-label="Heart"><HeartIcon /></IconButton>
-          <IconButton variant="filled" colorType="danger" size="small" aria-label="Add"><PlusIcon /></IconButton>
-          <IconButton variant="filled" colorType="primary" size="xsmall" aria-label="Add"><PlusIcon /></IconButton>
-          <IconButton variant="filled" colorType="primary" size="medium" loading aria-label="Loading"><PlusIcon /></IconButton>
+
+        {/* Filled — all colorTypes × all sizes */}
+        <div style={{ marginBottom: 12 }}>
+          <p style={labelStyle}>Filled — Large (52px)</p>
+          <div style={rowStyle}>
+            <IconButton variant="filled" colorType="primary" size="large" aria-label="Add"><PlusIcon /></IconButton>
+            <IconButton variant="filled" colorType="neutral" size="large" aria-label="Add"><PlusIcon /></IconButton>
+            <IconButton variant="filled" colorType="danger" size="large" aria-label="Add"><PlusIcon /></IconButton>
+            <IconButton variant="filled" colorType="prize" size="large" aria-label="Add"><PlusIcon /></IconButton>
+            <IconButton variant="filled" colorType="donation" size="large" aria-label="Add"><PlusIcon /></IconButton>
+          </div>
+        </div>
+        <div style={{ marginBottom: 12 }}>
+          <p style={labelStyle}>Filled — Medium (40px)</p>
+          <div style={rowStyle}>
+            <IconButton variant="filled" colorType="primary" size="medium" aria-label="Add"><PlusIcon /></IconButton>
+            <IconButton variant="filled" colorType="neutral" size="medium" aria-label="Add"><PlusIcon /></IconButton>
+            <IconButton variant="filled" colorType="danger" size="medium" aria-label="Add"><PlusIcon /></IconButton>
+            <IconButton variant="filled" colorType="prize" size="medium" aria-label="Add"><PlusIcon /></IconButton>
+            <IconButton variant="filled" colorType="donation" size="medium" aria-label="Add"><PlusIcon /></IconButton>
+          </div>
+        </div>
+        <div style={{ marginBottom: 12 }}>
+          <p style={labelStyle}>Filled — Small (32px)</p>
+          <div style={rowStyle}>
+            <IconButton variant="filled" colorType="primary" size="small" aria-label="Add"><PlusIcon /></IconButton>
+            <IconButton variant="filled" colorType="neutral" size="small" aria-label="Add"><PlusIcon /></IconButton>
+            <IconButton variant="filled" colorType="danger" size="small" aria-label="Add"><PlusIcon /></IconButton>
+            <IconButton variant="filled" colorType="prize" size="small" aria-label="Add"><PlusIcon /></IconButton>
+            <IconButton variant="filled" colorType="donation" size="small" aria-label="Add"><PlusIcon /></IconButton>
+          </div>
+        </div>
+        <div style={{ marginBottom: 12 }}>
+          <p style={labelStyle}>Filled — XSmall (24px)</p>
+          <div style={rowStyle}>
+            <IconButton variant="filled" colorType="primary" size="xsmall" aria-label="Add"><PlusIcon /></IconButton>
+            <IconButton variant="filled" colorType="neutral" size="xsmall" aria-label="Add"><PlusIcon /></IconButton>
+            <IconButton variant="filled" colorType="danger" size="xsmall" aria-label="Add"><PlusIcon /></IconButton>
+            <IconButton variant="filled" colorType="prize" size="xsmall" aria-label="Add"><PlusIcon /></IconButton>
+            <IconButton variant="filled" colorType="donation" size="xsmall" aria-label="Add"><PlusIcon /></IconButton>
+          </div>
+        </div>
+
+        {/* Outline — all sizes */}
+        <div style={{ marginBottom: 12 }}>
+          <p style={labelStyle}>Outline</p>
+          <div style={rowStyle}>
+            <IconButton variant="outline" colorType="primary" size="large" aria-label="Star"><StarIcon /></IconButton>
+            <IconButton variant="outline" colorType="primary" size="medium" aria-label="Star"><StarIcon /></IconButton>
+            <IconButton variant="outline" colorType="primary" size="small" aria-label="Star"><StarIcon /></IconButton>
+            <IconButton variant="outline" colorType="primary" size="xsmall" aria-label="Star"><StarIcon /></IconButton>
+          </div>
+        </div>
+
+        {/* Ghost — all colorTypes */}
+        <div style={{ marginBottom: 12 }}>
+          <p style={labelStyle}>Ghost</p>
+          <div style={rowStyle}>
+            <IconButton variant="ghost" colorType="primary" size="medium" aria-label="Heart"><HeartIcon /></IconButton>
+            <IconButton variant="ghost" colorType="neutral" size="medium" aria-label="Heart"><HeartIcon /></IconButton>
+            <IconButton variant="ghost" colorType="danger" size="medium" aria-label="Heart"><HeartIcon /></IconButton>
+            <IconButton variant="ghost" colorType="prize" size="medium" aria-label="Heart"><HeartIcon /></IconButton>
+            <IconButton variant="ghost" colorType="donation" size="medium" aria-label="Heart"><HeartIcon /></IconButton>
+          </div>
+        </div>
+
+        {/* States */}
+        <div style={{ marginBottom: 12 }}>
+          <p style={labelStyle}>States</p>
+          <div style={rowStyle}>
+            <IconButton variant="filled" colorType="primary" size="medium" loading aria-label="Loading"><PlusIcon /></IconButton>
+            <IconButton variant="filled" colorType="primary" size="medium" disabled aria-label="Disabled"><PlusIcon /></IconButton>
+            <IconButton variant="outline" colorType="primary" size="medium" loading aria-label="Loading"><StarIcon /></IconButton>
+            <IconButton variant="ghost" colorType="primary" size="medium" disabled aria-label="Disabled"><HeartIcon /></IconButton>
+          </div>
         </div>
       </section>
 
