@@ -1,57 +1,171 @@
+/* ========================================
+ * TextField
+ * Figma: Text field (node 3850:4356)
+ * Types: Simple | Has label
+ * ======================================== */
+
 .ui-text-field {
   display: flex;
   flex-direction: column;
-  gap: var(--space-150);
 }
+
+/* --- Input container --- */
+
+.ui-text-field__input-wrapper {
+  display: flex;
+  align-items: center;
+  gap: var(--space-300);
+  min-height: 56px;
+  padding-left: var(--space-300);
+  padding-right: var(--space-300);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-300);
+  background-color: var(--color-background-default);
+  overflow: hidden;
+  cursor: text;
+  transition: border-color 0.15s, border-width 0.15s;
+}
+
+/* Focus: border widens to 2px */
+.ui-text-field__input-wrapper:focus-within {
+  border: 2px solid var(--color-border-brand);
+  /* Compensate for thicker border so content doesn't shift */
+  padding-left: calc(var(--space-300) - 1px);
+  padding-right: calc(var(--space-300) - 1px);
+}
+
+/* Error state */
+.ui-text-field--error .ui-text-field__input-wrapper {
+  border: 2px solid var(--color-border-danger);
+  padding-left: calc(var(--space-300) - 1px);
+  padding-right: calc(var(--space-300) - 1px);
+}
+
+/* Disabled state */
+.ui-text-field--disabled .ui-text-field__input-wrapper {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+/* --- Content area (label + input stacked) --- */
+
+.ui-text-field__content {
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 0;
+  min-width: 0;
+  min-height: 0;
+  justify-content: center;
+}
+
+/* Simple type: single line, vertical padding for centering */
+.ui-text-field--simple .ui-text-field__content {
+  padding-top: var(--space-400);
+  padding-bottom: var(--space-400);
+}
+
+/* Has-label type: tighter vertical padding */
+.ui-text-field--has-label .ui-text-field__content {
+  padding-top: var(--space-150);
+  padding-bottom: var(--space-150);
+  gap: var(--space-50);
+}
+
+/* --- Floating label (inside input, for Has-label type) --- */
 
 .ui-text-field__label {
-  font-size: 14px;
-  line-height: 22px;
+  font-family: var(--font-family);
+  font-size: 12px;
   font-weight: 400;
-  color: var(--color-content-bold);
+  line-height: 18px;
+  color: var(--color-content-subtle);
 }
 
+.ui-text-field--error .ui-text-field__label {
+  color: var(--color-content-danger-default);
+}
+
+/* --- Input element --- */
+
 .ui-text-field__input {
-  height: 56px;
-  border-radius: var(--radius-300);
-  border: 1.5px solid var(--color-border-default);
-  padding: 0 var(--space-400);
-  font-size: 16px;
-  line-height: 24px;
-  font-weight: 400;
-  color: var(--color-content-default);
-  background-color: var(--color-background-default);
-  font-family: var(--font-family);
-  outline: none;
-  box-sizing: border-box;
+  display: block;
   width: 100%;
+  border: none;
+  outline: none;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  font-family: var(--font-family);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  color: var(--color-content-default);
 }
 
 .ui-text-field__input::placeholder {
   color: var(--color-content-subtlest);
 }
 
-.ui-text-field__input:focus {
-  border-color: var(--color-border-brand);
-  outline: none;
+.ui-text-field--error .ui-text-field__input::placeholder {
+  color: var(--color-content-danger-default);
 }
 
-.ui-text-field--error .ui-text-field__input {
-  border-color: var(--color-border-danger);
-}
+/* --- Leading / Trailing icons --- */
 
-.ui-text-field--disabled {
-  opacity: 0.4;
-  pointer-events: none;
-}
-
-.ui-text-field__help {
-  font-size: 12px;
-  line-height: 18px;
-  font-weight: 400;
+.ui-text-field__leading-icon,
+.ui-text-field__trailing-icon {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: var(--color-content-subtle);
 }
 
-.ui-text-field--error .ui-text-field__help {
+.ui-text-field__leading-icon > svg,
+.ui-text-field__trailing-icon > svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* --- Help text (below input) --- */
+
+.ui-text-field__help {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-200);
+  padding-top: var(--space-200);
+}
+
+.ui-text-field__help-icon {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: flex-start;
+  padding-top: 1px;
+  color: var(--color-content-subtle);
+}
+
+.ui-text-field__help-icon > svg {
+  width: 16px;
+  height: 16px;
+}
+
+.ui-text-field--error .ui-text-field__help-icon {
+  color: var(--color-content-danger-default);
+}
+
+.ui-text-field__help-text {
+  flex: 1 0 0;
+  font-family: var(--font-family);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 18px;
+  color: var(--color-content-subtle);
+}
+
+.ui-text-field--error .ui-text-field__help-text {
   color: var(--color-content-danger-default);
 }

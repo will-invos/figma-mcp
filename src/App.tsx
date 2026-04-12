@@ -223,7 +223,6 @@ export default function App() {
 
         <div style={{ marginBottom: 16 }}>
           <TextField
-            label="Username"
             placeholder="Enter username"
             value={textValue}
             onChange={e => setTextValue(e.target.value)}
@@ -231,6 +230,16 @@ export default function App() {
         </div>
         <div style={{ marginBottom: 16 }}>
           <TextField
+            variant="has-label"
+            label="Email"
+            placeholder="name@example.com"
+            value={textValue}
+            onChange={e => setTextValue(e.target.value)}
+          />
+        </div>
+        <div style={{ marginBottom: 16 }}>
+          <TextField
+            variant="has-label"
             label="Email (error)"
             placeholder="name@example.com"
             status="error"
@@ -239,7 +248,6 @@ export default function App() {
         </div>
         <div style={{ marginBottom: 16 }}>
           <TextField
-            label="Read-only"
             placeholder="Disabled field"
             status="disabled"
           />
