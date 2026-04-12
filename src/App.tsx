@@ -131,10 +131,10 @@ export default function App() {
   return (
     <div
       style={{
-        maxWidth: 430,
+        width: '100%',
+        maxWidth: 1024,
         margin: '0 auto',
-        padding: '24px 16px 64px',
-        fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+        padding: '24px 24px 64px',
       }}
     >
       {/* Header */}
