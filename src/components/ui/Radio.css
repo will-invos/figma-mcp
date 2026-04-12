@@ -48,8 +48,9 @@
   box-sizing: border-box;
 }
 
-/* Selected: brand border + 8px brand center dot */
+/* Selected: 22×22 brand fill + 8px white center dot */
 .ui-radio__input:checked + .ui-radio__indicator::before {
+  background-color: var(--color-background-brand-default);
   border-color: var(--color-background-brand-default);
 }
 
@@ -61,7 +62,7 @@
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background-color: var(--color-background-brand-default);
+  background-color: var(--color-content-fixed-white);
 }
 
 .ui-radio__input:checked + .ui-radio__indicator::after {
