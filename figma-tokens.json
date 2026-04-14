@@ -1,0 +1,100 @@
+{
+  "figmaFileKey": "zbdxaNIbxN4Iujx6Qi1DlI",
+  "figmaFileUrl": "https://www.figma.com/design/zbdxaNIbxN4Iujx6Qi1DlI/MCP-test",
+  "libraries": {
+    "designSystem": "🧰 Design System 2025",
+    "uiKit": "🧰 iOS - UI Kit 2025"
+  },
+  "variableCollections": {
+    "semanticColors": "aca99ba7f5e3b863523761870ab4fa8d4b24c0be",
+    "semanticSizes": "b2b4d349ff3e569ea2799606edbc77e3b5c1aa60",
+    "uiKitVariables": "3f0026e1a1cdbbcf678f559cdc723a02f2f35530"
+  },
+  "textStyles": {
+    "iOS/Label/Large": {
+      "key": "39508dd33641b5179e332d3ef152095c629e16b0",
+      "font": "SF Pro Medium 16",
+      "usage": "Field group labels, section headers"
+    },
+    "iOS/Body-CN/Large": {
+      "key": "9b4cd269904ddcece3711865cad93749f21f8233",
+      "font": "PingFang TC Regular 16",
+      "usage": "Input placeholders, radio/checkbox labels, body text"
+    },
+    "iOS/Body-CN/Medium": {
+      "key": "d96c961ea6b65c1075a5ef5fcb7f2dd07dca0113",
+      "font": "PingFang TC Regular 14",
+      "usage": "Descriptions, secondary text"
+    },
+    "iOS/Body-CN/Small": {
+      "key": "e26af525881f1faee81f3a0c115a07cf799c159d",
+      "font": "PingFang TC Regular 12",
+      "usage": "Help text, captions"
+    },
+    "iOS/Label-CN/Large": {
+      "key": "9ce79a6fcc21d419f0725671ffecd0efbc4c56c2",
+      "font": "PingFang TC Medium 16",
+      "usage": "Navigation bar title, button text"
+    }
+  },
+  "componentKeys": {
+    "TextField": {
+      "setKey": "bce75f45f294148ce9ad00b269adc1a01c1ab917",
+      "defaultVariant": { "Type": "Simple", "Status": "Enabled", "Content": "Empty" },
+      "textProps": ["↳ Placeholder#7667:0", "↳ Value#7057:0", "↳ Label#7057:25"]
+    },
+    "Select": {
+      "setKey": "78d3df49bba663714413cc1dfe14a1f7f3b5126f",
+      "defaultVariant": { "Type": "Single line", "Status": "Enabled", "Content": "Empty" },
+      "textProps": ["↳ Placeholder#7668:64", "↳ Value#7668:38", "↳ Label#7668:51"]
+    },
+    "RadioItem": {
+      "setKey": "90d1eb827cc66e8838636a0428cf0d34bd64fb16",
+      "defaultVariant": { "Status": "Enabled", "Checked": "False" },
+      "textProps": ["↳ Label#7460:0", "↳ Description#7460:6"]
+    },
+    "RadioGroup": {
+      "setKey": "e21ba9718979a56377784d7313321c7f6d0dda13",
+      "defaultVariant": { "Type": "Side by side" }
+    },
+    "CheckboxItem": {
+      "setKey": "23516b618faadcc58afdd30ea01c90da45fc4422",
+      "defaultVariant": { "Status": "Enabled", "Checked": "False" },
+      "textProps": ["↳ Label#7460:12", "↳ Description#7460:18"]
+    },
+    "Button": {
+      "setKey": "e44907631aa3e7f7d9cfa9cc0a89c4ca7e834e49",
+      "defaultVariant": { "Style": "Filled", "Type": "Primary", "State": "Enabled" },
+      "textProps": ["↳ Text#3750:0"]
+    },
+    "FieldGroup": {
+      "setKey": "648cb01e6fc7bd70866556ac6bce51efdfe1f13f",
+      "defaultVariant": { "Status": "Enabled" },
+      "booleanProps": ["Show help text#3938:196", "Show header#3938:197"]
+    },
+    "FieldGroupHeader": {
+      "compKey": "cbbb5741ba92f0546233c1fc70a0cc4de40a7650",
+      "textProps": ["↳ Headline#3813:21", "↳ Description#3929:45"]
+    },
+    "FieldGroupHelpText": {
+      "setKey": "c261cdbb19ae5d55e60943c437b272f3aa73cc14",
+      "defaultVariant": { "Status": "Default", "Align": "Left" },
+      "textProps": ["↳ Help text#3850:3"]
+    },
+    "NavigationBar": {
+      "setKey": "1173e1cfb820dae8fcf2015bb87c96fe7e9c5378",
+      "defaultVariant": { "Title size": "Regular", "Type": "Default" },
+      "textProps": ["↳ Title#3759:50"]
+    },
+    "SheetFooter": {
+      "setKey": "d91fe181e4dc95a71dbc213a6de33e810f90f3bf",
+      "defaultVariant": { "Type": "1 button" }
+    },
+    "Switch": {
+      "setKey": "797e9566e198a9a792ca0272e0032241f6b0e93b"
+    },
+    "Badge": {
+      "setKey": "f62007065326efd7432939c1c562f9bccccc55ab"
+    }
+  }
+}
