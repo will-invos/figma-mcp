@@ -145,7 +145,7 @@ Controls 狀態管理：用 `useState` 存每個 prop 的當前值，初始值�
 
 - 接收 `StoryDef.component` + Controls 當前值 + `fixedProps`
 - 動態渲染：`<story.component {...fixedProps} {...currentValues} />`
-- 背景可切換亮/暗底（用 toggle 在 Preview 區域頂部）
+- Preview 頂部有 light/dark mode toggle，切換時在 Preview 容器上設定 `data-theme="dark"`，讓元件完整走 `tokens/colors.css` 的 dark mode token 系統
 
 ### Sidebar 元件
 
@@ -227,4 +227,4 @@ export const DialogStory: StoryDef = {
 - 不加 Props API table
 - 不引入外部依賴（Storybook、highlight.js 等）
 - 不做 mobile responsive（展示頁以桌面使用為主）
-- 不支援 dark mode toggle（只在 Preview 區域提供暗底切換給 inverse 元件用）
+- Sidebar 和 Controls 固定 light mode，不隨 Preview 的 theme 切換
