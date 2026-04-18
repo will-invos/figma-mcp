@@ -3,7 +3,7 @@ import { HomeIcon, ReceiptIcon, UserIcon } from './icons'
 import type { StoryDef } from './types'
 import { useState } from 'react'
 
-const TabBarRender: React.FC<{ values: Record<string, any> }> = ({ values }) => {
+const TabBarRender: React.FC<{ values: Record<string, any> }> = () => {
   const [active, setActive] = useState('home')
   return (
     <TabBar
