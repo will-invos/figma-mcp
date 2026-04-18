@@ -1,0 +1,57 @@
+.cs-preview {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.cs-preview__toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-300) var(--space-400);
+  border-bottom: 1px solid var(--color-border-subtle);
+  background: var(--color-background-default);
+}
+
+.cs-preview__name {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-content-bold);
+}
+
+.cs-preview__theme-toggle {
+  display: flex;
+  align-items: center;
+  gap: var(--space-200);
+  padding: var(--space-100) var(--space-200);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-150);
+  background: transparent;
+  font-size: 12px;
+  font-family: var(--font-family);
+  color: var(--color-content-subtle);
+  cursor: pointer;
+  transition: background-color 0.15s;
+}
+
+.cs-preview__theme-toggle:hover {
+  background: var(--color-background-neutral-subtle);
+}
+
+.cs-preview__canvas {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-800);
+  overflow: auto;
+  background: var(--color-background-default);
+  transition: background-color 0.2s;
+}
+
+.cs-preview__canvas[data-theme="dark"] {
+  background: var(--color-background-default);
+}
