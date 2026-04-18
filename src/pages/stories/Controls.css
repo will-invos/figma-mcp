@@ -1,0 +1,89 @@
+.cs-controls {
+  width: 280px;
+  min-width: 280px;
+  height: 100vh;
+  overflow-y: auto;
+  padding: var(--space-400) var(--space-400);
+  background: var(--color-background-sunken);
+  border-left: 1px solid var(--color-border-subtle);
+  box-sizing: border-box;
+}
+
+.cs-controls__title {
+  margin: 0 0 var(--space-400);
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-content-subtlest);
+}
+
+.cs-controls__field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-100);
+  margin-bottom: var(--space-300);
+}
+
+.cs-controls__label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-content-subtle);
+}
+
+.cs-controls__select,
+.cs-controls__input {
+  width: 100%;
+  padding: var(--space-150) var(--space-200);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-150);
+  background: var(--color-background-default);
+  font-size: 13px;
+  font-family: var(--font-family);
+  color: var(--color-content-default);
+  box-sizing: border-box;
+  outline: none;
+}
+
+.cs-controls__select:focus,
+.cs-controls__input:focus {
+  border-color: var(--color-border-brand);
+}
+
+.cs-controls__checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-200);
+  margin-bottom: var(--space-300);
+}
+
+.cs-controls__checkbox {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--color-content-brand-default);
+}
+
+.cs-controls__checkbox-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-content-subtle);
+}
+
+.cs-controls__reset {
+  display: block;
+  width: 100%;
+  padding: var(--space-150);
+  margin-top: var(--space-400);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-150);
+  background: transparent;
+  font-size: 12px;
+  font-family: var(--font-family);
+  color: var(--color-content-subtle);
+  cursor: pointer;
+  transition: background-color 0.15s;
+}
+
+.cs-controls__reset:hover {
+  background: var(--color-background-neutral-subtle);
+}
