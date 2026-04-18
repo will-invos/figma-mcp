@@ -12,6 +12,8 @@ export interface StoryDef {
   category: string
   props: Record<string, PropDef>
   fixedProps?: Record<string, any>
+  /** Optional fixed width (px) for the preview container */
+  previewWidth?: number
   /** Custom render component for stories needing extra state or wrappers (e.g. Dialog, Toast).
    *  Receives current controlled prop values. Omit for default: <Component {...fixedProps} {...values} /> */
   Render?: React.ComponentType<{ values: Record<string, any> }>

@@ -7,6 +7,7 @@ export const NavigationBarStory: StoryDef = {
   component: NavigationBar,
   name: 'NavigationBar',
   category: 'Chrome',
+  previewWidth: 360,
   props: {
     title:     { type: 'string', default: '頁面標題' },
     titleSize: { type: 'enum', options: ['regular', 'large'], default: 'regular' },

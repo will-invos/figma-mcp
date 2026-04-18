@@ -30,10 +30,12 @@ export default function Preview({ story, values }: PreviewProps) {
         className="cs-preview__canvas"
         data-theme={dark ? 'dark' : undefined}
       >
-        {story.Render
-          ? <story.Render values={mergedProps} />
-          : <Component {...mergedProps} />
-        }
+        <div style={story.previewWidth ? { width: story.previewWidth } : undefined}>
+          {story.Render
+            ? <story.Render values={mergedProps} />
+            : <Component {...mergedProps} />
+          }
+        </div>
       </div>
     </main>
   )

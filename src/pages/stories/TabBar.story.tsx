@@ -22,6 +22,7 @@ export const TabBarStory: StoryDef = {
   component: TabBar,
   name: 'TabBar',
   category: 'Chrome',
+  previewWidth: 360,
   props: {},
   Render: TabBarRender,
 }
