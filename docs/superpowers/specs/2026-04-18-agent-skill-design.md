@@ -50,12 +50,7 @@
 
 - **違規 pattern**：元件 CSS 中直接定義 `font-size`、`line-height`、`font-weight`
 - **正確做法**：在 `.tsx` 中組合 `typography.css` 的 class，確保與 Figma text style 一對一對應
-- **可用 class**：
-  - Label：`text-ios-label-large` (16/24/500)、`text-ios-label-medium` (14/22/500)、`text-ios-label-small` (12/18/500)、`text-ios-label-xsmall` (10/16/500)
-  - Body：`text-ios-body-xlarge` (18/26/400)、`text-ios-body-large` (16/24/400)、`text-ios-body-medium` (14/22/400)、`text-ios-body-small` (12/18/400)、`text-ios-body-xsmall` (10/16/400)
-  - Heading：`text-ios-heading-large` (24/32/600)、`text-ios-heading-medium` (20/28/600)、`text-ios-heading-small` (18/26/600)
-  - Display：`text-ios-display` (28/36/500)、`text-ios-display-regular` (28/36/400)
-  - Code：`text-ios-code-large` (16/24)、`text-ios-code-medium` (14/22)、`text-ios-code-small` (12/18)
+- **參考**：讀取 `src/components/ui/tokens/typography.css` 取得可用 class
 
 #### 4. 字體用 token
 
@@ -66,20 +61,20 @@
 #### 5. 圓角嚴格用 radius token
 
 - **違規 pattern**：`border-radius` 值不是 `var(--radius-*)`
-- **正確做法**：`var(--radius-0)` ~ `var(--radius-1000)` 或 `var(--radius-full)`
-- **可用 token**：`--radius-0` (0px)、`--radius-50` (2px)、`--radius-100` (4px)、`--radius-150` (6px)、`--radius-200` (8px)、`--radius-250` (10px)、`--radius-300` (12px)、`--radius-400` (16px)、`--radius-500` (20px)、`--radius-600` (24px)、`--radius-800` (32px)、`--radius-1000` (40px)、`--radius-full` (9999px)
+- **正確做法**：使用 `var(--radius-*)` token
+- **參考**：讀取 `src/components/ui/tokens/radius.css` 取得可用 token
 
 #### 6. 間距嚴格用 spacing token
 
 - **違規 pattern**：`padding`、`margin`、`gap` 的值不是 `var(--space-*)` 或 `0`
-- **正確做法**：`var(--space-100)` 等
-- **可用 token**：`--space-0` (0px)、`--space-25` (1px)、`--space-50` (2px)、`--space-100` (4px)、`--space-150` (6px)、`--space-200` (8px)、`--space-250` (10px)、`--space-300` (12px)、`--space-400` (16px)、`--space-500` (20px)、`--space-600` (24px)、`--space-700` (28px)、`--space-800` (32px)、`--space-900` (36px)
+- **正確做法**：使用 `var(--space-*)` token
+- **參考**：讀取 `src/components/ui/tokens/spacing.css` 取得可用 token
 
 #### 7. 陰影嚴格用 shadow token
 
 - **違規 pattern**：`box-shadow` 值不是 `var(--shadow-*)`
-- **正確做法**：`var(--shadow-small)` 等
-- **可用 token**：`--shadow-small`、`--shadow-medium`、`--shadow-bold`、`--shadow-large`、`--shadow-sheet`、`--shadow-knob`
+- **正確做法**：使用 `var(--shadow-*)` token
+- **參考**：讀取 `src/components/ui/tokens/shadows.css` 取得可用 token
 
 #### 8. 元件結構一致性
 
