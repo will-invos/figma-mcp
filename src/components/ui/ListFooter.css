@@ -1,0 +1,11 @@
+/* ListFooter — caption text below a list section */
+.ui-list-footer {
+  padding: var(--space-200) var(--space-400) var(--space-400);
+  font-family: var(--font-family);
+  font-size: 12px;
+  line-height: 18px;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  color: var(--color-content-subtle);
+  background: var(--color-background-default);
+}

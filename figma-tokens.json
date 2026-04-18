@@ -3,7 +3,8 @@
   "figmaFileUrl": "https://www.figma.com/design/zbdxaNIbxN4Iujx6Qi1DlI/MCP-test",
   "libraries": {
     "designSystem": "🧰 Design System 2025",
-    "uiKit": "🧰 iOS - UI Kit 2025"
+    "uiKit": "🧰 iOS - UI Kit 2025",
+    "libraryKey_iOS_UIKit_2025": "lk-7322d0b146bd6149458bf482bdb367fedb2d5f9f0e1f2e334d8eb2b80e1b93bf5279ddc05934cd61c19df7032c4935b8c059ce8f4a0b137ce7f50e6aa6e05059"
   },
   "variableCollections": {
     "semanticColors": "aca99ba7f5e3b863523761870ab4fa8d4b24c0be",
@@ -11,61 +12,76 @@
     "uiKitVariables": "3f0026e1a1cdbbcf678f559cdc723a02f2f35530"
   },
   "textStyles": {
-    "iOS/Label/Large": {
-      "key": "39508dd33641b5179e332d3ef152095c629e16b0",
-      "font": "SF Pro Medium 16",
-      "usage": "Field group labels, section headers"
-    },
-    "iOS/Body-CN/Large": {
-      "key": "9b4cd269904ddcece3711865cad93749f21f8233",
-      "font": "PingFang TC Regular 16",
-      "usage": "Input placeholders, radio/checkbox labels, body text"
-    },
-    "iOS/Body-CN/Medium": {
-      "key": "d96c961ea6b65c1075a5ef5fcb7f2dd07dca0113",
-      "font": "PingFang TC Regular 14",
-      "usage": "Descriptions, secondary text"
-    },
-    "iOS/Body-CN/Small": {
-      "key": "e26af525881f1faee81f3a0c115a07cf799c159d",
-      "font": "PingFang TC Regular 12",
-      "usage": "Help text, captions"
-    },
-    "iOS/Label-CN/Large": {
-      "key": "9ce79a6fcc21d419f0725671ffecd0efbc4c56c2",
-      "font": "PingFang TC Medium 16",
-      "usage": "Navigation bar title, button text"
-    }
+    "_comment": "All keys from 🧰 Design System 2025. CSS classes in tokens/typography.css.",
+
+    "_display": "— Display (H1, page headline) —",
+    "iOS/Display":              { "key": "aed21ad886757d6cc61f43a1962fb3d4d57618fd", "font": "SF Pro Medium 28",      "css": ".text-ios-display" },
+    "iOS/Display-Regular":      { "key": "cb5ead1f3c2c0e08873e86fef5c61af7515ca457", "font": "SF Pro Regular 28",     "css": ".text-ios-display-regular" },
+    "iOS/Display-CN":           { "key": "7c00de91d9f041f5b16bea312c60cabbe46a64b1", "font": "PingFang TC Medium 28",  "css": ".text-ios-display-cn" },
+    "iOS/Display-CN-Regular":   { "key": "78c978f2a5b30d18b79ccae0f4d57cf419e40df0", "font": "PingFang TC Regular 28", "css": ".text-ios-display-cn-regular" },
+
+    "_heading": "— Heading (section/dialog titles) —",
+    "iOS/Heading/Large":        { "key": "56b328e483054136a021d791f031cf8d4ff41cf8", "font": "SF Pro Semibold 24",      "css": ".text-ios-heading-large" },
+    "iOS/Heading/Medium":       { "key": "aff1248b6e0c619c7cc2008314876c6d5e96bcec", "font": "SF Pro Semibold 20",      "css": ".text-ios-heading-medium" },
+    "iOS/Heading/Small":        { "key": "4ee01868964a147d0fd3f2548265a955dfb059e0", "font": "SF Pro Semibold 18",      "css": ".text-ios-heading-small" },
+    "iOS/Heading-CN/Large":     { "key": "a528d10e526d94a0d8871c1636f21ac1256714fa", "font": "PingFang TC Semibold 24", "css": ".text-ios-heading-cn-large" },
+    "iOS/Heading-CN/Medium":    { "key": "1a168c32c18e96280ead912b435f312ba1f4a219", "font": "PingFang TC Semibold 20", "css": ".text-ios-heading-cn-medium" },
+    "iOS/Heading-CN/Small":     { "key": "13f670df4e9effdf1b5f94a2b05516349e0be76d", "font": "PingFang TC Semibold 18", "css": ".text-ios-heading-cn-small" },
+
+    "_body": "— Body (body text, descriptions, captions) —",
+    "iOS/Body/XLarge":          { "key": "b04fdb97340126a751d43fb5a7055c86f7ae1bfd", "font": "SF Pro Regular 18",      "css": ".text-ios-body-xlarge" },
+    "iOS/Body/Large":           { "key": "aa505203b2e4236614a172560bb8dbce13b6d98d", "font": "SF Pro Regular 16",      "css": ".text-ios-body-large" },
+    "iOS/Body/Medium":          { "key": "050c377b29f40a9c80e947b0852c31044f66a8e8", "font": "SF Pro Regular 14",      "css": ".text-ios-body-medium" },
+    "iOS/Body/Small":           { "key": "87922011cabd841d7f45bf9252f84f2e8ad06335", "font": "SF Pro Regular 12",      "css": ".text-ios-body-small" },
+    "iOS/Body/XSmall":          { "key": "f6c233a051e994155f7d82e50d3b1cf845097738", "font": "SF Pro Regular 10",      "css": ".text-ios-body-xsmall" },
+    "iOS/Body-CN/XLarge":       { "key": "933c9db5100aaa923a8b58dbb9421aba05fbc8d0", "font": "PingFang TC Regular 18", "css": ".text-ios-body-cn-xlarge" },
+    "iOS/Body-CN/Large":        { "key": "9b4cd269904ddcece3711865cad93749f21f8233", "font": "PingFang TC Regular 16", "css": ".text-ios-body-cn-large" },
+    "iOS/Body-CN/Medium":       { "key": "87d49291c1fad030741a1e236c501b6130d1916a", "font": "PingFang TC Regular 14", "css": ".text-ios-body-cn-medium" },
+    "iOS/Body-CN/Small":        { "key": "e26af525881f1faee81f3a0c115a07cf799c159d", "font": "PingFang TC Regular 12", "css": ".text-ios-body-cn-small" },
+    "iOS/Body-CN/XSmall":       { "key": "a5cdd0dc6e5c80bc95943429d64f2b07d1783ed2", "font": "PingFang TC Regular 10", "css": ".text-ios-body-cn-xsmall" },
+
+    "_label": "— Label (buttons, field labels) —",
+    "iOS/Label/Large":          { "key": "39508dd33641b5179e332d3ef152095c629e16b0", "font": "SF Pro Medium 16",       "css": ".text-ios-label-large" },
+    "iOS/Label/Medium":         { "key": "f9bea87149ba4a13ab114ec3bda71766cb681770", "font": "SF Pro Medium 14",       "css": ".text-ios-label-medium" },
+    "iOS/Label/Small":          { "key": "e25a629e38bf3b3fe905afa9e6cfbd54defd29b7", "font": "SF Pro Medium 12",       "css": ".text-ios-label-small" },
+    "iOS/Label/XSmall":         { "key": "3e385acc7e6f845d169bd889a9c6d6dd468ff7a8", "font": "SF Pro Medium 10",       "css": ".text-ios-label-xsmall" },
+    "iOS/Label-CN/Large":       { "key": "9ce79a6fcc21d419f0725671ffecd0efbc4c56c2", "font": "PingFang TC Medium 16",  "css": ".text-ios-label-cn-large" },
+    "iOS/Label-CN/Medium":      { "key": "5778fa19f94d316807b307fd059c7f2957e8aa7c", "font": "PingFang TC Medium 14",  "css": ".text-ios-label-cn-medium" },
+    "iOS/Label-CN/Small":       { "key": "9edda577216a6712b84f6d0d0bf23caac0013b72", "font": "PingFang TC Medium 12",  "css": ".text-ios-label-cn-small" },
+    "iOS/Label-CN/XSmall":      { "key": "3af8acb08c753c989051bb32e00c600aaa8cbc29", "font": "PingFang TC Medium 10",  "css": ".text-ios-label-cn-xsmall" },
+
+    "_code": "— Code (monospace) —",
+    "iOS/Code/Large":           { "key": "0dc15af51434ae7bd6219008e90cb17968a70d7b", "font": "SF Mono Regular 16",     "css": ".text-ios-code-large" },
+    "iOS/Code/Medium":          { "key": "bf673d78c22f80ce76fc9c11cf51f8acb6029343", "font": "SF Mono Regular 14",     "css": ".text-ios-code-medium" },
+    "iOS/Code/Small":           { "key": "1c40631545dcdac4f9fce2a8bb2b7c889340fcb9", "font": "SF Mono Regular 12",     "css": ".text-ios-code-small" }
   },
   "componentKeys": {
+    "_comment": "All keys verified in iOS UI Kit 2025 library. Always prefer these; only build custom frames if a genuinely equivalent component doesn't exist.",
+
+    "_navigation": "— Navigation & layout —",
+    "NavigationBar": {
+      "setKey": "1173e1cfb820dae8fcf2015bb87c96fe7e9c5378",
+      "defaultVariant": { "Title size": "Regular", "Type": "Default" },
+      "textProps": ["↳ Title#3759:50"]
+    },
+    "TabBar": {
+      "setKey": "43a7374c4a22f98300cef8b07f1720121f2850e2"
+    },
+    "Divider": {
+      "setKey": "9c4f8569dffe5ea9dbfe6f3f3864847b816a15fc"
+    },
+
+    "_form": "— Forms —",
     "TextField": {
       "setKey": "bce75f45f294148ce9ad00b269adc1a01c1ab917",
       "defaultVariant": { "Type": "Simple", "Status": "Enabled", "Content": "Empty" },
+      "defaultVariantComponentKey": "acdfbe58d9b7119934a4df1856573bb429f8e3ba",
       "textProps": ["↳ Placeholder#7667:0", "↳ Value#7057:0", "↳ Label#7057:25"]
     },
     "Select": {
       "setKey": "78d3df49bba663714413cc1dfe14a1f7f3b5126f",
       "defaultVariant": { "Type": "Single line", "Status": "Enabled", "Content": "Empty" },
       "textProps": ["↳ Placeholder#7668:64", "↳ Value#7668:38", "↳ Label#7668:51"]
-    },
-    "RadioItem": {
-      "setKey": "90d1eb827cc66e8838636a0428cf0d34bd64fb16",
-      "defaultVariant": { "Status": "Enabled", "Checked": "False" },
-      "textProps": ["↳ Label#7460:0", "↳ Description#7460:6"]
-    },
-    "RadioGroup": {
-      "setKey": "e21ba9718979a56377784d7313321c7f6d0dda13",
-      "defaultVariant": { "Type": "Side by side" }
-    },
-    "CheckboxItem": {
-      "setKey": "23516b618faadcc58afdd30ea01c90da45fc4422",
-      "defaultVariant": { "Status": "Enabled", "Checked": "False" },
-      "textProps": ["↳ Label#7460:12", "↳ Description#7460:18"]
-    },
-    "Button": {
-      "setKey": "e44907631aa3e7f7d9cfa9cc0a89c4ca7e834e49",
-      "defaultVariant": { "Style": "Filled", "Type": "Primary", "State": "Enabled" },
-      "textProps": ["↳ Text#3750:0"]
     },
     "FieldGroup": {
       "setKey": "648cb01e6fc7bd70866556ac6bce51efdfe1f13f",
@@ -81,20 +97,158 @@
       "defaultVariant": { "Status": "Default", "Align": "Left" },
       "textProps": ["↳ Help text#3850:3"]
     },
-    "NavigationBar": {
-      "setKey": "1173e1cfb820dae8fcf2015bb87c96fe7e9c5378",
-      "defaultVariant": { "Title size": "Regular", "Type": "Default" },
-      "textProps": ["↳ Title#3759:50"]
+    "RadioItem": {
+      "setKey": "90d1eb827cc66e8838636a0428cf0d34bd64fb16",
+      "defaultVariant": { "Status": "Enabled", "Checked": "False" },
+      "textProps": ["↳ Label#7460:0", "↳ Description#7460:6"]
     },
+    "RadioGroup": {
+      "setKey": "e21ba9718979a56377784d7313321c7f6d0dda13",
+      "defaultVariant": { "Type": "Side by side" }
+    },
+    "RadioButton": {
+      "setKey": "797e9566e198a9a792ca0272e0032241f6b0e93b",
+      "notes": "Raw radio circle only — prefer RadioItem for label"
+    },
+    "CheckboxItem": {
+      "setKey": "23516b618faadcc58afdd30ea01c90da45fc4422",
+      "defaultVariant": { "Status": "Enabled", "Checked": "False" },
+      "textProps": ["↳ Label#7460:12", "↳ Description#7460:18"]
+    },
+    "Checkbox": {
+      "setKey": "3fceaf252398a7022b8a0f1870b4c3fed7537b9b",
+      "notes": "Raw checkbox box only — prefer CheckboxItem for label"
+    },
+    "Switch": {
+      "setKey": "6eef0deedbee20f10540584112186bde8a6005da"
+    },
+    "Slider": {
+      "setKey": "ebc2439400b109edd5e60ebea269b2025b8cd322"
+    },
+    "DatePicker": {
+      "setKey": "11abf97f4890e6f73fd6d224c0fe36c3d51a263a"
+    },
+    "MonthPicker": {
+      "setKey": "bd3d9dc2711935925eb1b9840b464c6f1ca9cd16"
+    },
+
+    "_buttons": "— Buttons —",
+    "Button": {
+      "setKey": "e44907631aa3e7f7d9cfa9cc0a89c4ca7e834e49",
+      "defaultVariant": { "Style": "Filled", "Type": "Primary", "State": "Enabled" },
+      "textProps": ["↳ Text#3750:0"],
+      "commonVariantKeys": {
+        "filledPrimaryEnabled": "228e1c652ca27ebb0af3c6635f6ad7156adafb89",
+        "filledPrimaryDisabled": "650ff26fc2035090df1f6c40ac212e5933ba54f2",
+        "filledPrimaryLoading": "458438a8bbf8420e0a2a67b70e399b1fd5de361a",
+        "outlinePrimaryEnabled": "1ac9c3c376611fe271682868646732feda29d79b",
+        "ghostPrimaryEnabled": "cd070db135ad8c48371126983075350be2a24343",
+        "textPrimaryEnabled": "fabe4e45d3fc81782f858e97f7ef62fd8e686b1c",
+        "textSecondaryEnabled": "1ac4d123bafb2367ceb347f4be4ca91872f33d83"
+      }
+    },
+    "IconButtonMedium": {
+      "setKey": "28cb4faab4de891d5deefc357a4c863efab13c20",
+      "defaultVariant": { "Style": "Ghost", "Type": "Neutral", "State": "Enabled" }
+    },
+
+    "_containers": "— Containers & layout —",
     "SheetFooter": {
       "setKey": "d91fe181e4dc95a71dbc213a6de33e810f90f3bf",
       "defaultVariant": { "Type": "1 button" }
     },
-    "Switch": {
-      "setKey": "797e9566e198a9a792ca0272e0032241f6b0e93b"
+    "SheetHeader": {
+      "setKey": "39089856e367ada2ae8c89df3cebd82b47ccc832"
+    },
+    "BottomSheet": {
+      "setKey": "90452b7e6a385eee8fc1f45ba493f1d82d6423b9"
+    },
+    "Dialog": {
+      "setKey": "720dc0efef44ff06485480a68c0fe3f4fd12e3f1"
+    },
+    "CardItem": {
+      "setKey": "f7d9445852d9de475357d6da22000a7242d2d607"
+    },
+    "CardBanner": {
+      "setKey": "040acef5ec9034d87fdc55e293d3a75fca4ff405"
+    },
+
+    "_listing": "— Lists & items —",
+    "ListItem": {
+      "setKey": "09766221213c56e244235692f3aeea506aa305a8",
+      "variantAxes": ["Type (Default/Has description/Compact)", "State (Enabled/Disabled)", "Trailing elements (None/Drill-in/Text/Text button/CTA/Icon/Spinner/Switch/Checkbox)"],
+      "textProps": ["↳ Headline#6569:0", "↳ Text#10803:5"],
+      "booleanProps": ["Leading icon#29724:85", "Leading addition#29724:36", "Badge#3938:167", "Divider#29723:0", "Trailing addition#4652:1"],
+      "commonVariantKeys": {
+        "defaultDrillIn": "cfb4e73bc3bd9568ccca4c5900e6d579ae3d3519",
+        "hasDescDrillIn": "48d721b8ead1122310e099c96fb5404a08f65ba5",
+        "defaultSwitch": "fb01ddf1adf11a088412201fe087bd9ae2b68e19",
+        "defaultCheckbox": "aab3476865865f28b76778cc3d826a047d629c8d"
+      }
+    },
+
+    "_feedback": "— Feedback —",
+    "BasicAlert": {
+      "setKey": "4d92f6db95ffb11cd2b748170f81ab4edd08d809",
+      "defaultVariant": { "Style": "Default", "Type": "Primary" },
+      "textProps": ["↳ Text#4031:0"],
+      "booleanProps": ["Leading icon#4031:5", "Trailing icon#4031:10"]
+    },
+    "RichAlert": {
+      "setKey": "9b0731420b97b4530e9b2f41275af45aaef13132"
+    },
+    "Toast": {
+      "setKey": "4829e08fdf78d9f9e10a3c0e03801cbf0679bcb0"
+    },
+    "Tooltip": {
+      "setKey": "40164f53d5c17dd6d1ee440185bdad3d57b63868"
+    },
+    "Spinner": {
+      "setKey": "8712e889589a6cf120312955cba078157f6cfee8",
+      "notes": "Standard spinner"
+    },
+    "iOSSpinner": {
+      "setKey": "a94aaa4d2335c9f1f9c1ea6bd6683d3a1df4b400",
+      "notes": "Native iOS-style spinner"
+    },
+    "ProgressBar": {
+      "setKey": "3d3eaf5c17ea9c851955824be218eb707a76ab6b"
+    },
+    "CircularProgress": {
+      "setKey": "8d369203381e763f1b32d85a5852c41f7e4e2457"
+    },
+    "ProgressGroup": {
+      "setKey": "922500f9f9eadad8305527fa4500ed5fd221df85"
+    },
+
+    "_display": "— Display —",
+    "Tag": {
+      "setKey": "77911e21f6e1c3e6e96b0525b52929501aeddfac"
+    },
+    "TagBar": {
+      "setKey": "19639663fdb5b5a4f7393235f8f01d9abe8298c0"
     },
     "Badge": {
       "setKey": "f62007065326efd7432939c1c562f9bccccc55ab"
+    },
+    "Avatar": {
+      "compKey": "9349bac40a7eb29779e81da592d4485d375b59c4",
+      "notes": "Single component (not a set)"
     }
+  },
+  "discoveryNotes": {
+    "howToFindNewComponents": "Use mcp__figma-remote__search_design_system with the component name. Filter by libraryName === '🧰 iOS - UI Kit 2025'. Always add found keys to this file before building.",
+    "notYetSearched": [
+      "Empty state",
+      "Skeleton loader",
+      "Segmented control",
+      "Search bar / Search field",
+      "Action sheet",
+      "Stepper",
+      "Menu / Context menu",
+      "Popover",
+      "Filter / Chip",
+      "Accordion"
+    ]
   }
 }

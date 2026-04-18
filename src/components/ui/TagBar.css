@@ -1,0 +1,42 @@
+/* Per Figma 19639663 — Tag bar
+   Container: bg white, padding 12 16, gap 8 between tags
+   Tag button:
+     - Default: white bg, 1px #edeff3 border, text #3b3c43
+     - Selected: #2a2c35 bg, no border, text #f7f8f9
+     - Padding: 6 16, radius 999 (pill), gap 4 (between text/badges) */
+.ui-tag-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  background: var(--color-background-default);
+}
+.ui-tag-bar--scroll {
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.ui-tag-bar--scroll::-webkit-scrollbar {
+  display: none;
+}
+.ui-tag-bar__item {
+  flex-shrink: 0;
+  padding: 6px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--color-border-subtle);
+  background: var(--color-background-default);
+  color: var(--color-content-default);
+  font-size: 14px;
+  line-height: 22px;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background-color 0.15s, color 0.15s, border-color 0.15s;
+}
+.ui-tag-bar__item:not(.ui-tag-bar__item--active):hover {
+  background: var(--color-background-sunken);
+}
+.ui-tag-bar__item--active {
+  background: var(--color-background-inverse-default);
+  color: var(--color-content-inverse-bold);
+  border-color: transparent;
+}

@@ -1,0 +1,12 @@
+.ui-divider {
+  background: var(--color-border-subtle);
+  flex-shrink: 0;
+}
+.ui-divider--horizontal {
+  width: 100%;
+  height: 1px;
+}
+.ui-divider--vertical {
+  width: 1px;
+  height: 100%;
+}

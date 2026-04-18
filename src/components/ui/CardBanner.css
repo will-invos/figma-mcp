@@ -1,0 +1,95 @@
+/* CardBanner — Large vertical card per Figma 4691:35640
+   Image at top (with border, radius-300), content below (headline + descriptions + button) */
+
+.ui-card-banner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-200);
+  width: 100%;
+}
+.ui-card-banner--interactive {
+  cursor: pointer;
+}
+
+/* Image area */
+.ui-card-banner__image {
+  position: relative;
+  width: 100%;
+  border-radius: var(--radius-300);
+  border: 1px solid var(--color-border-subtle);
+  overflow: hidden;
+  background: var(--color-background-neutral-subtle);
+}
+.ui-card-banner__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.ui-card-banner__badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+}
+
+/* Content */
+.ui-card-banner__body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.ui-card-banner__title {
+  margin: 0;
+  font-family: var(--font-family);
+  font-size: 18px;
+  line-height: 26px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--color-content-bold);
+}
+
+/* Bottom row: descriptions left, action right */
+.ui-card-banner__bottom {
+  display: flex;
+  gap: var(--space-400);
+  align-items: flex-start;
+}
+.ui-card-banner__descriptions {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-100);
+}
+.ui-card-banner__desc-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-100);
+}
+.ui-card-banner__desc-icon {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  color: var(--color-content-subtle);
+}
+.ui-card-banner__desc-icon svg {
+  width: 16px;
+  height: 16px;
+}
+.ui-card-banner__desc-text {
+  flex: 1;
+  min-width: 0;
+  font-family: var(--font-family);
+  font-size: 14px;
+  line-height: 22px;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  color: var(--color-content-subtle);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin: 0;
+}
+.ui-card-banner__action {
+  flex-shrink: 0;
+}

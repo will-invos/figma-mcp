@@ -2,12 +2,12 @@ import React from 'react';
 import './Spinner.css';
 
 interface SpinnerProps {
-  size?: 'small' | 'medium' | 'large';
-  color?: 'brand' | 'white' | 'neutral';
+  size?: 'xsmall' | 'small' | 'medium' | 'large';
+  color?: 'primary'| 'neutral' | 'inverse';
 }
 
 const Spinner = React.forwardRef<HTMLDivElement, SpinnerProps>(
-  ({ size = 'medium', color = 'brand' }, ref) => {
+  ({ size = 'medium', color = 'primary' }, ref) => {
     const classes = [
       'ui-spinner',
       `ui-spinner--${size}`,

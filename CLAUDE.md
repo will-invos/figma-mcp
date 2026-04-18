@@ -12,6 +12,14 @@ All components live in `src/components/ui/` with matching `.css` files.
 Available: Button, IconButton, TextField, Select, Checkbox, Radio, Switch, Tag, Badge, Alert, ListItem, Dialog, Sheet, Toast, Spinner.
 Design tokens: `src/components/ui/tokens/` (colors, radius, shadows, spacing, typography).
 
+### Coding Rules
+- **No hard-coded colors.** Never use hex (`#fff`), `rgb()`, `rgba()`, or named colors (`white`, `black`) directly in component CSS. Always reference a design token CSS variable (`var(--color-*)`). If a needed token doesn't exist, add it to `tokens/colors.css` first, then reference it.
+  - ✅ `color: var(--color-content-fixed-white);`
+  - ❌ `color: white;` / `color: #ffffff;` / `color: rgba(255,255,255,0.2);`
+  - The only file allowed to contain raw color values is `tokens/colors.css` (token definitions).
+- **No fallback values in `var()`.** Tokens are always defined; fallback hex is dead code that can silently diverge. Write `var(--color-background-brand-default)`, not `var(--color-background-brand-default, #3560ff)`.
+- **Use typography tokens.** Use `var(--font-family)` (PingFang TC) for all UI text and `var(--font-family-code)` for monospace. No separate CN font variable — PingFang TC is the default. Typography classes are in `tokens/typography.css`.
+
 ## Figma Integration
 
 ### Design System

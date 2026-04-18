@@ -14,6 +14,23 @@
   white-space: nowrap;
   outline: none;
   box-sizing: border-box;
+  /* Needed for absolute spinner overlay during loading */
+  position: relative;
+}
+
+/* Loading: keep width by hiding content while spinner overlays */
+.ui-button[data-loading] .ui-button__leading,
+.ui-button[data-loading] .ui-button__content,
+.ui-button[data-loading] .ui-button__trailing {
+  visibility: hidden;
+}
+.ui-button__spinner {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
 }
 
 /* ========================================
@@ -26,7 +43,7 @@
   border-radius: var(--radius-300);
   font-size: 16px;
   line-height: 24px;
-  font-weight: 510;
+  font-weight: 500;
 }
 
 .ui-button--medium {
@@ -35,7 +52,7 @@
   border-radius: var(--radius-250);
   font-size: 14px;
   line-height: 22px;
-  font-weight: 510;
+  font-weight: 500;
 }
 
 .ui-button--small {
@@ -44,7 +61,7 @@
   border-radius: var(--radius-200);
   font-size: 12px;
   line-height: 18px;
-  font-weight: 510;
+  font-weight: 500;
 }
 
 /* ========================================
@@ -239,10 +256,10 @@
   color: var(--color-content-inverse-bold);
 }
 .ui-button--ghost.ui-button--ghost-inverse:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: var(--color-background-transparent-hover);
 }
 .ui-button--ghost.ui-button--ghost-inverse:active {
-  background-color: rgba(255, 255, 255, 0.15);
+  background-color: var(--color-background-transparent-active);
 }
 
 /* ========================================

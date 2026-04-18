@@ -139,6 +139,7 @@
   font-size: 16px;
   font-weight: 400;
   line-height: 24px;
+  letter-spacing: 0.04em;
   color: var(--color-content-default);
 }
 
@@ -146,6 +147,7 @@
   font-size: 14px;
   font-weight: 400;
   line-height: 22px;
+  letter-spacing: 0.04em;
   color: var(--color-content-subtle);
 }
 
@@ -177,6 +179,7 @@
   font-size: 14px;
   font-weight: 400;
   line-height: 22px;
+  letter-spacing: 0.04em;
   color: var(--color-content-subtle);
 }
 

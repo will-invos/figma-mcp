@@ -1,0 +1,75 @@
+/* Per Figma 4351:24352 — Search field
+   - bg: color/background/sunken (#f7f8f9)
+   - padding: 12px all sides
+   - border-radius: 8px
+   - gap: 12px between icon / input / clear
+   - search icon + clear icon: 20×20
+   - text: PingFang TC Regular 16 / line-height 24 */
+.ui-search-field {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+.ui-search-field__input-wrapper {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background: var(--color-background-sunken);
+  border-radius: 8px;
+}
+.ui-search-field__icon {
+  flex-shrink: 0;
+  display: inline-flex;
+  width: 20px;
+  height: 20px;
+  color: var(--color-content-subtlest);
+}
+.ui-search-field__input {
+  flex: 1;
+  min-width: 0;
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 0;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.04em;
+  color: var(--color-content-default);
+  font-family: inherit;
+}
+.ui-search-field__input::placeholder {
+  color: var(--color-content-subtlest);
+}
+.ui-search-field__input::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+}
+.ui-search-field__clear {
+  flex-shrink: 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: inline-flex;
+  width: 20px;
+  height: 20px;
+  color: var(--color-content-subtlest);
+}
+.ui-search-field__clear:hover {
+  color: var(--color-content-subtle);
+}
+.ui-search-field__cancel {
+  flex-shrink: 0;
+  background: transparent;
+  border: none;
+  color: var(--color-content-default);
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  padding: 4px;
+  font-family: inherit;
+}

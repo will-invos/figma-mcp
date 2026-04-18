@@ -1,0 +1,64 @@
+/* Per Figma 5867:21532 — ProgressGroup
+   - Top variant   : flex-col, gap 4, texts row above bar (left brand / right default)
+   - Aside variant : flex-row, gap 8, bar takes flex-1, trailing text on the right (brand)
+   - Bar: 8px tall, base #edeff3, fill #3560ff, radius 999 */
+.ui-progress-group {
+  display: flex;
+  width: 100%;
+}
+.ui-progress-group--top {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 4px;
+}
+.ui-progress-group--aside {
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+
+.ui-progress-group__texts {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ui-progress-group__leading {
+  font-size: 12px;
+  line-height: 18px;
+  color: var(--color-content-brand-default);
+  white-space: nowrap;
+}
+
+.ui-progress-group__trailing {
+  font-size: 12px;
+  line-height: 18px;
+  color: var(--color-content-default);
+  white-space: nowrap;
+}
+
+.ui-progress-group__bar {
+  position: relative;
+  height: 8px;
+  overflow: hidden;
+  flex: 1;
+  min-width: 0;
+}
+.ui-progress-group--top .ui-progress-group__bar {
+  width: 100%;
+  flex: none;
+}
+
+.ui-progress-group__base {
+  position: absolute;
+  inset: 0;
+  background: var(--color-background-neutral-subtle);
+  border-radius: 999px;
+}
+.ui-progress-group__fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  background: var(--color-background-brand-default);
+  border-radius: 999px;
+  transition: width 0.3s ease;
+}

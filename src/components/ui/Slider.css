@@ -1,0 +1,61 @@
+/* Per Figma 108:279 — One way Slider, Enabled
+   Container 24h, base 4px #edeff3 round, fill 4px #3560ff round, nob 24x24 white */
+.ui-slider {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  height: 24px;
+}
+.ui-slider--disabled { opacity: 0.4; pointer-events: none; }
+
+.ui-slider__track {
+  position: absolute;
+  left: 12px;   /* leave room for thumb (24/2) */
+  right: 12px;
+  height: 4px;
+  background: var(--color-border-subtle); /* Figma: #edeff3 */
+  border-radius: 999px;
+  pointer-events: none;
+}
+.ui-slider__fill {
+  height: 100%;
+  background: var(--color-background-brand-default);
+  border-radius: 999px;
+}
+
+.ui-slider__input {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 24px;
+  background: transparent;
+  position: relative;
+  cursor: pointer;
+  margin: 0;
+}
+
+/* Thumb: 24×24 white circle with subtle shadow, per Figma "Nob" vector */
+.ui-slider__input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--color-background-fixed-white);
+  border: 0.5px solid var(--color-border-knob);
+  box-shadow: var(--shadow-knob);
+  cursor: pointer;
+  margin-top: 0;
+}
+.ui-slider__input::-moz-range-thumb {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--color-background-fixed-white);
+  border: 0.5px solid var(--color-border-knob);
+  box-shadow: var(--shadow-knob);
+  cursor: pointer;
+}
+

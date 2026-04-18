@@ -1,23 +1,31 @@
-@keyframes slideDown {
+/* Per Figma 4762:16032 — Toast
+   - Centered on viewport (translate -50%, -50%)
+   - bg: --color-background-toast (rgba(0,0,0,0.8))
+   - padding: 24, radius: 16
+   - Rich: column flex, gap 24 between body and action button, fixed 200 wide
+   - Loading: just spinner with same padding/radius (auto width) */
+
+@keyframes ui-toast-pop {
   from {
     opacity: 0;
-    transform: translateY(-16px);
+    transform: scale(0.9);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: scale(1);
   }
 }
 
 .ui-toast-container {
   position: fixed;
-  top: var(--space-600);
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate(-50%, -50%);
   z-index: 1100;
   display: flex;
   flex-direction: column;
-  gap: var(--space-200);
+  align-items: center;
+  gap: 12px;
   pointer-events: none;
 }
 
@@ -25,15 +33,65 @@
   pointer-events: auto;
   background: var(--color-background-toast);
   color: var(--color-content-inverse-bold);
-  border-radius: var(--radius-300);
-  padding: var(--space-300) var(--space-400);
-  box-shadow: var(--shadow-medium);
+  border-radius: 16px;
+  padding: 24px;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: var(--space-200);
-  font-size: 14px;
-  line-height: 22px;
-  font-weight: 400;
-  animation: slideDown 0.3s ease;
+  justify-content: center;
+  animation: ui-toast-pop 0.2s ease-out;
+}
+
+/* Rich variant: fixed 200 wide, gap 24 between body and action */
+.ui-toast--rich {
+  width: 200px;
   min-width: 200px;
+  gap: 24px;
+}
+
+/* Loading variant: just spinner with padding, no fixed width */
+.ui-toast--loading {
+  gap: 0;
+}
+
+.ui-toast__body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.ui-toast__icon {
+  display: inline-flex;
+  width: 48px;
+  height: 48px;
+  align-items: center;
+  justify-content: center;
+}
+
+.ui-toast__text {
+  margin: 0;
+  width: 100%;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.04em;
+  color: var(--color-content-inverse-bold);
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ui-toast__action {
+  background: transparent;
+  border: none;
+  padding: 0;
+  font-family: inherit;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--color-content-inverse-bold);
+  cursor: pointer;
 }

@@ -18,11 +18,11 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 function resolveSpinnerColor(
   variant: ButtonProps['variant'],
   colorType: ButtonProps['colorType']
-): 'white' | 'brand' {
+): 'primary' | 'inverse' {
   if (variant === 'filled' && colorType !== 'neutral') {
-    return 'white';
+    return 'inverse';
   }
-  return 'brand';
+  return 'primary';
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
@@ -67,18 +67,18 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         data-loading={loading || undefined}
         {...rest}
       >
-        {loading ? (
-          <Spinner size={spinnerSize} color={spinnerColor} />
-        ) : (
-          <>
-            {leadingIcon && (
-              <span className="ui-button__leading">{leadingIcon}</span>
-            )}
-            <span className="ui-button__content">{children}</span>
-            {trailingIcon && (
-              <span className="ui-button__trailing">{trailingIcon}</span>
-            )}
-          </>
+        {/* Always render content; loading hides it via visibility to preserve width */}
+        {leadingIcon && (
+          <span className="ui-button__leading">{leadingIcon}</span>
+        )}
+        <span className="ui-button__content">{children}</span>
+        {trailingIcon && (
+          <span className="ui-button__trailing">{trailingIcon}</span>
+        )}
+        {loading && (
+          <span className="ui-button__spinner" aria-hidden="true">
+            <Spinner size={spinnerSize} color={spinnerColor} />
+          </span>
         )}
       </button>
     );

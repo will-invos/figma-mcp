@@ -4,4 +4,5 @@
   --shadow-bold: 0 8px 24px var(--color-shadow-bold);
   --shadow-large: 0 16px 48px var(--color-shadow-bold);
   --shadow-sheet: 0 -4px 24px var(--color-shadow-sheet);
+  --shadow-knob: 0 3px 8px rgba(0, 0, 0, 0.15), 0 1px 1px rgba(0, 0, 0, 0.1);
 }

@@ -1,47 +1,48 @@
-import React, { useEffect } from 'react';
-import { createPortal } from 'react-dom';
-import './Sheet.css';
+import React, { useEffect } from 'react'
+import { createPortal } from 'react-dom'
+import './Sheet.css'
 
-interface SheetProps {
-  open: boolean;
-  onClose: () => void;
-  headerType?: 'grabber' | 'default';
-  title?: string;
-  titleSize?: 'large' | 'regular';
-  children: React.ReactNode;
-  footer?: React.ReactNode;
+interface BottomSheetProps {
+  open: boolean
+  onClose: () => void
+  title?: string
+  titleSize?: 'large' | 'regular'
+  children: React.ReactNode
+  footer?: React.ReactNode
+  /** Show the small drag handle at the top. Default: true. */
+  showHandle?: boolean
 }
 
-function Sheet({
+function BottomSheet({
   open,
   onClose,
-  headerType = 'default',
   title,
   titleSize = 'regular',
   children,
   footer,
-}: SheetProps) {
+  showHandle = true,
+}: BottomSheetProps) {
   useEffect(() => {
-    if (!open) return;
+    if (!open) return
 
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
-        onClose();
+        onClose()
       }
-    };
+    }
 
-    document.addEventListener('keydown', handleKeyDown);
-    return () => document.removeEventListener('keydown', handleKeyDown);
-  }, [open, onClose]);
+    document.addEventListener('keydown', handleKeyDown)
+    return () => document.removeEventListener('keydown', handleKeyDown)
+  }, [open, onClose])
 
-  if (!open) return null;
+  if (!open) return null
 
   return createPortal(
     <>
       <div className="ui-sheet-overlay" onClick={onClose} />
       <div className="ui-sheet-container">
         <div className="ui-sheet">
-          {headerType === 'grabber' ? (
+          {showHandle ? (
             <div className="ui-sheet__grabber" />
           ) : (
             <div className="ui-sheet__header">
@@ -77,8 +78,8 @@ function Sheet({
       </div>
     </>,
     document.body
-  );
+  )
 }
 
-export default Sheet;
-export type { SheetProps };
+export default BottomSheet
+export type { BottomSheetProps }

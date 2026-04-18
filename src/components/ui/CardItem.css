@@ -1,0 +1,118 @@
+/* CardItem — Medium horizontal card per Figma 6381:7573
+   Thumbnail (120×80) left, content center, action right, optional divider */
+
+.ui-card-item {
+  display: flex;
+  flex-direction: column;
+  background: var(--color-background-default);
+  padding: 0 var(--space-400);
+  position: relative;
+  width: 100%;
+}
+.ui-card-item--interactive {
+  cursor: pointer;
+  transition: background-color 0.15s;
+}
+.ui-card-item--interactive:hover {
+  background: var(--color-background-neutral-subtle);
+}
+
+.ui-card-item__container {
+  display: flex;
+  gap: var(--space-400);
+  align-items: flex-start;
+  width: 100%;
+}
+
+/* Thumbnail */
+.ui-card-item__thumbnail {
+  display: flex;
+  align-items: center;
+  padding: var(--space-400) 0;
+  flex-shrink: 0;
+}
+.ui-card-item__thumbnail img {
+  width: 120px;
+  height: 80px;
+  border-radius: var(--radius-200);
+  border: 1px solid var(--color-border-subtle);
+  object-fit: cover;
+  display: block;
+}
+
+/* Content */
+.ui-card-item__content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-100);
+  justify-content: center;
+  padding: var(--space-400) 0;
+}
+.ui-card-item__title {
+  font-family: var(--font-family);
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--color-content-bold);
+  margin: 0;
+}
+.ui-card-item__desc-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-100);
+}
+.ui-card-item__desc-icon {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  color: var(--color-content-subtle);
+}
+.ui-card-item__desc-icon svg {
+  width: 16px;
+  height: 16px;
+}
+.ui-card-item__desc-text {
+  flex: 1;
+  min-width: 0;
+  font-family: var(--font-family);
+  font-size: 14px;
+  line-height: 22px;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  color: var(--color-content-subtle);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin: 0;
+}
+
+/* Action */
+.ui-card-item__action {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: var(--space-400) 0;
+  flex-shrink: 0;
+}
+
+/* Trailing (generic slot — chevron, badge, etc.) */
+.ui-card-item__trailing {
+  display: flex;
+  align-items: center;
+  padding: var(--space-400) 0;
+  flex-shrink: 0;
+  color: var(--color-content-subtle);
+}
+
+/* Divider */
+.ui-card-item__divider {
+  position: absolute;
+  bottom: 0;
+  left: var(--space-400);
+  right: var(--space-400);
+  height: 1px;
+  background: var(--color-border-subtle);
+}

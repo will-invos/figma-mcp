@@ -1,0 +1,83 @@
+/* ListHeader — per Figma 3813:6726
+   Three sizes: small (section subhead), medium (section title), large (page title) */
+
+.ui-list-header {
+  display: flex;
+  padding: 0 var(--space-400);
+  background: var(--color-background-default);
+  width: 100%;
+}
+.ui-list-header__title {
+  flex: 1;
+  min-width: 0;
+  font-family: var(--font-family);
+  margin: 0;
+}
+.ui-list-header__trailing {
+  flex-shrink: 0;
+  white-space: nowrap;
+  font-family: var(--font-family);
+}
+
+/* Small — Label-CN/Medium (14/22, subtle) */
+.ui-list-header--small {
+  align-items: flex-end;
+  padding-top: var(--space-400);
+  padding-bottom: var(--space-200);
+}
+.ui-list-header--small .ui-list-header__title {
+  font-size: 14px;
+  line-height: 22px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--color-content-subtle);
+}
+.ui-list-header--small .ui-list-header__trailing {
+  font-size: 14px;
+  line-height: 22px;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  color: var(--color-content-subtle);
+}
+
+/* Medium — Heading-CN/Small (18/26, bold) */
+.ui-list-header--medium {
+  align-items: center;
+  padding-top: var(--space-400);
+  padding-bottom: var(--space-200);
+}
+.ui-list-header--medium .ui-list-header__title {
+  font-size: 18px;
+  line-height: 26px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--color-content-bold);
+}
+.ui-list-header--medium .ui-list-header__trailing {
+  font-size: 14px;
+  line-height: 22px;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  color: var(--color-content-default);
+}
+
+/* Large — Display-CN (28/36, bold) */
+.ui-list-header--large {
+  align-items: flex-end;
+  padding-top: var(--space-200);
+  padding-bottom: var(--space-200);
+}
+.ui-list-header--large .ui-list-header__title {
+  font-size: 28px;
+  line-height: 36px;
+  font-weight: 500;
+  letter-spacing: 0;
+  color: var(--color-content-bold);
+}
+.ui-list-header--large .ui-list-header__trailing {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  color: var(--color-content-default);
+}

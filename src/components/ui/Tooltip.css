@@ -1,0 +1,125 @@
+/* Per Figma 4115:7699 — Tooltip
+   - Body: rgba toast bg, padding 8/12, radius 8, text 16/24 (PingFang TC)
+   - Tail: rounded-bump SVG (36×8 horizontal, 8×28 vertical)
+   - Shadow: medium drop-shadow on the whole composition (covers tail too)
+
+   Two-layer structure:
+   - .ui-tooltip__container — handles absolute positioning + centering
+     translate. NEVER animated, so the centering transform is preserved.
+   - .ui-tooltip__inner     — handles the fade/scale animation. Owns its
+     own transform property without conflict. */
+
+.ui-tooltip {
+  position: relative;
+  display: inline-flex;
+  width: fit-content;
+}
+
+.ui-tooltip__container {
+  position: absolute;
+  z-index: 1000;
+  display: flex;
+  pointer-events: none;
+}
+
+.ui-tooltip__inner {
+  display: flex;
+  flex-direction: inherit;
+  align-items: inherit;
+  filter: drop-shadow(0 4px 8px var(--color-shadow-default));
+  animation: ui-tooltip-fade 0.15s ease-out;
+}
+
+.ui-tooltip__body {
+  background: var(--color-background-toast);
+  color: var(--color-content-inverse-bold);
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-family: var(--font-family);
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.ui-tooltip__tail {
+  display: block;
+  flex-shrink: 0;
+  fill: var(--color-background-toast);
+}
+
+@keyframes ui-tooltip-fade {
+  from { opacity: 0; transform: scale(0.96); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* ===== Vertical placements (top / bottom) → column layout ===== */
+.ui-tooltip__container--top,
+.ui-tooltip__container--bottom {
+  flex-direction: column;
+}
+.ui-tooltip__container--top    { bottom: 100%; }
+.ui-tooltip__container--bottom { top: 100%; }
+
+/* horizontal alignment */
+.ui-tooltip__container--top.ui-tooltip__container--start,
+.ui-tooltip__container--bottom.ui-tooltip__container--start {
+  left: 0;
+  align-items: flex-start;
+}
+.ui-tooltip__container--top.ui-tooltip__container--center,
+.ui-tooltip__container--bottom.ui-tooltip__container--center {
+  left: 50%;
+  transform: translateX(-50%);
+  align-items: center;
+}
+.ui-tooltip__container--top.ui-tooltip__container--end,
+.ui-tooltip__container--bottom.ui-tooltip__container--end {
+  right: 0;
+  align-items: flex-end;
+}
+
+/* ===== Horizontal placements (left / right) → row layout ===== */
+.ui-tooltip__container--left,
+.ui-tooltip__container--right {
+  flex-direction: row;
+}
+.ui-tooltip__container--left  { right: 100%; }
+.ui-tooltip__container--right { left: 100%; }
+
+/* vertical alignment */
+.ui-tooltip__container--left.ui-tooltip__container--start,
+.ui-tooltip__container--right.ui-tooltip__container--start {
+  top: 0;
+  align-items: flex-start;
+}
+.ui-tooltip__container--left.ui-tooltip__container--center,
+.ui-tooltip__container--right.ui-tooltip__container--center {
+  top: 50%;
+  transform: translateY(-50%);
+  align-items: center;
+}
+.ui-tooltip__container--left.ui-tooltip__container--end,
+.ui-tooltip__container--right.ui-tooltip__container--end {
+  bottom: 0;
+  align-items: flex-end;
+}
+
+/* Scale-from origin: animation grows out of the tail toward the trigger,
+   so the tooltip feels like it's sprouting from the element it points at.
+   Set on the inner (animated) layer. */
+.ui-tooltip__container--top    .ui-tooltip__inner { transform-origin: bottom center; }
+.ui-tooltip__container--bottom .ui-tooltip__inner { transform-origin: top center; }
+.ui-tooltip__container--left   .ui-tooltip__inner { transform-origin: center right; }
+.ui-tooltip__container--right  .ui-tooltip__inner { transform-origin: center left; }
+
+/* Off-center alignments: shift origin toward the trigger corner. */
+.ui-tooltip__container--top.ui-tooltip__container--start    .ui-tooltip__inner { transform-origin: bottom left; }
+.ui-tooltip__container--top.ui-tooltip__container--end      .ui-tooltip__inner { transform-origin: bottom right; }
+.ui-tooltip__container--bottom.ui-tooltip__container--start .ui-tooltip__inner { transform-origin: top left; }
+.ui-tooltip__container--bottom.ui-tooltip__container--end   .ui-tooltip__inner { transform-origin: top right; }
+.ui-tooltip__container--left.ui-tooltip__container--start   .ui-tooltip__inner { transform-origin: top right; }
+.ui-tooltip__container--left.ui-tooltip__container--end     .ui-tooltip__inner { transform-origin: bottom right; }
+.ui-tooltip__container--right.ui-tooltip__container--start  .ui-tooltip__inner { transform-origin: top left; }
+.ui-tooltip__container--right.ui-tooltip__container--end    .ui-tooltip__inner { transform-origin: bottom left; }

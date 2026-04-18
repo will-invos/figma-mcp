@@ -1,74 +1,118 @@
-import React, { createContext, useContext, useRef, useState } from 'react';
-import { createPortal } from 'react-dom';
-import Spinner from './Spinner';
-import './Toast.css';
+import React, { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
+import Spinner from './Spinner'
+import './Toast.css'
+
+interface ToastAction {
+  label: string
+  onClick: () => void
+}
 
 interface ToastMessage {
-  id: string;
-  message: string;
-  type?: 'rich' | 'loading';
-  duration?: number;
+  id: string
+  /** Text shown below icon (Rich variant). */
+  message?: string
+  /** 'rich' (default) shows icon + text + optional button; 'loading' shows just a spinner. */
+  type?: 'rich' | 'loading'
+  /** Optional icon shown above the text (Rich only). Defaults to a Spinner if omitted. */
+  icon?: React.ReactNode
+  /** Optional action button shown below the text (Rich only). */
+  action?: ToastAction
+  /** Auto-dismiss after this many ms. Loading toasts never auto-dismiss. */
+  duration?: number
 }
 
 interface ToastContextValue {
-  show: (opts: Omit<ToastMessage, 'id'>) => string;
-  dismiss: (id: string) => void;
+  show: (opts: Omit<ToastMessage, 'id'>) => string
+  dismiss: (id: string) => void
 }
 
-const ToastContext = createContext<ToastContextValue | null>(null);
+const ToastContext = createContext<ToastContextValue | null>(null)
 
 function useToast(): ToastContextValue {
-  const ctx = useContext(ToastContext);
+  const ctx = useContext(ToastContext)
   if (!ctx) {
-    throw new Error('useToast must be used within a ToastProvider');
+    throw new Error('useToast must be used within a ToastProvider')
   }
-  return ctx;
+  return ctx
 }
 
 function ToastProvider({ children }: { children: React.ReactNode }) {
-  const [toasts, setToasts] = useState<ToastMessage[]>([]);
-  const counterRef = useRef(0);
+  const [toasts, setToasts] = useState<ToastMessage[]>([])
+  const counterRef = useRef(0)
+  const timersRef = useRef<Map<string, ReturnType<typeof setTimeout>>>(new Map())
 
-  const dismiss = (id: string) => {
-    setToasts((prev) => prev.filter((t) => t.id !== id));
-  };
+  // Clear all timers on unmount
+  useEffect(() => {
+    const timers = timersRef.current
+    return () => { timers.forEach((t) => clearTimeout(t)); timers.clear() }
+  }, [])
 
-  const show = (opts: Omit<ToastMessage, 'id'>): string => {
-    counterRef.current += 1;
-    const id = String(counterRef.current);
-    const toast: ToastMessage = { ...opts, id };
+  const dismiss = useCallback((id: string) => {
+    const timer = timersRef.current.get(id)
+    if (timer) { clearTimeout(timer); timersRef.current.delete(id) }
+    setToasts((prev) => prev.filter((t) => t.id !== id))
+  }, [])
 
-    setToasts((prev) => [...prev, toast]);
+  const show = useCallback((opts: Omit<ToastMessage, 'id'>): string => {
+    counterRef.current += 1
+    const id = String(counterRef.current)
+    const toast: ToastMessage = { type: 'rich', ...opts, id }
 
-    if (opts.type !== 'loading') {
-      const duration = opts.duration ?? 3000;
-      setTimeout(() => {
-        dismiss(id);
-      }, duration);
+    setToasts((prev) => [...prev, toast])
+
+    if (toast.type !== 'loading') {
+      const duration = toast.duration ?? 3000
+      const timer = setTimeout(() => { timersRef.current.delete(id); dismiss(id) }, duration)
+      timersRef.current.set(id, timer)
     }
 
-    return id;
-  };
+    return id
+  }, [dismiss])
+
+  const value = useMemo(() => ({ show, dismiss }), [show, dismiss])
 
   return (
-    <ToastContext.Provider value={{ show, dismiss }}>
+    <ToastContext.Provider value={value}>
       {children}
       {createPortal(
         <div className="ui-toast-container">
           {toasts.map((toast) => (
-            <div key={toast.id} className="ui-toast">
-              {toast.type === 'loading' && (
-                <Spinner size="small" color="white" />
+            <div key={toast.id} className={`ui-toast ui-toast--${toast.type ?? 'rich'}`}>
+              {toast.type === 'loading' ? (
+                <Spinner size="large" color="inverse" />
+              ) : (
+                <>
+                  <div className="ui-toast__body">
+                    <span className="ui-toast__icon">
+                      {toast.icon ?? <Spinner size="large" color="inverse" />}
+                    </span>
+                    {toast.message && (
+                      <p className="ui-toast__text">{toast.message}</p>
+                    )}
+                  </div>
+                  {toast.action && (
+                    <button
+                      type="button"
+                      className="ui-toast__action"
+                      onClick={() => {
+                        toast.action!.onClick()
+                        dismiss(toast.id)
+                      }}
+                    >
+                      {toast.action.label}
+                    </button>
+                  )}
+                </>
               )}
-              {toast.message}
             </div>
           ))}
         </div>,
         document.body
       )}
     </ToastContext.Provider>
-  );
+  )
 }
 
-export { ToastProvider, useToast };
-export type { ToastMessage, ToastContextValue };
+export { ToastProvider, useToast }
+export type { ToastMessage, ToastContextValue, ToastAction }

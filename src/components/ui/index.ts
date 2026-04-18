@@ -1,3 +1,4 @@
+// === Existing components ===
 export { default as Spinner } from './Spinner';
 export type { SpinnerProps } from './Spinner';
 
@@ -37,8 +38,87 @@ export type { ListItemProps } from './ListItem';
 export { default as Dialog } from './Dialog';
 export type { DialogProps, DialogAction } from './Dialog';
 
-export { default as Sheet } from './Sheet';
-export type { SheetProps } from './Sheet';
 
 export { ToastProvider, useToast } from './Toast';
 export type { ToastMessage } from './Toast';
+
+// === New components mirroring iOS UI Kit 2025 ===
+
+// iOS chrome
+export { default as NavigationBar } from './NavigationBar';
+export type { NavigationBarProps } from './NavigationBar';
+
+export { default as TabBar } from './TabBar';
+export type { TabBarProps, TabItem } from './TabBar';
+
+export { default as Divider } from './Divider';
+export type { DividerProps } from './Divider';
+
+// Form helpers
+export { default as FieldGroup } from './FieldGroup';
+export type { FieldGroupProps } from './FieldGroup';
+
+export { default as FieldGroupHeader } from './FieldGroupHeader';
+export type { FieldGroupHeaderProps } from './FieldGroupHeader';
+
+export { default as FieldGroupHelpText } from './FieldGroupHelpText';
+export type { FieldGroupHelpTextProps } from './FieldGroupHelpText';
+
+export { default as Slider } from './Slider';
+export type { SliderProps } from './Slider';
+
+export { default as TextArea } from './TextArea';
+export type { TextAreaProps } from './TextArea';
+
+export { default as SearchField } from './SearchField';
+export type { SearchFieldProps } from './SearchField';
+
+// Pickers
+export { default as DatePicker } from './DatePicker';
+export type { DatePickerProps } from './DatePicker';
+
+export { default as MonthPicker } from './MonthPicker';
+export type { MonthPickerProps } from './MonthPicker';
+
+// Containers
+export { default as SheetHeader } from './SheetHeader';
+export type { SheetHeaderProps } from './SheetHeader';
+
+export { default as BottomSheet } from './BottomSheet';
+export type { BottomSheetProps } from './BottomSheet';
+
+export { default as CardItem } from './CardItem';
+export type { CardItemProps, CardItemDescRow } from './CardItem';
+
+export { default as CardBanner } from './CardBanner';
+export type { CardBannerProps, CardBannerDescRow } from './CardBanner';
+
+// List
+export { default as ListHeader } from './ListHeader';
+export type { ListHeaderProps } from './ListHeader';
+
+export { default as ListFooter } from './ListFooter';
+export type { ListFooterProps } from './ListFooter';
+
+// Display
+export { default as Avatar } from './Avatar';
+export type { AvatarProps } from './Avatar';
+
+export { default as Tooltip } from './Tooltip';
+export type { TooltipProps } from './Tooltip';
+
+export { default as SnackBar } from './SnackBar';
+export type { SnackBarProps } from './SnackBar';
+
+export { default as ProgressBar } from './ProgressBar';
+export type { ProgressBarProps } from './ProgressBar';
+
+export { default as CircularProgress } from './CircularProgress';
+export type { CircularProgressProps } from './CircularProgress';
+
+export { default as ProgressGroup } from './ProgressGroup';
+export type { ProgressGroupProps } from './ProgressGroup';
+
+// Tag variants
+export { default as TagBar } from './TagBar';
+export type { TagBarProps, TagBarItem } from './TagBar';

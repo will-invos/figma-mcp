@@ -98,7 +98,7 @@
   --color-background-plain: #ffffff;
   --color-background-skeleton: #edeff3;
   --color-background-sunken: #f7f8f9;
-  --color-background-toast: #101119;
+  --color-background-toast: rgba(0, 0, 0, 0.8);
 
   /* Background — Brand */
   --color-background-brand-active: #2b38c8;
@@ -151,6 +151,9 @@
   /* Background — Overlay */
   --color-background-overlay-bold: rgba(0, 0, 0, 0.7);
   --color-background-overlay-default: rgba(0, 0, 0, 0.5);
+  --color-background-overlay-inverse-hover: rgba(255, 255, 255, 0.1);
+  --color-background-overlay-inverse-active: rgba(255, 255, 255, 0.15);
+  --color-background-overlay-inverse-subtle: rgba(255, 255, 255, 0.2);
 
   /* Background — Prize */
   --color-background-prize-active: #c78b07;
@@ -203,6 +206,7 @@
   --color-border-plain: #dcdee5;
   --color-border-prize: #ffc423;
   --color-border-subtle: #edeff3;
+  --color-border-knob: rgba(0, 0, 0, 0.04);
   --color-border-success: #00bd64;
   --color-border-warning: #ff8710;
 
@@ -304,7 +308,7 @@
   --color-background-plain: #101119;
   --color-background-skeleton: #272736;
   --color-background-sunken: #0a0a12;
-  --color-background-toast: #dcdee5;
+  --color-background-toast: rgba(255, 255, 255, 0.9);
 
   /* Background — Brand */
   --color-background-brand-active: #1a2f8f;
@@ -351,6 +355,9 @@
   /* Background — Overlay */
   --color-background-overlay-bold: rgba(0, 0, 0, 0.85);
   --color-background-overlay-default: rgba(0, 0, 0, 0.7);
+  --color-background-overlay-inverse-hover: rgba(255, 255, 255, 0.1);
+  --color-background-overlay-inverse-active: rgba(255, 255, 255, 0.15);
+  --color-background-overlay-inverse-subtle: rgba(255, 255, 255, 0.2);
 
   /* Background — Prize */
   --color-background-prize-active: #9c6a05;
@@ -401,6 +408,7 @@
   --color-border-plain: #272736;
   --color-border-prize: #ffd86b;
   --color-border-subtle: #1c1c27;
+  --color-border-knob: rgba(255, 255, 255, 0.06);
   --color-border-success: #5dd99a;
   --color-border-warning: #ffb86b;
 
