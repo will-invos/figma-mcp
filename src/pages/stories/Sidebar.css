@@ -1,0 +1,57 @@
+.cs-sidebar {
+  width: 220px;
+  min-width: 220px;
+  height: 100vh;
+  overflow-y: auto;
+  padding: var(--space-400) var(--space-300);
+  background: var(--color-background-sunken);
+  border-right: 1px solid var(--color-border-subtle);
+  box-sizing: border-box;
+}
+
+.cs-sidebar__title {
+  margin: 0 0 var(--space-400);
+  padding: 0 var(--space-200);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-content-bold);
+}
+
+.cs-sidebar__group {
+  margin-bottom: var(--space-300);
+}
+
+.cs-sidebar__group-label {
+  display: block;
+  padding: var(--space-100) var(--space-200);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-content-subtlest);
+}
+
+.cs-sidebar__item {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: var(--space-150) var(--space-200) var(--space-150) var(--space-400);
+  border: none;
+  border-radius: var(--radius-150);
+  background: transparent;
+  font-size: 13px;
+  font-family: var(--font-family);
+  color: var(--color-content-default);
+  cursor: pointer;
+  transition: background-color 0.15s, color 0.15s;
+}
+
+.cs-sidebar__item:hover {
+  background: var(--color-background-neutral-subtle);
+}
+
+.cs-sidebar__item--active {
+  background: var(--color-background-brand-subtlest);
+  color: var(--color-content-brand-default);
+  font-weight: 500;
+}
