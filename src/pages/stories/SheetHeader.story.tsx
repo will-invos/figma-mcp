@@ -6,6 +6,7 @@ export const SheetHeaderStory: StoryDef = {
   component: SheetHeader,
   name: 'SheetHeader',
   category: 'Overlay',
+  previewWidth: 360,
   props: {
     title:      { type: 'string', default: '頁面標題' },
     showHandle: { type: 'boolean', default: true },

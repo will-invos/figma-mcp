@@ -6,6 +6,7 @@ export const CardItemStory: StoryDef = {
   component: CardItem,
   name: 'CardItem',
   category: 'Display',
+  previewWidth: 360,
   props: {
     title:   { type: 'string', default: '兌獎期限提醒' },
     divider: { type: 'boolean', default: true },

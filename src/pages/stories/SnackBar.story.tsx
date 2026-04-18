@@ -6,6 +6,7 @@ export const SnackBarStory: StoryDef = {
   component: SnackBar,
   name: 'SnackBar',
   category: 'Feedback',
+  previewWidth: 360,
   props: {
     text:       { type: 'string', default: '已成功儲存' },
     trailing:   { type: 'enum', options: ['none', 'button', 'spinner'], default: 'none' },

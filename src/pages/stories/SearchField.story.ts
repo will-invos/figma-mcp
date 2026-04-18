@@ -5,6 +5,7 @@ export const SearchFieldStory: StoryDef = {
   component: SearchField,
   name: 'SearchField',
   category: 'Forms',
+  previewWidth: 360,
   props: {
     placeholder: { type: 'string', default: '搜尋發票' },
     showCancel:  { type: 'boolean', default: false },

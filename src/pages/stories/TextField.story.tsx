@@ -6,6 +6,7 @@ export const TextFieldStory: StoryDef = {
   component: TextField,
   name: 'TextField',
   category: 'Forms',
+  previewWidth: 360,
   props: {
     variant:     { type: 'enum', options: ['default', 'inner-label'], default: 'default' },
     label:       { type: 'string', default: 'Email' },

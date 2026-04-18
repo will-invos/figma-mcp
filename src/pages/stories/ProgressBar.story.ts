@@ -5,6 +5,7 @@ export const ProgressBarStory: StoryDef = {
   component: ProgressBar,
   name: 'ProgressBar',
   category: 'Feedback',
+  previewWidth: 360,
   props: {
     value:         { type: 'number', default: 50, min: 0, max: 100 },
     label:         { type: 'string', default: '50%' },

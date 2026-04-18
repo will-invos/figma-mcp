@@ -5,6 +5,7 @@ export const AlertStory: StoryDef = {
   component: Alert,
   name: 'Alert',
   category: 'Feedback',
+  previewWidth: 360,
   props: {
     children:  { type: 'string', default: 'This is an alert message' },
     colorType: { type: 'enum', options: ['primary', 'neutral', 'success', 'warning', 'danger', 'prize'], default: 'neutral' },

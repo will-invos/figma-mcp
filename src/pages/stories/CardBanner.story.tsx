@@ -6,6 +6,7 @@ export const CardBannerStory: StoryDef = {
   component: CardBanner,
   name: 'CardBanner',
   category: 'Display',
+  previewWidth: 360,
   props: {
     title:       { type: 'string', default: '限時好禮' },
     aspectRatio: { type: 'string', default: '3 / 1' },

@@ -5,6 +5,7 @@ export const TextAreaStory: StoryDef = {
   component: TextArea,
   name: 'TextArea',
   category: 'Forms',
+  previewWidth: 360,
   props: {
     variant:     { type: 'enum', options: ['default', 'inner-label'], default: 'default' },
     label:       { type: 'string', default: '備註' },

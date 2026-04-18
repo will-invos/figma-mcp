@@ -26,6 +26,7 @@ export const ListItemStory: StoryDef = {
   component: ListItem,
   name: 'ListItem',
   category: 'Display',
+  previewWidth: 360,
   props: {
     headline:    { type: 'string', default: 'Headline' },
     description: { type: 'string', default: '描述文字' },
