@@ -10,7 +10,6 @@ import { isAuthenticated } from './pages/auth'
 
 // Public routes — accessible without authentication
 const AUTH_ROUTES = new Set(['/login', '/register', '/forgot-password'])
-const PUBLIC_ROUTES = new Set(['/', '/components'])
 
 function currentRoute(): string {
   return window.location.hash.replace(/^#/, '') || '/'
@@ -28,7 +27,7 @@ export default function App() {
   // Auth guard: redirect based on auth state
   const authed = isAuthenticated()
   const isAuthRoute = AUTH_ROUTES.has(route)
-  const isPublicRoute = PUBLIC_ROUTES.has(route)
+  const isPublicRoute = route === '/' || route.startsWith('/components')
 
   useEffect(() => {
     if (isPublicRoute) return
@@ -40,7 +39,7 @@ export default function App() {
   }, [authed, isAuthRoute, isPublicRoute, route])
 
   // Public route: components showcase (no auth required)
-  if (route === '/' || route === '/components') return <Components />
+  if (route === '/' || route.startsWith('/components')) return <Components />
 
   // Auth pages
   if (route === '/login') return <Login />
