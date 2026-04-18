@@ -1,0 +1,14 @@
+import ProgressGroup from '@/components/ui/ProgressGroup'
+import type { StoryDef } from './types'
+
+export const ProgressGroupStory: StoryDef = {
+  component: ProgressGroup,
+  name: 'ProgressGroup',
+  category: 'Feedback',
+  props: {
+    value:        { type: 'number', default: 50, min: 0, max: 100 },
+    textPosition: { type: 'enum', options: ['top', 'aside'], default: 'top' },
+    leadingText:  { type: 'string', default: '50%' },
+    trailingText: { type: 'string', default: '100/200' },
+  },
+}
