@@ -21,6 +21,8 @@ interface DialogProps {
   actions: DialogAction[];
   image?: React.ReactNode;
   extraContent?: React.ReactNode;
+  /** Portal container element. Defaults to document.body. Set this to render inside a themed container. */
+  container?: Element;
 }
 
 function Dialog({
@@ -33,6 +35,7 @@ function Dialog({
   actions,
   image,
   extraContent,
+  container,
 }: DialogProps) {
   const dialogRef = useRef<HTMLDivElement>(null);
 
@@ -136,7 +139,7 @@ function Dialog({
         </div>
       </div>
     </div>,
-    document.body
+    container ?? document.body
   );
 }
 

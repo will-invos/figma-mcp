@@ -113,6 +113,43 @@
   padding-left: 4px;
   padding-right: 4px;
 }
+/* Leading/trailing icon sizes per size variant */
+.ui-button--large .ui-button__leading > svg,
+.ui-button--large .ui-button__trailing > svg {
+  width: 20px;
+  height: 20px;
+}
+.ui-button--large .ui-button__leading > i[class],
+.ui-button--large .ui-button__trailing > i[class] {
+  width: 20px;
+  height: 20px;
+  font-size: 20px;
+}
+
+.ui-button--medium .ui-button__leading > svg,
+.ui-button--medium .ui-button__trailing > svg {
+  width: 16px;
+  height: 16px;
+}
+.ui-button--medium .ui-button__leading > i[class],
+.ui-button--medium .ui-button__trailing > i[class] {
+  width: 16px;
+  height: 16px;
+  font-size: 16px;
+}
+
+.ui-button--small .ui-button__leading > svg,
+.ui-button--small .ui-button__trailing > svg {
+  width: 14px;
+  height: 14px;
+}
+.ui-button--small .ui-button__leading > i[class],
+.ui-button--small .ui-button__trailing > i[class] {
+  width: 14px;
+  height: 14px;
+  font-size: 14px;
+}
+
 .ui-button--small .ui-button__leading {
   padding-left: 2px;
 }

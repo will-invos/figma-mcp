@@ -195,12 +195,16 @@
 }
 
 .ui-text-field__leading-icon > svg,
-.ui-text-field__trailing-icon > svg,
+.ui-text-field__trailing-icon > svg {
+  width: 20px;
+  height: 20px;
+}
+
 .ui-text-field__leading-icon > i[class],
 .ui-text-field__trailing-icon > i[class] {
-  width: 24px;
-  height: 24px;
-  font-size: 24px;
+  width: 20px;
+  height: 20px;
+  font-size: 20px;
 }
 
 /* Error: leading icon turns danger */

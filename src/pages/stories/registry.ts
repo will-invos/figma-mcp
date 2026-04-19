@@ -16,6 +16,7 @@ import { RadioStory } from './Radio.story'
 import { SwitchStory } from './Switch.story'
 import { SliderStory } from './Slider.story.tsx'
 import { SearchFieldStory } from './SearchField.story.tsx'
+import { FieldGroupStory } from './FieldGroup.story.tsx'
 
 // Display
 import { TagStory } from './Tag.story'
@@ -38,7 +39,6 @@ import { TooltipStory } from './Tooltip.story.tsx'
 // Overlay
 import { DialogStory } from './Dialog.story.tsx'
 import { BottomSheetStory } from './BottomSheet.story.tsx'
-import { SheetHeaderStory } from './SheetHeader.story.tsx'
 
 export const categories: StoryCategory[] = [
   {
@@ -47,7 +47,7 @@ export const categories: StoryCategory[] = [
   },
   {
     name: 'Forms',
-    stories: [ButtonStory, IconButtonStory, TextFieldStory, TextAreaStory, SelectStory, CheckboxStory, RadioStory, SwitchStory, SliderStory, SearchFieldStory],
+    stories: [ButtonStory, IconButtonStory, TextFieldStory, TextAreaStory, SelectStory, CheckboxStory, RadioStory, SwitchStory, SliderStory, SearchFieldStory, FieldGroupStory],
   },
   {
     name: 'Display',
@@ -59,7 +59,7 @@ export const categories: StoryCategory[] = [
   },
   {
     name: 'Overlay',
-    stories: [DialogStory, BottomSheetStory, SheetHeaderStory],
+    stories: [DialogStory, BottomSheetStory],
   },
 ]
 

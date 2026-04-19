@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import TabBar from '@/components/ui/TabBar'
 import type { StoryDef } from './types'
 
-const TabBarRender: React.FC<{ values: Record<string, any> }> = () => {
+const TabBarRender: React.FC<{ values: Record<string, any> }> = ({ values }) => {
   const [active, setActive] = useState('invoice')
   return (
     <TabBar
@@ -14,6 +14,7 @@ const TabBarRender: React.FC<{ values: Record<string, any> }> = () => {
           label: '我的發票',
           icon: <i className="icon-invoice" aria-hidden="true" />,
           activeIcon: <i className="icon-invoice-filled" aria-hidden="true" />,
+          badge: values.badge ? true : undefined,
         },
         {
           key: 'rewards',
@@ -49,6 +50,8 @@ export const TabBarStory: StoryDef = {
   name: 'TabBar',
   category: 'Chrome',
   previewWidth: 360,
-  props: {},
+  props: {
+    badge: { type: 'boolean', default: false },
+  },
   Render: TabBarRender,
 }

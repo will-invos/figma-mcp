@@ -1,5 +1,15 @@
+import React from 'react'
 import Button from '@/components/ui/Button'
 import type { StoryDef } from './types'
+
+const ButtonRender: React.FC<{ values: Record<string, any> }> = ({ values }) => {
+  const { leadingIcon, trailingIcon, ...props } = values
+  return React.createElement(Button, {
+    ...props,
+    leadingIcon: leadingIcon ? React.createElement('i', { className: 'icon-plus', 'aria-hidden': 'true' }) : undefined,
+    trailingIcon: trailingIcon ? React.createElement('i', { className: 'icon-chevron-right', 'aria-hidden': 'true' }) : undefined,
+  })
+}
 
 export const ButtonStory: StoryDef = {
   component: Button,
@@ -16,8 +26,11 @@ export const ButtonStory: StoryDef = {
         text:    ['primary', 'inverse', 'secondary'],
       }},
     },
-    size:      { type: 'enum', options: ['large', 'medium', 'small'], default: 'medium' },
-    disabled:  { type: 'boolean', default: false },
-    loading:   { type: 'boolean', default: false },
+    size:         { type: 'enum', options: ['large', 'medium', 'small'], default: 'medium' },
+    leadingIcon:  { type: 'boolean', default: false },
+    trailingIcon: { type: 'boolean', default: false },
+    disabled:     { type: 'boolean', default: false },
+    loading:      { type: 'boolean', default: false },
   },
+  Render: ButtonRender,
 }

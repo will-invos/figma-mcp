@@ -11,6 +11,8 @@ interface BottomSheetProps {
   footer?: React.ReactNode
   /** Show the small drag handle at the top. Default: true. */
   showHandle?: boolean
+  /** Portal container element. Defaults to document.body. Set this to render inside a themed container. */
+  container?: Element
 }
 
 function BottomSheet({
@@ -21,6 +23,7 @@ function BottomSheet({
   children,
   footer,
   showHandle = true,
+  container,
 }: BottomSheetProps) {
   useEffect(() => {
     if (!open) return
@@ -63,7 +66,7 @@ function BottomSheet({
         </div>
       </div>
     </>,
-    document.body
+    container ?? document.body
   )
 }
 

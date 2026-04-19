@@ -5,21 +5,26 @@ import { useState } from 'react'
 
 const DialogRender: React.FC<{ values: Record<string, any> }> = ({ values }) => {
   const [open, setOpen] = useState(false)
+  const [container, setContainer] = useState<HTMLDivElement | null>(null)
   return (
     <>
       <Button size="small" variant="outline" onClick={() => setOpen(true)}>Open Dialog</Button>
-      <Dialog
-        open={open}
-        onClose={() => setOpen(false)}
-        type={values.type}
-        cta={values.cta}
-        title={values.title}
-        description={values.description}
-        actions={[
-          { label: '取消', onClick: () => setOpen(false), colorType: 'neutral' },
-          { label: '確認', onClick: () => setOpen(false), colorType: values.type === 'danger' ? 'danger' : 'primary' },
-        ]}
-      />
+      <div ref={setContainer} />
+      {container && (
+        <Dialog
+          open={open}
+          onClose={() => setOpen(false)}
+          type={values.type}
+          cta={values.cta}
+          title={values.title}
+          description={values.description}
+          container={container}
+          actions={[
+            { label: '取消', onClick: () => setOpen(false), colorType: 'neutral' },
+            { label: '確認', onClick: () => setOpen(false), colorType: values.type === 'danger' ? 'danger' : 'primary' },
+          ]}
+        />
+      )}
     </>
   )
 }

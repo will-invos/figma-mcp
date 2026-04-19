@@ -189,11 +189,15 @@
   pointer-events: none;
 }
 
-.ui-select__chevron > svg,
+.ui-select__chevron > svg {
+  width: 16px;
+  height: 16px;
+}
+
 .ui-select__chevron > i[class] {
-  width: 20px;
-  height: 20px;
-  font-size: 20px;
+  width: 16px;
+  height: 16px;
+  font-size: 16px;
 }
 
 /* --- Leading icon --- */
@@ -208,11 +212,15 @@
   color: var(--color-content-subtle);
 }
 
-.ui-select__leading-icon > svg,
+.ui-select__leading-icon > svg {
+  width: 20px;
+  height: 20px;
+}
+
 .ui-select__leading-icon > i[class] {
-  width: 24px;
-  height: 24px;
-  font-size: 24px;
+  width: 20px;
+  height: 20px;
+  font-size: 20px;
 }
 
 /* Error: leading icon turns danger */

@@ -6,8 +6,6 @@ interface TextFieldProps extends Omit<React.InputHTMLAttributes<HTMLInputElement
   variant?: 'default' | 'inner-label';
   label?: string;
   status?: 'default' | 'error' | 'disabled';
-  helpText?: string;
-  helpIcon?: React.ReactNode;
   leadingIcon?: React.ReactNode;
   trailingIcon?: React.ReactNode;
   /** HTML input type */
@@ -20,8 +18,6 @@ const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
       variant = 'default',
       label,
       status = 'default',
-      helpText,
-      helpIcon,
       leadingIcon,
       trailingIcon,
       inputType,
@@ -39,7 +35,7 @@ const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
   ) => {
     const generatedId = useId();
     const inputId = id ?? generatedId;
-    const helpId = helpText ? `${inputId}-help` : undefined;
+    const helpId = undefined;
 
     const isDisabled = status === 'disabled';
     const isError = status === 'error';
@@ -128,14 +124,6 @@ const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
             <span className="ui-text-field__trailing-icon">{trailingIcon}</span>
           )}
         </div>
-        {helpText && (
-          <div id={helpId} className="ui-text-field__help">
-            {helpIcon && (
-              <span className="ui-text-field__help-icon">{helpIcon}</span>
-            )}
-            <span className="ui-text-field__help-text">{helpText}</span>
-          </div>
-        )}
       </div>
     );
   }
