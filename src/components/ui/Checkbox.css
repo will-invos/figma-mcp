@@ -66,18 +66,21 @@
   display: none;
 }
 
-/* Checkmark icon: 16×16 white SVG, shown when checked */
+/* Checkmark icon: 16×16 white, shown when checked */
 .ui-checkbox__indicator::after {
-  content: '';
+  content: '\f1d0';
+  font-family: 'ui-icons';
   display: none;
-  position: relative;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   z-index: 1;
-  width: 16px;
-  height: 16px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M3 8l3.5 3.5L13 5' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
+  font-size: 16px;
+  line-height: 1;
+  color: var(--color-content-fixed-white);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .ui-checkbox__input:checked + .ui-checkbox__indicator::after {

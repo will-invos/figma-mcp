@@ -4,21 +4,24 @@ import { useToast } from '@/components/ui'
 
 const ToastRender: React.FC<{ values: Record<string, any> }> = ({ values }) => {
   const { show, dismiss } = useToast()
+
+  const handleShow = () => {
+    if (values.type === 'loading') {
+      const id = show({ type: 'loading' })
+      setTimeout(() => dismiss(id), 3000)
+    } else {
+      show({
+        type: 'rich',
+        message: values.text,
+        action: values.button ? { label: '確定', onClick: () => {} } : undefined,
+      })
+    }
+  }
+
   return (
-    <div style={{ display: 'flex', gap: 8 }}>
-      <Button size="small" variant="outline" onClick={() => show({ message: values.message })}>
-        Show Toast
-      </Button>
-      <Button size="small" variant="outline" onClick={() => show({ message: values.message, action: { label: '確定', onClick: () => {} } })}>
-        With Action
-      </Button>
-      <Button size="small" variant="outline" onClick={() => {
-        const id = show({ type: 'loading' })
-        setTimeout(() => dismiss(id), 2500)
-      }}>
-        Loading
-      </Button>
-    </div>
+    <Button size="small" variant="outline" onClick={handleShow}>
+      Show Toast
+    </Button>
   )
 }
 
@@ -27,7 +30,9 @@ export const ToastStory: StoryDef = {
   name: 'Toast',
   category: 'Feedback',
   props: {
-    message: { type: 'string', default: '已儲存' },
+    type:   { type: 'enum', options: ['rich', 'loading'], default: 'rich' },
+    text:   { type: 'string', default: 'Text', when: { type: 'rich' } },
+    button: { type: 'boolean', default: true, when: { type: 'rich' } },
   },
   Render: ToastRender,
 }

@@ -4,7 +4,10 @@ import './TabBar.css'
 interface TabItem {
   key: string
   label: string
+  /** Icon shown when inactive (outline). */
   icon: React.ReactNode
+  /** Icon shown when active (filled). Falls back to `icon` if not provided. */
+  activeIcon?: React.ReactNode
   badge?: number | boolean
 }
 
@@ -31,14 +34,14 @@ const TabBar = React.forwardRef<HTMLElement, TabBarProps>(
                 aria-current={active ? 'page' : undefined}
               >
                 <span className="ui-tab-bar__icon">
-                  {item.icon}
+                  {active ? (item.activeIcon ?? item.icon) : item.icon}
                   {item.badge && (
-                    <span className="ui-tab-bar__badge">
+                    <span className={`ui-tab-bar__badge${typeof item.badge !== 'number' ? ' ui-tab-bar__badge--dot' : ''}`}>
                       {typeof item.badge === 'number' ? item.badge : ''}
                     </span>
                   )}
                 </span>
-                <span className="ui-tab-bar__label">{item.label}</span>
+                <span className={active ? 'text-ios-label-xsmall' : 'text-ios-body-xsmall'}>{item.label}</span>
               </button>
             )
           })}

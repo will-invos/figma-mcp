@@ -1,4 +1,5 @@
 import React from 'react';
+import Button from './Button';
 import Switch from './Switch';
 import Checkbox from './Checkbox';
 import Spinner from './Spinner';
@@ -21,23 +22,6 @@ interface ListItemProps {
   onClick?: () => void;
 }
 
-const ChevronRightIcon = () => (
-  <svg
-    width="20"
-    height="20"
-    viewBox="0 0 20 20"
-    fill="none"
-    aria-hidden="true"
-  >
-    <path
-      d="M7.5 5L12.5 10L7.5 15"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-  </svg>
-);
 
 const ListItem = React.forwardRef<HTMLDivElement, ListItemProps>(
   (
@@ -74,7 +58,7 @@ const ListItem = React.forwardRef<HTMLDivElement, ListItemProps>(
         case 'drill-in':
           return (
             <span className="ui-list-item__trailing ui-list-item__chevron">
-              <ChevronRightIcon />
+              <i className="icon-chevron-right" aria-hidden="true" />
             </span>
           );
         case 'text':
@@ -86,7 +70,7 @@ const ListItem = React.forwardRef<HTMLDivElement, ListItemProps>(
         case 'text-button':
           return (
             <span className="ui-list-item__trailing">
-              <span className="ui-list-item__trailing-text" style={{ color: 'var(--color-content-brand-default)' }}>{trailingText}</span>
+              <Button variant="text" colorType="primary" size="large">{trailingText}</Button>
             </span>
           );
         case 'switch':
@@ -116,12 +100,14 @@ const ListItem = React.forwardRef<HTMLDivElement, ListItemProps>(
         case 'spinner':
           return (
             <span className="ui-list-item__trailing">
-              <Spinner size="small" color="neutral" />
+              <Spinner size="medium" color="neutral" />
             </span>
           );
         case 'cta':
           return (
-            <span className="ui-list-item__trailing">{trailingIcon}</span>
+            <span className="ui-list-item__trailing">
+              <Button variant="outline" colorType="primary" size="small">{trailingText}</Button>
+            </span>
           );
         case 'none':
         default:

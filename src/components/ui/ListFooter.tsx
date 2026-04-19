@@ -4,13 +4,30 @@ import './ListFooter.css'
 interface ListFooterProps {
   /** Caption text shown below the list. */
   text: string
+  /** Visual state — danger turns text and icon red. */
+  state?: 'default' | 'danger'
+  /** Show a leading info icon (16×16). */
+  showIcon?: boolean
   className?: string
 }
 
+
 const ListFooter = React.forwardRef<HTMLDivElement, ListFooterProps>(
-  ({ text, className }, ref) => {
-    const classes = ['ui-list-footer', className].filter(Boolean).join(' ')
-    return <div ref={ref} className={classes}>{text}</div>
+  ({ text, state = 'default', showIcon = true, className }, ref) => {
+    const classes = [
+      'ui-list-footer',
+      state === 'danger' && 'ui-list-footer--danger',
+      className,
+    ].filter(Boolean).join(' ')
+
+    return (
+      <div ref={ref} className={classes}>
+        {showIcon && (
+          <span className="ui-list-footer__icon"><i className="icon-info" aria-hidden="true" /></span>
+        )}
+        <span className="ui-list-footer__text">{text}</span>
+      </div>
+    )
   }
 )
 ListFooter.displayName = 'ListFooter'

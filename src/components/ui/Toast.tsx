@@ -80,12 +80,12 @@ function ToastProvider({ children }: { children: React.ReactNode }) {
           {toasts.map((toast) => (
             <div key={toast.id} className={`ui-toast ui-toast--${toast.type ?? 'rich'}`}>
               {toast.type === 'loading' ? (
-                <Spinner size="large" color="inverse" />
+                <Spinner size="xxlarge" color="inverse" />
               ) : (
                 <>
                   <div className="ui-toast__body">
                     <span className="ui-toast__icon">
-                      {toast.icon ?? <Spinner size="large" color="inverse" />}
+                      {toast.icon ?? <Spinner size="xxlarge" color="inverse" />}
                     </span>
                     {toast.message && (
                       <p className="ui-toast__text">{toast.message}</p>

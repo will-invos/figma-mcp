@@ -26,7 +26,7 @@ const SnackBar = React.forwardRef<HTMLDivElement, SnackBarProps>(
           <button className="ui-snackbar__action" onClick={onButtonClick}>{buttonText}</button>
         )}
         {trailing === 'spinner' && (
-          <Spinner size="xsmall" color="inverse" />
+          <Spinner size="small" color="inverse" />
         )}
       </div>
     )

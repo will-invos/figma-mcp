@@ -1,18 +1,44 @@
+import React, { useState } from 'react'
 import TabBar from '@/components/ui/TabBar'
-import { HomeIcon, ReceiptIcon, UserIcon } from './icons'
 import type { StoryDef } from './types'
-import { useState } from 'react'
 
 const TabBarRender: React.FC<{ values: Record<string, any> }> = () => {
-  const [active, setActive] = useState('home')
+  const [active, setActive] = useState('invoice')
   return (
     <TabBar
       activeKey={active}
       onChange={setActive}
       items={[
-        { key: 'home', label: '首頁', icon: <HomeIcon /> },
-        { key: 'invoice', label: '發票', icon: <ReceiptIcon />, badge: 3 },
-        { key: 'me', label: '我的', icon: <UserIcon /> },
+        {
+          key: 'invoice',
+          label: '我的發票',
+          icon: <i className="icon-invoice" aria-hidden="true" />,
+          activeIcon: <i className="icon-invoice-filled" aria-hidden="true" />,
+        },
+        {
+          key: 'rewards',
+          label: '集點兌禮',
+          icon: <i className="icon-shopping-bag" aria-hidden="true" />,
+          activeIcon: <i className="icon-shopping-bag-filled" aria-hidden="true" />,
+        },
+        {
+          key: 'scan',
+          label: '掃描對獎',
+          icon: <i className="icon-barcode-book" aria-hidden="true" />,
+          activeIcon: <i className="icon-barcode-book-filled" aria-hidden="true" />,
+        },
+        {
+          key: 'carrier',
+          label: '載具管理',
+          icon: <i className="icon-scanner" aria-hidden="true" />,
+          activeIcon: <i className="icon-scanner-filled" aria-hidden="true" />,
+        },
+        {
+          key: 'home',
+          label: '首頁',
+          icon: <i className="icon-home-user" aria-hidden="true" />,
+          activeIcon: <i className="icon-home-user-filled" aria-hidden="true" />,
+        },
       ]}
     />
   )

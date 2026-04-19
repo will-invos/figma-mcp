@@ -1,6 +1,23 @@
+import React from 'react'
 import CardItem from '@/components/ui/CardItem'
-import Button from '@/components/ui/Button'
 import type { StoryDef } from './types'
+
+const sampleImage = 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=480&h=320&fit=crop'
+
+const defaultDescriptions = [
+  { icon: <i className="icon-gift" aria-hidden="true" />, text: '您有 1 張發票即將過期' },
+  { icon: <i className="icon-clock" aria-hidden="true" />, text: '截止日 2026/05/15' },
+]
+
+const CardItemRender: React.FC<{ values: Record<string, any> }> = ({ values }) => {
+  return (
+    <CardItem
+      {...values}
+      imageUrl={sampleImage}
+      descriptions={values.content === 'list-item' ? defaultDescriptions : undefined}
+    />
+  )
+}
 
 export const CardItemStory: StoryDef = {
   component: CardItem,
@@ -8,15 +25,14 @@ export const CardItemStory: StoryDef = {
   category: 'Display',
   previewWidth: 360,
   props: {
-    title:   { type: 'string', default: '兌獎期限提醒' },
-    divider: { type: 'boolean', default: true },
+    headline:      { type: 'string', default: '兌獎期限提醒' },
+    size:          { type: 'enum', options: ['large', 'medium'], default: 'medium' },
+    content:       { type: 'enum', options: ['list-item', 'text'], default: 'list-item' },
+    showThumbnail: { type: 'boolean', default: true, when: { size: 'medium' } },
+    description:   { type: 'string', default: '卡片說明文字描述', when: { content: 'text' } },
+    showButton:    { type: 'boolean', default: true },
+    buttonText:    { type: 'string', default: '查看', when: { showButton: true } },
+    divider:       { type: 'boolean', default: true, when: { size: 'medium' } },
   },
-  fixedProps: {
-    thumbnailUrl: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=240&h=160&fit=crop',
-    descriptions: [
-      { text: '您有 1 張發票即將過期' },
-      { text: '截止日 2026/05/15' },
-    ],
-    action: <Button size="small">查看</Button>,
-  },
+  Render: CardItemRender,
 }

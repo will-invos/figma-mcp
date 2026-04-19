@@ -8,7 +8,7 @@ export const SnackBarStory: StoryDef = {
   category: 'Feedback',
   previewWidth: 360,
   props: {
-    text:       { type: 'string', default: '已成功儲存' },
+    text:       { type: 'string', default: 'Message' },
     trailing:   { type: 'enum', options: ['none', 'button', 'spinner'], default: 'none' },
     buttonText: { type: 'string', default: 'Button' },
   },

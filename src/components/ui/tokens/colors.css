@@ -202,7 +202,7 @@
   --color-border-fixed-bold: #101119;
   --color-border-inverse-bold: #f7f8f9;
   --color-border-inverse-divider: rgba(255, 255, 255, 0.1);
-  --color-border-inverse-plain: #3b3c50;
+  --color-border-inverse-plain: #FFFFFF;
   --color-border-plain: #dcdee5;
   --color-border-prize: #ffc423;
   --color-border-subtle: #edeff3;
@@ -404,7 +404,7 @@
   --color-border-donation: #ff6baa;
   --color-border-inverse-bold: #101119;
   --color-border-inverse-divider: rgba(0, 0, 0, 0.1);
-  --color-border-inverse-plain: #dcdee5;
+  --color-border-inverse-plain: #000000;
   --color-border-plain: #272736;
   --color-border-prize: #ffd86b;
   --color-border-subtle: #1c1c27;

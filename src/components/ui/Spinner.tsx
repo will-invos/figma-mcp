@@ -2,8 +2,8 @@ import React from 'react';
 import './Spinner.css';
 
 interface SpinnerProps {
-  size?: 'xsmall' | 'small' | 'medium' | 'large';
-  color?: 'primary'| 'neutral' | 'inverse';
+  size?: 'xxsmall' | 'xsmall' | 'small' | 'medium' | 'large' | 'xlarge' | 'xxlarge';
+  color?: 'primary'| 'neutral' | 'inverse' | 'fixed-bold';
 }
 
 const Spinner = React.forwardRef<HTMLDivElement, SpinnerProps>(

@@ -3,6 +3,7 @@
 
 .ui-list-header {
   display: flex;
+  gap: var(--space-400);
   padding: 0 var(--space-400);
   background: var(--color-background-default);
   width: 100%;

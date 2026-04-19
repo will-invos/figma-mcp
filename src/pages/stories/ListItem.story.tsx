@@ -1,24 +1,18 @@
+import React, { useState } from 'react'
 import ListItem from '@/components/ui/ListItem'
+import { CheckIcon } from './icons'
 import type { StoryDef } from './types'
-import { useState } from 'react'
 
 const ListItemRender: React.FC<{ values: Record<string, any> }> = ({ values }) => {
   const [checked, setChecked] = useState(false)
   return (
-    <div style={{ width: 393, borderRadius: 12, overflow: 'hidden', border: '1px solid var(--color-border-subtle)' }}>
-      <ListItem
-        headline={values.headline}
-        description={values.description}
-        type={values.type}
-        trailing={values.trailing}
-        trailingText={values.trailingText}
-        disabled={values.disabled}
-        trailingChecked={checked}
-        onTrailingChange={setChecked}
-        onClick={values.trailing === 'drill-in' ? () => {} : undefined}
-        showDivider={false}
-      />
-    </div>
+    <ListItem
+      {...values}
+      trailingIcon={values.trailing === 'icon' ? <span style={{ color: 'var(--color-content-brand-default)' }}><CheckIcon /></span> : undefined}
+      trailingChecked={checked}
+      onTrailingChange={setChecked}
+      onClick={values.trailing === 'drill-in' ? () => {} : undefined}
+    />
   )
 }
 
@@ -31,9 +25,10 @@ export const ListItemStory: StoryDef = {
     headline:    { type: 'string', default: 'Headline' },
     description: { type: 'string', default: '描述文字' },
     type:        { type: 'enum', options: ['default', 'has-description', 'compact'], default: 'default' },
-    trailing:    { type: 'enum', options: ['none', 'drill-in', 'text', 'text-button', 'switch', 'checkbox', 'spinner'], default: 'drill-in' },
+    trailing:    { type: 'enum', options: ['none', 'drill-in', 'text', 'text-button', 'cta', 'icon', 'switch', 'checkbox', 'spinner'], default: 'drill-in' },
     trailingText:{ type: 'string', default: '詳情' },
     disabled:    { type: 'boolean', default: false },
+    showDivider: { type: 'boolean', default: true },
   },
   Render: ListItemRender,
 }

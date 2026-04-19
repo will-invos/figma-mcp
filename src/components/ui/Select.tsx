@@ -65,6 +65,7 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       'ui-select',
       `ui-select--${variant}`,
       shouldFloat && 'ui-select--float',
+      !hasValue && !value && 'ui-select--placeholder',
       isError && 'ui-select--error',
       isDisabled && 'ui-select--disabled',
       className,
@@ -109,15 +110,7 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
             </select>
           </div>
           <span className="ui-select__chevron" aria-hidden="true">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-              <path
-                d="M5 7.5L10 12.5L15 7.5"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
+            <i className="icon-chevron-down" />
           </span>
         </div>
         {helpText && (

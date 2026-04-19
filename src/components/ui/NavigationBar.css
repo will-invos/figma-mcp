@@ -1,9 +1,7 @@
 .ui-nav-bar {
   position: relative;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 48px;
+  flex-direction: column;
   background: var(--color-background-default);
 }
 
@@ -15,7 +13,16 @@
   border-bottom: 1px solid var(--color-border-subtle);
 }
 
-/* Leading / Trailing slots — absolute positioned within the nav bar */
+/* ===== Regular bar row (44px, centered title) ===== */
+.ui-nav-bar__bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 44px;
+}
+
+/* Leading / Trailing slots — absolute positioned within the bar */
 .ui-nav-bar__leading {
   position: absolute;
   left: 4px;
@@ -47,16 +54,24 @@
 }
 
 /* Text button inside nav bar: use content-default color */
-.ui-nav-bar .ui-nav-bar__leading .ui-button--text,
+.ui-nav-bar .ui-nav-bar__leading .ui-button--text {
+  color: var(--color-content-default);
+  margin: 0 8px 0 12px;
+}
 .ui-nav-bar .ui-nav-bar__trailing .ui-button--text {
   color: var(--color-content-default);
+  margin: 0 12px 0 8px;
 }
 
 /* Avatar inside leading/trailing */
 .ui-nav-bar__leading > .ui-avatar {
+  width: 28px;
+  height: 28px;
   margin: 0 8px 0 12px;
 }
 .ui-nav-bar__trailing > .ui-avatar {
+  width: 28px;
+  height: 28px;
   margin: 0 12px 0 8px;
 }
 
@@ -77,30 +92,11 @@
 
 /* ===== Default + Large: column layout, row on top + title container below ===== */
 .ui-nav-bar--large {
-  flex-direction: column;
   align-items: stretch;
-  justify-content: flex-start;
-  /* No padding on header — leading/trailing need full width */
 }
 .ui-nav-bar__row {
   position: relative;
-  height: 48px;
-}
-/* Title container provides the horizontal padding */
-.ui-nav-bar__title-wrap {
-  padding: 4px var(--space-400) 8px;
-}
-.ui-nav-bar__title-large {
-  margin: 0;
-  font-family: var(--font-family);
-  font-size: 28px;
-  font-weight: 500;
-  line-height: 36px;
-  letter-spacing: 0.04em;
-  color: var(--color-content-bold);
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  height: 44px;
 }
 
 /* ===== Home + Large: single 56px nav, title left, trailing right ===== */
@@ -117,10 +113,72 @@
   align-items: center;
   width: 100%;
   height: 56px;
-  padding: 0 var(--space-400);
+  padding: 0 0 0 var(--space-400);
 }
-.ui-nav-bar--home .ui-nav-bar__trailing {
+.ui-nav-bar--home.ui-nav-bar--large .ui-nav-bar__trailing {
   position: static;
   flex-shrink: 0;
   padding-right: 4px;
+}
+
+/* ===== Search type: search bar below nav bar ===== */
+.ui-nav-bar--search {
+  padding-bottom: var(--space-200);
+}
+.ui-nav-bar__search-bar {
+  padding: 0 var(--space-400);
+}
+
+/* Tabs type has its own built-in divider; suppress the outer one */
+.ui-nav-bar--tabs.ui-nav-bar--divider {
+  border-bottom: none;
+}
+
+/* ===== Tabs type: horizontal tab strip below nav bar ===== */
+.ui-nav-bar__tab-strip {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  overflow: hidden;
+  background: var(--color-background-default);
+}
+.ui-nav-bar__tab-strip-divider {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+.ui-nav-bar__tab {
+  flex: 1 0 0;
+  min-width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0 var(--space-200);
+  font-family: var(--font-family);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 22px;
+  letter-spacing: 0.04em;
+  color: var(--color-content-subtlest);
+}
+.ui-nav-bar__tab--active {
+  color: var(--color-content-bold);
+}
+.ui-nav-bar__tab--active::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: var(--color-content-bold);
+  z-index: 1;
 }

@@ -3,7 +3,7 @@ import { categories, storyMap, defaultStoryName } from './stories/registry'
 import Sidebar from './stories/Sidebar'
 import Preview from './stories/Preview'
 import Controls from './stories/Controls'
-import type { PropDef } from './stories/types'
+import { isPropVisible, getEnumOptions, type PropDef } from './stories/types'
 import './Components.css'
 
 function getStoryNameFromHash(): string {
@@ -34,8 +34,20 @@ export default function Components() {
   }, [])
 
   const handleChange = useCallback((key: string, value: any) => {
-    setValues((prev) => ({ ...prev, [key]: value }))
-  }, [])
+    setValues((prev) => {
+      const next = { ...prev, [key]: value }
+      for (const [k, def] of Object.entries(story.props)) {
+        if (k === key) continue
+        if (!isPropVisible(def, next) && next[k] !== def.default) {
+          next[k] = def.default
+        } else if (def.type === 'enum' && def.optionsByDep) {
+          const allowed = getEnumOptions(def, next)
+          if (!allowed.includes(next[k])) next[k] = def.default
+        }
+      }
+      return next
+    })
+  }, [story])
 
   const handleReset = useCallback(() => {
     setValues(getDefaults(story.props))

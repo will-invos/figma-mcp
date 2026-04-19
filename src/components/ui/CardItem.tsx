@@ -1,4 +1,5 @@
 import React from 'react'
+import Button from './Button'
 import './CardItem.css'
 
 interface CardItemDescRow {
@@ -7,56 +8,121 @@ interface CardItemDescRow {
 }
 
 interface CardItemProps {
-  title?: string
-  /** Description rows with optional leading icon. */
+  headline?: string
+  /** Card layout size. Large = vertical hero, Medium = horizontal thumbnail. */
+  size?: 'large' | 'medium'
+  /** Content type below headline. */
+  content?: 'list-item' | 'text'
+  /** Image URL — hero image (large) or thumbnail (medium). */
+  imageUrl?: string
+  /** Show thumbnail on the left (medium only). Default true. */
+  showThumbnail?: boolean
+  /** Description rows with optional leading icon (content='list-item'). */
   descriptions?: CardItemDescRow[]
-  /** Thumbnail image URL (120×80, shown on the left). */
-  thumbnailUrl?: string
-  /** Action element (e.g. Button) shown at the right. */
-  action?: React.ReactNode
-  /** Generic trailing element (e.g. chevron). */
-  trailing?: React.ReactNode
-  /** Show bottom divider. Default: false. */
+  /** Plain description text (content='text'). */
+  description?: string
+  /** Show action button. Default true. */
+  showButton?: boolean
+  /** Button label text. */
+  buttonText?: string
+  /** Show bottom divider (medium only). Default true. */
   divider?: boolean
   onClick?: () => void
   className?: string
 }
 
 const CardItem = React.forwardRef<HTMLDivElement, CardItemProps>(
-  ({ title, descriptions, thumbnailUrl, action, trailing, divider = false, onClick, className }, ref) => {
+  (
+    {
+      headline,
+      size = 'medium',
+      content = 'list-item',
+      imageUrl,
+      showThumbnail = true,
+      descriptions,
+      description,
+      showButton = true,
+      buttonText = 'Button',
+      divider = true,
+      onClick,
+      className,
+    },
+    ref
+  ) => {
+    const isLarge = size === 'large'
+    const isListItem = content === 'list-item'
     const isInteractive = Boolean(onClick)
+
     const classes = [
       'ui-card-item',
+      `ui-card-item--${size}`,
       isInteractive && 'ui-card-item--interactive',
       className,
     ].filter(Boolean).join(' ')
 
-    return (
-      <div
-        ref={ref}
-        className={classes}
-        role={isInteractive ? 'button' : undefined}
-        tabIndex={isInteractive ? 0 : undefined}
-        onClick={onClick}
-        onKeyDown={isInteractive ? (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onClick?.() } } : undefined}
+    const descContent = isListItem ? (
+      descriptions?.map((row, i) => (
+        <div key={i} className="ui-card-item__desc-row">
+          {row.icon && <span className="ui-card-item__desc-icon">{row.icon}</span>}
+          <p className="ui-card-item__desc-text">{row.text}</p>
+        </div>
+      ))
+    ) : (
+      description && <p className="ui-card-item__desc-text">{description}</p>
+    )
+
+    const actionButton = showButton && (
+      <Button
+        variant="filled"
+        colorType="primary"
+        size={isLarge ? 'medium' : 'small'}
       >
+        {buttonText}
+      </Button>
+    )
+
+    /* ── Large: vertical layout ── */
+    if (isLarge) {
+      return (
+        <div ref={ref} className={classes} onClick={onClick}>
+          {imageUrl && (
+            <div className="ui-card-item__hero">
+              <img src={imageUrl} alt="" />
+            </div>
+          )}
+          <div className="ui-card-item__body">
+            {headline && <p className="ui-card-item__title">{headline}</p>}
+            <div className="ui-card-item__bottom">
+              {isListItem ? (
+                <div className="ui-card-item__desc-list">{descContent}</div>
+              ) : (
+                <div className="ui-card-item__desc-plain">{descContent}</div>
+              )}
+              {actionButton && <div className="ui-card-item__action">{actionButton}</div>}
+            </div>
+          </div>
+        </div>
+      )
+    }
+
+    /* ── Medium: horizontal layout ── */
+    return (
+      <div ref={ref} className={classes} onClick={onClick}>
         <div className="ui-card-item__container">
-          {thumbnailUrl && (
+          {showThumbnail && imageUrl && (
             <div className="ui-card-item__thumbnail">
-              <img src={thumbnailUrl} alt="" />
+              <img src={imageUrl} alt="" />
             </div>
           )}
           <div className="ui-card-item__content">
-            {title && <p className="ui-card-item__title">{title}</p>}
-            {descriptions?.map((row, i) => (
-              <div key={i} className="ui-card-item__desc-row">
-                {row.icon && <span className="ui-card-item__desc-icon">{row.icon}</span>}
-                <p className="ui-card-item__desc-text">{row.text}</p>
-              </div>
-            ))}
+            {headline && <p className="ui-card-item__title">{headline}</p>}
+            {isListItem ? (
+              <div className="ui-card-item__desc-list">{descContent}</div>
+            ) : (
+              descContent
+            )}
           </div>
-          {action && <div className="ui-card-item__action">{action}</div>}
-          {trailing && <div className="ui-card-item__trailing">{trailing}</div>}
+          {actionButton && <div className="ui-card-item__action">{actionButton}</div>}
         </div>
         {divider && <div className="ui-card-item__divider" />}
       </div>

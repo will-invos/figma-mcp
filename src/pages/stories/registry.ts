@@ -1,51 +1,44 @@
 import type { StoryCategory, StoryDef } from './types'
 
 // Chrome
-import { NavigationBarStory } from './NavigationBar.story'
-import { TabBarStory } from './TabBar.story'
+import { NavigationBarStory } from './NavigationBar.story.tsx'
+import { TabBarStory } from './TabBar.story.tsx'
 import { DividerStory } from './Divider.story'
 
 // Forms
 import { ButtonStory } from './Button.story'
-import { IconButtonStory } from './IconButton.story'
-import { TextFieldStory } from './TextField.story'
+import { IconButtonStory } from './IconButton.story.tsx'
+import { TextFieldStory } from './TextField.story.tsx'
 import { TextAreaStory } from './TextArea.story'
-import { SelectStory } from './Select.story'
+import { SelectStory } from './Select.story.tsx'
 import { CheckboxStory } from './Checkbox.story'
 import { RadioStory } from './Radio.story'
 import { SwitchStory } from './Switch.story'
-import { SliderStory } from './Slider.story'
-import { SearchFieldStory } from './SearchField.story'
-
-// Pickers
-import { DatePickerStory } from './DatePicker.story'
-import { MonthPickerStory } from './MonthPicker.story'
+import { SliderStory } from './Slider.story.tsx'
+import { SearchFieldStory } from './SearchField.story.tsx'
 
 // Display
 import { TagStory } from './Tag.story'
-import { TagBarStory } from './TagBar.story'
+import { TagBarStory } from './TagBar.story.tsx'
 import { BadgeStory } from './Badge.story'
 import { AvatarStory } from './Avatar.story'
-import { ListItemStory } from './ListItem.story'
-import { ListHeaderStory } from './ListHeader.story'
+import { ListItemStory } from './ListItem.story.tsx'
+import { ListHeaderStory } from './ListHeader.story.tsx'
 import { ListFooterStory } from './ListFooter.story'
-import { CardItemStory } from './CardItem.story'
-import { CardBannerStory } from './CardBanner.story'
-
+import { CardItemStory } from './CardItem.story.tsx'
 // Feedback
 import { AlertStory } from './Alert.story'
 import { SpinnerStory } from './Spinner.story'
 import { ProgressBarStory } from './ProgressBar.story'
-import { CircularProgressStory } from './CircularProgress.story'
 import { ProgressGroupStory } from './ProgressGroup.story'
-import { ToastStory } from './Toast.story'
-import { SnackBarStory } from './SnackBar.story'
-import { TooltipStory } from './Tooltip.story'
+import { ToastStory } from './Toast.story.tsx'
+import { SnackBarStory } from './SnackBar.story.tsx'
+import { TooltipStory } from './Tooltip.story.tsx'
 
 // Overlay
-import { DialogStory } from './Dialog.story'
-import { BottomSheetStory } from './BottomSheet.story'
-import { SheetHeaderStory } from './SheetHeader.story'
+import { DialogStory } from './Dialog.story.tsx'
+import { BottomSheetStory } from './BottomSheet.story.tsx'
+import { SheetHeaderStory } from './SheetHeader.story.tsx'
 
 export const categories: StoryCategory[] = [
   {
@@ -57,16 +50,12 @@ export const categories: StoryCategory[] = [
     stories: [ButtonStory, IconButtonStory, TextFieldStory, TextAreaStory, SelectStory, CheckboxStory, RadioStory, SwitchStory, SliderStory, SearchFieldStory],
   },
   {
-    name: 'Pickers',
-    stories: [DatePickerStory, MonthPickerStory],
-  },
-  {
     name: 'Display',
-    stories: [TagStory, TagBarStory, BadgeStory, AvatarStory, ListItemStory, ListHeaderStory, ListFooterStory, CardItemStory, CardBannerStory],
+    stories: [TagStory, TagBarStory, BadgeStory, AvatarStory, ListItemStory, ListHeaderStory, ListFooterStory, CardItemStory],
   },
   {
     name: 'Feedback',
-    stories: [AlertStory, SpinnerStory, ProgressBarStory, CircularProgressStory, ProgressGroupStory, ToastStory, SnackBarStory, TooltipStory],
+    stories: [AlertStory, SpinnerStory, ProgressBarStory, ProgressGroupStory, ToastStory, SnackBarStory, TooltipStory],
   },
   {
     name: 'Overlay',

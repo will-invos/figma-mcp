@@ -1,4 +1,4 @@
-import type { PropDef } from './types'
+import { isPropVisible, getEnumOptions, type PropDef } from './types'
 import './Controls.css'
 
 interface ControlsProps {
@@ -16,8 +16,10 @@ export default function Controls({ propDefs, values, onChange, onReset }: Contro
       <h2 className="cs-controls__title">Controls</h2>
 
       {entries.map(([key, def]) => {
+        if (!isPropVisible(def, values)) return null
         switch (def.type) {
-          case 'enum':
+          case 'enum': {
+            const visibleOptions = getEnumOptions(def, values)
             return (
               <div key={key} className="cs-controls__field">
                 <label className="cs-controls__label">{key}</label>
@@ -26,12 +28,13 @@ export default function Controls({ propDefs, values, onChange, onReset }: Contro
                   value={values[key] ?? def.default}
                   onChange={(e) => onChange(key, e.target.value)}
                 >
-                  {def.options.map((opt) => (
+                  {visibleOptions.map((opt) => (
                     <option key={opt} value={opt}>{opt}</option>
                   ))}
                 </select>
               </div>
             )
+          }
 
           case 'boolean':
             return (

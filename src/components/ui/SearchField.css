@@ -25,6 +25,7 @@
   display: inline-flex;
   width: 20px;
   height: 20px;
+  font-size: 20px;
   color: var(--color-content-subtlest);
 }
 .ui-search-field__input {
@@ -56,20 +57,9 @@
   display: inline-flex;
   width: 20px;
   height: 20px;
+  font-size: 20px;
   color: var(--color-content-subtlest);
 }
 .ui-search-field__clear:hover {
   color: var(--color-content-subtle);
-}
-.ui-search-field__cancel {
-  flex-shrink: 0;
-  background: transparent;
-  border: none;
-  color: var(--color-content-default);
-  font-size: 16px;
-  line-height: 24px;
-  letter-spacing: 0.04em;
-  cursor: pointer;
-  padding: 4px;
-  font-family: inherit;
 }

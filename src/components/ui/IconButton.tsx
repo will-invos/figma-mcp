@@ -12,16 +12,20 @@ interface IconButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> 
 
 /**
  * Determines the spinner color for a given variant/colorType combination.
- * Filled non-neutral buttons use white; everything else uses brand.
+ * Matches the button's content color: white → inverse, blue → primary, dark → neutral.
  */
 function resolveSpinnerColor(
   variant: IconButtonProps['variant'],
   colorType: IconButtonProps['colorType']
-): 'white' | 'brand' {
-  if (variant === 'filled' && colorType !== 'neutral') {
-    return 'white';
+): 'primary' | 'inverse' | 'neutral' | 'fixed-bold' {
+  if (variant === 'filled') {
+    switch (colorType) {
+      case 'neutral': return 'neutral';
+      case 'prize': return 'fixed-bold';
+      default: return 'inverse';
+    }
   }
-  return 'brand';
+  return 'primary';
 }
 
 const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
@@ -53,7 +57,7 @@ const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
       .join(' ');
 
     const spinnerSize =
-      size === 'large' ? 'medium' : size === 'xsmall' ? 'small' : 'small';
+      size === 'large' ? 'medium' : size === 'medium' ? 'small' : size === 'small' ? 'xsmall' : 'xxsmall';
     const spinnerColor = resolveSpinnerColor(variant, colorType);
 
     return (

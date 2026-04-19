@@ -125,21 +125,27 @@
  * ======================================== */
 
 .ui-button--large svg,
-.ui-button--large img {
+.ui-button--large img,
+.ui-button--large i[class] {
   width: 20px;
   height: 20px;
+  font-size: 20px;
 }
 
 .ui-button--medium svg,
-.ui-button--medium img {
+.ui-button--medium img,
+.ui-button--medium i[class] {
   width: 16px;
   height: 16px;
+  font-size: 16px;
 }
 
 .ui-button--small svg,
-.ui-button--small img {
+.ui-button--small img,
+.ui-button--small i[class] {
   width: 14px;
   height: 14px;
+  font-size: 14px;
 }
 
 /* ========================================
@@ -317,9 +323,12 @@
  * States
  * ======================================== */
 
-.ui-button:disabled,
-.ui-button[data-loading] {
+.ui-button:disabled {
   opacity: 0.4;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+.ui-button[data-loading] {
   pointer-events: none;
   cursor: not-allowed;
 }

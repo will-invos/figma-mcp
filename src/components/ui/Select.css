@@ -22,7 +22,7 @@
   gap: var(--space-300);
   min-height: 56px;
   padding-left: var(--space-300);
-  padding-right: var(--space-300);
+  padding-right: var(--space-200);
   border: 1px solid var(--color-border-default);
   border-radius: var(--radius-300);
   background-color: var(--color-background-default);
@@ -166,7 +166,13 @@
   cursor: pointer;
 }
 
-.ui-select--error .ui-select__input {
+/* Placeholder state: no value selected — match inner-label placeholder color */
+.ui-select--placeholder .ui-select__input {
+  color: var(--color-content-subtlest);
+}
+
+/* Error + empty: placeholder text turns danger; filled value stays default */
+.ui-select--error.ui-select--placeholder .ui-select__input {
   color: var(--color-content-danger-default);
 }
 
@@ -183,9 +189,11 @@
   pointer-events: none;
 }
 
-.ui-select__chevron > svg {
+.ui-select__chevron > svg,
+.ui-select__chevron > i[class] {
   width: 20px;
   height: 20px;
+  font-size: 20px;
 }
 
 /* --- Leading icon --- */
@@ -200,9 +208,21 @@
   color: var(--color-content-subtle);
 }
 
-.ui-select__leading-icon > svg {
+.ui-select__leading-icon > svg,
+.ui-select__leading-icon > i[class] {
   width: 24px;
   height: 24px;
+  font-size: 24px;
+}
+
+/* Error: leading icon turns danger */
+.ui-select--error .ui-select__leading-icon {
+  color: var(--color-content-danger-default);
+}
+
+/* Disabled + empty: placeholder stays subtlest */
+.ui-select--disabled.ui-select--placeholder .ui-select__input {
+  color: var(--color-content-subtlest);
 }
 
 /* --- Help text (below select) --- */
@@ -224,9 +244,11 @@
   color: var(--color-content-subtle);
 }
 
-.ui-select__help-icon > svg {
+.ui-select__help-icon > svg,
+.ui-select__help-icon > i[class] {
   width: 16px;
   height: 16px;
+  font-size: 16px;
 }
 
 .ui-select--error .ui-select__help-icon {

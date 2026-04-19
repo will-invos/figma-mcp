@@ -1,10 +1,33 @@
 import type React from 'react'
 
+export type WhenCondition = Record<string, string | number | boolean>
+
+type PropDefBase = { when?: WhenCondition }
+
 export type PropDef =
-  | { type: 'enum'; options: string[]; default: string }
-  | { type: 'boolean'; default: boolean }
-  | { type: 'string'; default: string }
-  | { type: 'number'; default: number; min?: number; max?: number; step?: number }
+  | (PropDefBase & { type: 'enum'; options: string[]; default: string;
+      /** Filter visible options based on another prop's value.
+       *  e.g. `{ variant: { filled: ['primary','neutral'], ghost: ['primary'] } }` */
+      optionsByDep?: Record<string, Record<string, string[]>> })
+  | (PropDefBase & { type: 'boolean'; default: boolean })
+  | (PropDefBase & { type: 'string'; default: string })
+  | (PropDefBase & { type: 'number'; default: number; min?: number; max?: number; step?: number })
+
+/** Returns true if the prop should be visible given the current values. */
+export function isPropVisible(def: PropDef, values: Record<string, any>): boolean {
+  if (!def.when) return true
+  return Object.entries(def.when).every(([key, required]) => values[key] === required)
+}
+
+/** For enum props with optionsByDep, returns the filtered options; otherwise all options. */
+export function getEnumOptions(def: PropDef & { type: 'enum' }, values: Record<string, any>): string[] {
+  if (!def.optionsByDep) return def.options
+  for (const [depKey, mapping] of Object.entries(def.optionsByDep)) {
+    const depVal = String(values[depKey] ?? '')
+    if (mapping[depVal]) return mapping[depVal]
+  }
+  return def.options
+}
 
 export interface StoryDef {
   component: React.ComponentType<any>

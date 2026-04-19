@@ -7,7 +7,7 @@ export const AvatarStory: StoryDef = {
   category: 'Display',
   props: {
     name:  { type: 'string', default: 'Will Huang' },
-    size:  { type: 'enum', options: ['xsmall', 'small', 'medium', 'large', 'xlarge'], default: 'medium' },
+    size:  { type: 'enum', options: ['small', 'medium', 'large', 'xlarge'], default: 'medium' },
     shape: { type: 'enum', options: ['circle', 'square'], default: 'circle' },
   },
 }

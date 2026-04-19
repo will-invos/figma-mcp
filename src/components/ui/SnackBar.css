@@ -24,9 +24,11 @@
   height: 20px;
   color: var(--color-content-inverse-bold);
 }
-.ui-snackbar__icon svg {
+.ui-snackbar__icon svg,
+.ui-snackbar__icon i[class] {
   width: 20px;
   height: 20px;
+  font-size: 20px;
 }
 
 .ui-snackbar__text {

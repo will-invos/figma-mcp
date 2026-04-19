@@ -6,7 +6,7 @@
  * Full width: no radius, px space/400, py space/200
  * Gap: space/200 (8px)
  * Icon: 16×16 in 22px-height container (aligns with text line)
- * Text: 14px/22px weight 400
+ * Text: iOS/Body-CN/Medium — 14px/22px weight 400, letter-spacing 0.04em
  * ======================================== */
 
 .ui-alert {
@@ -73,6 +73,7 @@
   display: flex;
   align-items: center;
   height: 22px;
+  color: inherit;
 }
 
 .ui-alert__icon > svg {
@@ -86,31 +87,35 @@
 
 .ui-alert__content {
   flex: 1 0 0;
-  min-width: 0;
-  min-height: 0;
+  min-width: 1px;
   font-size: 14px;
   font-weight: 400;
   line-height: 22px;
+  letter-spacing: 0.04em;
 }
 
 /* ========================================
- * Close button (trailing): 16×16 icon in 22px-height container
+ * Trailing icon: 16×16 in 22px-height container
+ * Renders as <span> (display only) or <button> (clickable)
  * ======================================== */
 
-.ui-alert__close {
+.ui-alert__trailing {
   flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   height: 22px;
+  color: inherit;
+}
+
+.ui-alert__trailing > svg {
+  width: 16px;
+  height: 16px;
+}
+
+.ui-alert__trailing--button {
   background: transparent;
   border: none;
   cursor: pointer;
-  color: inherit;
   padding: 0;
-}
-
-.ui-alert__close > svg {
-  width: 16px;
-  height: 16px;
 }

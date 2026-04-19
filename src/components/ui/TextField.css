@@ -195,9 +195,17 @@
 }
 
 .ui-text-field__leading-icon > svg,
-.ui-text-field__trailing-icon > svg {
+.ui-text-field__trailing-icon > svg,
+.ui-text-field__leading-icon > i[class],
+.ui-text-field__trailing-icon > i[class] {
   width: 24px;
   height: 24px;
+  font-size: 24px;
+}
+
+/* Error: leading icon turns danger */
+.ui-text-field--error .ui-text-field__leading-icon {
+  color: var(--color-content-danger-default);
 }
 
 /* --- Help text (below input) --- */
@@ -219,9 +227,11 @@
   color: var(--color-content-subtle);
 }
 
-.ui-text-field__help-icon > svg {
+.ui-text-field__help-icon > svg,
+.ui-text-field__help-icon > i[class] {
   width: 16px;
   height: 16px;
+  font-size: 16px;
 }
 
 .ui-text-field--error .ui-text-field__help-icon {

@@ -18,25 +18,43 @@
 }
 
 /* Sizes */
-.ui-spinner--xsmall {
-  width: 16px;
-  height: 16px;
+.ui-spinner--xxsmall {
+  width: 12px;
+  height: 12px;
   border-width: 1px;
 }
 
+.ui-spinner--xsmall {
+  width: 16px;
+  height: 16px;
+  border-width: 1.5px;
+}
+
 .ui-spinner--small {
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
   border-width: 2px;
 }
 
 .ui-spinner--medium {
+  width: 24px;
+  height: 24px;
+  border-width: 2.5px;
+}
+
+.ui-spinner--large {
   width: 32px;
   height: 32px;
   border-width: 3px;
 }
 
-.ui-spinner--large {
+.ui-spinner--xlarge {
+  width: 40px;
+  height: 40px;
+  border-width: 4px;
+}
+
+.ui-spinner--xxlarge {
   width: 48px;
   height: 48px;
   border-width: 4px;
@@ -45,7 +63,7 @@
 /* Colors: arc = full color, track = same color at 20% */
 .ui-spinner--primary {
   --_spinner-arc: var(--color-border-brand);
-  --_spinner-track: var(--color-border-subtle);
+  --_spinner-track: color-mix(in srgb, var(--color-border-brand) 40%, transparent);
 }
 
 .ui-spinner--neutral {
@@ -54,6 +72,12 @@
 }
 
 .ui-spinner--inverse {
-  --_spinner-arc: var(--color-border-inverse-bold);
-  --_spinner-track: color-mix(in srgb, var(--color-border-inverse-bold) 40%, transparent);
+  --_spinner-arc: var(--color-border-inverse-plain);
+  --_spinner-track: color-mix(in srgb, var(--color-border-inverse-plain) 40%, transparent);
 }
+
+.ui-spinner--fixed-bold {
+  --_spinner-arc: var(--color-border-fixed-bold);
+  --_spinner-track: color-mix(in srgb, var(--color-border-fixed-bold) 40%, transparent);
+}
+

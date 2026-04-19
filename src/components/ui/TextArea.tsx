@@ -9,20 +9,20 @@ interface TextAreaProps {
   onChange?: (value: string) => void
   /** 'default' = no label, 'inner-label' = floating label above value. */
   variant?: 'default' | 'inner-label'
-  status?: 'default' | 'error'
-  disabled?: boolean
+  status?: 'default' | 'error' | 'disabled'
   className?: string
 }
 
 const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
-  ({ label, placeholder, value, onChange, variant = 'default', status = 'default', disabled = false, className }, ref) => {
+  ({ label, placeholder, value, onChange, variant = 'default', status = 'default', className }, ref) => {
+    const disabled = status === 'disabled'
     const [focused, setFocused] = useState(false)
     const internalRef = useRef<HTMLTextAreaElement>(null)
     useImperativeHandle(ref, () => internalRef.current!)
 
-    const hasValue = Boolean(value)
+    const [hasValue, setHasValue] = useState(() => Boolean(value))
     const isInnerLabel = variant === 'inner-label'
-    const showShrunkLabel = isInnerLabel && (focused || hasValue)
+    const showShrunkLabel = isInnerLabel && (focused || hasValue || Boolean(value))
 
     const autoGrow = useCallback(() => {
       const el = internalRef.current
@@ -57,9 +57,9 @@ const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
           className="ui-textarea__input"
           placeholder={isInnerLabel && !showShrunkLabel ? undefined : placeholder}
           value={value}
-          onChange={(e) => { onChange?.(e.target.value); autoGrow() }}
+          onChange={(e) => { setHasValue(e.target.value.length > 0); onChange?.(e.target.value); autoGrow() }}
           onFocus={() => setFocused(true)}
-          onBlur={() => setFocused(false)}
+          onBlur={(e) => { setFocused(false); setHasValue(e.target.value.length > 0) }}
           disabled={disabled}
           rows={1}
         />

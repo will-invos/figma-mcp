@@ -23,9 +23,11 @@
   font-size: 28px;
 }
 .ui-icon-button--large > svg,
-.ui-icon-button--large > img {
+.ui-icon-button--large > img,
+.ui-icon-button--large > i[class] {
   width: 28px;
   height: 28px;
+  font-size: 28px;
 }
 
 .ui-icon-button--medium {
@@ -36,9 +38,11 @@
   font-size: 24px;
 }
 .ui-icon-button--medium > svg,
-.ui-icon-button--medium > img {
+.ui-icon-button--medium > img,
+.ui-icon-button--medium > i[class] {
   width: 24px;
   height: 24px;
+  font-size: 24px;
 }
 
 .ui-icon-button--small {
@@ -49,9 +53,11 @@
   font-size: 20px;
 }
 .ui-icon-button--small > svg,
-.ui-icon-button--small > img {
+.ui-icon-button--small > img,
+.ui-icon-button--small > i[class] {
   width: 20px;
   height: 20px;
+  font-size: 20px;
 }
 
 .ui-icon-button--xsmall {
@@ -62,9 +68,11 @@
   font-size: 16px;
 }
 .ui-icon-button--xsmall > svg,
-.ui-icon-button--xsmall > img {
+.ui-icon-button--xsmall > img,
+.ui-icon-button--xsmall > i[class] {
   width: 16px;
   height: 16px;
+  font-size: 16px;
 }
 
 /* ========================================

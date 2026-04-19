@@ -102,9 +102,11 @@
   padding-bottom: var(--space-300);
 }
 
-.ui-list-item__leading-icon > svg {
+.ui-list-item__leading-icon > svg,
+.ui-list-item__leading-icon > i[class] {
   width: 24px;
   height: 24px;
+  font-size: 24px;
 }
 
 /* Leading extra: 40×40 slot (avatar/thumbnail), py matches content py */
@@ -187,7 +189,9 @@
   color: var(--color-content-subtlest);
 }
 
-.ui-list-item__chevron > svg {
+.ui-list-item__chevron > svg,
+.ui-list-item__chevron > i[class] {
   width: 20px;
   height: 20px;
+  font-size: 20px;
 }

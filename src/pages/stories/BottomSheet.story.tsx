@@ -14,9 +14,9 @@ const BottomSheetRender: React.FC<{ values: Record<string, any> }> = ({ values }
         title={values.title}
         titleSize={values.titleSize}
         showHandle={values.showHandle}
-        footer={<Button onClick={() => setOpen(false)}>確定</Button>}
+        footer={<Button onClick={() => setOpen(false)}>Button</Button>}
       >
-        <p style={{ padding: '16px 0' }}>BottomSheet 從底部滑出。</p>
+        <p style={{ padding: '16px 0' }}>Body content</p>
       </BottomSheet>
     </>
   )

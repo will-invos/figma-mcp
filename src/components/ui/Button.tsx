@@ -13,16 +13,25 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 
 /**
  * Determines the spinner color for a given variant/colorType combination.
- * Filled non-neutral buttons use white; everything else uses brand.
+ * Matches the button's text color: white text → inverse, blue → primary, dark → neutral.
  */
 function resolveSpinnerColor(
   variant: ButtonProps['variant'],
   colorType: ButtonProps['colorType']
-): 'primary' | 'inverse' {
-  if (variant === 'filled' && colorType !== 'neutral') {
-    return 'inverse';
+): 'primary' | 'inverse' | 'neutral' | 'fixed-bold' {
+  if (variant === 'filled') {
+    switch (colorType) {
+      case 'white': return 'primary';
+      case 'neutral': return 'neutral';
+      case 'prize': return 'fixed-bold';
+      default: return 'inverse';
+    }
   }
-  return 'primary';
+  switch (colorType) {
+    case 'inverse': return 'inverse';
+    case 'secondary': return 'neutral';
+    default: return 'primary';
+  }
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
@@ -56,7 +65,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       .filter(Boolean)
       .join(' ');
 
-    const spinnerSize = size === 'large' ? 'medium' : 'small';
+    const spinnerSize = size === 'large' ? 'small' : 'xxsmall';
     const spinnerColor = resolveSpinnerColor(variant, colorType);
 
     return (

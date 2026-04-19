@@ -1,11 +1,37 @@
-/* ListFooter — caption text below a list section */
+/* ListFooter — per Figma 4332:8712
+   States: Default (subtle) / Danger (red)
+   Optional leading 16×16 info icon */
+
 .ui-list-footer {
+  display: flex;
+  gap: var(--space-200);
+  align-items: flex-start;
   padding: var(--space-200) var(--space-400) var(--space-400);
+  background: var(--color-background-default);
+  color: var(--color-content-subtle);
+}
+
+.ui-list-footer__icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  width: 16px;
+  height: 22px; /* align with text line-height */
+  font-size: 16px;
+  justify-content: center;
+}
+
+.ui-list-footer__text {
+  flex: 1;
+  min-width: 0;
   font-family: var(--font-family);
-  font-size: 12px;
-  line-height: 18px;
+  font-size: 14px;
+  line-height: 22px;
   font-weight: 400;
   letter-spacing: 0.04em;
-  color: var(--color-content-subtle);
-  background: var(--color-background-default);
+}
+
+/* Danger state */
+.ui-list-footer--danger {
+  color: var(--color-content-danger-default);
 }
