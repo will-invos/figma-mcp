@@ -4,7 +4,7 @@
    - border-radius: 8px
    - gap: 12px between icon / input / clear
    - search icon + clear icon: 20×20
-   - text: PingFang TC Regular 16 / line-height 24 */
+   - text: 16 / line-height 24, Regular (system default font) */
 .ui-search-field {
   display: flex;
   align-items: center;

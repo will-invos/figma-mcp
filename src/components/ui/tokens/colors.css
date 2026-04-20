@@ -97,6 +97,7 @@
   --color-background-elevated-brand: #eef1fe;
   --color-background-plain: #ffffff;
   --color-background-skeleton: #edeff3;
+  --color-background-skeleton-bold: rgba(22, 25, 29, 0.2);
   --color-background-sunken: #f7f8f9;
   --color-background-toast: rgba(0, 0, 0, 0.8);
 
@@ -141,6 +142,7 @@
   /* Background — Neutral */
   --color-background-neutral-active: #9b9baa;
   --color-background-neutral-bold: #737380;
+  --color-background-neutral-bold-active: #3b3c43;
   --color-background-neutral-bold-hover: #575762;
   --color-background-neutral-default: #bbbbc8;
   --color-background-neutral-hover: #9b9baa;
@@ -151,9 +153,6 @@
   /* Background — Overlay */
   --color-background-overlay-bold: rgba(0, 0, 0, 0.7);
   --color-background-overlay-default: rgba(0, 0, 0, 0.5);
-  --color-background-overlay-inverse-hover: rgba(255, 255, 255, 0.1);
-  --color-background-overlay-inverse-active: rgba(255, 255, 255, 0.15);
-  --color-background-overlay-inverse-subtle: rgba(255, 255, 255, 0.2);
 
   /* Background — Prize */
   --color-background-prize-active: #c78b07;
@@ -200,13 +199,14 @@
   --color-border-donation: #f61372;
   --color-border-fixed-black: #000000;
   --color-border-fixed-bold: #101119;
+  --color-border-fixed-success-highlight: #34da86;
+  --color-border-fixed-white: #ffffff;
   --color-border-inverse-bold: #f7f8f9;
   --color-border-inverse-divider: rgba(255, 255, 255, 0.1);
   --color-border-inverse-plain: #FFFFFF;
   --color-border-plain: #dcdee5;
   --color-border-prize: #ffc423;
   --color-border-subtle: #edeff3;
-  --color-border-knob: rgba(0, 0, 0, 0.04);
   --color-border-success: #00bd64;
   --color-border-warning: #ff8710;
 
@@ -307,6 +307,7 @@
   --color-background-elevated-brand: #1a2050;
   --color-background-plain: #101119;
   --color-background-skeleton: #272736;
+  --color-background-skeleton-bold: rgba(255, 255, 255, 0.2);
   --color-background-sunken: #0a0a12;
   --color-background-toast: rgba(255, 255, 255, 0.9);
 
@@ -345,6 +346,7 @@
   /* Background — Neutral */
   --color-background-neutral-active: #575762;
   --color-background-neutral-bold: #9b9baa;
+  --color-background-neutral-bold-active: #edeff3;
   --color-background-neutral-bold-hover: #bbbbc8;
   --color-background-neutral-default: #3b3c50;
   --color-background-neutral-hover: #575762;
@@ -355,9 +357,6 @@
   /* Background — Overlay */
   --color-background-overlay-bold: rgba(0, 0, 0, 0.85);
   --color-background-overlay-default: rgba(0, 0, 0, 0.7);
-  --color-background-overlay-inverse-hover: rgba(255, 255, 255, 0.1);
-  --color-background-overlay-inverse-active: rgba(255, 255, 255, 0.15);
-  --color-background-overlay-inverse-subtle: rgba(255, 255, 255, 0.2);
 
   /* Background — Prize */
   --color-background-prize-active: #9c6a05;
@@ -408,7 +407,6 @@
   --color-border-plain: #272736;
   --color-border-prize: #ffd86b;
   --color-border-subtle: #1c1c27;
-  --color-border-knob: rgba(255, 255, 255, 0.06);
   --color-border-success: #5dd99a;
   --color-border-warning: #ffb86b;
 

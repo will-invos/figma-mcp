@@ -69,7 +69,7 @@ const SheetHeader = React.forwardRef<HTMLDivElement, SheetHeaderProps>(
               <div className="ui-sheet-header__leading">{leading}</div>
             )}
             {headlineSize === 'regular' && (
-              <span className="ui-sheet-header__title ui-sheet-header__title--regular text-ios-label-large">
+              <span className="ui-sheet-header__title ui-sheet-header__title--regular text-label-large">
                 {headline}
               </span>
             )}
@@ -81,7 +81,7 @@ const SheetHeader = React.forwardRef<HTMLDivElement, SheetHeaderProps>(
 
         {showLargeBlock && (
           <div className="ui-sheet-header__content">
-            <h2 className="ui-sheet-header__title ui-sheet-header__title--large text-ios-heading-large">
+            <h2 className="ui-sheet-header__title ui-sheet-header__title--large text-heading-large">
               {headline}
             </h2>
             {contentShowsTrailing && trailing && (

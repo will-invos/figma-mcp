@@ -1,5 +1,5 @@
 /* Per Figma 4115:7699 — Tooltip
-   - Body: rgba toast bg, padding 8/12, radius 8, text 16/24 (PingFang TC)
+   - Body: rgba toast bg, padding 8/12, radius 8, text 16/24
    - Tail: rounded-bump SVG (36×8 horizontal, 8×28 vertical)
    - Shadow: medium drop-shadow on the whole composition (covers tail too)
 

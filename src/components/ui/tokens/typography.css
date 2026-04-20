@@ -2,28 +2,37 @@
  * Typography Tokens
  * Generated from Figma 🧰 Design System 2025 — iOS text styles
  *
- * Naming: iOS/{category}/{size} → .text-ios-{category}-{size}
+ * Naming: iOS/{category}/{size} → .text-{category}-{size}
+ * (the "iOS/" prefix in Figma maps to the unprefixed CSS class)
  *
  * Font families:
- *   Default — PingFang TC (system CJK, used for all UI text)
- *   Code    — SF Mono (system monospace)
+ *   Default — system default (-apple-system / system-ui fallback chain,
+ *             which resolves to each OS's preferred Chinese font)
+ *   Code    — system monospace (ui-monospace / SF Mono fallback chain)
  *
- * Weight mapping (PingFang TC):
+ * Weight mapping:
  *   Regular = 400, Medium = 500, Semibold = 600
  *
  * All text styles use letter-spacing: 0.04em
  */
 
 :root {
-  --font-family: 'PingFang TC', -apple-system, BlinkMacSystemFont, 'Noto Sans TC', sans-serif;
-  --font-family-code: 'SF Mono', 'Menlo', 'Consolas', monospace;
+  /*
+   * System font stack — let each platform pick its own default Chinese font.
+   *   Apple  (iOS/macOS)    → SF Pro + PingFang TC (auto via -apple-system)
+   *   Android              → Roboto + Noto Sans CJK (auto via system-ui)
+   *   Windows              → Segoe UI + Microsoft JhengHei (auto via system-ui)
+   * Do NOT list explicit Chinese font names here — rely on the OS default.
+   */
+  --font-family: -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --font-family-code: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
 }
 
 /* ========================================
  * Display — page headline, large nav title
  * ======================================== */
 
-.text-ios-display {
+.text-display {
   font-family: var(--font-family);
   font-size: 28px;
   font-weight: 500;
@@ -31,7 +40,7 @@
   letter-spacing: 0.04em;
 }
 
-.text-ios-display-regular {
+.text-display-regular {
   font-family: var(--font-family);
   font-size: 28px;
   font-weight: 400;
@@ -43,7 +52,7 @@
  * Heading — section titles, dialog titles
  * ======================================== */
 
-.text-ios-heading-large {
+.text-heading-large {
   font-family: var(--font-family);
   font-size: 24px;
   font-weight: 600;
@@ -51,7 +60,7 @@
   letter-spacing: 0.04em;
 }
 
-.text-ios-heading-medium {
+.text-heading-medium {
   font-family: var(--font-family);
   font-size: 20px;
   font-weight: 600;
@@ -59,7 +68,7 @@
   letter-spacing: 0.04em;
 }
 
-.text-ios-heading-small {
+.text-heading-small {
   font-family: var(--font-family);
   font-size: 18px;
   font-weight: 600;
@@ -71,7 +80,7 @@
  * Body — body text, descriptions, captions
  * ======================================== */
 
-.text-ios-body-xlarge {
+.text-body-xlarge {
   font-family: var(--font-family);
   font-size: 18px;
   font-weight: 400;
@@ -79,7 +88,7 @@
   letter-spacing: 0.04em;
 }
 
-.text-ios-body-large {
+.text-body-large {
   font-family: var(--font-family);
   font-size: 16px;
   font-weight: 400;
@@ -87,7 +96,7 @@
   letter-spacing: 0.04em;
 }
 
-.text-ios-body-medium {
+.text-body-medium {
   font-family: var(--font-family);
   font-size: 14px;
   font-weight: 400;
@@ -95,7 +104,7 @@
   letter-spacing: 0.04em;
 }
 
-.text-ios-body-small {
+.text-body-small {
   font-family: var(--font-family);
   font-size: 12px;
   font-weight: 400;
@@ -103,7 +112,7 @@
   letter-spacing: 0.04em;
 }
 
-.text-ios-body-xsmall {
+.text-body-xsmall {
   font-family: var(--font-family);
   font-size: 10px;
   font-weight: 400;
@@ -115,7 +124,7 @@
  * Label — buttons, field labels
  * ======================================== */
 
-.text-ios-label-large {
+.text-label-large {
   font-family: var(--font-family);
   font-size: 16px;
   font-weight: 500;
@@ -123,7 +132,7 @@
   letter-spacing: 0.04em;
 }
 
-.text-ios-label-medium {
+.text-label-medium {
   font-family: var(--font-family);
   font-size: 14px;
   font-weight: 500;
@@ -131,7 +140,7 @@
   letter-spacing: 0.04em;
 }
 
-.text-ios-label-small {
+.text-label-small {
   font-family: var(--font-family);
   font-size: 12px;
   font-weight: 500;
@@ -139,7 +148,7 @@
   letter-spacing: 0.04em;
 }
 
-.text-ios-label-xsmall {
+.text-label-xsmall {
   font-family: var(--font-family);
   font-size: 10px;
   font-weight: 500;
@@ -151,7 +160,7 @@
  * Code — monospace text
  * ======================================== */
 
-.text-ios-code-large {
+.text-code-large {
   font-family: var(--font-family-code);
   font-size: 16px;
   font-weight: 400;
@@ -159,7 +168,7 @@
   letter-spacing: 0;
 }
 
-.text-ios-code-medium {
+.text-code-medium {
   font-family: var(--font-family-code);
   font-size: 14px;
   font-weight: 400;
@@ -167,7 +176,7 @@
   letter-spacing: 0;
 }
 
-.text-ios-code-small {
+.text-code-small {
   font-family: var(--font-family-code);
   font-size: 12px;
   font-weight: 400;

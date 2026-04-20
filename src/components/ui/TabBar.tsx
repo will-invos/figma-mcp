@@ -41,7 +41,7 @@ const TabBar = React.forwardRef<HTMLElement, TabBarProps>(
                     </span>
                   )}
                 </span>
-                <span className={active ? 'text-ios-label-xsmall' : 'text-ios-body-xsmall'}>{item.label}</span>
+                <span className={active ? 'text-label-xsmall' : 'text-body-xsmall'}>{item.label}</span>
               </button>
             )
           })}

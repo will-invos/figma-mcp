@@ -47,9 +47,9 @@ const ComponentName = React.forwardRef<HTMLElement, ComponentNameProps>(
   ({ prop1, prop2, className, ...rest }, ref) => {
     // Map size/variant to typography class
     const typographyClass = {
-      large: 'text-ios-label-large',
-      medium: 'text-ios-label-medium',
-      small: 'text-ios-label-small',
+      large: 'text-label-large',
+      medium: 'text-label-medium',
+      small: 'text-label-small',
     }[size];
 
     const classes = [

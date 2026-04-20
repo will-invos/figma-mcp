@@ -32,7 +32,7 @@ Run every rule against the component. For each rule, report PASS or FAIL with sp
 ### 3. Typography must use typography.css classes
 
 - **Violation**: The component's `.css` file directly defines `font-size`, `line-height`, or `font-weight`
-- **Correct**: The `.tsx` file should compose typography classes from `typography.css` (e.g., `text-ios-label-large`) instead of defining font styles in CSS
+- **Correct**: The `.tsx` file should compose typography classes from `typography.css` (e.g., `text-label-large`) instead of defining font styles in CSS
 - **How to check**: Read `src/components/ui/tokens/typography.css` to see available classes, then verify the component uses them in `.tsx` rather than defining font properties in `.css`
 
 ### 4. Font family uses token

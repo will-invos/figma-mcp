@@ -44,8 +44,8 @@
   height: 24px;
   border-radius: 50%;
   background: var(--color-background-fixed-white);
-  border: 0.5px solid var(--color-border-knob);
-  box-shadow: var(--shadow-knob);
+  border: 0.5px solid var(--color-border-subtle);
+  box-shadow: var(--shadow-small);
   cursor: pointer;
   margin-top: 0;
 }
@@ -54,8 +54,8 @@
   height: 24px;
   border-radius: 50%;
   background: var(--color-background-fixed-white);
-  border: 0.5px solid var(--color-border-knob);
-  box-shadow: var(--shadow-knob);
+  border: 0.5px solid var(--color-border-subtle);
+  box-shadow: var(--shadow-small);
   cursor: pointer;
 }
 
