@@ -65,7 +65,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       .filter(Boolean)
       .join(' ');
 
-    const spinnerSize = size === 'large' ? 'small' : 'xxsmall';
+    const spinnerSize = size === 'large' ? 'small' : size === 'medium' ? 'xsmall' : 'xxsmall';
     const spinnerColor = resolveSpinnerColor(variant, colorType);
 
     return (

@@ -7,8 +7,8 @@ const TextFieldRender: React.FC<{ values: Record<string, any> }> = ({ values }) 
   return (
     <TextField
       {...rest}
-      leadingIcon={leadingIcon ? <i className="icon-search" aria-hidden="true" /> : undefined}
-      trailingIcon={trailingIcon ? <i className="icon-cross" aria-hidden="true" /> : undefined}
+      leadingIcon={leadingIcon ? <i className="icon-user" aria-hidden="true" /> : undefined}
+      trailingIcon={trailingIcon ? <i className="icon-eye-off" aria-hidden="true" /> : undefined}
     />
   )
 }

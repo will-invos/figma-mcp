@@ -27,6 +27,8 @@ import { ListItemStory } from './ListItem.story.tsx'
 import { ListHeaderStory } from './ListHeader.story.tsx'
 import { ListFooterStory } from './ListFooter.story'
 import { CardItemStory } from './CardItem.story.tsx'
+import { IconsStory } from './Icons.story.tsx'
+
 // Feedback
 import { AlertStory } from './Alert.story'
 import { SpinnerStory } from './Spinner.story'
@@ -51,7 +53,7 @@ export const categories: StoryCategory[] = [
   },
   {
     name: 'Display',
-    stories: [TagStory, TagBarStory, BadgeStory, AvatarStory, ListItemStory, ListHeaderStory, ListFooterStory, CardItemStory],
+    stories: [TagStory, TagBarStory, BadgeStory, AvatarStory, ListItemStory, ListHeaderStory, ListFooterStory, CardItemStory, IconsStory],
   },
   {
     name: 'Feedback',

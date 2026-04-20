@@ -54,22 +54,22 @@
   border-color: var(--color-background-brand-default);
 }
 
-/* Error overrides checked styling: keep red border (Figma defines Error as a single
-   unchecked-style variant; if checked + error is used, error visual still wins) */
-.ui-checkbox--error .ui-checkbox__input:checked + .ui-checkbox__indicator::before,
+/* Error unchecked: red border, default background */
 .ui-checkbox--error .ui-checkbox__indicator::before {
   background-color: var(--color-background-default);
   border-color: var(--color-border-danger);
 }
-/* In error state, hide the white check (Figma error = always unchecked visual) */
-.ui-checkbox--error .ui-checkbox__input:checked + .ui-checkbox__indicator::after {
-  display: none;
+
+/* Error checked: keep brand fill, checkmark visible */
+.ui-checkbox--error .ui-checkbox__input:checked + .ui-checkbox__indicator::before {
+  background-color: var(--color-background-brand-default);
+  border-color: var(--color-background-brand-default);
 }
 
 /* Checkmark icon: 16×16 white, shown when checked */
 .ui-checkbox__indicator::after {
-  content: '\f1d0';
-  font-family: 'ui-icons';
+  content: '\f04d';
+  font-family: 'invos';
   display: none;
   position: absolute;
   top: 50%;

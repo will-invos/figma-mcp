@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import Select from '@/components/ui/Select'
-import { SearchIconBig } from './icons'
 import type { StoryDef } from './types'
 
 const options = [
@@ -22,7 +21,7 @@ const SelectRender: React.FC<{ values: Record<string, any> }> = ({ values }) => 
       options={options}
       value={internalValue}
       onChange={(e) => setInternalValue(e.target.value)}
-      leadingIcon={leadingIcon ? <SearchIconBig /> : undefined}
+      leadingIcon={leadingIcon ? <i className="icon-user" aria-hidden="true" /> : undefined}
     />
   )
 }
@@ -34,8 +33,8 @@ export const SelectStory: StoryDef = {
   previewWidth: 360,
   props: {
     variant:     { type: 'enum', options: ['default', 'inner-label'], default: 'default' },
-    label:       { type: 'string', default: '部門' },
-    placeholder: { type: 'string', default: '請選擇' },
+    label:       { type: 'string', default: 'Label' },
+    placeholder: { type: 'string', default: 'Please select...' },
     status:      { type: 'enum', options: ['default', 'error', 'disabled'], default: 'default' },
     leadingIcon: { type: 'boolean', default: false },
     value:       { type: 'enum', options: ['', 'design', 'engineering', 'product'], default: '' },

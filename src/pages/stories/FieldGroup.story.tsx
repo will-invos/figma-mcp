@@ -3,6 +3,7 @@ import FieldGroup from '@/components/ui/FieldGroup'
 import TextField from '@/components/ui/TextField'
 import TextArea from '@/components/ui/TextArea'
 import Checkbox from '@/components/ui/Checkbox'
+import Radio from '@/components/ui/Radio'
 import Select from '@/components/ui/Select'
 import type { StoryDef } from './types'
 
@@ -14,6 +15,8 @@ const DEMO_OPTIONS = [
 
 const FieldGroupRender: React.FC<{ values: Record<string, any> }> = ({ values }) => {
   const [checked, setChecked] = useState(false)
+  const [checkedB, setCheckedB] = useState(false)
+  const [radioValue, setRadioValue] = useState('a')
 
   const renderField = () => {
     const fieldStatus = values.status === 'error' ? 'error' : 'default'
@@ -23,9 +26,21 @@ const FieldGroupRender: React.FC<{ values: Record<string, any> }> = ({ values })
       case 'textarea':
         return <TextArea placeholder="Placeholder" status={fieldStatus} />
       case 'checkbox':
-        return <Checkbox checked={checked} onChange={setChecked}>Checkbox label</Checkbox>
+        return (
+          <div style={{ display: 'flex', gap: 24 }}>
+            <Checkbox checked={checked} onChange={setChecked}>Option A</Checkbox>
+            <Checkbox checked={checkedB} onChange={setCheckedB}>Option B</Checkbox>
+          </div>
+        )
+      case 'radio':
+        return (
+          <div style={{ display: 'flex', gap: 24 }}>
+            <Radio checked={radioValue === 'a'} onChange={() => setRadioValue('a')} name="fg-radio" value="a" status={fieldStatus}>Option A</Radio>
+            <Radio checked={radioValue === 'b'} onChange={() => setRadioValue('b')} name="fg-radio" value="b" status={fieldStatus}>Option B</Radio>
+          </div>
+        )
       case 'select':
-        return <Select placeholder="請選擇" options={DEMO_OPTIONS} status={fieldStatus} />
+        return <Select placeholder="Please select..." options={DEMO_OPTIONS} status={fieldStatus} />
       default:
         return <TextField placeholder="Placeholder" status={fieldStatus} />
     }
@@ -35,6 +50,7 @@ const FieldGroupRender: React.FC<{ values: Record<string, any> }> = ({ values })
     <FieldGroup
       label={values.header ? values.label : undefined}
       helpText={values.helpText ? values.helpTextValue : undefined}
+      helpIcon={values.helpText ? <i className="icon-info" aria-hidden="true" /> : undefined}
       status={values.status}
     >
       {renderField()}
@@ -48,12 +64,11 @@ export const FieldGroupStory: StoryDef = {
   category: 'Forms',
   previewWidth: 360,
   props: {
-    field:         { type: 'enum', options: ['textfield', 'textarea', 'checkbox', 'select'], default: 'textfield' },
+    field:         { type: 'enum', options: ['textfield', 'textarea', 'checkbox', 'radio', 'select'], default: 'textfield' },
     status:        { type: 'enum', options: ['default', 'error'], default: 'default' },
-    header:        { type: 'boolean', default: true },
     label:         { type: 'string', default: 'Label', when: { header: true } },
     helpText:      { type: 'boolean', default: true },
-    helpTextValue: { type: 'string', default: 'Help text', when: { helpText: true } },
+    helpTextBody: { type: 'string', default: 'Help text', when: { helpText: true } },
   },
   Render: FieldGroupRender,
 }

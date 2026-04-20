@@ -29,6 +29,19 @@
 .ui-tab-bar__icon {
   position: relative;
   display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+}
+.ui-tab-bar__icon > svg {
+  width: 24px;
+  height: 24px;
+}
+.ui-tab-bar__icon > i[class] {
+  width: 24px;
+  height: 24px;
+  font-size: 24px;
 }
 .ui-tab-bar__badge {
   position: absolute;
@@ -50,10 +63,10 @@
   top: -3px;
   left: 14px;
   right: auto;
-  min-width: 8px;
-  width: 8px;
-  height: 8px;
+  min-width: 12px;
+  width: 12px;
+  height: 12px;
+  border: var(--color-background-default) solid 2px;
   padding: 0;
-  border: 2px solid var(--color-background-default);
   border-radius: 50%;
 }

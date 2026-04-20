@@ -190,14 +190,14 @@
 }
 
 .ui-select__chevron > svg {
-  width: 16px;
-  height: 16px;
+  width: 24px;
+  height: 24px;
 }
 
 .ui-select__chevron > i[class] {
-  width: 16px;
-  height: 16px;
-  font-size: 16px;
+  width: 24px;
+  height: 24px;
+  font-size: 24px;
 }
 
 /* --- Leading icon --- */
@@ -213,14 +213,14 @@
 }
 
 .ui-select__leading-icon > svg {
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
 }
 
 .ui-select__leading-icon > i[class] {
-  width: 20px;
-  height: 20px;
-  font-size: 20px;
+  width: 24px;
+  height: 24px;
+  font-size: 24px;
 }
 
 /* Error: leading icon turns danger */

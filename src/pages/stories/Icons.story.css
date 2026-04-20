@@ -1,0 +1,40 @@
+.icons-story {
+  padding: var(--space-400);
+}
+
+.icons-story__grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-400);
+}
+
+.icons-story__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-100);
+  padding: var(--space-200) var(--space-100);
+  border-radius: var(--radius-200);
+  cursor: default;
+  transition: background-color 0.15s;
+  width: 20%;
+  max-width: 96px;
+  box-sizing: border-box;
+}
+
+.icons-story__item:hover {
+  background-color: var(--color-background-neutral-subtle);
+}
+
+.icons-story__item > i[class] {
+  color: var(--color-content-default);
+}
+
+.icons-story__name {
+  font-family: var(--font-family);
+  font-size: 10px;
+  line-height: 14px;
+  color: var(--color-content-subtle);
+  text-align: center;
+  word-break: break-all;
+}
