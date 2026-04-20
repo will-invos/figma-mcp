@@ -103,14 +103,14 @@
 }
 
 .ui-list-item__leading-icon > svg {
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
 }
 
 .ui-list-item__leading-icon > i[class] {
-  width: 20px;
-  height: 20px;
-  font-size: 20px;
+  width: 24px;
+  height: 24px;
+  font-size: 24px;
 }
 
 /* Leading extra: 40×40 slot (avatar/thumbnail), py matches content py */
@@ -182,24 +182,36 @@
 }
 
 .ui-list-item__trailing-text {
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 400;
-  line-height: 22px;
+  line-height: 24px;
   letter-spacing: 0.04em;
-  color: var(--color-content-subtle);
+  color: var(--color-content-default);
+}
+
+/* Trailing icon: 24×24 */
+.ui-list-item__trailing > svg {
+  width: 24px;
+  height: 24px;
+}
+
+.ui-list-item__trailing > i[class] {
+  width: 24px;
+  height: 24px;
+  font-size: 24px;
 }
 
 .ui-list-item__chevron {
   color: var(--color-content-subtlest);
 }
 
-.ui-list-item__chevron > svg {
-  width: 16px;
-  height: 16px;
+/* CTA trailing: reduce padding so button doesn't stretch list item height */
+.ui-list-item__trailing--cta {
+  padding-top: var(--space-200);
+  padding-bottom: var(--space-200);
 }
 
-.ui-list-item__chevron > i[class] {
-  width: 16px;
-  height: 16px;
-  font-size: 16px;
+.ui-list-item--compact .ui-list-item__trailing--cta {
+  padding-top: var(--space-100);
+  padding-bottom: var(--space-100);
 }

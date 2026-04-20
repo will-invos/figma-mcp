@@ -48,8 +48,8 @@ const FieldGroupRender: React.FC<{ values: Record<string, any> }> = ({ values })
 
   return (
     <FieldGroup
-      label={values.header ? values.label : undefined}
-      helpText={values.helpText ? values.helpTextValue : undefined}
+      label={values.label}
+      helpText={values.helpText ? values.helpTextBody : undefined}
       helpIcon={values.helpText ? <i className="icon-info" aria-hidden="true" /> : undefined}
       status={values.status}
     >

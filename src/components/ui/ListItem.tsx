@@ -105,7 +105,7 @@ const ListItem = React.forwardRef<HTMLDivElement, ListItemProps>(
           );
         case 'cta':
           return (
-            <span className="ui-list-item__trailing">
+            <span className="ui-list-item__trailing ui-list-item__trailing--cta">
               <Button variant="outline" colorType="primary" size="small">{trailingText}</Button>
             </span>
           );

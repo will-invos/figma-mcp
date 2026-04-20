@@ -121,6 +121,10 @@
   padding: var(--space-400);
   flex-shrink: 0;
 }
+.ui-sheet__footer > .ui-button {
+  width: 100%;
+}
+
 .ui-sheet__footer::before {
   content: '';
   position: absolute;
