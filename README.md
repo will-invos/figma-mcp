@@ -88,8 +88,8 @@ pnpm lint           # ESLint
 
 - **禁止 hard-coded 顏色**：CSS 內不可出現 hex / rgb / 顏色名稱，一律走 `var(--color-*)`。唯一例外是 `tokens/colors.css`。
 - **`var()` 不加 fallback**：token 一定存在，fallback 只會讓差異悄悄發生。
-- **字體 token**：UI 文字用 `var(--font-family)`（PingFang TC），code 用 `var(--font-family-code)`。
-- **Remote Plugin API 沒有 PingFang TC**：直接改文字節點時用 `Noto Sans TC` 當 fallback，再套回正確 `textStyleId`。
+- **字體 token**：UI 文字用 `var(--font-family)`（系統預設字體 chain），code 用 `var(--font-family-code)`。不在 code 指定 `PingFang TC` 等特定中文字體，讓各平台 OS 自行挑選。
+- **Remote Plugin API 側**：若在 Figma Plugin 端直接改文字節點，以 `Noto Sans TC` 當 fallback，再套回正確 `textStyleId`（PingFang TC 在 remote Plugin API 不可用）。
 
 ## Figma 資源
 

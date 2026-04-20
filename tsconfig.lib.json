@@ -1,0 +1,14 @@
+{
+  "extends": "./tsconfig.app.json",
+  "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.lib.tsbuildinfo",
+    "noEmit": true
+  },
+  "include": ["src/components/ui"],
+  "exclude": [
+    "src/components/ui/**/*.figma.tsx",
+    "src/components/ui/**/*.stories.tsx",
+    "src/components/ui/**/*.story.tsx",
+    "src/components/ui/**/*.story.ts"
+  ]
+}
