@@ -7,6 +7,7 @@ const ListItemRender: React.FC<{ values: Record<string, any> }> = ({ values }) =
   const [checked, setChecked] = useState(false)
   return (
     <ListItem
+      headline={values.headline}
       {...values}
       trailingIcon={values.trailing === 'icon' ? <span style={{ color: 'var(--color-content-brand-default)' }}><CheckIcon /></span> : undefined}
       trailingChecked={checked}
