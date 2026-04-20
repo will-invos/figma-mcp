@@ -3,7 +3,7 @@ import './Spinner.css';
 
 interface SpinnerProps {
   size?: 'xxsmall' | 'xsmall' | 'small' | 'medium' | 'large' | 'xlarge' | 'xxlarge';
-  color?: 'primary'| 'neutral' | 'inverse' | 'fixed-bold';
+  color?: 'primary'| 'neutral' | 'inverse' | 'fixed-bold' | 'fixed-white';
 }
 
 const Spinner = React.forwardRef<HTMLDivElement, SpinnerProps>(

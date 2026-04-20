@@ -18,13 +18,13 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 function resolveSpinnerColor(
   variant: ButtonProps['variant'],
   colorType: ButtonProps['colorType']
-): 'primary' | 'inverse' | 'neutral' | 'fixed-bold' {
+): 'primary' | 'inverse' | 'neutral' | 'fixed-bold' | 'fixed-white' {
   if (variant === 'filled') {
     switch (colorType) {
       case 'white': return 'primary';
       case 'neutral': return 'neutral';
       case 'prize': return 'fixed-bold';
-      default: return 'inverse';
+      default: return 'fixed-white';
     }
   }
   switch (colorType) {

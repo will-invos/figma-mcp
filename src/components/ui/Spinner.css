@@ -81,3 +81,8 @@
   --_spinner-track: color-mix(in srgb, var(--color-border-fixed-bold) 40%, transparent);
 }
 
+.ui-spinner--fixed-white {
+  --_spinner-arc: var(--color-border-fixed-white);
+  --_spinner-track: color-mix(in srgb, var(--color-border-fixed-white) 40%, transparent);
+}
+

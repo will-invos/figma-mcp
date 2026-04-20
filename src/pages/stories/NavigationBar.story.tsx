@@ -28,10 +28,9 @@ const trailingPresets: Record<string, React.ReactNode> = {
 }
 
 const defaultTabs = [
-  { label: '全部' },
-  { label: '進行中' },
-  { label: '已完成' },
-  { label: '已取消' },
+  { label: 'Tab' },
+  { label: 'Tab' },
+  { label: 'Tab' },
 ]
 
 const NavigationBarRender: React.FC<{ values: Record<string, any> }> = ({ values }) => {
@@ -59,15 +58,15 @@ export const NavigationBarStory: StoryDef = {
   category: 'Chrome',
   previewWidth: 360,
   props: {
-    title:     { type: 'string', default: '頁面標題' },
     titleSize: { type: 'enum', options: ['regular', 'large'], default: 'regular' },
     type:      { type: 'enum', options: ['default', 'home', 'search', 'tabs'], default: 'default',
       optionsByDep: { titleSize: { regular: ['default', 'search', 'tabs'], large: ['default', 'home', 'search', 'tabs'] } },
     },
+    title:     { type: 'string', default: 'Title' },
     leading:   { type: 'enum', options: ['none', 'back', 'close', 'avatar', 'text'], default: 'back' },
     trailing:  { type: 'enum', options: ['none', 'icon', 'icons', 'text', 'avatar'], default: 'icon' },
     divider:   { type: 'boolean', default: true },
-    searchPlaceholder: { type: 'string', default: '搜尋', when: { type: 'search' } },
+    searchPlaceholder: { type: 'string', default: 'Search', when: { type: 'search' } },
   },
   Render: NavigationBarRender,
 }
