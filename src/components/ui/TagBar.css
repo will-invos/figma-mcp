@@ -7,8 +7,8 @@
 .ui-tag-bar {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 12px 16px;
+  gap: var(--space-200);
+  padding: var(--space-300) var(--space-400);
   background: var(--color-background-default);
 }
 .ui-tag-bar--scroll {
@@ -21,8 +21,8 @@
 }
 .ui-tag-bar__item {
   flex-shrink: 0;
-  padding: 6px 16px;
-  border-radius: 999px;
+  padding: var(--space-150) var(--space-400);
+  border-radius: var(--radius-full);
   border: 1px solid var(--color-border-subtle);
   background: var(--color-background-default);
   color: var(--color-content-default);

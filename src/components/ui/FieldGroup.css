@@ -6,8 +6,8 @@
 .ui-field-group__header {
   display: flex;
   flex-direction: column;
-  gap: 2px;
-  padding: 8px 0;
+  gap: var(--space-50);
+  padding: var(--space-200) 0;
 }
 .ui-field-group__label {
   font-size: 16px;
@@ -27,14 +27,14 @@
 .ui-field-group__help {
   display: flex;
   align-items: flex-start;
-  gap: 8px;
-  padding-top: 8px;
+  gap: var(--space-200);
+  padding-top: var(--space-200);
 }
 .ui-field-group__help-icon {
   display: inline-flex;
   color: var(--color-content-subtle);
   flex-shrink: 0;
-  padding-top: 1px;
+  padding-top: var(--space-25);
 }
 .ui-field-group__help-text {
   font-size: 12px;

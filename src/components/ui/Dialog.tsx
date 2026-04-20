@@ -14,8 +14,8 @@ interface DialogProps {
   open: boolean;
   onClose: () => void;
   type?: 'default' | 'danger';
-  /** '2-buttons' = row, '2-buttons-straight' = column (filled + text), '1-button' = single */
-  cta?: '2-buttons' | '2-buttons-straight' | '1-button';
+  /** '2-buttons-horizontal' = row, '2-buttons-vertical' = column (filled + text), '1-button' = single */
+  cta?: '2-buttons-horizontal' | '2-buttons-vertical' | '1-button';
   title: string;
   description?: string;
   actions: DialogAction[];
@@ -29,7 +29,7 @@ function Dialog({
   open,
   onClose,
   type = 'default',
-  cta = '2-buttons',
+  cta = '2-buttons-horizontal',
   title,
   description,
   actions,
@@ -57,24 +57,27 @@ function Dialog({
 
   if (!open) return null;
 
-  const isStraight = cta === '2-buttons-straight';
+  const isVertical = cta === '2-buttons-vertical';
 
   const renderActions = () => {
-    if (isStraight) {
-      // Column layout: first = filled primary, second = text primary
+    if (isVertical) {
+      // Column layout: top = filled primary/danger, bottom = text primary
       return (
-        <div className="ui-dialog__actions--straight">
-          {actions.map((action, i) => (
-            <Button
-              key={i}
-              variant={i === 0 ? (action.variant ?? 'filled') : (action.variant ?? 'text')}
-              colorType={action.colorType ?? 'primary'}
-              size="large"
-              onClick={action.onClick}
-            >
-              {action.label}
-            </Button>
-          ))}
+        <div className="ui-dialog__actions--vertical">
+          {actions.map((action, i) => {
+            const isTop = i === 0;
+            return (
+              <Button
+                key={i}
+                variant={isTop ? (action.variant ?? 'filled') : 'text'}
+                colorType={isTop ? (action.colorType ?? 'primary') : 'primary'}
+                size="large"
+                onClick={action.onClick}
+              >
+                {action.label}
+              </Button>
+            );
+          })}
         </div>
       );
     }
@@ -132,7 +135,7 @@ function Dialog({
             <h2 id="ui-dialog-title" className="ui-dialog__title">{title}</h2>
             {description && <p className="ui-dialog__description">{description}</p>}
           </div>
-          {extraContent}
+          {extraContent && <div className="ui-dialog__extra">{extraContent}</div>}
         </div>
         <div className="ui-dialog__footer">
           {renderActions()}

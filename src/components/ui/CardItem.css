@@ -40,16 +40,16 @@
 .ui-card-item__body {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: var(--space-200);
 }
 
-/* Large title: Heading-CN/Small 18/26 */
+/* Large title: Heading-Large 24/32 */
 .ui-card-item--large .ui-card-item__title {
   font-family: var(--font-family);
-  font-size: 18px;
-  line-height: 26px;
-  font-weight: 500;
-  letter-spacing: 0.02em;
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
   color: var(--color-content-bold);
   margin: 0;
 }

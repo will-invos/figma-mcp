@@ -36,7 +36,7 @@
   font-weight: 400;
   letter-spacing: 0.04em;
   color: var(--color-content-subtle);
-  padding: 6px var(--space-300) 0;
+  padding: var(--space-150) var(--space-300) 0;
   flex-shrink: 0;
   cursor: text;
 }
@@ -88,7 +88,7 @@
 
 /* Inner-label visible: reduce top padding on textarea */
 .ui-textarea--inner-label .ui-textarea__input {
-  padding-top: 2px;
+  padding-top: var(--space-50);
   padding-bottom: var(--space-400);
 }
 

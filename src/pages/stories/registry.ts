@@ -40,7 +40,7 @@ import { TooltipStory } from './Tooltip.story.tsx'
 
 // Overlay
 import { DialogStory } from './Dialog.story.tsx'
-import { BottomSheetStory } from './BottomSheet.story.tsx'
+import { SheetStory } from './Sheet.story.tsx'
 
 export const categories: StoryCategory[] = [
   {
@@ -61,7 +61,7 @@ export const categories: StoryCategory[] = [
   },
   {
     name: 'Overlay',
-    stories: [DialogStory, BottomSheetStory],
+    stories: [DialogStory, SheetStory],
   },
 ]
 

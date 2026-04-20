@@ -1,30 +1,33 @@
 import React, { useEffect } from 'react'
 import { createPortal } from 'react-dom'
+import IconButton from './IconButton'
+import SheetHeader from './SheetHeader'
 import './Sheet.css'
 
-interface BottomSheetProps {
+interface SheetProps {
   open: boolean
   onClose: () => void
-  title?: string
-  titleSize?: 'large' | 'regular'
+  /** Size of the headline. Applied whether or not the grabber handle is shown. */
+  headlineSize?: 'regular' | 'large'
+  headline?: string
   children: React.ReactNode
   footer?: React.ReactNode
   /** Show the small drag handle at the top. Default: true. */
-  showHandle?: boolean
+  Handle?: boolean
   /** Portal container element. Defaults to document.body. Set this to render inside a themed container. */
   container?: Element
 }
 
-function BottomSheet({
+function Sheet({
   open,
   onClose,
-  title,
-  titleSize = 'regular',
+  headline,
+  headlineSize = 'regular',
   children,
   footer,
-  showHandle = true,
+  Handle = true,
   container,
-}: BottomSheetProps) {
+}: SheetProps) {
   useEffect(() => {
     if (!open) return
 
@@ -40,27 +43,33 @@ function BottomSheet({
 
   if (!open) return null
 
+  const hasHeadline = !!headline
+  const headerType = Handle ? 'grabber' : 'default'
+  const resolvedHeadlineSize = hasHeadline ? headlineSize : Handle ? 'none' : 'regular'
+
+  const closeButton = (
+    <IconButton
+      variant="ghost"
+      colorType="neutral"
+      size="medium"
+      aria-label="Close"
+      onClick={onClose}
+    >
+      <i className="icon-cross" aria-hidden="true" />
+    </IconButton>
+  )
+
   return createPortal(
     <>
       <div className="ui-sheet-overlay" onClick={onClose} />
       <div className="ui-sheet-container">
         <div className="ui-sheet">
-          {showHandle ? (
-            <div className="ui-sheet__grabber" />
-          ) : (
-            <div className="ui-sheet__header">
-              {title && (
-                <span className={`ui-sheet__title--${titleSize}`}>{title}</span>
-              )}
-              <button
-                className="ui-sheet__close"
-                onClick={onClose}
-                aria-label="Close"
-              >
-                <i className="icon-cross" aria-hidden="true" />
-              </button>
-            </div>
-          )}
+          <SheetHeader
+            type={headerType}
+            headlineSize={resolvedHeadlineSize}
+            headline={headline}
+            leading={headerType === 'default' ? closeButton : undefined}
+          />
           <div className="ui-sheet__body">{children}</div>
           {footer && <div className="ui-sheet__footer">{footer}</div>}
         </div>
@@ -70,5 +79,5 @@ function BottomSheet({
   )
 }
 
-export default BottomSheet
-export type { BottomSheetProps }
+export default Sheet
+export type { SheetProps }

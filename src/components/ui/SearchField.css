@@ -8,17 +8,17 @@
 .ui-search-field {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: var(--space-300);
   width: 100%;
 }
 .ui-search-field__input-wrapper {
   flex: 1;
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 12px;
+  gap: var(--space-300);
+  padding: var(--space-300);
   background: var(--color-background-sunken);
-  border-radius: 8px;
+  border-radius: var(--radius-200);
 }
 .ui-search-field__icon {
   flex-shrink: 0;

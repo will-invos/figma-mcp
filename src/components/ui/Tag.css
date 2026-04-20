@@ -22,7 +22,7 @@
   gap: var(--space-150);
   border-radius: var(--radius-200);
   font-size: 14px;
-  font-weight: 510;
+  font-weight: 500;
   line-height: 22px;
 }
 
@@ -43,7 +43,7 @@
   gap: var(--space-100);
   border-radius: var(--radius-150);
   font-size: 12px;
-  font-weight: 510;
+  font-weight: 500;
   line-height: 18px;
 }
 

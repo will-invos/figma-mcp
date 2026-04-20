@@ -41,17 +41,17 @@
   color: var(--color-content-subtle);
 }
 
-/* Medium — Heading-CN/Small (18/26, bold) */
+/* Medium — Heading-Large (24/32, bold) */
 .ui-list-header--medium {
   align-items: center;
   padding-top: var(--space-400);
   padding-bottom: var(--space-200);
 }
 .ui-list-header--medium .ui-list-header__title {
-  font-size: 18px;
-  line-height: 26px;
-  font-weight: 500;
-  letter-spacing: 0.02em;
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
   color: var(--color-content-bold);
 }
 .ui-list-header--medium .ui-list-header__trailing {

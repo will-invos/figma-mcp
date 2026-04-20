@@ -1,45 +1,109 @@
+/* SheetHeader — per Figma 3929:7248 (iOS UI Kit)
+   Total heights by (type, headlineSize):
+     grabber + none    → 24px  (12 grabber + 12 spacer)
+     grabber + regular → 60px  (12 grabber + 48 nav)
+     grabber + large   → 56px  (12 grabber + 44 content)
+     default + regular → 48px  (nav only)
+     default + large   → 80px  (48 nav + 32 title) */
+
 .ui-sheet-header {
   background: var(--color-background-default);
-  border-top-left-radius: 12px;
-  border-top-right-radius: 12px;
+  border-top-left-radius: var(--radius-600);
+  border-top-right-radius: var(--radius-600);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+  overflow: hidden;
 }
-.ui-sheet-header--divider {
-  border-bottom: 1px solid var(--color-border-subtle);
+
+/* ===== Grabber ===== */
+.ui-sheet-header__grabber {
+  position: relative;
+  height: 12px;
+  flex-shrink: 0;
 }
 .ui-sheet-header__handle {
-  width: 36px;
-  height: 5px;
-  border-radius: 2.5px;
-  background: var(--color-background-neutral-subtle);
-  margin: 8px auto 0;
-}
-.ui-sheet-header__row {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 44px;
-  padding: 0 16px;
-}
-.ui-sheet-header__leading {
   position: absolute;
-  left: 8px;
-  top: 0;
-  bottom: 0;
-  display: flex;
-  align-items: center;
+  top: var(--space-150);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 48px;
+  height: 4px;
+  border-radius: var(--radius-full);
+  background: var(--color-background-neutral-default);
 }
+/* headline=none → add 12px spacer below grabber (total 24px) */
+.ui-sheet-header--grabber.ui-sheet-header--headline-none {
+  min-height: 24px;
+}
+
+/* ===== Nav bar + leading / trailing slots ===== */
+.ui-sheet-header__nav {
+  position: relative;
+  height: 48px;
+  flex-shrink: 0;
+}
+
+.ui-sheet-header__leading,
 .ui-sheet-header__trailing {
   position: absolute;
-  right: 8px;
   top: 0;
   bottom: 0;
   display: flex;
   align-items: center;
 }
+.ui-sheet-header__leading  { left: 0;  padding-left: var(--space-100); }
+.ui-sheet-header__trailing { right: 0; padding-right: var(--space-100); }
+
+/* In the large content block the trailing is bottom-anchored (32px tall) */
+.ui-sheet-header__trailing--inline {
+  top: auto;
+  height: 32px;
+}
+
+/* Flatten nested icon-button hover — sheet headers are already elevated */
+.ui-sheet-header .ui-icon-button:hover,
+.ui-sheet-header .ui-icon-button:active {
+  background: transparent;
+  color: var(--color-content-default);
+}
+
+/* ===== Titles — typography comes from text-ios-* utility classes ===== */
 .ui-sheet-header__title {
   margin: 0;
-  font-size: 16px;
-  font-weight: 500;
   color: var(--color-content-bold);
+}
+.ui-sheet-header__title--regular {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+}
+.ui-sheet-header__title--large {
+  flex: 1;
+}
+
+/* ===== Large headline content block (only rendered for headlineSize=large) ===== */
+.ui-sheet-header__content {
+  position: relative;
+  display: flex;
+  padding: 0 var(--space-400);
+  flex-shrink: 0;
+  overflow: hidden;
+}
+/* grabber variant: inline row with 12px top padding */
+.ui-sheet-header--grabber .ui-sheet-header__content {
+  padding-top: var(--space-300);
+  align-items: center;
+}
+/* default variant: column, title fills width */
+.ui-sheet-header--default .ui-sheet-header__content {
+  flex-direction: column;
+  align-items: flex-start;
+}
+.ui-sheet-header--default .ui-sheet-header__title--large {
+  flex: none;
+  width: 100%;
 }

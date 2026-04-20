@@ -25,7 +25,7 @@
 /* Leading / Trailing slots — absolute positioned within the bar */
 .ui-nav-bar__leading {
   position: absolute;
-  left: 4px;
+  left: var(--space-100);
   top: 0;
   bottom: 0;
   display: flex;
@@ -34,7 +34,7 @@
 }
 .ui-nav-bar__trailing {
   position: absolute;
-  right: 4px;
+  right: var(--space-100);
   top: 0;
   bottom: 0;
   display: flex;
@@ -42,37 +42,43 @@
   color: var(--color-content-bold);
 }
 
-/* IconButton inside nav bar: fixed 48px tap target, no hover bg */
-.ui-nav-bar .ui-icon-button {
+/* IconButton inside nav bar: fixed 48px tap target, flat (no hover bg).
+   Pair base class with its variant modifier so our rule carries higher
+   specificity (0,4,0) than IconButton's per-colorType hover rules (0,3,0). */
+.ui-nav-bar__leading .ui-icon-button,
+.ui-nav-bar__trailing .ui-icon-button {
   width: 48px;
   height: 48px;
+  color: var(--color-content-default);
 }
-.ui-nav-bar .ui-icon-button:hover,
-.ui-nav-bar .ui-icon-button:active {
-  background: transparent;
+.ui-nav-bar__leading .ui-icon-button.ui-icon-button--ghost:hover,
+.ui-nav-bar__leading .ui-icon-button.ui-icon-button--ghost:active,
+.ui-nav-bar__trailing .ui-icon-button.ui-icon-button--ghost:hover,
+.ui-nav-bar__trailing .ui-icon-button.ui-icon-button--ghost:active {
+  background-color: transparent;
   color: var(--color-content-bold);
 }
 
 /* Text button inside nav bar: use content-default color */
 .ui-nav-bar .ui-nav-bar__leading .ui-button--text {
   color: var(--color-content-default);
-  margin: 0 8px 0 12px;
+  margin: 0 var(--space-200) 0 var(--space-300);
 }
 .ui-nav-bar .ui-nav-bar__trailing .ui-button--text {
   color: var(--color-content-default);
-  margin: 0 12px 0 8px;
+  margin: 0 var(--space-300) 0 var(--space-200);
 }
 
 /* Avatar inside leading/trailing */
 .ui-nav-bar__leading > .ui-avatar {
   width: 28px;
   height: 28px;
-  margin: 0 8px 0 12px;
+  margin: 0 var(--space-200) 0 var(--space-300);
 }
 .ui-nav-bar__trailing > .ui-avatar {
   width: 28px;
   height: 28px;
-  margin: 0 12px 0 8px;
+  margin: 0 var(--space-300) 0 var(--space-200);
 }
 
 /* ===== Regular title (centered, Label-CN/Large) ===== */
@@ -118,7 +124,7 @@
 .ui-nav-bar--home.ui-nav-bar--large .ui-nav-bar__trailing {
   position: static;
   flex-shrink: 0;
-  padding-right: 4px;
+  padding-right: var(--space-100);
 }
 
 /* ===== Search type: search bar below nav bar ===== */

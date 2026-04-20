@@ -77,8 +77,8 @@ export type { SearchFieldProps } from './SearchField';
 export { default as SheetHeader } from './SheetHeader';
 export type { SheetHeaderProps } from './SheetHeader';
 
-export { default as BottomSheet } from './BottomSheet';
-export type { BottomSheetProps } from './BottomSheet';
+export { default as Sheet } from './Sheet';
+export type { SheetProps } from './Sheet';
 
 export { default as CardItem } from './CardItem';
 export type { CardItemProps, CardItemDescRow } from './CardItem';

@@ -38,8 +38,8 @@
 /* Knob */
 .ui-switch__thumb {
   position: absolute;
-  top: 2px;
-  left: 2px;
+  top: var(--space-50);
+  left: var(--space-50);
   width: 24px;
   height: 24px;
   border-radius: var(--radius-full);

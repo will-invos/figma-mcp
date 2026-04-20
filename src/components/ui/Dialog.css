@@ -72,7 +72,7 @@
 
 .ui-dialog__title {
   font-size: 24px;
-  font-weight: 510;
+  font-weight: 500;
   line-height: 32px;
   color: var(--color-content-bold);
   margin: 0;
@@ -84,6 +84,14 @@
   line-height: 24px;
   color: var(--color-content-default);
   margin: 0;
+}
+
+/* --- Extra content slot --- */
+
+.ui-dialog__extra {
+  width: 100%;
+  text-align: left;
+  align-self: stretch;
 }
 
 /* --- Footer --- */
@@ -116,7 +124,7 @@
 
 /* --- Actions: 2 buttons straight (column) --- */
 
-.ui-dialog__actions--straight {
+.ui-dialog__actions--vertical {
   display: flex;
   flex-direction: column;
   gap: var(--space-500);
@@ -125,6 +133,6 @@
   width: 100%;
 }
 
-.ui-dialog__actions--straight > button {
+.ui-dialog__actions--vertical > button {
   width: 100%;
 }

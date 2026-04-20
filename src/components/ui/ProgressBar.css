@@ -1,7 +1,7 @@
 .ui-progress-bar {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: var(--space-150);
   width: 100%;
 }
 .ui-progress-bar__label {
@@ -12,14 +12,14 @@
   position: relative;
   width: 100%;
   background: var(--color-background-neutral-subtle);
-  border-radius: 999px;
+  border-radius: var(--radius-full);
   overflow: hidden;
 }
 .ui-progress-bar--small .ui-progress-bar__track { height: 4px; }
 .ui-progress-bar--medium .ui-progress-bar__track { height: 8px; }
 .ui-progress-bar__fill {
   height: 100%;
-  border-radius: 999px;
+  border-radius: var(--radius-full);
   transition: width 0.3s ease;
 }
 .ui-progress-bar--primary .ui-progress-bar__fill { background: var(--color-background-brand-default); }

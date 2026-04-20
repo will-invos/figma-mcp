@@ -227,7 +227,7 @@
   height: 16px;
   display: flex;
   align-items: flex-start;
-  padding-top: 1px;
+  padding-top: var(--space-25);
   color: var(--color-content-subtle);
 }
 

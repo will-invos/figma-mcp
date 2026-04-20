@@ -39,7 +39,7 @@
 
 .ui-button--large {
   height: 48px;
-  padding: 12px;
+  padding: var(--space-300);
   border-radius: var(--radius-300);
   font-size: 16px;
   line-height: 24px;
@@ -48,7 +48,7 @@
 
 .ui-button--medium {
   height: 38px;
-  padding: 8px;
+  padding: var(--space-200);
   border-radius: var(--radius-250);
   font-size: 14px;
   line-height: 22px;
@@ -57,7 +57,7 @@
 
 .ui-button--small {
   height: 30px;
-  padding: 6px;
+  padding: var(--space-150);
   border-radius: var(--radius-200);
   font-size: 12px;
   line-height: 18px;
@@ -88,30 +88,30 @@
 
 /* Leading/content/trailing padding per size */
 .ui-button--large .ui-button__content {
-  padding-left: 8px;
-  padding-right: 8px;
+  padding-left: var(--space-200);
+  padding-right: var(--space-200);
 }
 .ui-button--large .ui-button__leading {
-  padding-left: 6px;
+  padding-left: var(--space-150);
 }
 .ui-button--large .ui-button__trailing {
-  padding-right: 6px;
+  padding-right: var(--space-150);
 }
 
 .ui-button--medium .ui-button__content {
-  padding-left: 6px;
-  padding-right: 6px;
+  padding-left: var(--space-150);
+  padding-right: var(--space-150);
 }
 .ui-button--medium .ui-button__leading {
-  padding-left: 4px;
+  padding-left: var(--space-100);
 }
 .ui-button--medium .ui-button__trailing {
-  padding-right: 4px;
+  padding-right: var(--space-100);
 }
 
 .ui-button--small .ui-button__content {
-  padding-left: 4px;
-  padding-right: 4px;
+  padding-left: var(--space-100);
+  padding-right: var(--space-100);
 }
 /* Leading/trailing icon sizes per size variant */
 .ui-button--large .ui-button__leading > svg,
@@ -151,10 +151,10 @@
 }
 
 .ui-button--small .ui-button__leading {
-  padding-left: 2px;
+  padding-left: var(--space-50);
 }
 .ui-button--small .ui-button__trailing {
-  padding-right: 2px;
+  padding-right: var(--space-50);
 }
 
 /* ========================================
@@ -316,7 +316,7 @@
   border-radius: 0;
   background-color: transparent;
   border: none;
-  gap: 4px;
+  gap: var(--space-100);
 }
 
 .ui-button--text:hover {
