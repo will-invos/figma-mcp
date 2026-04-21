@@ -10,13 +10,25 @@ interface ListHeaderProps {
   className?: string
 }
 
+const HEADLINE_CLASS = {
+  small:  'text-label-large',
+  medium: 'text-heading-small',
+  large:  'text-display',
+} as const
+
+const TRAILING_CLASS = {
+  small:  'text-body-medium',
+  medium: 'text-body-medium',
+  large:  'text-body-large',
+} as const
+
 const ListHeader = React.forwardRef<HTMLDivElement, ListHeaderProps>(
   ({ headline, trailing, size = 'small', className }, ref) => {
     const classes = ['ui-list-header', `ui-list-header--${size}`, className].filter(Boolean).join(' ')
     return (
       <div ref={ref} className={classes}>
-        <span className="ui-list-header__headline">{headline}</span>
-        {trailing && <span className="ui-list-header__trailing">{trailing}</span>}
+        <span className={`${HEADLINE_CLASS[size]} ui-list-header__headline`}>{headline}</span>
+        {trailing && <span className={`${TRAILING_CLASS[size]} ui-list-header__trailing`}>{trailing}</span>}
       </div>
     )
   }

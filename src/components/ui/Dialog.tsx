@@ -130,8 +130,8 @@ function Dialog({
         <div className="ui-dialog__body">
           {image && <div className="ui-dialog__image">{image}</div>}
           <div className="ui-dialog__content">
-            <h2 id="ui-dialog-title" className="ui-dialog__title">{title}</h2>
-            {description && <p className="ui-dialog__description">{description}</p>}
+            <h2 id="ui-dialog-title" className="text-heading-large ui-dialog__title">{title}</h2>
+            {description && <p className="text-body-large ui-dialog__description">{description}</p>}
           </div>
           {extraContent && <div className="ui-dialog__extra">{extraContent}</div>}
         </div>

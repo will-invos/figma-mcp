@@ -8,8 +8,8 @@ export const TextAreaStory: StoryDef = {
   previewWidth: 360,
   props: {
     variant:     { type: 'enum', options: ['default', 'inner-label'], default: 'default' },
-    label:       { type: 'string', default: '備註' },
-    placeholder: { type: 'string', default: '請輸入內容' },
+    label:       { type: 'string', default: 'Label' },
+    placeholder: { type: 'string', default: 'Placeholder' },
     status:      { type: 'enum', options: ['default', 'error', 'disabled'], default: 'default' },
   },
 }

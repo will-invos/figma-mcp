@@ -1,15 +1,19 @@
 import React from 'react'
+import FieldGroupHeader from './FieldGroupHeader'
+import FieldGroupHelpText from './FieldGroupHelpText'
 import './FieldGroup.css'
 
 interface FieldGroupProps {
   /** Headline shown in the header (the field's main label). */
-  label?: string
+  headline?: string
   /** Optional secondary description shown under the headline. */
   description?: string
   /** Optional help text shown below the input. */
   helpText?: string
   /** Optional icon for help text (e.g. info circle). */
   helpIcon?: React.ReactNode
+  /** Help text alignment. */
+  helpTextAlign?: 'left' | 'right'
   /** Whether the field is in error state (affects help text color). */
   status?: 'default' | 'error'
   /** Children = the input control(s) — TextField, Select, Radio group, etc. */
@@ -18,11 +22,11 @@ interface FieldGroupProps {
 }
 
 /**
- * Form field wrapper providing consistent label + input + help layout.
- * Mirrors the Figma "Field group" component (containing FieldGroupHeader + content + FieldGroupHelpText).
+ * Form field wrapper composing FieldGroupHeader + content + FieldGroupHelpText,
+ * matching the Figma "Field group" component structure.
  */
 const FieldGroup = React.forwardRef<HTMLDivElement, FieldGroupProps>(
-  ({ label, description, helpText, helpIcon, status = 'default', children, className }, ref) => {
+  ({ headline, description, helpText, helpIcon, helpTextAlign = 'left', status = 'default', children, className }, ref) => {
     const classes = [
       'ui-field-group',
       status === 'error' && 'ui-field-group--error',
@@ -30,19 +34,9 @@ const FieldGroup = React.forwardRef<HTMLDivElement, FieldGroupProps>(
     ].filter(Boolean).join(' ')
     return (
       <div ref={ref} className={classes}>
-        {label && (
-          <div className="ui-field-group__header">
-            <span className="ui-field-group__label">{label}</span>
-            {description && <span className="ui-field-group__description">{description}</span>}
-          </div>
-        )}
+        {headline && <FieldGroupHeader headline={headline} description={description} />}
         <div className="ui-field-group__content">{children}</div>
-        {helpText && (
-          <div className="ui-field-group__help">
-            {helpIcon && <span className="ui-field-group__help-icon">{helpIcon}</span>}
-            <span className="ui-field-group__help-text">{helpText}</span>
-          </div>
-        )}
+        {helpText && <FieldGroupHelpText text={helpText} icon={helpIcon} status={status} align={helpTextAlign} />}
       </div>
     )
   }

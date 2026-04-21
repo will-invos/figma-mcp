@@ -1,8 +1,13 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
 import IconButton from './IconButton'
 import SheetHeader from './SheetHeader'
 import './Sheet.css'
+
+/** Past this fraction of the sheet height the release is treated as dismiss. */
+const DISMISS_DISTANCE_RATIO = 0.25
+/** Downward flick velocity (px/ms) that auto-dismisses regardless of distance. */
+const DISMISS_VELOCITY = 0.5
 
 interface SheetProps {
   open: boolean
@@ -28,6 +33,8 @@ function Sheet({
   Handle = true,
   container,
 }: SheetProps) {
+  const sheetRef = useRef<HTMLDivElement>(null)
+
   useEffect(() => {
     if (!open) return
 
@@ -40,6 +47,73 @@ function Sheet({
     document.addEventListener('keydown', handleKeyDown)
     return () => document.removeEventListener('keydown', handleKeyDown)
   }, [open, onClose])
+
+  // Drag-to-dismiss: only active when the grabber Handle is shown.
+  useEffect(() => {
+    if (!open || !Handle) return
+    const sheetEl = sheetRef.current
+    if (!sheetEl) return
+    const headerEl = sheetEl.querySelector<HTMLElement>('.ui-sheet-header--grabber')
+    if (!headerEl) return
+
+    let startY = 0
+    let startTime = 0
+    let dragging = false
+
+    const onPointerDown = (e: PointerEvent) => {
+      // Ignore right-click; primary button only.
+      if (e.button !== 0 && e.pointerType === 'mouse') return
+      dragging = true
+      startY = e.clientY
+      startTime = performance.now()
+      headerEl.setPointerCapture(e.pointerId)
+      // Disable enter animation while user is driving the position.
+      sheetEl.style.animation = 'none'
+      sheetEl.style.transition = 'none'
+    }
+
+    const onPointerMove = (e: PointerEvent) => {
+      if (!dragging) return
+      const dy = Math.max(0, e.clientY - startY)
+      sheetEl.style.transform = `translateY(${dy}px)`
+    }
+
+    const endDrag = (e: PointerEvent) => {
+      if (!dragging) return
+      dragging = false
+      const dy = e.clientY - startY
+      const dt = performance.now() - startTime
+      const velocity = dt > 0 ? dy / dt : 0
+      const height = sheetEl.offsetHeight || 1
+      const shouldDismiss = dy > height * DISMISS_DISTANCE_RATIO || velocity > DISMISS_VELOCITY
+
+      sheetEl.style.transition = 'transform 0.2s ease'
+      if (shouldDismiss) {
+        sheetEl.style.transform = 'translateY(100%)'
+        window.setTimeout(onClose, 200)
+      } else {
+        sheetEl.style.transform = 'translateY(0)'
+        // Reset any leftover inline styles once snap-back finishes.
+        window.setTimeout(() => {
+          if (!sheetEl.isConnected) return
+          sheetEl.style.transition = ''
+          sheetEl.style.transform = ''
+        }, 200)
+      }
+    }
+
+    headerEl.addEventListener('pointerdown', onPointerDown)
+    headerEl.addEventListener('pointermove', onPointerMove)
+    headerEl.addEventListener('pointerup', endDrag)
+    headerEl.addEventListener('pointercancel', endDrag)
+
+    return () => {
+      headerEl.removeEventListener('pointerdown', onPointerDown)
+      headerEl.removeEventListener('pointermove', onPointerMove)
+      headerEl.removeEventListener('pointerup', endDrag)
+      headerEl.removeEventListener('pointercancel', endDrag)
+    }
+  }, [open, Handle, onClose])
 
   if (!open) return null
 
@@ -54,16 +128,15 @@ function Sheet({
       size="medium"
       aria-label="Close"
       onClick={onClose}
-    >
-      <i className="icon-cross" aria-hidden="true" />
-    </IconButton>
+      icon={<i className="icon-cross" aria-hidden="true" />}
+    />
   )
 
   return createPortal(
     <>
       <div className="ui-sheet-overlay" onClick={onClose} />
       <div className="ui-sheet-container">
-        <div className="ui-sheet">
+        <div ref={sheetRef} className="ui-sheet">
           <SheetHeader
             type={headerType}
             headlineSize={resolvedHeadlineSize}

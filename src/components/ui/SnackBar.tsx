@@ -1,4 +1,5 @@
 import React from 'react'
+import Button from './Button'
 import Spinner from './Spinner'
 import './SnackBar.css'
 
@@ -21,9 +22,16 @@ const SnackBar = React.forwardRef<HTMLDivElement, SnackBarProps>(
     return (
       <div ref={ref} className={classes} role="status">
         {icon && <span className="ui-snackbar__icon">{icon}</span>}
-        <span className="ui-snackbar__text">{text}</span>
+        <span className="text-body-large ui-snackbar__text">{text}</span>
         {trailing === 'button' && (
-          <button className="ui-snackbar__action" onClick={onButtonClick}>{buttonText}</button>
+          <Button
+            variant="text"
+            colorType="primary"
+            size="large"
+            className="ui-snackbar__action"
+            onClick={onButtonClick}
+            text={buttonText}
+          />
         )}
         {trailing === 'spinner' && (
           <Spinner size="small" color="inverse" />

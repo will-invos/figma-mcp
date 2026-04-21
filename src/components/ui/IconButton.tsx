@@ -1,12 +1,17 @@
 import React from 'react';
 import Spinner from './Spinner';
+import Badge from './Badge';
 import './IconButton.css';
 
-interface IconButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface IconButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'children'> {
   variant?: 'filled' | 'outline' | 'ghost';
   colorType?: 'primary' | 'neutral' | 'danger' | 'prize' | 'donation';
   size?: 'large' | 'medium' | 'small' | 'xsmall';
   loading?: boolean;
+  /** The icon element to render inside the button. */
+  icon?: React.ReactNode;
+  /** Overlay a small red notification dot on the button. */
+  badge?: boolean;
   'aria-label': string;
 }
 
@@ -36,7 +41,8 @@ const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
       size = 'medium',
       loading = false,
       disabled,
-      children,
+      icon,
+      badge = false,
       className,
       ...rest
     },
@@ -59,6 +65,7 @@ const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
     const spinnerSize =
       size === 'large' ? 'medium' : size === 'medium' ? 'small' : size === 'small' ? 'xsmall' : 'xxsmall';
     const spinnerColor = resolveSpinnerColor(variant, colorType);
+    const badgeSize = size === 'large' ? 'large' : size === 'xsmall' ? 'small' : 'medium';
 
     return (
       <button
@@ -68,7 +75,12 @@ const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
         data-loading={loading || undefined}
         {...rest}
       >
-        {loading ? <Spinner size={spinnerSize} color={spinnerColor} /> : children}
+        {loading ? <Spinner size={spinnerSize} color={spinnerColor} /> : icon}
+        {badge && !loading && (
+          <span className="ui-icon-button__badge" aria-hidden="true">
+            <Badge variant="dot" size={badgeSize} />
+          </span>
+        )}
       </button>
     );
   }

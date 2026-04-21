@@ -7,16 +7,16 @@ import type { StoryDef } from './types'
 
 const leadingPresets: Record<string, React.ReactNode> = {
   none: undefined,
-  close: <IconButton variant="ghost" colorType="neutral" size="medium" aria-label="關閉"><CloseIcon /></IconButton>,
-  back: <IconButton variant="ghost" colorType="neutral" size="medium" aria-label="返回"><ArrowLeftIcon /></IconButton>,
-  search: <IconButton variant="ghost" colorType="neutral" size="medium" aria-label="搜尋"><SearchIconBig /></IconButton>,
+  close: <IconButton variant="ghost" colorType="neutral" size="medium" aria-label="關閉" icon={<CloseIcon />} />,
+  back: <IconButton variant="ghost" colorType="neutral" size="medium" aria-label="返回" icon={<ArrowLeftIcon />} />,
+  search: <IconButton variant="ghost" colorType="neutral" size="medium" aria-label="搜尋" icon={<SearchIconBig />} />,
   text: <Button variant="text" colorType="secondary" size="medium" text="取消" />,
 }
 
 const trailingPresets: Record<string, React.ReactNode> = {
   none: undefined,
-  more: <IconButton variant="ghost" colorType="neutral" size="medium" aria-label="更多"><MoreIcon /></IconButton>,
-  close: <IconButton variant="ghost" colorType="neutral" size="medium" aria-label="關閉"><CloseIcon /></IconButton>,
+  more: <IconButton variant="ghost" colorType="neutral" size="medium" aria-label="更多" icon={<MoreIcon />} />,
+  close: <IconButton variant="ghost" colorType="neutral" size="medium" aria-label="關閉" icon={<CloseIcon />} />,
   text: <Button variant="text" colorType="primary" size="medium" text="完成" />,
 }
 

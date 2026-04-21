@@ -2,40 +2,36 @@ import React from 'react'
 import './ProgressBar.css'
 
 interface ProgressBarProps {
-  /** 0–100. */
+  /** Progress 0–100. Ignored when `indeterminate` is true. */
   value: number
-  /** Shown label above the bar. */
-  label?: string
-  /** Indeterminate (animated) — ignores value when true. */
+  /** Animated indeterminate state (e.g. unknown progress). */
   indeterminate?: boolean
-  colorType?: 'primary' | 'success' | 'warning' | 'danger' | 'prize'
-  size?: 'small' | 'medium'
+  className?: string
 }
 
+/** Per Figma Web 3:1985 — 8px brand-filled bar with subtle track. */
 const ProgressBar = React.forwardRef<HTMLDivElement, ProgressBarProps>(
-  ({ value, label, indeterminate = false, colorType = 'primary', size = 'medium' }, ref) => {
+  ({ value, indeterminate = false, className }, ref) => {
     const pct = Math.max(0, Math.min(100, value))
     const classes = [
       'ui-progress-bar',
-      `ui-progress-bar--${size}`,
-      `ui-progress-bar--${colorType}`,
       indeterminate && 'ui-progress-bar--indeterminate',
+      className,
     ].filter(Boolean).join(' ')
     return (
-      <div ref={ref} className={classes}>
-        {label && <div className="ui-progress-bar__label">{label}</div>}
+      <div
+        ref={ref}
+        className={classes}
+        role="progressbar"
+        aria-valuenow={indeterminate ? undefined : pct}
+        aria-valuemin={0}
+        aria-valuemax={100}
+      >
+        <div className="ui-progress-bar__base" />
         <div
-          className="ui-progress-bar__track"
-          role="progressbar"
-          aria-valuenow={indeterminate ? undefined : pct}
-          aria-valuemin={0}
-          aria-valuemax={100}
-        >
-          <div
-            className="ui-progress-bar__fill"
-            style={!indeterminate ? { width: `${pct}%` } : undefined}
-          />
-        </div>
+          className="ui-progress-bar__fill"
+          style={!indeterminate ? { width: `${pct}%` } : undefined}
+        />
       </div>
     )
   }

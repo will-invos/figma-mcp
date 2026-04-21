@@ -13,7 +13,7 @@ const SearchField = React.forwardRef<HTMLInputElement, SearchFieldProps>(
     {
       value,
       onChange,
-      placeholder = '搜尋',
+      placeholder = 'Search',
       clearable = true,
       id,
       className,
@@ -32,7 +32,7 @@ const SearchField = React.forwardRef<HTMLInputElement, SearchFieldProps>(
             ref={ref}
             id={inputId}
             type="search"
-            className="ui-search-field__input"
+            className="text-body-large ui-search-field__input"
             value={value}
             onChange={(e) => onChange?.(e.target.value)}
             placeholder={placeholder}
@@ -42,7 +42,7 @@ const SearchField = React.forwardRef<HTMLInputElement, SearchFieldProps>(
             <button
               type="button"
               className="ui-search-field__clear"
-              aria-label="清除"
+              aria-label="Clear"
               onClick={() => onChange?.('')}
             >
               <i className="icon-cross-circle-filled" aria-hidden="true" />

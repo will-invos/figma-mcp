@@ -24,41 +24,18 @@
 }
 
 .ui-progress-group__leading {
-  font-size: 12px;
-  line-height: 18px;
   color: var(--color-content-brand-default);
   white-space: nowrap;
 }
 
 .ui-progress-group__trailing {
-  font-size: 12px;
-  line-height: 18px;
   color: var(--color-content-default);
   white-space: nowrap;
 }
 
-.ui-progress-group__bar {
-  position: relative;
-  height: 8px;
-  overflow: hidden;
+/* Aside layout: let the ProgressBar fill remaining row width beside the text. */
+.ui-progress-group--aside .ui-progress-bar {
   flex: 1;
   min-width: 0;
-}
-.ui-progress-group--top .ui-progress-group__bar {
-  width: 100%;
-  flex: none;
-}
-
-.ui-progress-group__base {
-  position: absolute;
-  inset: 0;
-  background: var(--color-background-neutral-subtle);
-  border-radius: var(--radius-full);
-}
-.ui-progress-group__fill {
-  position: absolute;
-  inset: 0 auto 0 0;
-  background: var(--color-background-brand-default);
-  border-radius: var(--radius-full);
-  transition: width 0.3s ease;
+  width: auto;
 }

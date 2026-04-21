@@ -4,6 +4,8 @@ import { useState } from 'react'
 
 const TagBarRender: React.FC<{ values: Record<string, any> }> = ({ values }) => {
   const [active, setActive] = useState('all')
+  const badgeOnSecond: 'dot' | number | undefined =
+    values.badge === 'dot' ? 'dot' : values.badge === 'number' ? 1 : undefined
   return (
     <TagBar
       activeKey={active}
@@ -11,7 +13,7 @@ const TagBarRender: React.FC<{ values: Record<string, any> }> = ({ values }) => 
       scrollable={values.scrollable}
       items={[
         { key: 'all', label: '全部' },
-        { key: 'unused', label: '未對獎' },
+        { key: 'unused', label: '未對獎', badge: badgeOnSecond },
         { key: 'won', label: '中獎' },
         { key: 'cashed', label: '已兌領' },
       ]}
@@ -24,6 +26,7 @@ export const TagBarStory: StoryDef = {
   name: 'TagBar',
   category: 'Display',
   props: {
+    badge:      { type: 'enum', options: ['none', 'dot', 'number'], default: 'none' },
     scrollable: { type: 'boolean', default: true },
   },
   Render: TagBarRender,

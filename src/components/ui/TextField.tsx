@@ -99,7 +99,10 @@ const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
           )}
           <div className="ui-text-field__content">
             {isInnerLabel && label && (
-              <label className="ui-text-field__label" htmlFor={inputId}>
+              <label
+                className={`${shouldFloat ? 'text-body-small' : 'text-body-large'} ui-text-field__label`}
+                htmlFor={inputId}
+              >
                 {label}
               </label>
             )}
@@ -107,7 +110,7 @@ const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
               ref={ref}
               id={inputId}
               type={inputType}
-              className="ui-text-field__input"
+              className="text-body-large ui-text-field__input"
               disabled={isDisabled}
               aria-invalid={isError || undefined}
               aria-describedby={helpId}

@@ -13,7 +13,7 @@ const ToastRender: React.FC<{ values: Record<string, any> }> = ({ values }) => {
       show({
         type: 'rich',
         message: values.text,
-        action: values.button ? { label: '確定', onClick: () => {} } : undefined,
+        action: values.button ? { label: 'Cancel', onClick: () => {} } : undefined,
       })
     }
   }
@@ -29,7 +29,7 @@ export const ToastStory: StoryDef = {
   category: 'Feedback',
   props: {
     type:   { type: 'enum', options: ['rich', 'loading'], default: 'rich' },
-    text:   { type: 'string', default: 'Text', when: { type: 'rich' } },
+    text:   { type: 'string', default: 'Message', when: { type: 'rich' } },
     button: { type: 'boolean', default: true, when: { type: 'rich' } },
   },
   Render: ToastRender,

@@ -73,46 +73,56 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       .filter(Boolean)
       .join(' ');
 
+    const currentValue = (value ?? defaultValue ?? '') as string;
+    const selectedOption = options.find((o) => o.value === currentValue);
+
     return (
       <div className={rootClasses}>
-        <div className="ui-select__input-wrapper">
+        <label className="ui-select__input-wrapper" htmlFor={selectId}>
           {leadingIcon && (
             <span className="ui-select__leading-icon">{leadingIcon}</span>
           )}
           <div className="ui-select__content">
             {isInnerLabel && (
-              <label className="ui-select__label" htmlFor={selectId}>
+              <span
+                className={`${shouldFloat ? 'text-body-small' : 'text-body-large'} ui-select__label`}
+              >
                 {shouldFloat ? label : (placeholder || label)}
-              </label>
+              </span>
             )}
-            <select
-              ref={ref}
-              id={selectId}
-              className="ui-select__input"
-              disabled={isDisabled}
-              aria-invalid={isError || undefined}
-              aria-describedby={helpId}
-              value={value}
-              defaultValue={defaultValue}
-              onChange={handleChange}
-              {...rest}
-            >
-              {placeholder && (
-                <option value="" disabled>
-                  {placeholder}
-                </option>
-              )}
-              {options.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-            </select>
+            {(!isInnerLabel || shouldFloat) && (
+              <span className="text-body-large ui-select__value">
+                {selectedOption?.label ?? (!isInnerLabel ? placeholder : '')}
+              </span>
+            )}
           </div>
           <span className="ui-select__chevron" aria-hidden="true">
             <i className="icon-chevron-down" />
           </span>
-        </div>
+          <select
+            ref={ref}
+            id={selectId}
+            className="ui-select__input"
+            disabled={isDisabled}
+            aria-invalid={isError || undefined}
+            aria-describedby={helpId}
+            value={value}
+            defaultValue={defaultValue}
+            onChange={handleChange}
+            {...rest}
+          >
+            {placeholder && (
+              <option value="" disabled>
+                {placeholder}
+              </option>
+            )}
+            {options.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
+        </label>
         {helpText && (
           <div id={helpId} className="ui-select__help">
             {helpIcon && (

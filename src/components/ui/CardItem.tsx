@@ -1,5 +1,6 @@
 import React from 'react'
 import Button from './Button'
+import Divider from './Divider'
 import './CardItem.css'
 
 interface CardItemDescRow {
@@ -123,7 +124,7 @@ const CardItem = React.forwardRef<HTMLDivElement, CardItemProps>(
           </div>
           {actionButton && <div className="ui-card-item__action">{actionButton}</div>}
         </div>
-        {divider && <div className="ui-card-item__divider" />}
+        {divider && <Divider className="ui-card-item__divider" />}
       </div>
     )
   }

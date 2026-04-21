@@ -13,11 +13,9 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding-left: var(--space-400);
-  padding-right: var(--space-400);
+  padding: 0 var(--space-400);
   background-color: var(--color-background-default);
   position: relative;
-  font-family: var(--font-family);
 }
 
 /* --- Container (inner row) --- */
@@ -36,27 +34,23 @@
   bottom: 0;
   left: var(--space-400);
   right: var(--space-400);
-  height: 1px;
-  border-bottom: 1px solid var(--color-border-subtle);
+  width: auto;
 }
 
 /* ========================================
  * Types (content padding)
  * ======================================== */
 
-/* Default: py 16 → total 16+24+16 = 56px */
 .ui-list-item--default .ui-list-item__content {
   padding-top: var(--space-400);
   padding-bottom: var(--space-400);
 }
 
-/* Rich (has description): py 16 → total 16+24+2+22+16 = 80px */
 .ui-list-item--rich .ui-list-item__content {
   padding-top: var(--space-400);
   padding-bottom: var(--space-400);
 }
 
-/* Compact: py 12 → total 12+24+12 = 48px */
 .ui-list-item--compact .ui-list-item__content {
   padding-top: var(--space-300);
   padding-bottom: var(--space-300);
@@ -74,7 +68,6 @@
   background-color: var(--color-background-neutral-subtle);
 }
 
-/* Disabled: opacity on container only (divider stays full) */
 .ui-list-item--disabled .ui-list-item__container {
   opacity: 0.4;
 }
@@ -87,45 +80,34 @@
  * Leading elements
  * ======================================== */
 
-/* Leading icon: 24×24, py matches content py */
 .ui-list-item__leading-icon {
   flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-top: var(--space-400);
-  padding-bottom: var(--space-400);
+  padding: var(--space-400) 0;
 }
 
 .ui-list-item--compact .ui-list-item__leading-icon {
-  padding-top: var(--space-300);
-  padding-bottom: var(--space-300);
+  padding: var(--space-300) 0;
 }
 
-.ui-list-item__leading-icon > svg {
-  width: 24px;
-  height: 24px;
-}
-
-.ui-list-item__leading-icon > i[class^='icon-'],
-.ui-list-item__leading-icon > i[class*=' icon-'] {
+.ui-list-item__leading-icon i[class^='icon-'],
+.ui-list-item__leading-icon i[class*=' icon-'] {
   width: 24px;
   height: 24px;
   font-size: 24px;
 }
 
-/* Leading extra: 40×40 slot (avatar/thumbnail), py matches content py */
 .ui-list-item__leading-extra {
   flex-shrink: 0;
   display: flex;
   align-items: center;
-  padding-top: var(--space-400);
-  padding-bottom: var(--space-400);
+  padding: var(--space-400) 0;
 }
 
 .ui-list-item--compact .ui-list-item__leading-extra {
-  padding-top: var(--space-100);
-  padding-bottom: var(--space-100);
+  padding: var(--space-100) 0;
 }
 
 /* ========================================
@@ -143,18 +125,10 @@
 }
 
 .ui-list-item__headline {
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 24px;
-  letter-spacing: 0.04em;
   color: var(--color-content-default);
 }
 
 .ui-list-item__description {
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 22px;
-  letter-spacing: 0.04em;
   color: var(--color-content-subtle);
 }
 
@@ -173,13 +147,11 @@
   flex-direction: column;
   align-items: flex-end;
   justify-content: center;
-  padding-top: var(--space-400);
-  padding-bottom: var(--space-400);
+  padding: var(--space-400) 0;
 }
 
 .ui-list-item--compact .ui-list-item__trailing {
-  padding-top: var(--space-300);
-  padding-bottom: var(--space-300);
+  padding: var(--space-300) 0;
 }
 
 .ui-list-item__trailing-text {
@@ -195,7 +167,7 @@
 }
 
 .ui-list-item__chevron {
-  color: var(--color-content-subtlest);
+  color: var(--color-content-default);
 }
 
 /* CTA trailing: reduce padding so button doesn't stretch list item height */

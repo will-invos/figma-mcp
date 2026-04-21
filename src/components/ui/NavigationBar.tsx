@@ -1,5 +1,7 @@
 import React from 'react'
 import SearchField from './SearchField'
+import Divider from './Divider'
+import Tabs from './Tabs'
 import './NavigationBar.css'
 
 interface NavigationBarTab {
@@ -59,8 +61,11 @@ const NavigationBar = React.forwardRef<HTMLElement, NavigationBarProps>(
       isHome && 'ui-nav-bar--home',
       type === 'search' && 'ui-nav-bar--search',
       type === 'tabs' && 'ui-nav-bar--tabs',
-      divider && 'ui-nav-bar--divider',
     ].filter(Boolean).join(' ')
+
+    // Tabs type has its own divider inside the tab strip — don't double up.
+    const bottomDivider = divider && type !== 'tabs' && <Divider />
+
 
     /* ── Bottom add-ons (search bar / tab strip) ── */
     const searchBar = type === 'search' && (
@@ -74,19 +79,12 @@ const NavigationBar = React.forwardRef<HTMLElement, NavigationBarProps>(
     )
 
     const tabStrip = type === 'tabs' && tabs && tabs.length > 0 && (
-      <div className="ui-nav-bar__tab-strip">
-        {tabs.map((tab, i) => (
-          <button
-            key={i}
-            type="button"
-            className={`ui-nav-bar__tab${i === activeTab ? ' ui-nav-bar__tab--active' : ''}`}
-            onClick={() => onTabChange?.(i)}
-          >
-            {tab.label}
-          </button>
-        ))}
-        <div className="ui-nav-bar__tab-strip-divider" />
-      </div>
+      <Tabs
+        type="fill"
+        items={tabs.map((tab, i) => ({ key: String(i), label: tab.label }))}
+        activeKey={String(activeTab)}
+        onChange={(key) => onTabChange?.(Number(key))}
+      />
     )
 
     const bottomAddon = searchBar || tabStrip || null
@@ -100,6 +98,7 @@ const NavigationBar = React.forwardRef<HTMLElement, NavigationBarProps>(
             {trailing && <div className="ui-nav-bar__trailing">{trailing}</div>}
           </div>
           {bottomAddon}
+          {bottomDivider}
         </header>
       )
     }
@@ -114,6 +113,7 @@ const NavigationBar = React.forwardRef<HTMLElement, NavigationBarProps>(
             <div className="ui-nav-bar__trailing">{trailing}</div>
           </div>
           {bottomAddon}
+          {bottomDivider}
         </header>
       )
     }
@@ -128,6 +128,7 @@ const NavigationBar = React.forwardRef<HTMLElement, NavigationBarProps>(
         <div className="ui-nav-bar__nav">
           <h1 className="text-display">{title}</h1>
         </div>
+        {bottomDivider}
       </header>
     )
   }

@@ -36,8 +36,7 @@ const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
     const wrapperClasses = [
       'ui-textarea',
       isInnerLabel && 'ui-textarea--inner-label',
-      focused && 'ui-textarea--focused',
-      status === 'error' && !focused && 'ui-textarea--error',
+      status === 'error' && 'ui-textarea--error',
       disabled && 'ui-textarea--disabled',
       className,
     ].filter(Boolean).join(' ')
@@ -48,13 +47,15 @@ const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
         onClick={() => internalRef.current?.focus()}
       >
         {isInnerLabel && (
-          <label className={`ui-textarea__label ${showShrunkLabel ? '' : 'ui-textarea__label--placeholder'}`}>
+          <label
+            className={`${showShrunkLabel ? 'text-body-small' : 'text-body-large'} ui-textarea__label ${showShrunkLabel ? '' : 'ui-textarea__label--placeholder'}`}
+          >
             {label}
           </label>
         )}
         <textarea
           ref={internalRef}
-          className="ui-textarea__input"
+          className="text-body-large ui-textarea__input"
           placeholder={isInnerLabel && !showShrunkLabel ? undefined : placeholder}
           value={value}
           onChange={(e) => { setHasValue(e.target.value.length > 0); onChange?.(e.target.value); autoGrow() }}

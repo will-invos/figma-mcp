@@ -44,7 +44,6 @@
 /* Rich variant: fixed 200 wide, gap --space-600 between body and action */
 .ui-toast--rich {
   width: 200px;
-  min-width: 200px;
   gap: var(--space-600);
 }
 
@@ -63,20 +62,21 @@
 
 .ui-toast__icon {
   display: inline-flex;
-  width: 48px;
-  height: 48px;
   align-items: center;
   justify-content: center;
+  width: 48px;
+  height: 48px;
+}
+.ui-toast__icon i[class^='icon-'],
+.ui-toast__icon i[class*=' icon-'] {
+  width: 48px;
+  height: 48px;
+  font-size: 48px;
 }
 
 .ui-toast__text {
   margin: 0;
   width: 100%;
-  font-family: var(--font-family);
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 24px;
-  letter-spacing: 0.04em;
   color: var(--color-content-inverse-bold);
   text-align: center;
   overflow: hidden;
@@ -84,19 +84,4 @@
   white-space: nowrap;
 }
 
-.ui-toast__action {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--space-100);
-  background: transparent;
-  border: none;
-  padding: 0;
-  font-family: var(--font-family);
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 24px;
-  letter-spacing: 0.04em;
-  color: var(--color-content-inverse-bold);
-  cursor: pointer;
-}
+/* Button styling comes from the <Button variant="text" colorType="inverse"> instance. */

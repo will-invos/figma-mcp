@@ -12,13 +12,13 @@
 }
 
 .ui-list-footer__icon {
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
+  padding-top: var(--space-75);
+}
+.ui-list-footer__icon i[class^='icon-'],
+.ui-list-footer__icon i[class*=' icon-'] {
   width: 16px;
-  height: 22px; /* align with text line-height */
+  height: 16px;
   font-size: 16px;
-  justify-content: center;
 }
 
 .ui-list-footer__text {

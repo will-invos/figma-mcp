@@ -10,20 +10,16 @@
   display: inline-flex;
   align-items: center;
   white-space: nowrap;
-  font-family: var(--font-family);
 }
 
 /* ========================================
- * Sizes
+ * Sizes (typography via text-label-* utility classes)
  * ======================================== */
 
 .ui-tag--medium {
   padding: var(--space-100) var(--space-200);
   gap: var(--space-150);
   border-radius: var(--radius-200);
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 22px;
 }
 
 .ui-tag--medium .ui-tag__icon {
@@ -43,9 +39,6 @@
   padding: var(--space-50) var(--space-150);
   gap: var(--space-100);
   border-radius: var(--radius-150);
-  font-size: 12px;
-  font-weight: 500;
-  line-height: 18px;
 }
 
 .ui-tag--small .ui-tag__icon {

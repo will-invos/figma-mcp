@@ -12,7 +12,7 @@
 
 .ui-slider__track {
   position: absolute;
-  left: var(--space-300);   /* leave room for thumb (24/2) */
+  left: var(--space-300);
   right: var(--space-300);
   height: 4px;
   background: var(--color-border-subtle);

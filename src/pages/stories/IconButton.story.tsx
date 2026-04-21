@@ -8,13 +8,20 @@ export const IconButtonStory: StoryDef = {
   category: 'Forms',
   props: {
     variant:   { type: 'enum', options: ['filled', 'outline', 'ghost'], default: 'filled' },
-    colorType: { type: 'enum', options: ['primary', 'neutral', 'danger', 'prize', 'donation'], default: 'primary' },
+    colorType: { type: 'enum', options: ['primary', 'neutral', 'danger', 'prize', 'donation'], default: 'primary',
+      optionsByDep: { variant: {
+        filled:  ['primary', 'neutral', 'danger', 'prize', 'donation'],
+        outline: ['primary'],
+        ghost:   ['primary', 'neutral'],
+      }},
+    },
     size:      { type: 'enum', options: ['large', 'medium', 'small', 'xsmall'], default: 'medium' },
+    badge:     { type: 'boolean', default: false },
     disabled:  { type: 'boolean', default: false },
     loading:   { type: 'boolean', default: false },
   },
   fixedProps: {
     'aria-label': 'action',
-    children: <PlusIcon />,
+    icon: <PlusIcon />,
   },
 }

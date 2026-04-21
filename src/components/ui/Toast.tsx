@@ -1,5 +1,6 @@
 import React, { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
+import Button from './Button'
 import Spinner from './Spinner'
 import './Toast.css'
 
@@ -88,20 +89,21 @@ function ToastProvider({ children }: { children: React.ReactNode }) {
                       {toast.icon ?? <Spinner size="xxlarge" color="inverse" />}
                     </span>
                     {toast.message && (
-                      <p className="ui-toast__text">{toast.message}</p>
+                      <p className="text-body-large ui-toast__text">{toast.message}</p>
                     )}
                   </div>
                   {toast.action && (
-                    <button
-                      type="button"
+                    <Button
+                      variant="text"
+                      colorType="inverse"
+                      size="large"
                       className="ui-toast__action"
                       onClick={() => {
                         toast.action!.onClick()
                         dismiss(toast.id)
                       }}
-                    >
-                      {toast.action.label}
-                    </button>
+                      text={toast.action.label}
+                    />
                   )}
                 </>
               )}

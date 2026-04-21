@@ -21,7 +21,7 @@ const FieldGroupHelpText = React.forwardRef<HTMLDivElement, FieldGroupHelpTextPr
     return (
       <div ref={ref} className={classes} style={align === 'right' ? { justifyContent: 'flex-end' } : undefined}>
         {icon && <span className="ui-field-group__help-icon">{icon}</span>}
-        <span className="ui-field-group__help-text">{text}</span>
+        <span className="text-body-medium ui-field-group__help-text">{text}</span>
       </div>
     )
   }

@@ -8,19 +8,19 @@ import type { StoryDef } from './types'
 
 const leadingPresets: Record<string, React.ReactNode> = {
   none: undefined,
-  back: <IconButton variant="ghost" colorType="neutral" size="medium" aria-label="返回"><ArrowLeftIcon /></IconButton>,
-  close: <IconButton variant="ghost" colorType="neutral" size="medium" aria-label="關閉"><CloseIcon /></IconButton>,
+  back: <IconButton variant="ghost" colorType="neutral" size="medium" aria-label="返回" icon={<ArrowLeftIcon />} />,
+  close: <IconButton variant="ghost" colorType="neutral" size="medium" aria-label="關閉" icon={<CloseIcon />} />,
   avatar: <Avatar name="Will" size="small" />,
   text: <Button variant="text" colorType="secondary" size="medium" text="取消" />,
 }
 
 const trailingPresets: Record<string, React.ReactNode> = {
   none: undefined,
-  icon: <IconButton variant="ghost" colorType="neutral" size="medium" aria-label="更多"><MoreIcon /></IconButton>,
+  icon: <IconButton variant="ghost" colorType="neutral" size="medium" aria-label="更多" icon={<MoreIcon />} />,
   icons: (
     <>
-      <IconButton variant="ghost" colorType="neutral" size="medium" aria-label="搜尋"><SearchIconBig /></IconButton>
-      <IconButton variant="ghost" colorType="neutral" size="medium" aria-label="分享"><ShareIcon /></IconButton>
+      <IconButton variant="ghost" colorType="neutral" size="medium" aria-label="搜尋" icon={<SearchIconBig />} />
+      <IconButton variant="ghost" colorType="neutral" size="medium" aria-label="分享" icon={<ShareIcon />} />
     </>
   ),
   text: <Button variant="text" colorType="primary" size="medium" text="完成" />,

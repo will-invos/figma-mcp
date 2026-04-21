@@ -1,9 +1,12 @@
 import React from 'react'
+import Badge from './Badge'
 import './TagBar.css'
 
 interface TagBarItem {
   key: string
   label: string
+  /** Optional badge next to the label: 'dot' (unread marker) or a numeric count. */
+  badge?: 'dot' | number
 }
 
 interface TagBarProps {
@@ -38,7 +41,13 @@ const TagBar = React.forwardRef<HTMLDivElement, TagBarProps>(
                 .filter(Boolean).join(' ')}
               onClick={() => onChange?.(item.key)}
             >
-              {item.label}
+              <span className="text-label-medium">{item.label}</span>
+              {item.badge === 'dot' && (
+                <Badge variant="dot" size="medium" border={false} />
+              )}
+              {typeof item.badge === 'number' && (
+                <Badge variant="number" size="large" count={item.badge} border={false} />
+              )}
             </button>
           )
         })}

@@ -9,10 +9,6 @@
   color: var(--color-content-bold);
 }
 
-.ui-nav-bar--divider {
-  border-bottom: 1px solid var(--color-border-subtle);
-}
-
 /* ===== Regular bar row (44px, centered title) ===== */
 .ui-nav-bar__bar {
   position: relative;
@@ -48,7 +44,7 @@
 .ui-nav-bar__leading .ui-icon-button,
 .ui-nav-bar__trailing .ui-icon-button {
   width: 48px;
-  height: 48px;
+  height: 44px;
   color: var(--color-content-default);
 }
 .ui-nav-bar__leading .ui-icon-button.ui-icon-button--ghost:hover,
@@ -132,59 +128,6 @@
   padding-bottom: var(--space-200);
 }
 .ui-nav-bar__search-bar {
-  padding: 0 var(--space-400);
+  padding: 0 var(--space-400) var(--space-200);
 }
 
-/* Tabs type has its own built-in divider; suppress the outer one */
-.ui-nav-bar--tabs.ui-nav-bar--divider {
-  border-bottom: none;
-}
-
-/* ===== Tabs type: horizontal tab strip below nav bar ===== */
-.ui-nav-bar__tab-strip {
-  position: relative;
-  display: flex;
-  align-items: flex-start;
-  overflow: hidden;
-  background: var(--color-background-default);
-}
-.ui-nav-bar__tab-strip-divider {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 1px;
-  border-bottom: 1px solid var(--color-border-subtle);
-}
-.ui-nav-bar__tab {
-  flex: 1 0 0;
-  min-width: 48px;
-  height: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  padding: 0 var(--space-200);
-  font-family: var(--font-family);
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 22px;
-  letter-spacing: 0.04em;
-  color: var(--color-content-subtlest);
-}
-.ui-nav-bar__tab--active {
-  color: var(--color-content-bold);
-}
-.ui-nav-bar__tab--active::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 2px;
-  background: var(--color-content-bold);
-  z-index: 1;
-}

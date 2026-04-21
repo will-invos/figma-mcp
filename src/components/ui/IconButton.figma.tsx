@@ -46,9 +46,8 @@ figma.connect(
         size="medium"
         disabled={disabled}
         loading={loading}
-      >
-        <i className="icon-star" aria-hidden="true" />
-      </IconButton>
+        icon={<i className="icon-star" aria-hidden="true" />}
+      />
     ),
   }
 )

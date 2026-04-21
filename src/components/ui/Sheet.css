@@ -35,7 +35,7 @@
   border-radius: var(--radius-600) var(--radius-600) 0 0;
   max-height: 90vh;
   width: 100%;
-  max-width: 430px;
+  max-width: 480px;
   display: flex;
   flex-direction: column;
   box-shadow: var(--shadow-sheet);

@@ -160,6 +160,5 @@
   bottom: 0;
   left: var(--space-400);
   right: var(--space-400);
-  height: 1px;
-  background: var(--color-border-subtle);
+  width: auto;
 }

@@ -3,6 +3,7 @@ import Button from './Button';
 import Switch from './Switch';
 import Checkbox from './Checkbox';
 import Spinner from './Spinner';
+import Divider from './Divider';
 import './ListItem.css';
 
 interface ListItemProps {
@@ -129,14 +130,14 @@ const ListItem = React.forwardRef<HTMLDivElement, ListItemProps>(
             <span className="ui-list-item__leading-icon">{leadingIcon}</span>
           )}
           <div className="ui-list-item__content">
-            <span className="ui-list-item__headline">{headline}</span>
+            <span className="text-body-large ui-list-item__headline">{headline}</span>
             {description && type === 'rich' && (
-              <span className="ui-list-item__description">{description}</span>
+              <span className="text-body-medium ui-list-item__description">{description}</span>
             )}
           </div>
           {renderTrailing()}
         </div>
-        {showDivider && <div className="ui-list-item__divider" />}
+        {showDivider && <Divider className="ui-list-item__divider" />}
       </div>
     );
   }

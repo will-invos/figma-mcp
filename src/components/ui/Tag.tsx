@@ -23,6 +23,7 @@ const Tag = React.forwardRef<HTMLSpanElement, TagProps>(
     ref
   ) => {
     const classes = [
+      size === 'small' ? 'text-label-small' : 'text-label-medium',
       'ui-tag',
       `ui-tag--${size}`,
       `ui-tag--${variant}-${colorType}`,

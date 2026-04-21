@@ -3,6 +3,7 @@ import type { StoryCategory, StoryDef } from './types'
 // Chrome
 import { NavigationBarStory } from './NavigationBar.story.tsx'
 import { TabBarStory } from './TabBar.story.tsx'
+import { TabsStory } from './Tabs.story.tsx'
 import { DividerStory } from './Divider.story'
 
 // Forms
@@ -45,7 +46,7 @@ import { SheetStory } from './Sheet.story.tsx'
 export const categories: StoryCategory[] = [
   {
     name: 'Chrome',
-    stories: [NavigationBarStory, TabBarStory, DividerStory],
+    stories: [NavigationBarStory, TabBarStory, TabsStory, DividerStory],
   },
   {
     name: 'Forms',

@@ -51,6 +51,9 @@ export type { NavigationBarProps } from './NavigationBar';
 export { default as TabBar } from './TabBar';
 export type { TabBarProps, TabItem } from './TabBar';
 
+export { default as Tabs } from './Tabs';
+export type { TabsProps, TabsItem } from './Tabs';
+
 export { default as Divider } from './Divider';
 export type { DividerProps } from './Divider';
 

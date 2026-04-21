@@ -9,16 +9,11 @@
   gap: var(--space-50);
   padding: var(--space-200) 0;
 }
-.ui-field-group__label {
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 24px;
-  letter-spacing: 0.04em;
+.ui-field-group__header .ui-field-group__label {
   color: var(--color-content-bold);
 }
-.ui-field-group__description {
-  font-size: 14px;
-  color: var(--color-content-subtle);
+.ui-field-group__header .ui-field-group__description {
+  color: var(--color-content-default);
 }
 .ui-field-group__content {
   display: flex;
@@ -29,19 +24,19 @@
   align-items: flex-start;
   gap: var(--space-200);
   padding-top: var(--space-200);
+  color: var(--color-content-subtle);
 }
 .ui-field-group__help-icon {
   display: inline-flex;
-  color: var(--color-content-subtle);
   flex-shrink: 0;
   padding-top: var(--space-25);
 }
-.ui-field-group__help-text {
-  font-size: 12px;
-  line-height: 18px;
-  color: var(--color-content-subtle);
+.ui-field-group__help-icon i[class^='icon-'],
+.ui-field-group__help-icon i[class*=' icon-'] {
+  width: 16px;
+  height: 16px;
+  font-size: 16px;
 }
-.ui-field-group--error .ui-field-group__help-icon,
-.ui-field-group--error .ui-field-group__help-text {
+.ui-field-group--error.ui-field-group__help {
   color: var(--color-content-danger-default);
 }

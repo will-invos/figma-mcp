@@ -47,8 +47,8 @@ const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
         <span className="ui-checkbox__indicator" aria-hidden="true" />
         {(label || description) && (
           <span className="ui-checkbox__content">
-            {label && <span className="ui-checkbox__label">{label}</span>}
-            {description && <span className="ui-checkbox__description">{description}</span>}
+            {label && <span className="text-body-large ui-checkbox__label">{label}</span>}
+            {description && <span className="text-body-medium ui-checkbox__description">{description}</span>}
           </span>
         )}
       </label>

@@ -1,0 +1,85 @@
+/* ========================================
+ * Tabs — per Figma 10972:5454
+ *
+ * Fill:    each tab fills 1 0 0 of the row (min-width 48px), 48px tall
+ * Compact: tabs auto-size; container has 24px gap and 16px horizontal padding
+ *
+ * Active indicator: 2px bold line at the bottom of the tab.
+ * Bottom divider spans the full width of the Tabs container.
+ * ======================================== */
+
+.ui-tabs {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  background: var(--color-background-default);
+  width: 100%;
+}
+
+/* Bottom divider spans full width, positioned absolutely under all tabs */
+.ui-tabs__divider {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: auto;
+}
+
+/* ===== Variants ===== */
+
+.ui-tabs--fill .ui-tabs__item {
+  flex: 1 0 0;
+  min-width: 48px;
+}
+
+.ui-tabs--compact {
+  gap: var(--space-600);
+  padding: 0 var(--space-400);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.ui-tabs--compact::-webkit-scrollbar {
+  display: none;
+}
+.ui-tabs--compact .ui-tabs__item {
+  flex-shrink: 0;
+}
+
+/* ===== Tab item ===== */
+
+.ui-tabs__item {
+  height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 var(--space-200);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--color-content-subtlest);
+  position: relative;
+  transition: color 0.15s;
+}
+
+.ui-tabs__content {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-100);
+}
+
+.ui-tabs__item--active {
+  color: var(--color-content-bold);
+  cursor: default;
+}
+
+.ui-tabs__item--active::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: var(--color-content-bold);
+  z-index: 1;
+}

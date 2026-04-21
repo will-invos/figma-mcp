@@ -9,9 +9,9 @@
   padding: var(--space-300);
   border-radius: var(--radius-300);
   background: var(--color-background-toast);
-  box-shadow: 0 8px 16px var(--color-shadow-default);
-  width: 100%;
-  max-width: 369px;
+  box-shadow: var(--shadow-large);
+  width: 96%;
+  max-width: 480px;
   box-sizing: border-box;
 }
 
@@ -24,7 +24,6 @@
   height: 20px;
   color: var(--color-content-inverse-bold);
 }
-.ui-snackbar__icon svg,
 .ui-snackbar__icon i[class^='icon-'],
 .ui-snackbar__icon i[class*=' icon-'] {
   width: 20px;
@@ -35,27 +34,14 @@
 .ui-snackbar__text {
   flex: 1;
   min-width: 0;
-  font-family: var(--font-family);
-  font-size: 16px;
-  line-height: 24px;
-  font-weight: 400;
-  letter-spacing: 0.04em;
   color: var(--color-content-inverse-bold);
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.ui-snackbar__action {
-  flex-shrink: 0;
-  font-family: var(--font-family);
-  font-size: 16px;
-  line-height: 24px;
-  font-weight: 500;
-  letter-spacing: 0.04em;
+/* Toast background is always dark → remap the text Button's brand color to
+   its inverse counterpart so it stays readable. */
+.ui-snackbar .ui-snackbar__action.ui-button--text-primary {
   color: var(--color-content-inverse-brand);
-  white-space: nowrap;
-  cursor: pointer;
-  background: none;
-  border: none;
-  padding: 0;
+  flex-shrink: 0;
 }

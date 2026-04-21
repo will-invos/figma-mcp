@@ -18,6 +18,16 @@
 }
 
 /* ===== Grabber ===== */
+/* Grabber variant turns the whole header into the drag-to-dismiss surface.
+   touch-action: none prevents the browser from hijacking vertical drags as page scroll. */
+.ui-sheet-header--grabber {
+  touch-action: none;
+  cursor: grab;
+  user-select: none;
+}
+.ui-sheet-header--grabber:active {
+  cursor: grabbing;
+}
 .ui-sheet-header__grabber {
   position: relative;
   height: 12px;

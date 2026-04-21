@@ -9,6 +9,16 @@
   flex-shrink: 0;
   outline: none;
   padding: 0;
+  position: relative;
+}
+
+/* Badge overlay: top-right notification dot */
+.ui-icon-button__badge {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  display: inline-flex;
+  pointer-events: none;
 }
 
 /* ========================================

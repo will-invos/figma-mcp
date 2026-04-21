@@ -1,10 +1,4 @@
-/* Per Figma 4351:24352 — Search field
-   - bg: color/background/sunken (#f7f8f9)
-   - padding: 12px all sides
-   - border-radius: 8px
-   - gap: 12px between icon / input / clear
-   - search icon + clear icon: 20×20
-   - text: 16 / line-height 24, Regular (system default font) */
+/* Per Figma 4351:24352 — Search field */
 .ui-search-field {
   display: flex;
   align-items: center;
@@ -23,10 +17,13 @@
 .ui-search-field__icon {
   flex-shrink: 0;
   display: inline-flex;
-  width: 24px;
-  height: 24px;
-  font-size: 24px;
-  color: var(--color-content-subtlest);
+  color: var(--color-content-default);
+}
+.ui-search-field__icon i[class^='icon-'],
+.ui-search-field__icon i[class*=' icon-'] {
+  width: 20px;
+  height: 20px;
+  font-size: 20px;
 }
 .ui-search-field__input {
   flex: 1;
@@ -35,11 +32,7 @@
   border: none;
   outline: none;
   padding: 0;
-  font-size: 16px;
-  line-height: 24px;
-  letter-spacing: 0.04em;
   color: var(--color-content-default);
-  font-family: inherit;
 }
 .ui-search-field__input::placeholder {
   color: var(--color-content-subtlest);
@@ -55,10 +48,13 @@
   cursor: pointer;
   padding: 0;
   display: inline-flex;
+  color: var(--color-content-subtle);
+}
+.ui-search-field__clear i[class^='icon-'],
+.ui-search-field__clear i[class*=' icon-'] {
   width: 20px;
   height: 20px;
   font-size: 20px;
-  color: var(--color-content-subtlest);
 }
 .ui-search-field__clear:hover {
   color: var(--color-content-subtle);

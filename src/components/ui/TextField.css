@@ -112,13 +112,9 @@
 }
 
 .ui-text-field__label {
-  font-family: var(--font-family);
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 24px;
   color: var(--color-content-subtlest);
   pointer-events: none;
-  transition: font-size 0.15s, line-height 0.15s, color 0.15s;
+  transition: color 0.15s;
 }
 
 /* Not floated: input is absolute, transparent but focusable */
@@ -138,8 +134,6 @@
 }
 
 .ui-text-field--inner-label.ui-text-field--float .ui-text-field__label {
-  font-size: 12px;
-  line-height: 18px;
   color: var(--color-content-subtle);
 }
 
@@ -166,10 +160,6 @@
   padding: 0;
   margin: 0;
   background: transparent;
-  font-family: var(--font-family);
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 24px;
   color: var(--color-content-default);
 }
 

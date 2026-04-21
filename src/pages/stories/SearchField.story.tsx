@@ -20,7 +20,7 @@ export const SearchFieldStory: StoryDef = {
   category: 'Forms',
   previewWidth: 360,
   props: {
-    placeholder: { type: 'string', default: '搜尋發票' },
+    placeholder: { type: 'string', default: 'Search' },
     clearable:   { type: 'boolean', default: true },
   },
   Render: SearchFieldRender,

@@ -48,9 +48,10 @@ const FieldGroupRender: React.FC<{ values: Record<string, any> }> = ({ values })
 
   return (
     <FieldGroup
-      label={values.label}
+      headline={values.headline}
       helpText={values.helpText ? values.helpTextBody : undefined}
-      helpIcon={values.helpText ? <i className="icon-info" aria-hidden="true" /> : undefined}
+      helpIcon={values.helpText && values.helpIcon ? <i className="icon-info" aria-hidden="true" /> : undefined}
+      helpTextAlign={values.helpTextAlign}
       status={values.status}
     >
       {renderField()}
@@ -64,11 +65,13 @@ export const FieldGroupStory: StoryDef = {
   category: 'Forms',
   previewWidth: 360,
   props: {
-    field:         { type: 'enum', options: ['textfield', 'textarea', 'checkbox', 'radio', 'select'], default: 'textfield' },
-    label:         { type: 'string', default: 'Label', when: { header: true } },
-    helpText:      { type: 'boolean', default: true },
-    helpTextBody: { type: 'string', default: 'Help text', when: { helpText: true } },
-    status:        { type: 'enum', options: ['default', 'error'], default: 'default' },
+    field:          { type: 'enum', options: ['textfield', 'textarea', 'checkbox', 'radio', 'select'], default: 'textfield' },
+    headline:       { type: 'string', default: 'Headline' },
+    helpText:       { type: 'boolean', default: true },
+    helpTextBody:   { type: 'string', default: 'Help text', when: { helpText: true } },
+    helpIcon:       { type: 'boolean', default: true, when: { helpText: true } },
+    helpTextAlign:  { type: 'enum', options: ['left', 'right'], default: 'left', when: { helpText: true } },
+    status:         { type: 'enum', options: ['default', 'error'], default: 'default' },
   },
   Render: FieldGroupRender,
 }

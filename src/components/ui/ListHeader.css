@@ -11,74 +11,48 @@
 .ui-list-header__headline {
   flex: 1;
   min-width: 0;
-  font-family: var(--font-family);
   margin: 0;
 }
 .ui-list-header__trailing {
   flex-shrink: 0;
   white-space: nowrap;
-  font-family: var(--font-family);
 }
 
-/* Small — Label-CN/Medium (14/22, subtle) */
+/* Typography is applied via text-* utility classes; CSS only handles layout + color. */
+
+/* Small */
 .ui-list-header--small {
   align-items: flex-end;
   padding-top: var(--space-400);
   padding-bottom: var(--space-200);
 }
-.ui-list-header--small .ui-list-header__headline {
-  font-size: 14px;
-  line-height: 22px;
-  font-weight: 500;
-  letter-spacing: 0.04em;
-  color: var(--color-content-subtle);
-}
+.ui-list-header--small .ui-list-header__headline,
 .ui-list-header--small .ui-list-header__trailing {
-  font-size: 14px;
-  line-height: 22px;
-  font-weight: 400;
-  letter-spacing: 0.04em;
   color: var(--color-content-subtle);
 }
 
-/* Medium — Heading-Large (24/32, bold) */
+/* Medium */
 .ui-list-header--medium {
   align-items: center;
   padding-top: var(--space-400);
   padding-bottom: var(--space-200);
 }
 .ui-list-header--medium .ui-list-header__headline {
-  font-size: 24px;
-  line-height: 32px;
-  font-weight: 600;
-  letter-spacing: 0.04em;
   color: var(--color-content-bold);
 }
 .ui-list-header--medium .ui-list-header__trailing {
-  font-size: 14px;
-  line-height: 22px;
-  font-weight: 400;
-  letter-spacing: 0.04em;
   color: var(--color-content-default);
 }
 
-/* Large — Display-CN (28/36, bold) */
+/* Large */
 .ui-list-header--large {
   align-items: flex-end;
   padding-top: var(--space-200);
   padding-bottom: var(--space-200);
 }
 .ui-list-header--large .ui-list-header__headline {
-  font-size: 28px;
-  line-height: 36px;
-  font-weight: 500;
-  letter-spacing: 0;
   color: var(--color-content-bold);
 }
 .ui-list-header--large .ui-list-header__trailing {
-  font-size: 16px;
-  line-height: 24px;
-  font-weight: 400;
-  letter-spacing: 0.04em;
   color: var(--color-content-default);
 }

@@ -53,8 +53,8 @@ const Radio = React.forwardRef<HTMLInputElement, RadioProps>(
         <span className="ui-radio__indicator" aria-hidden="true" />
         {(children || description) && (
           <span className="ui-radio__content">
-            {children && <span className="ui-radio__label">{children}</span>}
-            {description && <span className="ui-radio__description">{description}</span>}
+            {children && <span className="text-body-large ui-radio__label">{children}</span>}
+            {description && <span className="text-body-medium ui-radio__description">{description}</span>}
           </span>
         )}
       </label>

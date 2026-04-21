@@ -1,4 +1,5 @@
 import React from 'react'
+import ProgressBar from './ProgressBar'
 import './ProgressGroup.css'
 
 interface ProgressGroupProps {
@@ -23,7 +24,6 @@ interface ProgressGroupProps {
  */
 const ProgressGroup = React.forwardRef<HTMLDivElement, ProgressGroupProps>(
   ({ value, textPosition = 'top', leadingText, trailingText, className }, ref) => {
-    const pct = Math.max(0, Math.min(100, value))
     const classes = [
       'ui-progress-group',
       `ui-progress-group--${textPosition}`,
@@ -33,16 +33,13 @@ const ProgressGroup = React.forwardRef<HTMLDivElement, ProgressGroupProps>(
       <div ref={ref} className={classes}>
         {textPosition === 'top' && (leadingText || trailingText) && (
           <div className="ui-progress-group__texts">
-            <span className="ui-progress-group__leading">{leadingText}</span>
-            <span className="ui-progress-group__trailing">{trailingText}</span>
+            <span className="text-body-small ui-progress-group__leading">{leadingText}</span>
+            <span className="text-body-small ui-progress-group__trailing">{trailingText}</span>
           </div>
         )}
-        <div className="ui-progress-group__bar" role="progressbar" aria-valuenow={pct} aria-valuemin={0} aria-valuemax={100}>
-          <div className="ui-progress-group__base" />
-          <div className="ui-progress-group__fill" style={{ width: `${pct}%` }} />
-        </div>
+        <ProgressBar value={value} />
         {textPosition === 'aside' && trailingText && (
-          <span className="ui-progress-group__leading">{trailingText}</span>
+          <span className="text-body-small ui-progress-group__leading">{trailingText}</span>
         )}
       </div>
     )
