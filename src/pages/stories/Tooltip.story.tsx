@@ -9,7 +9,7 @@ const TooltipRender: React.FC<{ values: Record<string, any> }> = ({ values }) =>
       placement={values.placement}
       align={values.align}
     >
-      <Button size="small" variant="outline">Hover me</Button>
+      <Button size="small" variant="outline" text="Hover me" />
     </Tooltip>
   )
 }

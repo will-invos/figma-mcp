@@ -2,13 +2,14 @@ import React from 'react';
 import Spinner from './Spinner';
 import './Button.css';
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'children'> {
   variant?: 'filled' | 'outline' | 'ghost' | 'text';
   colorType?: 'primary' | 'neutral' | 'danger' | 'prize' | 'donation' | 'white' | 'inverse' | 'secondary';
   size?: 'large' | 'medium' | 'small';
   loading?: boolean;
   leadingIcon?: React.ReactNode;
   trailingIcon?: React.ReactNode;
+  text?: React.ReactNode;
 }
 
 /**
@@ -42,7 +43,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       size = 'medium',
       loading = false,
       disabled,
-      children,
+      text,
       className,
       leadingIcon,
       trailingIcon,
@@ -80,7 +81,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         {leadingIcon && (
           <span className="ui-button__leading">{leadingIcon}</span>
         )}
-        <span className="ui-button__content">{children}</span>
+        <span className="ui-button__content">{text}</span>
         {trailingIcon && (
           <span className="ui-button__trailing">{trailingIcon}</span>
         )}

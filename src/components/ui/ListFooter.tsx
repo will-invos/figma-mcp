@@ -3,7 +3,7 @@ import './ListFooter.css'
 
 interface ListFooterProps {
   /** Caption text shown below the list. */
-  text: string
+  footer: string
   /** Visual state — danger turns text and icon red. */
   state?: 'default' | 'danger'
   /** Show a leading info icon (16×16). */
@@ -13,7 +13,7 @@ interface ListFooterProps {
 
 
 const ListFooter = React.forwardRef<HTMLDivElement, ListFooterProps>(
-  ({ text, state = 'default', icon = true, className }, ref) => {
+  ({ footer, state = 'default', icon = true, className }, ref) => {
     const classes = [
       'ui-list-footer',
       state === 'danger' && 'ui-list-footer--danger',
@@ -25,7 +25,7 @@ const ListFooter = React.forwardRef<HTMLDivElement, ListFooterProps>(
         {icon && (
           <span className="ui-list-footer__icon"><i className="icon-info" aria-hidden="true" /></span>
         )}
-        <span className="text-body-medium ui-list-footer__text">{text}</span>
+        <span className="text-body-medium ui-list-footer__text">{footer}</span>
       </div>
     )
   }

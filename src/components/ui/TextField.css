@@ -37,8 +37,8 @@
   box-shadow: inset 0 0 0 1px var(--color-border-brand);
 }
 
-/* Error */
-.ui-text-field--error .ui-text-field__input-wrapper {
+/* Error border: only when NOT focused — focus should show brand border */
+.ui-text-field--error .ui-text-field__input-wrapper:not(:focus-within) {
   border-color: var(--color-border-danger);
   box-shadow: inset 0 0 0 1px var(--color-border-danger);
 }

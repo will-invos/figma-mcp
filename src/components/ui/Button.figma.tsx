@@ -15,7 +15,7 @@ figma.connect(
   'https://www.figma.com/design/8pE8KHl50y72IP7JseLH55/%F0%9F%A7%B0-iOS---UI-Kit-2025?node-id=10905-4663',
   {
     props: {
-      children: figma.string('↳ Text'),
+      text: figma.string('↳ Text'),
       variant: figma.enum('Style', {
         Filled: 'filled',
         Outline: 'outline',
@@ -43,16 +43,15 @@ figma.connect(
         Disabled: false,
       }),
     },
-    example: ({ children, variant, colorType, disabled, loading }) => (
+    example: ({ text, variant, colorType, disabled, loading }) => (
       <Button
         variant={variant}
         colorType={colorType}
         size="large"
         disabled={disabled}
         loading={loading}
-      >
-        {children}
-      </Button>
+        text={text}
+      />
     ),
   }
 )

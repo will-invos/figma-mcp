@@ -76,9 +76,8 @@ const CardItem = React.forwardRef<HTMLDivElement, CardItemProps>(
         variant="filled"
         colorType="primary"
         size={isLarge ? 'medium' : 'small'}
-      >
-        {buttonText}
-      </Button>
+        text={buttonText}
+      />
     )
 
     /* ── Large: vertical layout ── */

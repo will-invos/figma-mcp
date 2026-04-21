@@ -97,7 +97,7 @@ const DialogRender: React.FC<{ values: Record<string, any> }> = ({ values }) => 
 
   return (
     <>
-      <Button size="small" variant="outline" onClick={() => setOpen(true)}>Open Dialog</Button>
+      <Button size="small" variant="outline" onClick={() => setOpen(true)} text="Open Dialog" />
       <div ref={setContainer} />
       {container && (
         <Dialog

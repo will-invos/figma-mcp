@@ -8,7 +8,7 @@
   background: var(--color-background-default);
   width: 100%;
 }
-.ui-list-header__title {
+.ui-list-header__headline {
   flex: 1;
   min-width: 0;
   font-family: var(--font-family);
@@ -26,7 +26,7 @@
   padding-top: var(--space-400);
   padding-bottom: var(--space-200);
 }
-.ui-list-header--small .ui-list-header__title {
+.ui-list-header--small .ui-list-header__headline {
   font-size: 14px;
   line-height: 22px;
   font-weight: 500;
@@ -47,7 +47,7 @@
   padding-top: var(--space-400);
   padding-bottom: var(--space-200);
 }
-.ui-list-header--medium .ui-list-header__title {
+.ui-list-header--medium .ui-list-header__headline {
   font-size: 24px;
   line-height: 32px;
   font-weight: 600;
@@ -68,7 +68,7 @@
   padding-top: var(--space-200);
   padding-bottom: var(--space-200);
 }
-.ui-list-header--large .ui-list-header__title {
+.ui-list-header--large .ui-list-header__headline {
   font-size: 28px;
   line-height: 36px;
   font-weight: 500;

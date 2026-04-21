@@ -10,14 +10,14 @@ const leadingPresets: Record<string, React.ReactNode> = {
   close: <IconButton variant="ghost" colorType="neutral" size="medium" aria-label="關閉"><CloseIcon /></IconButton>,
   back: <IconButton variant="ghost" colorType="neutral" size="medium" aria-label="返回"><ArrowLeftIcon /></IconButton>,
   search: <IconButton variant="ghost" colorType="neutral" size="medium" aria-label="搜尋"><SearchIconBig /></IconButton>,
-  text: <Button variant="text" colorType="secondary" size="medium">取消</Button>,
+  text: <Button variant="text" colorType="secondary" size="medium" text="取消" />,
 }
 
 const trailingPresets: Record<string, React.ReactNode> = {
   none: undefined,
   more: <IconButton variant="ghost" colorType="neutral" size="medium" aria-label="更多"><MoreIcon /></IconButton>,
   close: <IconButton variant="ghost" colorType="neutral" size="medium" aria-label="關閉"><CloseIcon /></IconButton>,
-  text: <Button variant="text" colorType="primary" size="medium">完成</Button>,
+  text: <Button variant="text" colorType="primary" size="medium" text="完成" />,
 }
 
 const SheetHeaderRender: React.FC<{ values: Record<string, any> }> = ({ values }) => {

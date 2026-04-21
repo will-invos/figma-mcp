@@ -24,10 +24,11 @@ function NumberField({
 }) {
   const [raw, setRaw] = useState<string>(() => String(value))
 
-  // Re-sync when parent value changes externally (story switch, reset, other control).
+  // Re-sync only when parent value actually changes (story switch, reset, dependent control).
+  // We must NOT re-run based on raw — that would fight the user's typing (e.g. they clear
+  // the input to "" and the effect would immediately restore the previous number).
   useEffect(() => {
-    if (Number(raw) !== value) setRaw(String(value))
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    setRaw(String(value))
   }, [value])
 
   return (

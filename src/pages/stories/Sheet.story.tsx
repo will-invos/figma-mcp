@@ -14,36 +14,36 @@ const SheetRender: React.FC<{ values: Record<string, any> }> = ({ values }) => {
     if (!values.footer) return undefined
     switch (values.footerType) {
       case '1-button':
-        return <Button onClick={() => setOpen(false)}>Confirm</Button>
+        return <Button onClick={() => setOpen(false)} text="Confirm" />
       case '2-buttons-horizontal':
         return (
           <div style={{ display: 'flex', gap: 16, width: '100%' }}>
-            <Button variant="filled" colorType="neutral" style={{ flex: 1 }} onClick={() => setOpen(false)}>Cancel</Button>
-            <Button variant="filled" colorType="primary" style={{ flex: 1 }} onClick={() => setOpen(false)}>Confirm</Button>
+            <Button variant="filled" colorType="neutral" style={{ flex: 1 }} onClick={() => setOpen(false)} text="Cancel" />
+            <Button variant="filled" colorType="primary" style={{ flex: 1 }} onClick={() => setOpen(false)} text="Confirm" />
           </div>
         )
       case '2-buttons-vertical':
         return (
           <div style={{ display: 'flex', flexDirection: 'column', gap: 20, width: '100%' }}>
-            <Button onClick={() => setOpen(false)}>Confirm</Button>
-            <Button variant="text" onClick={() => setOpen(false)}>Cancel</Button>
+            <Button onClick={() => setOpen(false)} text="Confirm" />
+            <Button variant="text" onClick={() => setOpen(false)} text="Cancel" />
           </div>
         )
       case 'checkbox-button':
         return (
           <div style={{ display: 'flex', flexDirection: 'column', gap: 16, width: '100%' }}>
             <Checkbox checked={checked} onChange={setChecked}>I agree to the terms</Checkbox>
-            <Button onClick={() => setOpen(false)}>Confirm</Button>
+            <Button onClick={() => setOpen(false)} text="Confirm" />
           </div>
         )
       default:
-        return <Button onClick={() => setOpen(false)}>Confirm</Button>
+        return <Button onClick={() => setOpen(false)} text="Confirm" />
     }
   }
 
   return (
     <>
-      <Button size="small" variant="outline" onClick={() => setOpen(true)}>Open Sheet</Button>
+      <Button size="small" variant="outline" onClick={() => setOpen(true)} text="Open Sheet" />
       <div ref={setContainer} />
       {container && (
         <Sheet

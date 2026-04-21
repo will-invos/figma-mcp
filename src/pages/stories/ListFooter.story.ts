@@ -7,7 +7,7 @@ export const ListFooterStory: StoryDef = {
   category: 'Display',
   previewWidth: 360,
   props: {
-    text:     { type: 'string', default: 'This is a footer.' },
+    footer:   { type: 'string', default: 'This is a footer.' },
     icon: { type: 'boolean', default: true },
     state:    { type: 'enum', options: ['default', 'danger'], default: 'default' },
   },

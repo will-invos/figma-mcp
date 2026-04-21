@@ -19,9 +19,7 @@ const ToastRender: React.FC<{ values: Record<string, any> }> = ({ values }) => {
   }
 
   return (
-    <Button size="small" variant="outline" onClick={handleShow}>
-      Show Toast
-    </Button>
+    <Button size="small" variant="outline" onClick={handleShow} text="Show Toast" />
   )
 }
 

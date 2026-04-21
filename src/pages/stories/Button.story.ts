@@ -26,7 +26,7 @@ export const ButtonStory: StoryDef = {
       }},
     },
     size:         { type: 'enum', options: ['large', 'medium', 'small'], default: 'medium' },
-    children:  { type: 'string', default: 'Button' },
+    text:         { type: 'string', default: 'Button' },
     leadingIcon:  { type: 'boolean', default: false },
     trailingIcon: { type: 'boolean', default: false },
     disabled:     { type: 'boolean', default: false },

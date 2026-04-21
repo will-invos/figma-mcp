@@ -73,9 +73,8 @@ function Dialog({
                 colorType={isTop ? (action.colorType ?? 'primary') : 'primary'}
                 size="large"
                 onClick={action.onClick}
-              >
-                {action.label}
-              </Button>
+                text={action.label}
+              />
             );
           })}
         </div>
@@ -110,9 +109,8 @@ function Dialog({
               colorType={colorType ?? 'primary'}
               size="large"
               onClick={action.onClick}
-            >
-              {action.label}
-            </Button>
+              text={action.label}
+            />
           );
         })}
       </div>

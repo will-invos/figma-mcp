@@ -70,7 +70,7 @@ const ListItem = React.forwardRef<HTMLDivElement, ListItemProps>(
         case 'text-button':
           return (
             <span className="ui-list-item__trailing">
-              <Button variant="text" colorType="primary" size="large">{trailingText}</Button>
+              <Button variant="text" colorType="primary" size="large" text={trailingText} />
             </span>
           );
         case 'switch':
@@ -106,7 +106,7 @@ const ListItem = React.forwardRef<HTMLDivElement, ListItemProps>(
         case 'cta':
           return (
             <span className="ui-list-item__trailing ui-list-item__trailing--cta">
-              <Button variant="outline" colorType="primary" size="small">{trailingText}</Button>
+              <Button variant="outline" colorType="primary" size="small" text={trailingText} />
             </span>
           );
         case 'none':

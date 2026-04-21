@@ -11,7 +11,7 @@ const leadingPresets: Record<string, React.ReactNode> = {
   back: <IconButton variant="ghost" colorType="neutral" size="medium" aria-label="返回"><ArrowLeftIcon /></IconButton>,
   close: <IconButton variant="ghost" colorType="neutral" size="medium" aria-label="關閉"><CloseIcon /></IconButton>,
   avatar: <Avatar name="Will" size="small" />,
-  text: <Button variant="text" colorType="secondary" size="medium">取消</Button>,
+  text: <Button variant="text" colorType="secondary" size="medium" text="取消" />,
 }
 
 const trailingPresets: Record<string, React.ReactNode> = {
@@ -23,7 +23,7 @@ const trailingPresets: Record<string, React.ReactNode> = {
       <IconButton variant="ghost" colorType="neutral" size="medium" aria-label="分享"><ShareIcon /></IconButton>
     </>
   ),
-  text: <Button variant="text" colorType="primary" size="medium">完成</Button>,
+  text: <Button variant="text" colorType="primary" size="medium" text="完成" />,
   avatar: <Avatar name="Will" size="small" />,
 }
 

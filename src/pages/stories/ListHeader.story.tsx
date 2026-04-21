@@ -3,10 +3,9 @@ import ListHeader from '@/components/ui/ListHeader'
 import type { StoryDef } from './types'
 
 const ListHeaderRender: React.FC<{ values: Record<string, any> }> = ({ values }) => {
-  const { trailingText, title, ...rest } = values
+  const { trailingText, ...rest } = values
   return (
     <ListHeader
-      title={title}
       {...rest}
       trailing={trailingText ? trailingText : undefined}
     />
@@ -20,7 +19,7 @@ export const ListHeaderStory: StoryDef = {
   previewWidth: 360,
   props: {
     size:         { type: 'enum', options: ['small', 'medium', 'large'], default: 'small' },
-    title:        { type: 'string', default: 'Title' },
+    headline:     { type: 'string', default: 'Headline' },
     trailingText: { type: 'string', default: '' },
   },
   Render: ListHeaderRender,
