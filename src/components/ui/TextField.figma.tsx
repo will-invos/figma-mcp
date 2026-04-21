@@ -8,11 +8,11 @@ import TextField from './TextField'
  *   setKey: bce75f45f294148ce9ad00b269adc1a01c1ab917
  *   Variants: Type (Simple/Has label) × Status (Enabled/Error/Disabled) × Content (Empty/Filled)
  *
- * TODO: Replace the URL below with the actual node URL from Figma.
+ * Source: 🧰 iOS - UI Kit 2025 library (fileKey 8pE8KHl50y72IP7JseLH55)
  */
 figma.connect(
   TextField,
-  'https://www.figma.com/design/zbdxaNIbxN4Iujx6Qi1DlI/MCP-test?node-id=TODO',
+  'https://www.figma.com/design/8pE8KHl50y72IP7JseLH55/%F0%9F%A7%B0-iOS---UI-Kit-2025?node-id=3850-4356',
   {
     props: {
       placeholder: figma.string('↳ Placeholder'),

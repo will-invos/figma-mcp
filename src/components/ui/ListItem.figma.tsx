@@ -12,11 +12,11 @@ import ListItem from './ListItem'
  *     Trailing elements: None / Drill-in / Text / Text button / CTA / Icon / Spinner / Switch / Checkbox
  *   Booleans: Leading icon, Leading addition, Badge, Divider, Trailing addition
  *
- * TODO: Replace the URL below with the actual node URL from Figma.
+ * Source: 🧰 iOS - UI Kit 2025 library (fileKey 8pE8KHl50y72IP7JseLH55)
  */
 figma.connect(
   ListItem,
-  'https://www.figma.com/design/zbdxaNIbxN4Iujx6Qi1DlI/MCP-test?node-id=TODO',
+  'https://www.figma.com/design/8pE8KHl50y72IP7JseLH55/%F0%9F%A7%B0-iOS---UI-Kit-2025?node-id=3754-2508',
   {
     props: {
       headline: figma.string('↳ Headline'),

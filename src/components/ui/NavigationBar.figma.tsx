@@ -9,11 +9,11 @@ import NavigationBar from './NavigationBar'
  *   Variants: Title size (Regular/Large) × Type (Default/Home/Search/Tabs)
  *   Text prop: ↳ Title
  *
- * TODO: Replace the URL below with the actual node URL from Figma.
+ * Source: 🧰 iOS - UI Kit 2025 library (fileKey 8pE8KHl50y72IP7JseLH55)
  */
 figma.connect(
   NavigationBar,
-  'https://www.figma.com/design/zbdxaNIbxN4Iujx6Qi1DlI/MCP-test?node-id=TODO',
+  'https://www.figma.com/design/8pE8KHl50y72IP7JseLH55/%F0%9F%A7%B0-iOS---UI-Kit-2025?node-id=3743-5891',
   {
     props: {
       title: figma.string('↳ Title'),

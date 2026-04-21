@@ -8,11 +8,11 @@ import IconButton from './IconButton'
  *   setKey: 28cb4faab4de891d5deefc357a4c863efab13c20
  *   Variants: Style (Filled/Outline/Ghost) × Type (Primary/Neutral/Danger/Prize/Donation) × State (Enabled/Disabled/Loading)
  *
- * TODO: Replace the URL below with the actual node URL from Figma.
+ * Source: 🧰 iOS - UI Kit 2025 library (fileKey 8pE8KHl50y72IP7JseLH55)
  */
 figma.connect(
   IconButton,
-  'https://www.figma.com/design/zbdxaNIbxN4Iujx6Qi1DlI/MCP-test?node-id=TODO',
+  'https://www.figma.com/design/8pE8KHl50y72IP7JseLH55/%F0%9F%A7%B0-iOS---UI-Kit-2025?node-id=10905-4664',
   {
     props: {
       variant: figma.enum('Style', {
