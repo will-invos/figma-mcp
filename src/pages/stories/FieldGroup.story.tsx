@@ -28,8 +28,8 @@ const FieldGroupRender: React.FC<{ values: Record<string, any> }> = ({ values })
       case 'checkbox':
         return (
           <div style={{ display: 'flex', gap: 24 }}>
-            <Checkbox checked={checked} onChange={setChecked}>Option A</Checkbox>
-            <Checkbox checked={checkedB} onChange={setCheckedB}>Option B</Checkbox>
+            <Checkbox checked={checked} onChange={setChecked} label="Option A" />
+            <Checkbox checked={checkedB} onChange={setCheckedB} label="Option B" />
           </div>
         )
       case 'radio':

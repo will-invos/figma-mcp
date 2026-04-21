@@ -64,11 +64,11 @@ const CardItem = React.forwardRef<HTMLDivElement, CardItemProps>(
       descriptions?.map((row, i) => (
         <div key={i} className="ui-card-item__desc-row">
           {row.icon && <span className="ui-card-item__desc-icon">{row.icon}</span>}
-          <p className="ui-card-item__desc-text">{row.text}</p>
+          <p className="text-body-medium ui-card-item__desc-text">{row.text}</p>
         </div>
       ))
     ) : (
-      description && <p className="ui-card-item__desc-text">{description}</p>
+      description && <p className="text-body-medium ui-card-item__desc-text">{description}</p>
     )
 
     const actionButton = showButton && (
@@ -90,7 +90,7 @@ const CardItem = React.forwardRef<HTMLDivElement, CardItemProps>(
             </div>
           )}
           <div className="ui-card-item__body">
-            {headline && <p className="ui-card-item__title">{headline}</p>}
+            {headline && <p className="text-heading-small ui-card-item__title">{headline}</p>}
             <div className="ui-card-item__bottom">
               {isListItem ? (
                 <div className="ui-card-item__desc-list">{descContent}</div>
@@ -114,7 +114,7 @@ const CardItem = React.forwardRef<HTMLDivElement, CardItemProps>(
             </div>
           )}
           <div className="ui-card-item__content">
-            {headline && <p className="ui-card-item__title">{headline}</p>}
+            {headline && <p className="text-label-large ui-card-item__title">{headline}</p>}
             {isListItem ? (
               <div className="ui-card-item__desc-list">{descContent}</div>
             ) : (

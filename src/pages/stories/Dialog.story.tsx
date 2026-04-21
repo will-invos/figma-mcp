@@ -58,7 +58,7 @@ const ExtraContent: React.FC<{ kind: string }> = ({ kind }) => {
         />
       )
     case 'checkbox':
-      return <Checkbox checked={checked} onChange={setChecked}>I agree to the terms</Checkbox>
+      return <Checkbox checked={checked} onChange={setChecked} label="I agree to the terms" />
     case 'switch':
       return (
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>

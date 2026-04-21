@@ -7,8 +7,8 @@ const CheckboxRender: React.FC<{ values: Record<string, any> }> = ({ values }) =
   const [checkedB, setCheckedB] = useState(false)
   const { disabled, status, description } = values
   return React.createElement('div', { style: { display: 'flex', flexDirection: 'column', gap: 12 } },
-    React.createElement(Checkbox, { checked: checkedA, onChange: setCheckedA, disabled, status, description }, 'Option A'),
-    React.createElement(Checkbox, { checked: checkedB, onChange: setCheckedB, disabled, status, description }, 'Option B'),
+    React.createElement(Checkbox, { checked: checkedA, onChange: setCheckedA, disabled, status, description, label: 'Option A' }),
+    React.createElement(Checkbox, { checked: checkedB, onChange: setCheckedB, disabled, status, description, label: 'Option B' }),
   )
 }
 

@@ -32,7 +32,7 @@ const SheetRender: React.FC<{ values: Record<string, any> }> = ({ values }) => {
       case 'checkbox-button':
         return (
           <div style={{ display: 'flex', flexDirection: 'column', gap: 16, width: '100%' }}>
-            <Checkbox checked={checked} onChange={setChecked}>I agree to the terms</Checkbox>
+            <Checkbox checked={checked} onChange={setChecked} label="I agree to the terms" />
             <Button onClick={() => setOpen(false)} text="Confirm" />
           </div>
         )

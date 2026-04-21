@@ -25,13 +25,12 @@
   border-radius: var(--radius-300);
   border: 1px solid var(--color-border-subtle);
   overflow: hidden;
-  aspect-ratio: 361 / 148;
 }
 .ui-card-item__hero img {
   position: absolute;
   inset: 0;
   width: 100%;
-  height: 100%;
+  height: auto;
   object-fit: cover;
   display: block;
 }
@@ -43,13 +42,7 @@
   gap: var(--space-200);
 }
 
-/* Large title: Heading-Large 24/32 */
 .ui-card-item--large .ui-card-item__title {
-  font-family: var(--font-family);
-  font-size: 24px;
-  line-height: 32px;
-  font-weight: 600;
-  letter-spacing: 0.04em;
   color: var(--color-content-bold);
   margin: 0;
 }
@@ -107,11 +100,6 @@
 
 /* Medium title: Label-CN/Large 16/24 */
 .ui-card-item--medium .ui-card-item__title {
-  font-family: var(--font-family);
-  font-size: 16px;
-  line-height: 24px;
-  font-weight: 500;
-  letter-spacing: 0.04em;
   color: var(--color-content-bold);
   margin: 0;
 }
@@ -132,19 +120,17 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  color: var(--color-content-subtle);
+}
+.ui-card-item__desc-icon i[class^='icon-'],
+.ui-card-item__desc-icon i[class*=' icon-'] {
   width: 16px;
   height: 16px;
   font-size: 16px;
-  color: var(--color-content-subtle);
 }
 .ui-card-item__desc-text {
   flex: 1;
   min-width: 0;
-  font-family: var(--font-family);
-  font-size: 14px;
-  line-height: 22px;
-  font-weight: 400;
-  letter-spacing: 0.04em;
   color: var(--color-content-subtle);
   overflow: hidden;
   text-overflow: ellipsis;
