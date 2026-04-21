@@ -2,54 +2,51 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  box-sizing: border-box;
   background-color: var(--color-background-danger-default);
   border-radius: var(--radius-full);
   flex-shrink: 0;
+  font-family: var(--font-family);
 }
 
 /* ========================================
- * Dot variant — fixed square dimensions, no text
+ * Dot variant — square red circle, optional white ring
  * ======================================== */
 
-.ui-badge--dot.ui-badge--small {
-  width: 8px;
-  height: 8px;
-}
+.ui-badge--dot.ui-badge--small  { width: 8px;  height: 8px; }
+.ui-badge--dot.ui-badge--medium { width: 12px; height: 12px; }
+.ui-badge--dot.ui-badge--large  { width: 16px; height: 16px; }
 
-.ui-badge--dot.ui-badge--medium {
-  width: 10px;
-  height: 10px;
-}
-
-.ui-badge--dot.ui-badge--large {
-  width: 12px;
-  height: 12px;
-}
+/* Ring thickness per dot size (per Figma). box-sizing: border-box keeps total size fixed. */
+.ui-badge--dot.ui-badge--bordered.ui-badge--small  { border: 1px solid var(--color-background-plain); }
+.ui-badge--dot.ui-badge--bordered.ui-badge--medium { border: 2px solid var(--color-background-plain); }
+.ui-badge--dot.ui-badge--bordered.ui-badge--large  { border: 2px solid var(--color-background-plain); }
 
 /* ========================================
  * Number variant — height-driven, padding for multi-digit
  * ======================================== */
 
 .ui-badge--number {
-  color: var(--color-content-fixed-white);
-  font-size: 10px;
-  line-height: 16px;
-  font-weight: 500;
+  color: var(--color-content-inverse-bold);
   padding: 0 var(--space-100);
+  font-weight: 500;
   text-align: center;
 }
 
-.ui-badge--number.ui-badge--small {
-  height: 16px;
-  min-width: 16px;
-}
-
 .ui-badge--number.ui-badge--medium {
-  height: 20px;
-  min-width: 20px;
+  height: 14px;
+  min-width: 14px;
+  font-size: 10px;
+  line-height: 16px;
 }
 
 .ui-badge--number.ui-badge--large {
-  height: 24px;
-  min-width: 24px;
+  height: 18px;
+  min-width: 18px;
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.ui-badge--number.ui-badge--bordered {
+  border: 1px solid var(--color-background-default);
 }
