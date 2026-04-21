@@ -17,8 +17,8 @@ export const RadioStory: StoryDef = {
   category: 'Forms',
   props: {
     description: { type: 'string', default: '' },
-    disabled:    { type: 'boolean', default: false },
     status:      { type: 'enum', options: ['default', 'error'], default: 'default' },
+    disabled:    { type: 'boolean', default: false },
   },
   Render: RadioRender,
 }

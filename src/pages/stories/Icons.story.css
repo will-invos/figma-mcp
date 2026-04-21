@@ -26,7 +26,8 @@
   background-color: var(--color-background-neutral-subtle);
 }
 
-.icons-story__item > i[class] {
+.icons-story__item > i[class^='icon-'],
+.icons-story__item > i[class*=' icon-'] {
   color: var(--color-content-default);
 }
 

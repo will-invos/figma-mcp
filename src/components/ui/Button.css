@@ -119,8 +119,10 @@
   width: 20px;
   height: 20px;
 }
-.ui-button--large .ui-button__leading > i[class],
-.ui-button--large .ui-button__trailing > i[class] {
+.ui-button--large .ui-button__leading > i[class^='icon-'],
+.ui-button--large .ui-button__leading > i[class*=' icon-'],
+.ui-button--large .ui-button__trailing > i[class^='icon-'],
+.ui-button--large .ui-button__trailing > i[class*=' icon-'] {
   width: 20px;
   height: 20px;
   font-size: 20px;
@@ -131,8 +133,10 @@
   width: 16px;
   height: 16px;
 }
-.ui-button--medium .ui-button__leading > i[class],
-.ui-button--medium .ui-button__trailing > i[class] {
+.ui-button--medium .ui-button__leading > i[class^='icon-'],
+.ui-button--medium .ui-button__leading > i[class*=' icon-'],
+.ui-button--medium .ui-button__trailing > i[class^='icon-'],
+.ui-button--medium .ui-button__trailing > i[class*=' icon-'] {
   width: 16px;
   height: 16px;
   font-size: 16px;
@@ -143,8 +147,10 @@
   width: 14px;
   height: 14px;
 }
-.ui-button--small .ui-button__leading > i[class],
-.ui-button--small .ui-button__trailing > i[class] {
+.ui-button--small .ui-button__leading > i[class^='icon-'],
+.ui-button--small .ui-button__leading > i[class*=' icon-'],
+.ui-button--small .ui-button__trailing > i[class^='icon-'],
+.ui-button--small .ui-button__trailing > i[class*=' icon-'] {
   width: 14px;
   height: 14px;
   font-size: 14px;
@@ -163,7 +169,8 @@
 
 .ui-button--large svg,
 .ui-button--large img,
-.ui-button--large i[class] {
+.ui-button--large i[class^='icon-'],
+.ui-button--large i[class*=' icon-'] {
   width: 20px;
   height: 20px;
   font-size: 20px;
@@ -171,7 +178,8 @@
 
 .ui-button--medium svg,
 .ui-button--medium img,
-.ui-button--medium i[class] {
+.ui-button--medium i[class^='icon-'],
+.ui-button--medium i[class*=' icon-'] {
   width: 16px;
   height: 16px;
   font-size: 16px;
@@ -179,7 +187,8 @@
 
 .ui-button--small svg,
 .ui-button--small img,
-.ui-button--small i[class] {
+.ui-button--small i[class^='icon-'],
+.ui-button--small i[class*=' icon-'] {
   width: 14px;
   height: 14px;
   font-size: 14px;

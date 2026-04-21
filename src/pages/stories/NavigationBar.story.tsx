@@ -58,15 +58,15 @@ export const NavigationBarStory: StoryDef = {
   category: 'Chrome',
   previewWidth: 360,
   props: {
-    titleSize: { type: 'enum', options: ['regular', 'large'], default: 'regular' },
     type:      { type: 'enum', options: ['default', 'home', 'search', 'tabs'], default: 'default',
       optionsByDep: { titleSize: { regular: ['default', 'search', 'tabs'], large: ['default', 'home', 'search', 'tabs'] } },
     },
+    titleSize: { type: 'enum', options: ['regular', 'large'], default: 'regular' },
     title:     { type: 'string', default: 'Title' },
+    searchPlaceholder: { type: 'string', default: 'Search', when: { type: 'search' } },
     leading:   { type: 'enum', options: ['none', 'back', 'close', 'avatar', 'text'], default: 'back' },
     trailing:  { type: 'enum', options: ['none', 'icon', 'icons', 'text', 'avatar'], default: 'icon' },
     divider:   { type: 'boolean', default: true },
-    searchPlaceholder: { type: 'string', default: 'Search', when: { type: 'search' } },
   },
   Render: NavigationBarRender,
 }

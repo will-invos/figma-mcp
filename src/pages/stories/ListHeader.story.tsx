@@ -19,8 +19,8 @@ export const ListHeaderStory: StoryDef = {
   category: 'Display',
   previewWidth: 360,
   props: {
-    title:        { type: 'string', default: '區段標題' },
     size:         { type: 'enum', options: ['small', 'medium', 'large'], default: 'small' },
+    title:        { type: 'string', default: 'Title' },
     trailingText: { type: 'string', default: '' },
   },
   Render: ListHeaderRender,

@@ -23,7 +23,7 @@ figma.connect(
       description: figma.string('↳ Text'),
       type: figma.enum('Type', {
         Default: 'default',
-        'Has description': 'has-description',
+        'Has description': 'rich',
         Compact: 'compact',
       }),
       disabled: figma.enum('State', {

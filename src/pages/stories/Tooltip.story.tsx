@@ -19,9 +19,9 @@ export const TooltipStory: StoryDef = {
   name: 'Tooltip',
   category: 'Feedback',
   props: {
-    content:   { type: 'string', default: 'Tooltip text' },
     placement: { type: 'enum', options: ['top', 'bottom', 'left', 'right'], default: 'top' },
     align:     { type: 'enum', options: ['start', 'center', 'end'], default: 'center' },
+    content:   { type: 'string', default: 'Tooltip text' },
   },
   Render: TooltipRender,
 }

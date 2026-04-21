@@ -7,13 +7,13 @@ interface ListFooterProps {
   /** Visual state — danger turns text and icon red. */
   state?: 'default' | 'danger'
   /** Show a leading info icon (16×16). */
-  showIcon?: boolean
+  icon?: boolean
   className?: string
 }
 
 
 const ListFooter = React.forwardRef<HTMLDivElement, ListFooterProps>(
-  ({ text, state = 'default', showIcon = true, className }, ref) => {
+  ({ text, state = 'default', icon = true, className }, ref) => {
     const classes = [
       'ui-list-footer',
       state === 'danger' && 'ui-list-footer--danger',
@@ -22,10 +22,10 @@ const ListFooter = React.forwardRef<HTMLDivElement, ListFooterProps>(
 
     return (
       <div ref={ref} className={classes}>
-        {showIcon && (
+        {icon && (
           <span className="ui-list-footer__icon"><i className="icon-info" aria-hidden="true" /></span>
         )}
-        <span className="ui-list-footer__text">{text}</span>
+        <span className="text-body-medium ui-list-footer__text">{text}</span>
       </div>
     )
   }

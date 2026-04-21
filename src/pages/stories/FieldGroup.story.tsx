@@ -65,10 +65,10 @@ export const FieldGroupStory: StoryDef = {
   previewWidth: 360,
   props: {
     field:         { type: 'enum', options: ['textfield', 'textarea', 'checkbox', 'radio', 'select'], default: 'textfield' },
-    status:        { type: 'enum', options: ['default', 'error'], default: 'default' },
     label:         { type: 'string', default: 'Label', when: { header: true } },
     helpText:      { type: 'boolean', default: true },
     helpTextBody: { type: 'string', default: 'Help text', when: { helpText: true } },
+    status:        { type: 'enum', options: ['default', 'error'], default: 'default' },
   },
   Render: FieldGroupRender,
 }

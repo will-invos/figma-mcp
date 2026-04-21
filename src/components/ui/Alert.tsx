@@ -18,64 +18,27 @@ interface AlertProps {
 /** Default leading icon SVG per colorType. Uses currentColor for proper color inheritance. */
 const DEFAULT_LEADING_ICONS: Record<NonNullable<AlertProps['colorType']>, React.ReactNode> = {
   primary: (
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-      <circle cx="8" cy="8" r="7" stroke="currentColor" strokeWidth="1.5" />
-      <path d="M8 7v4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-      <circle cx="8" cy="5" r="0.75" fill="currentColor" />
-    </svg>
+    <i className="icon-loud-speaker"></i>
   ),
   neutral: (
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-      <path d="M2.5 11.5L4 6.5L7 9L12 2.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M2.5 13.5h11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-    </svg>
+    <i className="icon-info"></i>
   ),
   success: (
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-      <path d="M3.5 8.5L6.5 11.5L12.5 4.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
+    <i className="icon-check"></i>
   ),
   warning: (
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-      <circle cx="8" cy="8" r="7" stroke="currentColor" strokeWidth="1.5" />
-      <path d="M8 5v3.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-      <circle cx="8" cy="11" r="0.75" fill="currentColor" />
-    </svg>
+    <i className="icon-alert-circle"></i>
   ),
   danger: (
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-      <circle cx="8" cy="8" r="7" stroke="currentColor" strokeWidth="1.5" />
-      <path d="M8 5v3.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-      <circle cx="8" cy="11" r="0.75" fill="currentColor" />
-    </svg>
+    <i className="icon-alert-circle"></i>
   ),
   prize: (
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-      <rect x="4" y="7" width="8" height="6" rx="1" stroke="currentColor" strokeWidth="1.5" />
-      <path d="M8 7v6M4 9.5h8" stroke="currentColor" strokeWidth="1.5" />
-      <path d="M8 7C8 7 5 7 4 5.5C3 4 4.5 2.5 5.5 3C6.5 3.5 8 5 8 7Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M8 7C8 7 11 7 12 5.5C13 4 11.5 2.5 10.5 3C9.5 3.5 8 5 8 7Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
+    <i className="icon-gift"></i>
   ),
 };
 
 const CloseIcon = () => (
-  <svg
-    width="16"
-    height="16"
-    viewBox="0 0 16 16"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    aria-hidden="true"
-  >
-    <path
-      d="M12 4L4 12M4 4L12 12"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-  </svg>
+  <i className="icon-cross"></i>
 );
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
@@ -102,7 +65,7 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
     return (
       <div ref={ref} className={classes} role="alert">
         {resolvedLeading && <span className="ui-alert__icon">{resolvedLeading}</span>}
-        <div className="ui-alert__content">{message}</div>
+        <div className="text-body-medium ui-alert__content">{message}</div>
         {trailingIcon && (
           onClose ? (
             <button

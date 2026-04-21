@@ -194,7 +194,8 @@
   height: 24px;
 }
 
-.ui-select__chevron > i[class] {
+.ui-select__chevron > i[class^='icon-'],
+.ui-select__chevron > i[class*=' icon-'] {
   width: 24px;
   height: 24px;
   font-size: 24px;
@@ -217,7 +218,8 @@
   height: 24px;
 }
 
-.ui-select__leading-icon > i[class] {
+.ui-select__leading-icon > i[class^='icon-'],
+.ui-select__leading-icon > i[class*=' icon-'] {
   width: 24px;
   height: 24px;
   font-size: 24px;
@@ -253,7 +255,8 @@
 }
 
 .ui-select__help-icon > svg,
-.ui-select__help-icon > i[class] {
+.ui-select__help-icon > i[class^='icon-'],
+.ui-select__help-icon > i[class*=' icon-'] {
   width: 16px;
   height: 16px;
   font-size: 16px;

@@ -8,8 +8,8 @@ import './ListItem.css';
 interface ListItemProps {
   headline: string;
   description?: string;
-  /** 'default' = 56px, 'has-description' = 80px, 'compact' = 48px */
-  type?: 'default' | 'has-description' | 'compact';
+  /** 'default' = 56px, 'rich' = 80px, 'compact' = 48px */
+  type?: 'default' | 'rich' | 'compact';
   trailing?: 'none' | 'drill-in' | 'text' | 'text-button' | 'cta' | 'switch' | 'checkbox' | 'icon' | 'spinner';
   trailingText?: string;
   trailingChecked?: boolean;
@@ -64,7 +64,7 @@ const ListItem = React.forwardRef<HTMLDivElement, ListItemProps>(
         case 'text':
           return (
             <span className="ui-list-item__trailing">
-              <span className="ui-list-item__trailing-text">{trailingText}</span>
+              <span className="text-body-large">{trailingText}</span>
             </span>
           );
         case 'text-button':
@@ -130,7 +130,7 @@ const ListItem = React.forwardRef<HTMLDivElement, ListItemProps>(
           )}
           <div className="ui-list-item__content">
             <span className="ui-list-item__headline">{headline}</span>
-            {description && type === 'has-description' && (
+            {description && type === 'rich' && (
               <span className="ui-list-item__description">{description}</span>
             )}
           </div>

@@ -200,8 +200,10 @@
   height: 24px;
 }
 
-.ui-text-field__leading-icon > i[class],
-.ui-text-field__trailing-icon > i[class] {
+.ui-text-field__leading-icon > i[class^='icon-'],
+.ui-text-field__leading-icon > i[class*=' icon-'],
+.ui-text-field__trailing-icon > i[class^='icon-'],
+.ui-text-field__trailing-icon > i[class*=' icon-'] {
   width: 24px;
   height: 24px;
   font-size: 24px;
@@ -232,7 +234,8 @@
 }
 
 .ui-text-field__help-icon > svg,
-.ui-text-field__help-icon > i[class] {
+.ui-text-field__help-icon > i[class^='icon-'],
+.ui-text-field__help-icon > i[class*=' icon-'] {
   width: 16px;
   height: 16px;
   font-size: 16px;

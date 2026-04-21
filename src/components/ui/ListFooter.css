@@ -24,11 +24,6 @@
 .ui-list-footer__text {
   flex: 1;
   min-width: 0;
-  font-family: var(--font-family);
-  font-size: 14px;
-  line-height: 22px;
-  font-weight: 400;
-  letter-spacing: 0.04em;
 }
 
 /* Danger state */

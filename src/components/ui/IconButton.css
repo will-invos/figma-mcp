@@ -24,7 +24,8 @@
 }
 .ui-icon-button--large > svg,
 .ui-icon-button--large > img,
-.ui-icon-button--large > i[class] {
+.ui-icon-button--large > i[class^='icon-'],
+.ui-icon-button--large > i[class*=' icon-'] {
   width: 28px;
   height: 28px;
   font-size: 28px;
@@ -39,7 +40,8 @@
 }
 .ui-icon-button--medium > svg,
 .ui-icon-button--medium > img,
-.ui-icon-button--medium > i[class] {
+.ui-icon-button--medium > i[class^='icon-'],
+.ui-icon-button--medium > i[class*=' icon-'] {
   width: 24px;
   height: 24px;
   font-size: 24px;
@@ -54,7 +56,8 @@
 }
 .ui-icon-button--small > svg,
 .ui-icon-button--small > img,
-.ui-icon-button--small > i[class] {
+.ui-icon-button--small > i[class^='icon-'],
+.ui-icon-button--small > i[class*=' icon-'] {
   width: 20px;
   height: 20px;
   font-size: 20px;
@@ -69,7 +72,8 @@
 }
 .ui-icon-button--xsmall > svg,
 .ui-icon-button--xsmall > img,
-.ui-icon-button--xsmall > i[class] {
+.ui-icon-button--xsmall > i[class^='icon-'],
+.ui-icon-button--xsmall > i[class*=' icon-'] {
   width: 16px;
   height: 16px;
   font-size: 16px;

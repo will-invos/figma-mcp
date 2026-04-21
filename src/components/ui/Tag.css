@@ -32,7 +32,8 @@
 }
 
 .ui-tag--medium .ui-tag__icon > svg,
-.ui-tag--medium .ui-tag__icon > i[class] {
+.ui-tag--medium .ui-tag__icon > i[class^='icon-'],
+.ui-tag--medium .ui-tag__icon > i[class*=' icon-'] {
   width: 14px;
   height: 14px;
   font-size: 14px;
@@ -53,7 +54,8 @@
 }
 
 .ui-tag--small .ui-tag__icon > svg,
-.ui-tag--small .ui-tag__icon > i[class] {
+.ui-tag--small .ui-tag__icon > i[class^='icon-'],
+.ui-tag--small .ui-tag__icon > i[class*=' icon-'] {
   width: 12px;
   height: 12px;
   font-size: 12px;

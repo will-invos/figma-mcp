@@ -16,10 +16,10 @@ export const TagStory: StoryDef = {
   name: 'Tag',
   category: 'Display',
   props: {
-    message:      { type: 'string', default: 'Tag' },
     variant:      { type: 'enum', options: ['light', 'bold'], default: 'light' },
     colorType:    { type: 'enum', options: ['neutral', 'primary', 'success', 'danger', 'warning', 'prize'], default: 'neutral' },
     size:         { type: 'enum', options: ['medium', 'small'], default: 'medium' },
+    message:      { type: 'string', default: 'Tag' },
     leadingIcon:  { type: 'boolean', default: false },
     trailingIcon: { type: 'boolean', default: false },
   },

@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import { isPropVisible, getEnumOptions, type PropDef } from './types'
 import './Controls.css'
 
@@ -6,6 +7,53 @@ interface ControlsProps {
   values: Record<string, any>
   onChange: (key: string, value: any) => void
   onReset: () => void
+}
+
+/**
+ * Number inputs need a local string buffer. If we use <input type="number"> directly,
+ * React compares DOM value vs prop value with loose numeric equality, so "01" == 1
+ * and the DOM is never rewritten after typing — leaving stale leading zeros visible.
+ */
+function NumberField({
+  name, def, value, onCommit,
+}: {
+  name: string
+  def: Extract<PropDef, { type: 'number' }>
+  value: number
+  onCommit: (n: number) => void
+}) {
+  const [raw, setRaw] = useState<string>(() => String(value))
+
+  // Re-sync when parent value changes externally (story switch, reset, other control).
+  useEffect(() => {
+    if (Number(raw) !== value) setRaw(String(value))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [value])
+
+  return (
+    <div className="cs-controls__field">
+      <label className="cs-controls__label">{name}</label>
+      <input
+        type="text"
+        inputMode="numeric"
+        className="cs-controls__input"
+        value={raw}
+        onChange={(e) => {
+          const next = e.target.value.replace(/[^\d-]/g, '')
+          setRaw(next)
+          if (next === '' || next === '-') return
+          const n = Number(next)
+          if (!Number.isNaN(n)) onCommit(n)
+        }}
+        onBlur={() => {
+          if (raw === '' || Number.isNaN(Number(raw))) setRaw(String(value))
+          else setRaw(String(Number(raw)))
+        }}
+        aria-valuemin={def.min}
+        aria-valuemax={def.max}
+      />
+    </div>
+  )
 }
 
 export default function Controls({ propDefs, values, onChange, onReset }: ControlsProps) {
@@ -65,18 +113,13 @@ export default function Controls({ propDefs, values, onChange, onReset }: Contro
 
           case 'number':
             return (
-              <div key={key} className="cs-controls__field">
-                <label className="cs-controls__label">{key}</label>
-                <input
-                  type="number"
-                  className="cs-controls__input"
-                  value={values[key] ?? def.default}
-                  min={def.min}
-                  max={def.max}
-                  step={def.step}
-                  onChange={(e) => onChange(key, Number(e.target.value))}
-                />
-              </div>
+              <NumberField
+                key={key}
+                name={key}
+                def={def}
+                value={values[key] ?? def.default}
+                onCommit={(n) => onChange(key, n)}
+              />
             )
 
           default:

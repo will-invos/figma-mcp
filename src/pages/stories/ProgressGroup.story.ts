@@ -7,8 +7,8 @@ export const ProgressGroupStory: StoryDef = {
   category: 'Feedback',
   previewWidth: 360,
   props: {
-    value:        { type: 'number', default: 50, min: 0, max: 100 },
     textPosition: { type: 'enum', options: ['top', 'aside'], default: 'top' },
+    value:        { type: 'number', default: 50, min: 0, max: 100 },
     leadingText:  { type: 'string', default: '50%' },
     trailingText: { type: 'string', default: '100/200' },
   },

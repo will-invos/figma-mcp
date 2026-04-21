@@ -76,28 +76,17 @@
   color: inherit;
 }
 
-.ui-alert__icon > svg {
+.ui-alert__icon i[class^='icon-'],
+.ui-alert__icon i[class*=' icon-'] {
   width: 16px;
   height: 16px;
+  font-size: 16px;
 }
-
-/* ========================================
- * Content
- * ======================================== */
 
 .ui-alert__content {
   flex: 1 0 0;
-  min-width: 1px;
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 22px;
-  letter-spacing: 0.04em;
+  min-width: 0px;
 }
-
-/* ========================================
- * Trailing icon: 16×16 in 22px-height container
- * Renders as <span> (display only) or <button> (clickable)
- * ======================================== */
 
 .ui-alert__trailing {
   flex-shrink: 0;
@@ -108,9 +97,11 @@
   color: inherit;
 }
 
-.ui-alert__trailing > svg {
+.ui-alert__trailing i[class^='icon-'],
+.ui-alert__trailing i[class*=' icon-'] {
   width: 16px;
   height: 16px;
+  font-size: 16px;
 }
 
 .ui-alert__trailing--button {

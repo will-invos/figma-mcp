@@ -25,8 +25,8 @@ export const CardItemStory: StoryDef = {
   category: 'Display',
   previewWidth: 360,
   props: {
-    headline:      { type: 'string', default: '兌獎期限提醒' },
     size:          { type: 'enum', options: ['large', 'medium'], default: 'medium' },
+    headline:      { type: 'string', default: '兌獎期限提醒' },
     content:       { type: 'enum', options: ['list-item', 'text'], default: 'list-item' },
     showThumbnail: { type: 'boolean', default: true, when: { size: 'medium' } },
     description:   { type: 'string', default: '卡片說明文字描述', when: { content: 'text' } },

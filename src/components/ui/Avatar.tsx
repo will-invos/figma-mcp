@@ -9,8 +9,6 @@ interface AvatarProps {
   /** Full name for accessible label and initials extraction. */
   name?: string
   size?: 'xsmall' | 'small' | 'medium' | 'large' | 'xlarge'
-  /** Optional shape; iOS standard is circle. */
-  shape?: 'circle' | 'square'
 }
 
 function deriveInitials(name?: string): string {
@@ -20,7 +18,7 @@ function deriveInitials(name?: string): string {
 }
 
 const Avatar = React.forwardRef<HTMLSpanElement, AvatarProps>(
-  ({ src, initials, name, size = 'medium', shape = 'circle' }, ref) => {
+  ({ src, initials, name, size = 'medium'}, ref) => {
     const [errored, setErrored] = React.useState(false)
     React.useEffect(() => { setErrored(false) }, [src])
     const showImg = src && !errored
@@ -28,7 +26,6 @@ const Avatar = React.forwardRef<HTMLSpanElement, AvatarProps>(
     const classes = [
       'ui-avatar',
       `ui-avatar--${size}`,
-      `ui-avatar--${shape}`,
     ].join(' ')
     return (
       <span ref={ref} className={classes} role="img" aria-label={name || 'avatar'}>

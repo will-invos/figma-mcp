@@ -23,9 +23,9 @@ export const TextFieldStory: StoryDef = {
     label:        { type: 'string', default: 'Label' },
     placeholder:  { type: 'string', default: 'Placeholder' },
     value:        { type: 'string', default: '' },
-    status:       { type: 'enum', options: ['default', 'error', 'disabled'], default: 'default' },
     leadingIcon:  { type: 'boolean', default: false },
     trailingIcon: { type: 'boolean', default: false },
+    status:       { type: 'enum', options: ['default', 'error', 'disabled'], default: 'default' },
   },
   Render: TextFieldRender,
 }

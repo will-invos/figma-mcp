@@ -35,9 +35,9 @@ export const SelectStory: StoryDef = {
     variant:     { type: 'enum', options: ['default', 'inner-label'], default: 'default' },
     label:       { type: 'string', default: 'Label' },
     placeholder: { type: 'string', default: 'Please select...' },
-    status:      { type: 'enum', options: ['default', 'error', 'disabled'], default: 'default' },
-    leadingIcon: { type: 'boolean', default: false },
     value:       { type: 'enum', options: ['', 'design', 'engineering', 'product'], default: '' },
+    leadingIcon: { type: 'boolean', default: false },
+    status:      { type: 'enum', options: ['default', 'error', 'disabled'], default: 'default' },
   },
   Render: SelectRender,
 }

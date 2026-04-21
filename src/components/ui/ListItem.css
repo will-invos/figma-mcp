@@ -50,8 +50,8 @@
   padding-bottom: var(--space-400);
 }
 
-/* Has description: py 16 → total 16+24+2+22+16 = 80px */
-.ui-list-item--has-description .ui-list-item__content {
+/* Rich (has description): py 16 → total 16+24+2+22+16 = 80px */
+.ui-list-item--rich .ui-list-item__content {
   padding-top: var(--space-400);
   padding-bottom: var(--space-400);
 }
@@ -107,7 +107,8 @@
   height: 24px;
 }
 
-.ui-list-item__leading-icon > i[class] {
+.ui-list-item__leading-icon > i[class^='icon-'],
+.ui-list-item__leading-icon > i[class*=' icon-'] {
   width: 24px;
   height: 24px;
   font-size: 24px;
@@ -161,9 +162,9 @@
  * Trailing elements
  *
  * Trailing has its own py padding to align within the row.
- * Default/Has-description: py space/400 (16px)
+ * Default/Rich: py space/400 (16px)
  * Compact: py space/300 (12px)
- * For switch/checkbox in has-description: py space/300 (12px) to center
+ * For switch/checkbox in rich: py space/300 (12px) to center
  * ======================================== */
 
 .ui-list-item__trailing {
@@ -182,20 +183,12 @@
 }
 
 .ui-list-item__trailing-text {
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 24px;
-  letter-spacing: 0.04em;
   color: var(--color-content-default);
 }
 
 /* Trailing icon: 24×24 */
-.ui-list-item__trailing > svg {
-  width: 24px;
-  height: 24px;
-}
-
-.ui-list-item__trailing > i[class] {
+.ui-list-item__trailing i[class^='icon-'],
+.ui-list-item__trailing i[class*=' icon-'] {
   width: 24px;
   height: 24px;
   font-size: 24px;
@@ -207,11 +200,11 @@
 
 /* CTA trailing: reduce padding so button doesn't stretch list item height */
 .ui-list-item__trailing--cta {
-  padding-top: var(--space-200);
-  padding-bottom: var(--space-200);
+  padding-top: var(--space-300);
+  padding-bottom: var(--space-300);
 }
 
 .ui-list-item--compact .ui-list-item__trailing--cta {
-  padding-top: var(--space-100);
-  padding-bottom: var(--space-100);
+  padding-top: var(--space-200);
+  padding-bottom: var(--space-200);
 }

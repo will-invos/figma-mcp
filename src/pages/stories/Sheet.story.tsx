@@ -67,11 +67,11 @@ export const SheetStory: StoryDef = {
   name: 'Sheet',
   category: 'Overlay',
   props: {
-    Handle: { type: 'boolean', default: false },
     headlineSize: { type: 'enum', options: ['regular', 'large'], default: 'large' },
     headline:     { type: 'string', default: 'Headline' },
-    footer:     { type: 'boolean', default: true },
-    footerType: { type: 'enum', options: ['1-button', '2-buttons-horizontal', '2-buttons-vertical', 'checkbox-button'], default: '1-button', when: { footer: true } },
+    Handle:       { type: 'boolean', default: false },
+    footer:       { type: 'boolean', default: true },
+    footerType:   { type: 'enum', options: ['1-button', '2-buttons-horizontal', '2-buttons-vertical', 'checkbox-button'], default: '1-button', when: { footer: true } },
   },
   Render: SheetRender,
 }
