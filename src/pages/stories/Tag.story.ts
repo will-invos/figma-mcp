@@ -3,8 +3,9 @@ import Tag from '@/components/ui/Tag'
 import type { StoryDef } from './types'
 
 const TagRender: React.FC<{ values: Record<string, any> }> = ({ values }) => {
-  const { leadingIcon, trailingIcon, ...props } = values
+  const { leadingIcon, trailingIcon, message, ...props } = values
   return React.createElement(Tag, {
+    message,
     ...props,
     leadingIcon: leadingIcon ? React.createElement('i', { className: 'icon-info', 'aria-hidden': 'true' }) : undefined,
     trailingIcon: trailingIcon ? React.createElement('i', { className: 'icon-cross', 'aria-hidden': 'true' }) : undefined,

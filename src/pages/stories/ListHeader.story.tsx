@@ -3,9 +3,10 @@ import ListHeader from '@/components/ui/ListHeader'
 import type { StoryDef } from './types'
 
 const ListHeaderRender: React.FC<{ values: Record<string, any> }> = ({ values }) => {
-  const { trailingText, ...rest } = values
+  const { trailingText, headline, ...rest } = values
   return (
     <ListHeader
+      headline={headline}
       {...rest}
       trailing={trailingText ? trailingText : undefined}
     />
