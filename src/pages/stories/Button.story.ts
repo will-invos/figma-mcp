@@ -16,8 +16,8 @@ export const ButtonStory: StoryDef = {
   name: 'Button',
   category: 'Forms',
   props: {
-    Style:   { type: 'enum', options: ['filled', 'outline', 'ghost', 'text'], default: 'filled' },
-    Color: { type: 'enum', options: ['primary', 'neutral', 'danger', 'prize', 'donation', 'white', 'inverse', 'secondary'], default: 'primary',
+    variant:   { type: 'enum', options: ['filled', 'outline', 'ghost', 'text'], default: 'filled' },
+    colorType: { type: 'enum', options: ['primary', 'neutral', 'danger', 'prize', 'donation', 'white', 'inverse', 'secondary'], default: 'primary',
       optionsByDep: { variant: {
         filled:  ['primary', 'neutral', 'danger', 'prize', 'donation', 'white'],
         outline: ['primary'],
@@ -26,7 +26,7 @@ export const ButtonStory: StoryDef = {
       }},
     },
     size:         { type: 'enum', options: ['large', 'medium', 'small'], default: 'medium' },
-    label:  { type: 'string', default: 'Button' },
+    children:  { type: 'string', default: 'Button' },
     leadingIcon:  { type: 'boolean', default: false },
     trailingIcon: { type: 'boolean', default: false },
     disabled:     { type: 'boolean', default: false },
