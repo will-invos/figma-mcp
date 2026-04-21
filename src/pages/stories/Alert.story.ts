@@ -7,7 +7,7 @@ export const AlertStory: StoryDef = {
   category: 'Feedback',
   previewWidth: 360,
   props: {
-    children:     { type: 'string', default: 'Message' },
+    message:      { type: 'string', default: 'Message' },
     colorType:    { type: 'enum', options: ['primary', 'neutral', 'success', 'warning', 'danger', 'prize'], default: 'primary' },
     variant:      { type: 'enum', options: ['default', 'full-width'], default: 'default' },
     leadingIcon:  { type: 'boolean', default: true },

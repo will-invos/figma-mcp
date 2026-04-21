@@ -12,7 +12,7 @@ interface AlertProps {
   trailingIcon?: boolean;
   /** Called when the trailing icon is clicked. */
   onClose?: () => void;
-  children: React.ReactNode;
+  message: React.ReactNode;
 }
 
 /** Default leading icon SVG per colorType. Uses currentColor for proper color inheritance. */
@@ -87,7 +87,7 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
       icon,
       trailingIcon = true,
       onClose,
-      children,
+      message,
     },
     ref
   ) => {
@@ -102,7 +102,7 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
     return (
       <div ref={ref} className={classes} role="alert">
         {resolvedLeading && <span className="ui-alert__icon">{resolvedLeading}</span>}
-        <div className="ui-alert__content">{children}</div>
+        <div className="ui-alert__content">{message}</div>
         {trailingIcon && (
           onClose ? (
             <button

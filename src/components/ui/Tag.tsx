@@ -7,7 +7,7 @@ interface TagProps {
   size?: 'medium' | 'small';
   leadingIcon?: React.ReactNode;
   trailingIcon?: React.ReactNode;
-  children: React.ReactNode;
+  message: React.ReactNode;
 }
 
 const Tag = React.forwardRef<HTMLSpanElement, TagProps>(
@@ -18,7 +18,7 @@ const Tag = React.forwardRef<HTMLSpanElement, TagProps>(
       size = 'medium',
       leadingIcon,
       trailingIcon,
-      children,
+      message,
     },
     ref
   ) => {
@@ -31,7 +31,7 @@ const Tag = React.forwardRef<HTMLSpanElement, TagProps>(
     return (
       <span ref={ref} className={classes}>
         {leadingIcon && <span className="ui-tag__icon">{leadingIcon}</span>}
-        {children}
+        {message}
         {trailingIcon && <span className="ui-tag__icon">{trailingIcon}</span>}
       </span>
     );
