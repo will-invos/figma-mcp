@@ -110,16 +110,22 @@ Design tokens: `src/components/ui/tokens/` (colors, radius, shadows, spacing, ty
 - **Library**: 🧰 iOS - UI Kit 2025 (components), 🧰 Design System 2025 (variables, text styles)
 - **Token reference**: `figma-tokens.json` — contains all component keys, text style keys, and variable collection keys
 
-### Code Connect
-Each UI component has (or should have) a `.figma.tsx` mapping file (e.g., `TextField.figma.tsx`).
-These map React component props ↔ Figma component variant properties and text overrides.
+### Code Connect（目前未啟用）
 
-當 AI 讀 Figma 時，有對應的 Code Connect 映射就會直接拿到 React 呼叫（例：`<Button variant="filled" colorType="primary">Submit</Button>`）而不是 Tailwind class。優先使用這份資訊，再依專案 CSS token 系統微調。
+Figma Code Connect 可以讓 Dev Mode 直接顯示 React 呼叫（取代預設的 Tailwind），但 **publish 需要 Organization 以上方案**，目前帳號不具備。因此本專案**沒有 `.figma.tsx` 映射檔**，AI 讀 Figma 時會拿到 Tailwind 或純 CSS 預設輸出，需自行翻譯成本專案元件。
 
-### Figma → Code workflow
-1. Use `get_design_context` (figma-remote or figma-dev-mode MCP) with the node ID
-2. Code Connect mappings will return React component usage instead of raw Tailwind
-3. Adapt to the project's existing patterns (CSS variables, component APIs)
+未來若升級方案，可重建 `.figma.tsx` + `figma.config.json` 走 `npx figma connect publish`。
+
+### Figma → Code workflow（現行流程）
+
+1. 呼叫 `mcp__figma-remote__get_design_context` with `{ fileKey, nodeId }`
+2. 回傳通常是 Tailwind / 原生 CSS 的 reference code
+3. **AI 必須自己翻譯**：
+   - 對照下方 `figma-tokens.json.componentKeys` 找出 Figma 元件對應哪個 React 元件
+   - 套用上方「Component Decision Tree」挑選正確元件與變體
+   - 顏色對照 `tokens/colors.css`，換成 `var(--color-*)`
+   - Text style 對照 `tokens/typography.css` 的 class（`.text-display`、`.text-body-large` 等）
+4. **絕對不要**直接產出 Tailwind class 到本專案程式碼
 
 ### Code → Figma workflow (IMPORTANT)
 **Do NOT use `generate_figma_design` (HTML capture).** It loses variables, text styles, and component structure.
