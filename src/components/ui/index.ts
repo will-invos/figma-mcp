@@ -1,3 +1,8 @@
+// Design tokens (colors, spacing, radius, typography, shadows, icons).
+// Imported here so consumers only need `import '@invos/ios-ui-kit/styles.css'`
+// to get both tokens + component styles in one go.
+import './tokens/index.css';
+
 // === Existing components ===
 export { default as Spinner } from './Spinner';
 export type { SpinnerProps } from './Spinner';
