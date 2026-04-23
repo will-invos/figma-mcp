@@ -1,4 +1,7 @@
-# Project: figma-mcp
+# Project: @invos/ios-ui-kit
+
+> Repo: `will-invos/invos-ui` · npm 套件名稱 `@invos/ios-ui-kit`
+> 本機工作目錄目前仍為 `~/Github/figma-mcp/`（未重新命名，避免影響 IDE / terminal 工作區）
 
 React + TypeScript + Vite 專案，內含一套以行動網頁為主的 UI Kit 與 design tokens。可供內部多個專案共用，並搭配 Figma MCP 讓 AI 快速建立新頁面。
 

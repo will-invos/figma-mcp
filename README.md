@@ -1,8 +1,10 @@
-# figma-mcp
+# @invos/ios-ui-kit
 
-透過 **Claude Code** 與 **Figma MCP** 從 Figma 設計稿自動產生 React 元件與 Storybook（自製預覽系統）的示範專案。
+> Repo: [`will-invos/invos-ui`](https://github.com/will-invos/invos-ui) — npm 套件名稱 `@invos/ios-ui-kit`
 
-一套 iOS 風格 UI Kit，元件與 story 幾乎全由 Claude Code 讀取 Figma 設計後產出，並透過 Code Connect 綁定回 Figma，達到「設計 ↔ 程式碼」雙向同步。
+一套 iOS 風格、**行動網頁為主**的 React UI Kit，可供內部多個專案共用。
+
+元件與 token 透過 **Claude Code** + **Figma MCP** 從 Figma 設計稿讀回並產生，搭配自製 Storybook 預覽系統，實現「設計 ↔ 程式碼」同步。
 
 ## 專案目標
 
