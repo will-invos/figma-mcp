@@ -36,16 +36,92 @@ figma-tokens.json         # Figma component / text style / variable 的 key 清�
 CLAUDE.md                 # 給 Claude Code 的專案規範
 ```
 
-## 安裝與啟動
+## 安裝與啟動（在這個 repo 內開發時）
 
 ```bash
 pnpm install        # 或 npm install / yarn
 pnpm dev            # 啟動 Vite dev server
 pnpm build          # 型別檢查 + production build
+pnpm build:lib      # 打包成 library（output: dist/）
 pnpm lint           # ESLint
 ```
 
 開啟 `http://localhost:5173/` 即可看到自製 Storybook。
+
+## 在其他內部專案引用這套 UI Kit
+
+### 1. 安裝（走 GitHub tag）
+
+在新專案的 `package.json` 加入：
+
+```json
+{
+  "dependencies": {
+    "@invos/ios-ui-kit": "github:will-invos/invos-ui#v0.1.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  }
+}
+```
+
+```bash
+npm install
+```
+
+> 原理：`npm install` 看到 GitHub URL 會 clone 該 tag、自動裝 devDeps、跑 `prepare` script（= `npm run build:lib`）把 `dist/` 建出來、再打包安裝。所以消費端不用額外做事，但首次安裝會比一般套件慢 30 秒～1 分鐘。
+
+### 2. 引入 CSS（**整個專案只要一次**）
+
+```tsx
+// src/main.tsx
+import '@invos/ios-ui-kit/styles.css'
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import App from './App'
+
+createRoot(document.getElementById('root')!).render(
+  <StrictMode><App /></StrictMode>
+)
+```
+
+沒引這行 → 元件完全沒樣式。
+
+### 3. 在元件使用
+
+```tsx
+import {
+  Button,
+  TextField,
+  Dialog,
+  NavigationBar,
+  ListItem,
+} from '@invos/ios-ui-kit'
+import type { ButtonProps } from '@invos/ios-ui-kit'
+
+export default function LoginPage() {
+  return (
+    <>
+      <NavigationBar title="登入" />
+      <TextField variant="inner-label" label="Email" />
+      <Button variant="filled" colorType="primary" size="large" text="送出" />
+    </>
+  )
+}
+```
+
+完整元件清單與決策樹請見 Kit 內的 [CLAUDE.md](CLAUDE.md)（被 `npm install` 時一起裝進 `node_modules/@invos/ios-ui-kit/`，AI 會自動讀到）。
+
+### 4. Viewport（行動網頁）
+
+```html
+<!-- index.html -->
+<meta name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+```
+
+### 5. 升級版本
+
+Kit 這邊發新 tag（例如 `v0.1.1`）後，消費端只要把 `package.json` 的 `#v0.1.0` 改成 `#v0.1.1` 再 `npm install` 即可。
 
 ## Claude Code + Figma MCP 工作流程
 
@@ -80,9 +156,9 @@ pnpm lint           # ESLint
 4. `figma.importStyleByKeyAsync(key)` → `textNode.textStyleId = style.id` 套用文字樣式
 5. `figma.teamLibrary.getVariablesInLibraryCollectionAsync(collectionKey)` → 綁定顏色 / 尺寸變數
 
-### 4. Code Connect
+### 4. Code Connect（目前未啟用）
 
-每個 UI 元件旁放一份 `*.figma.tsx` mapping，將 React props 對應到 Figma variant，讓 Figma 的 Dev Mode 直接顯示專案實際用法。
+Code Connect 能讓 Figma Dev Mode 直接顯示 React 呼叫，但 publish 需要 Figma Organization 以上方案，目前帳號不具備。AI 讀 Figma 時會拿到 Tailwind 預設輸出，需依 [CLAUDE.md](CLAUDE.md) 的決策樹與 [figma-tokens.json](figma-tokens.json) 手動翻譯成本專案元件。升級方案後可重建 `.figma.tsx` 映射。
 
 ## 設計規範（摘要，完整請見 [CLAUDE.md](CLAUDE.md)）
 
