@@ -123,7 +123,42 @@ export default function LoginPage() {
 
 ### 5. 升級版本
 
-Kit 這邊發新 tag（例如 `v0.1.1`）後，消費端只要把 `package.json` 的 `#v0.1.0` 改成 `#v0.1.1` 再 `npm install` 即可。
+#### Kit 端發新版（在這個 repo）
+
+```bash
+npm version patch     # 0.1.0 → 0.1.1（bug fix）
+# 或 npm version minor / npm version major
+```
+
+`package.json` 已設好 `preversion` / `postversion` hooks，一行會自動：
+
+1. 跑 `lint` + `build:lib`（任一失敗就中止，不會升版）
+2. 改 `package.json` → `git commit` → `git tag vX.Y.Z`
+3. `git push && git push --tags`
+
+> 跑前先把工作 commit 完，`npm version` 預設會擋未 commit 的變更。
+
+#### 消費端拉新版
+
+修改消費端 `package.json`：
+
+```diff
+- "@invos/ios-ui-kit": "github:will-invos/invos-ui#v0.1.0",
++ "@invos/ios-ui-kit": "github:will-invos/invos-ui#v0.1.1",
+```
+
+```bash
+rm -rf node_modules/@invos/ios-ui-kit
+npm install
+```
+
+> 為什麼要 `rm -rf`：npm 對 GitHub URL 的快取很黏，光改 tag 跑 `npm install` 有時不會重抓。
+
+驗證：
+
+```bash
+npm ls @invos/ios-ui-kit
+```
 
 ## Claude Code + Figma MCP 工作流程
 

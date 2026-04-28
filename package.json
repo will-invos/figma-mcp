@@ -32,7 +32,9 @@
     "build:lib": "tsc -p tsconfig.lib.json && vite build --config vite.lib.config.ts",
     "lint": "eslint .",
     "preview": "vite preview",
-    "prepare": "npm run build:lib"
+    "prepare": "npm run build:lib",
+    "preversion": "npm run lint && npm run build:lib",
+    "postversion": "git push && git push --tags"
   },
   "peerDependencies": {
     "react": ">=19",
