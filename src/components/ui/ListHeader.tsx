@@ -11,7 +11,7 @@ interface ListHeaderProps {
 }
 
 const HEADLINE_CLASS = {
-  small:  'text-label-large',
+  small:  'text-label-medium',
   medium: 'text-heading-small',
   large:  'text-display',
 } as const
