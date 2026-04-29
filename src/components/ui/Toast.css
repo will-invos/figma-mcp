@@ -66,6 +66,7 @@
   justify-content: center;
   width: 48px;
   height: 48px;
+  color: var(--color-content-inverse-bold);
 }
 .ui-toast__icon i[class^='icon-'],
 .ui-toast__icon i[class*=' icon-'] {
