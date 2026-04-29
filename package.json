@@ -1,6 +1,6 @@
 {
   "name": "@invos/ios-ui-kit",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Mobile-web UI Kit with iOS-flavored design tokens; synced with Figma via MCP.",
   "private": true,
   "type": "module",
