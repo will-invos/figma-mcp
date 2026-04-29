@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import TextField from '@/components/ui/TextField'
+import IconButton from '@/components/ui/IconButton'
 import type { StoryDef } from './types'
 
 const TextFieldRender: React.FC<{ values: Record<string, any> }> = ({ values }) => {
@@ -15,7 +16,18 @@ const TextFieldRender: React.FC<{ values: Record<string, any> }> = ({ values }) 
       value={value}
       onChange={(e) => setValue(e.target.value)}
       leadingIcon={leadingIcon ? <i className="icon-user" aria-hidden="true" /> : undefined}
-      trailingIcon={trailingIcon ? <i className="icon-eye-off" aria-hidden="true" /> : undefined}
+      trailingIcon={
+        trailingIcon ? (
+          <IconButton
+            variant="ghost"
+            colorType="neutral"
+            size="xsmall"
+            aria-label="Clear"
+            icon={<i className="icon-cross" aria-hidden="true" />}
+            onClick={() => setValue('')}
+          />
+        ) : undefined
+      }
     />
   )
 }

@@ -124,7 +124,12 @@ const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
             />
           </div>
           {trailingIcon && (
-            <span className="ui-text-field__trailing-icon">{trailingIcon}</span>
+            <div
+              className="ui-text-field__trailing-icon"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {trailingIcon}
+            </div>
           )}
         </div>
       </div>
