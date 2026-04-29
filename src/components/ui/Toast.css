@@ -43,7 +43,7 @@
 
 /* Rich variant: fixed 200 wide, gap --space-600 between body and action */
 .ui-toast--rich {
-  width: 200px;
+  min-width: 200px;
   gap: var(--space-600);
 }
 
