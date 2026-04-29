@@ -21,6 +21,7 @@
   },
   "files": [
     "dist",
+    "docs/*.md",
     "README.md",
     "LICENSE",
     "CLAUDE.md",
