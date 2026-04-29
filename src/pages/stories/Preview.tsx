@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import type { StoryDef } from './types'
 import './Preview.css'
 
@@ -9,6 +9,16 @@ interface PreviewProps {
 
 export default function Preview({ story, values }: PreviewProps) {
   const [dark, setDark] = useState(false)
+
+  // Mirror theme to <html> so portal'd elements (Toast / Dialog / Sheet) inherit it.
+  // Without this, components rendered into document.body via createPortal escape the
+  // canvas-scoped data-theme and fall back to :root (light) tokens.
+  useEffect(() => {
+    const html = document.documentElement
+    if (dark) html.dataset.theme = 'dark'
+    else delete html.dataset.theme
+    return () => { delete html.dataset.theme }
+  }, [dark])
 
   const mergedProps = { ...story.fixedProps, ...values }
   const Component = story.component
