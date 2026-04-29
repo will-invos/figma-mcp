@@ -56,6 +56,8 @@
   height: 20px;
   font-size: 20px;
 }
-.ui-search-field__clear:hover {
-  color: var(--color-content-subtle);
+@media (hover: hover) {
+  .ui-search-field__clear:hover {
+    color: var(--color-content-subtle);
+  }
 }

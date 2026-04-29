@@ -32,8 +32,10 @@
   cursor: pointer;
   transition: background-color 0.15s, color 0.15s, border-color 0.15s;
 }
-.ui-tag-bar__item:not(.ui-tag-bar__item--active):hover {
-  background: var(--color-background-sunken);
+@media (hover: hover) {
+  .ui-tag-bar__item:not(.ui-tag-bar__item--active):hover {
+    background: var(--color-background-sunken);
+  }
 }
 .ui-tag-bar__item--active {
   background: var(--color-background-inverse-default);

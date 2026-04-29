@@ -64,8 +64,10 @@
   cursor: pointer;
 }
 
-.ui-list-item--clickable:hover {
-  background-color: var(--color-background-neutral-subtle);
+@media (hover: hover) {
+  .ui-list-item--clickable:hover {
+    background-color: var(--color-background-neutral-subtle);
+  }
 }
 
 .ui-list-item--disabled .ui-list-item__container {

@@ -98,8 +98,10 @@
   background-color: var(--color-background-brand-default);
   color: var(--color-content-fixed-white);
 }
-.ui-icon-button--filled.ui-icon-button--filled-primary:hover {
-  background-color: var(--color-background-brand-hover);
+@media (hover: hover) {
+  .ui-icon-button--filled.ui-icon-button--filled-primary:hover {
+    background-color: var(--color-background-brand-hover);
+  }
 }
 .ui-icon-button--filled.ui-icon-button--filled-primary:active {
   background-color: var(--color-background-brand-active);
@@ -110,8 +112,10 @@
   background-color: var(--color-background-neutral-subtle);
   color: var(--color-content-default);
 }
-.ui-icon-button--filled.ui-icon-button--filled-neutral:hover {
-  background-color: var(--color-background-neutral-subtle-hover);
+@media (hover: hover) {
+  .ui-icon-button--filled.ui-icon-button--filled-neutral:hover {
+    background-color: var(--color-background-neutral-subtle-hover);
+  }
 }
 .ui-icon-button--filled.ui-icon-button--filled-neutral:active {
   background-color: var(--color-background-neutral-subtle-active);
@@ -122,8 +126,10 @@
   background-color: var(--color-background-danger-default);
   color: var(--color-content-fixed-white);
 }
-.ui-icon-button--filled.ui-icon-button--filled-danger:hover {
-  background-color: var(--color-background-danger-hover);
+@media (hover: hover) {
+  .ui-icon-button--filled.ui-icon-button--filled-danger:hover {
+    background-color: var(--color-background-danger-hover);
+  }
 }
 .ui-icon-button--filled.ui-icon-button--filled-danger:active {
   background-color: var(--color-background-danger-active);
@@ -134,8 +140,10 @@
   background-color: var(--color-background-prize-default);
   color: var(--color-content-fixed-bold);
 }
-.ui-icon-button--filled.ui-icon-button--filled-prize:hover {
-  background-color: var(--color-background-prize-hover);
+@media (hover: hover) {
+  .ui-icon-button--filled.ui-icon-button--filled-prize:hover {
+    background-color: var(--color-background-prize-hover);
+  }
 }
 .ui-icon-button--filled.ui-icon-button--filled-prize:active {
   background-color: var(--color-background-prize-active);
@@ -146,8 +154,10 @@
   background-color: var(--color-background-donation-default);
   color: var(--color-content-fixed-white);
 }
-.ui-icon-button--filled.ui-icon-button--filled-donation:hover {
-  background-color: var(--color-background-donation-hover);
+@media (hover: hover) {
+  .ui-icon-button--filled.ui-icon-button--filled-donation:hover {
+    background-color: var(--color-background-donation-hover);
+  }
 }
 .ui-icon-button--filled.ui-icon-button--filled-donation:active {
   background-color: var(--color-background-donation-active);
@@ -162,8 +172,10 @@
   border: 1.5px solid var(--color-border-brand);
   color: var(--color-content-brand-default);
 }
-.ui-icon-button--outline:hover {
-  background-color: var(--color-background-transparent-hover);
+@media (hover: hover) {
+  .ui-icon-button--outline:hover {
+    background-color: var(--color-background-transparent-hover);
+  }
 }
 .ui-icon-button--outline:active {
   background-color: var(--color-background-transparent-active);
@@ -178,8 +190,10 @@
   background-color: var(--color-background-transparent-default);
   color: var(--color-content-brand-default);
 }
-.ui-icon-button--ghost.ui-icon-button--ghost-primary:hover {
-  background-color: var(--color-background-transparent-hover);
+@media (hover: hover) {
+  .ui-icon-button--ghost.ui-icon-button--ghost-primary:hover {
+    background-color: var(--color-background-transparent-hover);
+  }
 }
 .ui-icon-button--ghost.ui-icon-button--ghost-primary:active {
   background-color: var(--color-background-transparent-active);
@@ -190,8 +204,10 @@
   background-color: transparent;
   color: var(--color-content-neutral-default);
 }
-.ui-icon-button--ghost.ui-icon-button--ghost-neutral:hover {
-  background-color: var(--color-background-transparent-hover);
+@media (hover: hover) {
+  .ui-icon-button--ghost.ui-icon-button--ghost-neutral:hover {
+    background-color: var(--color-background-transparent-hover);
+  }
 }
 .ui-icon-button--ghost.ui-icon-button--ghost-neutral:active {
   background-color: var(--color-background-transparent-active);
@@ -202,8 +218,10 @@
   background-color: var(--color-background-transparent-default);
   color: var(--color-content-danger-default);
 }
-.ui-icon-button--ghost.ui-icon-button--ghost-danger:hover {
-  background-color: var(--color-background-danger-subtlest);
+@media (hover: hover) {
+  .ui-icon-button--ghost.ui-icon-button--ghost-danger:hover {
+    background-color: var(--color-background-danger-subtlest);
+  }
 }
 .ui-icon-button--ghost.ui-icon-button--ghost-danger:active {
   background-color: var(--color-background-danger-subtle);
@@ -214,8 +232,10 @@
   background-color: var(--color-background-transparent-default);
   color: var(--color-content-prize-default);
 }
-.ui-icon-button--ghost.ui-icon-button--ghost-prize:hover {
-  background-color: var(--color-background-prize-subtlest);
+@media (hover: hover) {
+  .ui-icon-button--ghost.ui-icon-button--ghost-prize:hover {
+    background-color: var(--color-background-prize-subtlest);
+  }
 }
 .ui-icon-button--ghost.ui-icon-button--ghost-prize:active {
   background-color: var(--color-background-prize-subtle);
@@ -226,8 +246,10 @@
   background-color: var(--color-background-transparent-default);
   color: var(--color-content-donation-default);
 }
-.ui-icon-button--ghost.ui-icon-button--ghost-donation:hover {
-  background-color: var(--color-background-donation-subtlest);
+@media (hover: hover) {
+  .ui-icon-button--ghost.ui-icon-button--ghost-donation:hover {
+    background-color: var(--color-background-donation-subtlest);
+  }
 }
 .ui-icon-button--ghost.ui-icon-button--ghost-donation:active {
   background-color: var(--color-background-donation-subtle);

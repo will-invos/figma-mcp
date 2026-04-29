@@ -184,19 +184,23 @@
   color: var(--color-content-subtle);
 }
 
-.ui-text-field__leading-icon > svg,
-.ui-text-field__trailing-icon > svg {
-  width: 24px;
-  height: 24px;
-}
-
-.ui-text-field__leading-icon > i[class^='icon-'],
-.ui-text-field__leading-icon > i[class*=' icon-'],
-.ui-text-field__trailing-icon > i[class^='icon-'],
-.ui-text-field__trailing-icon > i[class*=' icon-'] {
+.ui-text-field__leading-icon i[class^='icon-'],
+.ui-text-field__leading-icon i[class*=' icon-'],
+.ui-text-field__trailing-icon i[class^='icon-'],
+.ui-text-field__trailing-icon i[class*=' icon-'] {
   width: 24px;
   height: 24px;
   font-size: 24px;
+}
+
+.ui-text-field__trailing-icon .ui-icon-button:active {
+  background: none;
+  opacity: 0.6;
+}
+@media (hover: hover) {
+  .ui-text-field__trailing-icon .ui-icon-button:hover {
+    background: none;
+  }
 }
 
 /* Error: leading icon turns danger */
