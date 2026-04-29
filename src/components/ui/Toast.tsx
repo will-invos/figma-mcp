@@ -25,6 +25,8 @@ interface ToastMessage {
 
 interface ToastContextValue {
   show: (opts: Omit<ToastMessage, 'id'>) => string
+  /** Merge `patch` into an existing toast and reset its auto-dismiss timer. No-op if id is gone. */
+  update: (id: string, patch: Partial<Omit<ToastMessage, 'id'>>) => void
   dismiss: (id: string) => void
 }
 
@@ -71,7 +73,35 @@ function ToastProvider({ children }: { children: React.ReactNode }) {
     return id
   }, [dismiss])
 
-  const value = useMemo(() => ({ show, dismiss }), [show, dismiss])
+  const update = useCallback(
+    (id: string, patch: Partial<Omit<ToastMessage, 'id'>>) => {
+      let captured: ToastMessage | null = null
+      setToasts((prev) => {
+        const idx = prev.findIndex((t) => t.id === id)
+        if (idx === -1) return prev
+        const merged: ToastMessage = { ...prev[idx], ...patch, id }
+        captured = merged
+        const next = [...prev]
+        next[idx] = merged
+        return next
+      })
+
+      if (!captured) return
+
+      // Reset auto-dismiss timer to reflect new type / duration
+      const existing = timersRef.current.get(id)
+      if (existing) { clearTimeout(existing); timersRef.current.delete(id) }
+      const merged: ToastMessage = captured
+      if (merged.type !== 'loading') {
+        const duration = merged.duration ?? 3000
+        const timer = setTimeout(() => { timersRef.current.delete(id); dismiss(id) }, duration)
+        timersRef.current.set(id, timer)
+      }
+    },
+    [dismiss]
+  )
+
+  const value = useMemo(() => ({ show, update, dismiss }), [show, update, dismiss])
 
   return (
     <ToastContext.Provider value={value}>

@@ -3,18 +3,25 @@ import Button from '@/components/ui/Button'
 import { useToast } from '@/components/ui'
 
 const ToastRender: React.FC<{ values: Record<string, any> }> = ({ values }) => {
-  const { show, dismiss } = useToast()
+  const { show, update, dismiss } = useToast()
 
   const handleShow = () => {
     if (values.type === 'loading') {
       const id = show({ type: 'loading' })
       setTimeout(() => dismiss(id), 3000)
     } else {
-      show({
+      // rich: 一直保持 rich 樣式，3s 後把預設 Spinner icon 換成 check icon。
+      // duration 設大於 3s 避免 icon 切換前就被 auto-dismiss；update 後 timer 會重置為預設 3s。
+      const id = show({
         type: 'rich',
         message: values.text,
         action: values.button ? { label: 'Cancel', onClick: () => {} } : undefined,
+        duration: 5000,
       })
+      setTimeout(
+        () => update(id, { icon: <i className="icon-check" aria-hidden="true" /> }),
+        3000
+      )
     }
   }
 
