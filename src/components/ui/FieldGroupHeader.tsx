@@ -12,7 +12,7 @@ const FieldGroupHeader = React.forwardRef<HTMLDivElement, FieldGroupHeaderProps>
     const classes = ['ui-field-group__header', className].filter(Boolean).join(' ')
     return (
       <div ref={ref} className={classes}>
-        <span className="text-heading-small ui-field-group__label">{headline}</span>
+        <span className="text-label-large ui-field-group__label">{headline}</span>
         {description && <span className="text-body-large ui-field-group__description">{description}</span>}
       </div>
     )
