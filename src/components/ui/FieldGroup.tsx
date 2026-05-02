@@ -10,8 +10,6 @@ interface FieldGroupProps {
   description?: string
   /** Optional help text shown below the input. */
   helpText?: string
-  /** Optional icon for help text (e.g. info circle). */
-  helpIcon?: React.ReactNode
   /** Help text alignment. */
   helpTextAlign?: 'left' | 'right'
   /** Whether the field is in error state (affects help text color). */
@@ -26,7 +24,7 @@ interface FieldGroupProps {
  * matching the Figma "Field group" component structure.
  */
 const FieldGroup = React.forwardRef<HTMLDivElement, FieldGroupProps>(
-  ({ headline, description, helpText, helpIcon, helpTextAlign = 'left', status = 'default', children, className }, ref) => {
+  ({ headline, description, helpText, helpTextAlign = 'left', status = 'default', children, className }, ref) => {
     const classes = [
       'ui-field-group',
       status === 'error' && 'ui-field-group--error',
@@ -36,7 +34,7 @@ const FieldGroup = React.forwardRef<HTMLDivElement, FieldGroupProps>(
       <div ref={ref} className={classes}>
         {headline && <FieldGroupHeader headline={headline} description={description} />}
         <div className="ui-field-group__content">{children}</div>
-        {helpText && <FieldGroupHelpText text={helpText} icon={helpIcon} status={status} align={helpTextAlign} />}
+        {helpText && <FieldGroupHelpText text={helpText} status={status} align={helpTextAlign} />}
       </div>
     )
   }

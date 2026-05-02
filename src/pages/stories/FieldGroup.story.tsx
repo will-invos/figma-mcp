@@ -50,7 +50,6 @@ const FieldGroupRender: React.FC<{ values: Record<string, any> }> = ({ values })
     <FieldGroup
       headline={values.headline}
       helpText={values.helpText ? values.helpTextBody : undefined}
-      helpIcon={values.helpText && values.helpIcon ? <i className="icon-info" aria-hidden="true" /> : undefined}
       helpTextAlign={values.helpTextAlign}
       status={values.status}
     >
@@ -69,7 +68,6 @@ export const FieldGroupStory: StoryDef = {
     headline:       { type: 'string', default: 'Headline' },
     helpText:       { type: 'boolean', default: true },
     helpTextBody:   { type: 'string', default: 'Help text', when: { helpText: true } },
-    helpIcon:       { type: 'boolean', default: true, when: { helpText: true } },
     helpTextAlign:  { type: 'enum', options: ['left', 'right'], default: 'left', when: { helpText: true } },
     status:         { type: 'enum', options: ['default', 'error'], default: 'default' },
   },

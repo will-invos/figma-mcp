@@ -13,8 +13,6 @@ interface SelectProps extends Omit<React.SelectHTMLAttributes<HTMLSelectElement>
   placeholder?: string;
   options: SelectOption[];
   status?: 'default' | 'error' | 'disabled';
-  helpText?: string;
-  helpIcon?: React.ReactNode;
   leadingIcon?: React.ReactNode;
 }
 
@@ -26,8 +24,6 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       placeholder,
       options,
       status = 'default',
-      helpText,
-      helpIcon,
       leadingIcon,
       id,
       className,
@@ -40,7 +36,6 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
   ) => {
     const generatedId = useId();
     const selectId = id ?? generatedId;
-    const helpId = helpText ? `${selectId}-help` : undefined;
 
     const isDisabled = status === 'disabled';
     const isError = status === 'error';
@@ -105,7 +100,6 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
             className="ui-select__input"
             disabled={isDisabled}
             aria-invalid={isError || undefined}
-            aria-describedby={helpId}
             value={value}
             defaultValue={defaultValue}
             onChange={handleChange}
@@ -123,14 +117,6 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
             ))}
           </select>
         </label>
-        {helpText && (
-          <div id={helpId} className="ui-select__help">
-            {helpIcon && (
-              <span className="ui-select__help-icon">{helpIcon}</span>
-            )}
-            <span className="ui-select__help-text">{helpText}</span>
-          </div>
-        )}
       </div>
     );
   }
