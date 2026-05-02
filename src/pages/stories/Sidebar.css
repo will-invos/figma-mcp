@@ -1,7 +1,7 @@
 .cs-sidebar {
   width: 220px;
   min-width: 220px;
-  height: 100vh;
+  height: 100dvh;
   overflow-y: auto;
   padding: var(--space-400) var(--space-300);
   background: var(--color-background-sunken);

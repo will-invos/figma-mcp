@@ -1,7 +1,7 @@
 .cs-controls {
   width: 280px;
   min-width: 280px;
-  height: 100vh;
+  height: 100dvh;
   overflow-y: auto;
   padding: var(--space-400) var(--space-400);
   background: var(--color-background-sunken);
