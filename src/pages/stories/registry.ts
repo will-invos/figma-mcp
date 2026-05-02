@@ -10,6 +10,7 @@ import { DividerStory } from './Divider.story'
 import { ButtonStory } from './Button.story'
 import { IconButtonStory } from './IconButton.story.tsx'
 import { TextFieldStory } from './TextField.story.tsx'
+import { PinInputStory } from './PinInput.story.tsx'
 import { TextAreaStory } from './TextArea.story'
 import { SelectStory } from './Select.story.tsx'
 import { CheckboxStory } from './Checkbox.story'
@@ -50,7 +51,7 @@ export const categories: StoryCategory[] = [
   },
   {
     name: 'Forms',
-    stories: [ButtonStory, IconButtonStory, TextFieldStory, TextAreaStory, SelectStory, CheckboxStory, RadioStory, SwitchStory, SliderStory, SearchFieldStory, FieldGroupStory],
+    stories: [ButtonStory, IconButtonStory, TextFieldStory, TextAreaStory, PinInputStory, SelectStory, CheckboxStory, RadioStory, SwitchStory, SliderStory, SearchFieldStory, FieldGroupStory],
   },
   {
     name: 'Display',

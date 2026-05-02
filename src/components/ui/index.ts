@@ -16,6 +16,9 @@ export type { IconButtonProps } from './IconButton';
 export { default as TextField } from './TextField';
 export type { TextFieldProps } from './TextField';
 
+export { default as PinInput } from './PinInput';
+export type { PinInputProps } from './PinInput';
+
 export { default as Select } from './Select';
 export type { SelectProps, SelectOption } from './Select';
 

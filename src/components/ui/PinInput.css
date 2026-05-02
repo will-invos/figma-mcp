@@ -1,0 +1,46 @@
+.ui-pin-input {
+  display: flex;
+  gap: var(--space-200);
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.ui-pin-input__cell {
+  flex: 1 1 0;
+  min-width: 40px;
+  max-width: 56px;
+  height: 56px;
+  padding: 0;
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-300);
+  background: var(--color-background-default);
+  color: var(--color-content-default);
+  text-align: center;
+  caret-color: var(--color-content-brand-default);
+  font-family: var(--font-family);
+  outline: none;
+  box-sizing: border-box;
+  -moz-appearance: textfield;
+}
+
+.ui-pin-input__cell::placeholder {
+  color: var(--color-content-subtlest);
+  font-weight: 400;
+}
+
+.ui-pin-input__cell:focus {
+  border: 2px solid var(--color-border-brand);
+}
+
+.ui-pin-input__cell--error,
+.ui-pin-input__cell--error:focus {
+  border: 2px solid var(--color-border-danger);
+}
+
+.ui-pin-input__cell--disabled,
+.ui-pin-input__cell:disabled {
+  background: var(--color-background-disable);
+  color: var(--color-content-subtle);
+  cursor: not-allowed;
+}
