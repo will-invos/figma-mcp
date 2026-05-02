@@ -33,7 +33,7 @@
 .ui-sheet {
   background: var(--color-background-default);
   border-radius: var(--radius-600) var(--radius-600) 0 0;
-  max-height: 90vh;
+  max-height: 100vh;
   width: 100%;
   max-width: 480px;
   display: flex;

@@ -15,6 +15,7 @@
   align-items: stretch;
   width: 100%;
   overflow: hidden;
+  flex-shrink: 0;
 }
 
 /* ===== Grabber ===== */
