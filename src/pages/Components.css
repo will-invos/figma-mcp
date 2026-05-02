@@ -4,3 +4,30 @@
   height: 100vh;
   overflow: hidden;
 }
+
+.cs-layout__backdrop {
+  display: none;
+}
+
+@media (max-width: 991px) {
+  .cs-layout {
+    padding-left: 48px;
+    padding-right: 48px;
+  }
+
+  .cs-layout__backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: var(--color-background-overlay-default);
+    z-index: 90;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+  }
+
+  .cs-layout__backdrop--visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}

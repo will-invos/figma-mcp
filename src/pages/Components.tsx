@@ -25,12 +25,15 @@ export default function Components() {
   const story = storyMap[activeStory] ?? storyMap[defaultStoryName]
 
   const [values, setValues] = useState<Record<string, any>>(() => getDefaults(story.props))
+  const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [controlsOpen, setControlsOpen] = useState(false)
 
   const handleSelect = useCallback((name: string) => {
     setActiveStory(name)
     window.location.hash = `#/components/${name}`
     const next = storyMap[name]
     if (next) setValues(getDefaults(next.props))
+    setSidebarOpen(false)
   }, [])
 
   const handleChange = useCallback((key: string, value: any) => {
@@ -53,12 +56,21 @@ export default function Components() {
     setValues(getDefaults(story.props))
   }, [story])
 
+  const closeAll = useCallback(() => {
+    setSidebarOpen(false)
+    setControlsOpen(false)
+  }, [])
+
+  const anyOpen = sidebarOpen || controlsOpen
+
   return (
     <div className="cs-layout">
       <Sidebar
         categories={categories}
         activeStory={activeStory}
         onSelect={handleSelect}
+        open={sidebarOpen}
+        onToggle={() => setSidebarOpen((o) => !o)}
       />
       <Preview story={story} values={values} />
       <Controls
@@ -66,6 +78,13 @@ export default function Components() {
         values={values}
         onChange={handleChange}
         onReset={handleReset}
+        open={controlsOpen}
+        onToggle={() => setControlsOpen((o) => !o)}
+      />
+      <div
+        className={`cs-layout__backdrop${anyOpen ? ' cs-layout__backdrop--visible' : ''}`}
+        onClick={closeAll}
+        aria-hidden="true"
       />
     </div>
   )

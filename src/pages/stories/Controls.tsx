@@ -7,6 +7,8 @@ interface ControlsProps {
   values: Record<string, any>
   onChange: (key: string, value: any) => void
   onReset: () => void
+  open: boolean
+  onToggle: () => void
 }
 
 /**
@@ -57,11 +59,22 @@ function NumberField({
   )
 }
 
-export default function Controls({ propDefs, values, onChange, onReset }: ControlsProps) {
+export default function Controls({ propDefs, values, onChange, onReset, open, onToggle }: ControlsProps) {
   const entries = Object.entries(propDefs)
+  const className = ['cs-controls', open && 'cs-controls--open'].filter(Boolean).join(' ')
 
   return (
-    <aside className="cs-controls">
+    <aside className={className}>
+      <button
+        type="button"
+        className="cs-controls__toggle"
+        onClick={onToggle}
+        aria-label={open ? 'Close controls' : 'Open controls'}
+        aria-expanded={open}
+      >
+        <i className={open ? 'icon-cross' : 'icon-cog-6-tooth'} aria-hidden="true" />
+      </button>
+      <div className="cs-controls__content">
       <h2 className="cs-controls__title">Controls</h2>
 
       {entries.map(([key, def]) => {
@@ -131,6 +144,7 @@ export default function Controls({ propDefs, values, onChange, onReset }: Contro
       <button type="button" className="cs-controls__reset" onClick={onReset}>
         Reset to defaults
       </button>
+      </div>
     </aside>
   )
 }

@@ -9,6 +9,14 @@
   box-sizing: border-box;
 }
 
+.cs-sidebar__toggle {
+  display: none;
+}
+
+.cs-sidebar__content {
+  display: contents;
+}
+
 .cs-sidebar__title {
   margin: 0 0 var(--space-400);
   padding: 0 var(--space-200);
@@ -54,4 +62,62 @@
   background: var(--color-background-brand-subtlest);
   color: var(--color-content-brand-default);
   font-weight: 500;
+}
+
+@media (max-width: 991px) {
+  .cs-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 48px;
+    min-width: 48px;
+    padding: 0;
+    overflow: hidden;
+    transition: width 0.25s ease;
+    z-index: 50;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .cs-sidebar--open {
+    width: 220px;
+    z-index: 100;
+    box-shadow: var(--shadow-large);
+  }
+
+  .cs-sidebar__toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
+    align-self: flex-start;
+    border: none;
+    background: transparent;
+    color: var(--color-content-default);
+    font-size: 20px;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  .cs-sidebar__toggle:hover {
+    background: var(--color-background-neutral-subtle);
+  }
+
+  .cs-sidebar__content {
+    display: block;
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    padding: 0 var(--space-300) var(--space-400);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s ease;
+  }
+
+  .cs-sidebar--open .cs-sidebar__content {
+    opacity: 1;
+    pointer-events: auto;
+  }
 }
