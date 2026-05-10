@@ -55,19 +55,7 @@ const InAppNotificationRender: React.FC<{ values: Record<string, any> }> = ({ va
   }
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-      <Button size="small" variant="outline" onClick={handleShow} text="Show notification" />
-      <Button
-        size="small"
-        variant="ghost"
-        onClick={() => {
-          handleShow()
-          handleShow()
-          handleShow()
-        }}
-        text="Queue 3"
-      />
-    </div>
+    <Button size="small" variant="outline" onClick={handleShow} text="Show notification" />
   )
 }
 
