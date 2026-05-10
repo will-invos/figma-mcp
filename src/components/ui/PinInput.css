@@ -22,6 +22,7 @@
   outline: none;
   box-sizing: border-box;
   -moz-appearance: textfield;
+  transition: border-color 0.15s, box-shadow 0.15s;
 }
 
 .ui-pin-input__cell::placeholder {
@@ -29,13 +30,16 @@
   font-weight: 400;
 }
 
+/* Focus: 1px border + 1px inset box-shadow = visual 2px (no layout shift) */
 .ui-pin-input__cell:focus {
-  border: 2px solid var(--color-border-brand);
+  border-color: var(--color-border-brand);
+  box-shadow: inset 0 0 0 1px var(--color-border-brand);
 }
 
-.ui-pin-input__cell--error,
-.ui-pin-input__cell--error:focus {
-  border: 2px solid var(--color-border-danger);
+/* Error border: only when NOT focused — focus should show brand border */
+.ui-pin-input__cell--error:not(:focus) {
+  border-color: var(--color-border-danger);
+  box-shadow: inset 0 0 0 1px var(--color-border-danger);
 }
 
 .ui-pin-input__cell--disabled,
