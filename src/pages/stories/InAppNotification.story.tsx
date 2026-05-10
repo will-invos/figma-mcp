@@ -18,11 +18,7 @@ const SAMPLE_DESCRIPTIONS: Record<string, string> = {
   reward: '獲得 100 金幣，立即前往查看！',
 }
 
-const SAMPLE_IMAGE_SRC =
-  'data:image/svg+xml;utf8,' +
-  encodeURIComponent(
-    '<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="%2358b9ff"/><stop offset="1" stop-color="%23eaf6ff"/></linearGradient></defs><rect width="40" height="40" fill="url(%23g)"/><circle cx="14" cy="14" r="4" fill="%23ffffff" opacity="0.9"/></svg>'
-  )
+const SAMPLE_IMAGE_SRC = 'https://picsum.photos/id/237/80/80'
 
 const InAppNotificationRender: React.FC<{ values: Record<string, any> }> = ({ values }) => {
   const { show } = useInAppNotification()
