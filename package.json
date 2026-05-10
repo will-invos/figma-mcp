@@ -25,6 +25,7 @@
     "README.md",
     "LICENSE",
     "CLAUDE.md",
+    "design.md",
     "figma-tokens.json"
   ],
   "scripts": {
