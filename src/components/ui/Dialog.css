@@ -13,7 +13,14 @@
  * CTA types: 1 button, 2 buttons (row), 2 buttons straight (col)
  * ======================================== */
 
-@keyframes ui-dialog-fade-in {
+/* Overlay: opacity-only fade-in */
+@keyframes ui-dialog-overlay-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Dialog body: opacity + scale pop-in */
+@keyframes ui-dialog-pop {
   from {
     opacity: 0;
     transform: scale(0.95);
@@ -32,6 +39,7 @@
   align-items: center;
   justify-content: center;
   z-index: 1000;
+  animation: ui-dialog-overlay-fade-in 0.2s ease;
 }
 
 .ui-dialog {
@@ -43,7 +51,7 @@
   max-width: 480px;
   border-radius: var(--radius-400);
   overflow: hidden;
-  animation: ui-dialog-fade-in 0.2s ease;
+  animation: ui-dialog-pop 0.2s ease-in-out;
   font-family: var(--font-family);
 }
 
