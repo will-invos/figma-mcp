@@ -27,7 +27,7 @@
   flex-direction: inherit;
   align-items: inherit;
   filter: drop-shadow(var(--shadow-medium));
-  animation: ui-tooltip-fade 0.15s ease-out;
+  animation: ui-tooltip-fade 0.15s ease-in-out;
 }
 
 .ui-tooltip__body {
