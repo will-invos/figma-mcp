@@ -24,7 +24,7 @@ Repo：`@invos/ios-ui-kit`（`will-invos/invos-ui`）
 | Variant 命名 | `default`、`completion`、`danger`（從 Figma 的「warning」改名，因實際語意是 error）、`announcement`、`reward` |
 | 容器圓角 | `--radius-400`（16px），以原始 6475:6103 為準 |
 | Image variant | 保留（自訂 40×40 圖像內容） |
-| Trailing | `none` / `button` / `chevron` 全部保留 |
+| Trailing | `none` / `button` / `icon` 全部保留（`icon` 變體使用 `IconButton` 元件，預設圖示為 chevron-right，可由 props 覆蓋） |
 | 卡片點擊 vs button 點擊 | 兩者皆支援；`button.onClick` 不冒泡到 `onPress` |
 | 動畫 | 純 CSS transitions/keyframes，不加額外依賴 |
 | 元件命名 | `InAppNotification` + `useInAppNotification`（避開未來與 push notification 衝突） |
@@ -39,10 +39,16 @@ type InAppNotificationVariant =
   | 'announcement'
   | 'reward'
 
-type InAppNotificationTrailing = 'none' | 'button' | 'chevron'
+type InAppNotificationTrailing = 'none' | 'button' | 'icon'
 
 interface InAppNotificationButton {
   label: string                       // 依 Figma guideline ≤ 4 字
+  onClick: () => void
+}
+
+interface InAppNotificationIconButton {
+  icon?: React.ReactNode              // 預設 <i className="icon-chevron-right" />
+  ariaLabel: string                   // 必填（IconButton 要求）
   onClick: () => void
 }
 
@@ -59,8 +65,9 @@ interface InAppNotificationOptions {
   description?: string                // 選填，單行 + ellipsis
 
   // Trailing
-  trailing?: InAppNotificationTrailing // 預設 'none'
-  button?: InAppNotificationButton    // 當 trailing === 'button'
+  trailing?: InAppNotificationTrailing      // 預設 'none'
+  button?: InAppNotificationButton          // 當 trailing === 'button'
+  iconButton?: InAppNotificationIconButton  // 當 trailing === 'icon'
 
   // 互動
   onPress?: () => void                // 點整張卡，觸發後自動收回
@@ -115,7 +122,7 @@ interface InAppNotificationContextValue {
 ### Trailing
 - `none`：不渲染
 - `button`：真正的 `<button>`，`text-label-large`、顏色 `var(--color-content-brand-default)`、無內距、`flex-shrink: 0`。Click 不冒泡到卡片的 `onPress`。
-- `chevron`：24×24，`icon-chevron-right`、顏色 `var(--color-content-default)`。純視覺，click 冒泡到卡片。
+- `icon`：使用 `<IconButton>` 元件，預設 `icon={<i className="icon-chevron-right" />}`、`variant="ghost"`、`colorType="neutral"`、`size="small"`，由使用者透過 `iconButton.icon` 覆蓋。`flex-shrink: 0`。Click 不冒泡到卡片的 `onPress`。
 
 ## 行為
 
@@ -131,8 +138,8 @@ interface InAppNotificationContextValue {
 
 ### 點擊互動
 - 卡片只有在 `onPress` 有設定時才有 `onClick`；此時加上 `role="button"`、`tabindex="0"`，鍵盤 Enter/Space 也能觸發。
-- Trailing button 永遠攔截 click 並 `stopPropagation()`。
-- Tap（卡片或 button）→ 執行 callback → 收回。
+- Trailing button 與 trailing IconButton 都永遠攔截 click 並 `stopPropagation()`。
+- Tap（卡片、button 或 IconButton）→ 執行對應 callback → 收回。
 
 ### 上滑收回
 - Touch handlers 綁在卡片上。
@@ -155,7 +162,7 @@ interface InAppNotificationContextValue {
 - 容器：`role="status"`、`aria-live="polite"`（非阻斷型）。Polite 適合此用途，因為通知是告知性而非緊急的。
 - 帶 `onPress` 的卡片：`role="button"`、`tabindex="0"`、`onKeyDown` 處理 Enter/Space。
 - Trailing button：真正的 `<button type="button">`，`aria-label` 預設為 `button.label`。
-- Chevron 為裝飾用 — `aria-hidden="true"` 加在 icon span 上。
+- Trailing IconButton：直接使用既有的 `<IconButton>`，`aria-label` 由 `iconButton.ariaLabel` 提供（必填）。
 - Focus：通知出現時 focus 不移動；使用者透過滑動 / TalkBack / VoiceOver 公告察覺。
 
 ## 檔案結構
@@ -178,13 +185,14 @@ export type {
   InAppNotificationVariant,
   InAppNotificationTrailing,
   InAppNotificationButton,
+  InAppNotificationIconButton,
   InAppNotificationContextValue,
 } from './InAppNotification'
 ```
 
 ## Story 規畫（`src/pages/stories/InAppNotification.story.tsx`）
 
-`Render` 元件提供 `variant`、`trailing`、`description`（boolean）、`useImage`（boolean）等 controls，加上「Show notification」按鈕呼叫 `show()`。Provider 必須先 mount 在 app shell 才能讓 hook 工作。
+`Render` 元件提供 `variant`、`trailing`（none / button / icon）、`description`（boolean）、`useImage`（boolean）等 controls，加上「Show notification」按鈕呼叫 `show()`。Provider 必須先 mount 在 app shell 才能讓 hook 工作。
 
 Mount 點：`src/main.tsx`，與既有的 `ToastProvider` 並排（如 `<InAppNotificationProvider><ToastProvider>...</ToastProvider></InAppNotificationProvider>`）。
 
