@@ -1,7 +1,7 @@
 :root {
-  --shadow-small: 0 1px 3px var(--color-shadow-default);
+  --shadow-small: 0 2px 4px var(--color-shadow-default);
   --shadow-medium: 0 4px 8px var(--color-shadow-default);
-  --shadow-bold: 0 8px 24px var(--color-shadow-bold);
-  --shadow-large: 0 16px 48px var(--color-shadow-bold);
-  --shadow-sheet: 0 -4px 24px var(--color-shadow-sheet);
+  --shadow-bold: 0 0 16px var(--color-shadow-bold);
+  --shadow-large: 0 8px 16px var(--color-shadow-bold);
+  --shadow-sheet: 0 -4px 8px var(--color-shadow-sheet);
 }
