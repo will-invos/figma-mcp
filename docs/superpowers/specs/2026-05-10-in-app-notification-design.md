@@ -1,33 +1,33 @@
-# InAppNotification — Design Spec
+# InAppNotification — 設計規格書
 
-Date: 2026-05-10
-Component: `InAppNotification`
-Repo: `@invos/ios-ui-kit` (`will-invos/invos-ui`)
+日期：2026-05-10
+元件：`InAppNotification`
+Repo：`@invos/ios-ui-kit`（`will-invos/invos-ui`）
 
-## Goal
+## 目標
 
-A mobile-web in-app notification that slides down from the top of the viewport, displays for a short duration, and supports tap / swipe-up dismissal. Used for non-blocking, app-level alerts (e.g. invoice arrival, error states, announcements, rewards) that should be visible from any page.
+行動網頁的站內通知元件，從畫面頂部滑入、顯示短暫時間後自動收回，並支援點擊與上滑收回。用於非阻斷型、App 全域層級的提示（例如：發票進帳、錯誤狀態、公告、獎勵），可在任何頁面上顯示。
 
-## Figma references
+## Figma 來源
 
-- Component (variants): `8pE8KHl50y72IP7JseLH55` node `6475:6103` — leading (icon | image) × trailing (none | button | chevron)
-- Variant presets: `mLsUp3q2ewYZEQwfIjhsfg` node `2367:4051` — 5 named variants (default / completion / danger / announcement / reward)
-- Guideline: `7b0nj4qql59Oefcl9t7upr` node `76:38969` — usage, layering, animation timing
+- 元件本體（變體組合）：`8pE8KHl50y72IP7JseLH55` node `6475:6103` — leading（icon | image）× trailing（none | button | chevron）
+- Variant 類型：`mLsUp3q2ewYZEQwfIjhsfg` node `2367:4051` — 5 個命名 variant（default / completion / danger / announcement / reward）
+- Guideline：`7b0nj4qql59Oefcl9t7upr` node `76:38969` — 使用時機、層級、動畫時序
 
-## Decisions (already aligned with the user)
+## 已確認的決策
 
-| Topic | Decision |
-|------|----------|
-| API form | `InAppNotificationProvider` + `useInAppNotification()`; mounted at app root, push programmatically (mirrors `Toast`) |
-| Multiple notifications | FIFO queue; only one visible at a time. Next is shown after the current one's exit animation completes |
-| Swipe-up to dismiss | In v1; pure touch event handlers (no `framer-motion` dependency) |
-| Variant naming | `default`, `completion`, `danger` (renamed from Figma's "warning" — semantics is error), `announcement`, `reward` |
-| Container radius | `--radius-400` (16px), per the original 6475:6103 spec |
-| Image variant | Kept (custom 40×40 image content) |
-| Trailing | `none` / `button` / `chevron` all kept |
-| Card vs button click | Both supported; `button.onClick` does not propagate to `onPress` |
-| Animation | Pure CSS transitions/keyframes; no extra dependency |
-| Component name | `InAppNotification` + `useInAppNotification` (avoid clashing with future push-notification work) |
+| 項目 | 決定 |
+|------|------|
+| API 形式 | `InAppNotificationProvider` + `useInAppNotification()`；mount 在 App 根層，程式化推送（與 `Toast` 一致） |
+| 多則處理 | FIFO 佇列；同時間只顯一則，目前那則退場動畫結束後再顯下一則 |
+| 上滑收回 | v1 即實作；純 touch event，不引入 `framer-motion` |
+| Variant 命名 | `default`、`completion`、`danger`（從 Figma 的「warning」改名，因實際語意是 error）、`announcement`、`reward` |
+| 容器圓角 | `--radius-400`（16px），以原始 6475:6103 為準 |
+| Image variant | 保留（自訂 40×40 圖像內容） |
+| Trailing | `none` / `button` / `chevron` 全部保留 |
+| 卡片點擊 vs button 點擊 | 兩者皆支援；`button.onClick` 不冒泡到 `onPress` |
+| 動畫 | 純 CSS transitions/keyframes，不加額外依賴 |
+| 元件命名 | `InAppNotification` + `useInAppNotification`（避開未來與 push notification 衝突） |
 
 ## API
 
@@ -42,31 +42,31 @@ type InAppNotificationVariant =
 type InAppNotificationTrailing = 'none' | 'button' | 'chevron'
 
 interface InAppNotificationButton {
-  label: string                       // ≤ 4 chars per Figma guideline
+  label: string                       // 依 Figma guideline ≤ 4 字
   onClick: () => void
 }
 
 interface InAppNotificationOptions {
-  // Leading — icon style (default)
-  variant?: InAppNotificationVariant  // default 'default'
-  icon?: React.ReactNode              // override the variant's default icon (still uses variant's bg color)
+  // Leading — icon style（預設）
+  variant?: InAppNotificationVariant  // 預設 'default'
+  icon?: React.ReactNode              // 覆蓋 variant 的預設 icon（仍套用 variant 底色）
 
-  // Leading — image style (mutually exclusive with variant/icon)
-  image?: React.ReactNode             // when set, image variant takes precedence
+  // Leading — image style（與 variant/icon 互斥）
+  image?: React.ReactNode             // 給了 image → 走 image variant
 
   // Content
-  headline: string                    // required, single line + ellipsis
-  description?: string                // optional, single line + ellipsis
+  headline: string                    // 必填，單行 + ellipsis
+  description?: string                // 選填，單行 + ellipsis
 
   // Trailing
-  trailing?: InAppNotificationTrailing // default 'none'
-  button?: InAppNotificationButton    // when trailing === 'button'
+  trailing?: InAppNotificationTrailing // 預設 'none'
+  button?: InAppNotificationButton    // 當 trailing === 'button'
 
-  // Interaction
-  onPress?: () => void                // tap on the card; auto-dismisses after firing
+  // 互動
+  onPress?: () => void                // 點整張卡，觸發後自動收回
 
-  // Timing
-  duration?: number                   // ms; default 3000
+  // 時序
+  duration?: number                   // ms；預設 3000
 }
 
 interface InAppNotificationContextValue {
@@ -76,11 +76,11 @@ interface InAppNotificationContextValue {
 }
 ```
 
-`show()` returns a string `id`. `dismiss(id)` triggers exit animation and removes from queue. `update(id, patch)` merges into the active notification and resets the auto-dismiss timer; if `id` is not the active one (e.g. queued or already gone), no-op.
+`show()` 回傳 string `id`。`dismiss(id)` 觸發退場動畫並移出佇列。`update(id, patch)` 把 patch 合併到目前顯示的那則並重置 auto-dismiss timer；如果 `id` 不是目前顯示的那則（在佇列中或已消失），no-op。
 
-## Variant token map
+## Variant token 對照
 
-| variant | leading bg | icon class | icon color |
+| variant | leading 底色 | icon class | icon 顏色 |
 |---------|-----------|------------|-----------|
 | `default` | `var(--color-background-sunken)` | `icon-bell-filled` | `var(--color-content-default)` |
 | `completion` | `var(--color-background-success-subtlest)` | `icon-check-bold` | `var(--color-content-success-bold)` |
@@ -88,86 +88,86 @@ interface InAppNotificationContextValue {
 | `announcement` | `var(--color-background-brand-subtlest)` | `icon-loud-speaker-filled` | `var(--color-content-brand-bold)` |
 | `reward` | `var(--color-background-prize-subtlest)` | `icon-gift-filled` | `var(--color-content-prize-bold)` |
 
-`image` variant: 40×40 wrapper, `border-radius: var(--radius-200)`, `overflow: hidden`, no background; consumer renders `<img>` / `<Avatar>` / etc. inside.
+`image` variant：40×40 容器、`border-radius: var(--radius-200)`、`overflow: hidden`、無底色；由使用者自行放 `<img>` / `<Avatar>` 等。
 
-## Visual spec (matches Figma node 6475:6103 + variant presets)
+## 視覺規格（對齊 Figma node 6475:6103 + variant 預設）
 
 ### Container
-- `position: fixed`, `left: var(--space-300)`, `right: var(--space-300)` (12px each)
-- `top: calc(env(safe-area-inset-top, 0px) + var(--space-200))` (8px below status bar)
-- `z-index: 1050` (above Tooltip/Sheet 1000 / Dialog 1000, below Toast 1100)
+- `position: fixed`、`left: var(--space-300)`、`right: var(--space-300)`（左右各 12px）
+- `top: calc(env(safe-area-inset-top, 0px) + var(--space-200))`（status bar 下方 8px）
+- `z-index: 1050`（在 Tooltip/Sheet 1000、Dialog 1000 之上，Toast 1100 之下）
 - `background: var(--color-background-default)`
-- `padding: var(--space-300)` (12px)
-- `border-radius: var(--radius-400)` (16px)
+- `padding: var(--space-300)`（12px）
+- `border-radius: var(--radius-400)`（16px）
 - `box-shadow: var(--shadow-large)`
-- `display: flex; align-items: center; gap: var(--space-300)` (12px)
+- `display: flex; align-items: center; gap: var(--space-300)`（12px）
 
-### Leading element (40×40, `flex-shrink: 0`)
-- `width: 40px; height: 40px; border-radius: var(--radius-200)` (8px)
-- icon variants: bg/color from variant table; inner icon is 24×24, centered
-- image variant: `overflow: hidden`; child fills the box (`width: 100%; height: 100%; object-fit: cover`)
+### Leading 元素（40×40，`flex-shrink: 0`）
+- `width: 40px; height: 40px; border-radius: var(--radius-200)`（8px）
+- icon variant：底色 / 顏色依 variant 表；內部 icon 24×24 置中
+- image variant：`overflow: hidden`；子元素填滿（`width: 100%; height: 100%; object-fit: cover`）
 
-### Content (`flex: 1 0 0; min-width: 0`)
-- `display: flex; flex-direction: column; justify-content: center; gap: var(--space-50)` (2px)
-- Headline: class `text-label-large` (16/500/24, 0.04em), color `var(--color-content-bold)`, single line + ellipsis (`white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%`)
-- Description: class `text-body-medium` (14/400/22, 0.04em), color `var(--color-content-subtle)`, same ellipsis treatment
+### Content（`flex: 1 0 0; min-width: 0`）
+- `display: flex; flex-direction: column; justify-content: center; gap: var(--space-50)`（2px）
+- Headline：class `text-label-large`（16/500/24，0.04em），顏色 `var(--color-content-bold)`，單行 + ellipsis（`white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%`）
+- Description：class `text-body-medium`（14/400/22，0.04em），顏色 `var(--color-content-subtle)`，同樣的 ellipsis 處理
 
 ### Trailing
-- `none`: not rendered
-- `button`: real `<button>`, `text-label-large`, color `var(--color-content-brand-default)`, no padding, `flex-shrink: 0`. Click does NOT propagate to card `onPress`.
-- `chevron`: 24×24, `icon-chevron-right`, color `var(--color-content-default)`. Pure visual; click bubbles to card.
+- `none`：不渲染
+- `button`：真正的 `<button>`，`text-label-large`、顏色 `var(--color-content-brand-default)`、無內距、`flex-shrink: 0`。Click 不冒泡到卡片的 `onPress`。
+- `chevron`：24×24，`icon-chevron-right`、顏色 `var(--color-content-default)`。純視覺，click 冒泡到卡片。
 
-## Behavior
+## 行為
 
-### Queue (FIFO)
-- Internal state: `current: Notification | null`, `queue: Notification[]`
-- `show(opts)` → push to `queue`. If `current === null`, immediately promote first queued item.
-- On exit animation end: drop `current`, promote next.
+### 佇列（FIFO）
+- 內部狀態：`current: Notification | null`、`queue: Notification[]`
+- `show(opts)` → 推入 `queue`。若 `current === null`，立即把第一則升為 current。
+- 退場動畫結束 → 移除 `current` → 升下一則。
 
 ### Auto-dismiss
-- After mounting (and after enter animation begins), set `setTimeout(dismiss, duration)` (default 3000ms).
-- `update()` resets the timer using the patched `duration`.
-- Timer is paused while a touch gesture is in progress (`touchstart` clears, `touchend` without dismissal restarts with full duration to give user time to read).
+- mount 後（入場動畫開始時）`setTimeout(dismiss, duration)`，預設 3000ms。
+- `update()` 用 patch 後的 `duration` 重置 timer。
+- 觸控手勢進行中暫停 timer：`touchstart` 清除、`touchend` 若沒收回則用完整 duration 重啟（讓使用者有時間閱讀）。
 
-### Tap interaction
-- `card` has `onClick` only when `onPress` is set; in that case also `role="button"`, `tabindex="0"`, and Enter/Space trigger.
-- `trailing button` always intercepts and `stopPropagation`s.
-- Tap (card or button) → fire callback, then dismiss.
+### 點擊互動
+- 卡片只有在 `onPress` 有設定時才有 `onClick`；此時加上 `role="button"`、`tabindex="0"`，鍵盤 Enter/Space 也能觸發。
+- Trailing button 永遠攔截 click 並 `stopPropagation()`。
+- Tap（卡片或 button）→ 執行 callback → 收回。
 
-### Swipe-up to dismiss
-- Touch handlers attached to the card.
-- `touchstart`: record `startY`, `startTime`; clear auto-dismiss timer; set `data-dragging="true"`.
-- `touchmove`: `delta = clientY - startY`. If `delta < 0` → set inline style `transform: translateY(${delta}px)` and `opacity: 1 - min(|delta| / 64, 0.3)`. If `delta >= 0` → ignore.
-- `touchend`:
-  - If `|delta| > 32px` OR velocity > 0.3 px/ms → trigger exit (animate from current transform to `translateY(-100%)`, opacity → 0).
-  - Else → spring back: `transition: transform 150ms ease-out, opacity 150ms ease-out`; clear inline transform; restart auto-dismiss timer.
+### 上滑收回
+- Touch handlers 綁在卡片上。
+- `touchstart`：記錄 `startY`、`startTime`；清除 auto-dismiss timer；設 `data-dragging="true"`。
+- `touchmove`：`delta = clientY - startY`。若 `delta < 0` → 設 inline `transform: translateY(${delta}px)`、`opacity: 1 - min(|delta| / 64, 0.3)`。`delta >= 0` 忽略。
+- `touchend`：
+  - 若 `|delta| > 32px` 或 velocity > 0.3 px/ms → 觸發退場（從目前 transform 過渡到 `translateY(-100%)`、opacity → 0）。
+  - 否則 → 彈回原位：`transition: transform 150ms ease-out, opacity 150ms ease-out`；清除 inline transform；重啟 auto-dismiss timer。
 
-### Animations (CSS)
-- Enter: `translateY(-120%) → translateY(0)`, `opacity: 0.7 → 1`, 300ms `cubic-bezier(0.175, 0.885, 0.32, 1.275)` (easeOutBack)
-- Exit: `translateY(0) → translateY(-120%)`, `opacity: 1 → 0`, 300ms `cubic-bezier(0.6, -0.28, 0.735, 0.045)` (easeInBack)
-- Use `data-state="entering" | "visible" | "exiting"` driven from React state to switch CSS rules, and listen for `transitionend` / `animationend` on the relevant transform property to advance the queue.
+### 動畫（CSS）
+- 入場：`translateY(-120%) → translateY(0)`、`opacity: 0.7 → 1`，300ms `cubic-bezier(0.175, 0.885, 0.32, 1.275)`（easeOutBack）
+- 退場：`translateY(0) → translateY(-120%)`、`opacity: 1 → 0`，300ms `cubic-bezier(0.6, -0.28, 0.735, 0.045)`（easeInBack）
+- 用 `data-state="entering" | "visible" | "exiting"`（由 React state 驅動）切換 CSS 規則，並在 `transitionend` / `animationend` 時推進佇列。
 
 ### Reduced motion
-- Under `@media (prefers-reduced-motion: reduce)`, replace transforms with `opacity 150ms linear`. Swipe gesture remains functional but the spring-back transition is also opacity-only.
+- `@media (prefers-reduced-motion: reduce)` 下，把 transform 換成 `opacity 150ms linear`。上滑手勢仍可用，但彈回過渡也只用 opacity。
 
 ## Accessibility
 
-- Container: `role="status"`, `aria-live="polite"` (non-interruptive). Polite is appropriate; the notification is informational, not a critical alert.
-- Card with `onPress`: `role="button"`, `tabindex="0"`, `onKeyDown` for Enter/Space.
-- Trailing button: real `<button type="button">`, `aria-label` defaults to `button.label`.
-- Chevron is decorative — `aria-hidden="true"` on the icon span.
-- Focus: when a notification arrives, focus stays where it was; users find it via swipe / TalkBack / VoiceOver announcement.
+- 容器：`role="status"`、`aria-live="polite"`（非阻斷型）。Polite 適合此用途，因為通知是告知性而非緊急的。
+- 帶 `onPress` 的卡片：`role="button"`、`tabindex="0"`、`onKeyDown` 處理 Enter/Space。
+- Trailing button：真正的 `<button type="button">`，`aria-label` 預設為 `button.label`。
+- Chevron 為裝飾用 — `aria-hidden="true"` 加在 icon span 上。
+- Focus：通知出現時 focus 不移動；使用者透過滑動 / TalkBack / VoiceOver 公告察覺。
 
-## File structure
+## 檔案結構
 
 ```
-src/components/ui/InAppNotification.tsx     # Provider, hook, queue, visual, animation, touch logic
-src/components/ui/InAppNotification.css     # variants, layout, keyframes, transitions
-src/components/ui/index.ts                  # add barrel exports
-src/pages/stories/InAppNotification.story.tsx  # showcase: 5 variants + image + 3 trailings + onPress
+src/components/ui/InAppNotification.tsx     # Provider、hook、佇列、視覺、動畫、touch 邏輯
+src/components/ui/InAppNotification.css     # variants、layout、keyframes、transitions
+src/components/ui/index.ts                  # 加 barrel exports
+src/pages/stories/InAppNotification.story.tsx  # 故事：5 variants + image + 3 trailings + onPress
 ```
 
-Barrel exports (`src/components/ui/index.ts`):
+Barrel exports（`src/components/ui/index.ts`）：
 ```ts
 export {
   InAppNotificationProvider,
@@ -182,22 +182,22 @@ export type {
 } from './InAppNotification'
 ```
 
-## Story plan (for `src/pages/stories/InAppNotification.story.tsx`)
+## Story 規畫（`src/pages/stories/InAppNotification.story.tsx`）
 
-A `Render` component with controls for `variant`, `trailing`, `description (boolean)`, `useImage (boolean)` and a "Show notification" button that calls `show()`. The provider must be mounted at the app shell so the story can call the hook.
+`Render` 元件提供 `variant`、`trailing`、`description`（boolean）、`useImage`（boolean）等 controls，加上「Show notification」按鈕呼叫 `show()`。Provider 必須先 mount 在 app shell 才能讓 hook 工作。
 
-Mount point: `src/main.tsx`, alongside the existing `ToastProvider` (e.g. `<InAppNotificationProvider><ToastProvider>...</ToastProvider></InAppNotificationProvider>`).
+Mount 點：`src/main.tsx`，與既有的 `ToastProvider` 並排（如 `<InAppNotificationProvider><ToastProvider>...</ToastProvider></InAppNotificationProvider>`）。
 
-## Out of scope (explicit non-goals)
+## 不在範圍內（明確的 non-goals）
 
-- Stacking multiple notifications visually (FIFO queue replaces this).
-- Persistent / sticky notifications (no `duration: Infinity` support; if needed later, add `persist: true`).
-- Top-edge slide-down on landscape / tablet layouts (mobile-first; horizontal positioning relies on viewport width).
-- Sound / haptic feedback.
-- Push-notification integration (this is purely an in-app, in-process UI primitive).
+- 多則同時視覺堆疊（FIFO 佇列已取代）。
+- 永久 / 黏住的通知（不支援 `duration: Infinity`；之後若需要再加 `persist: true`）。
+- 橫向 / 平板版型的頂端滑入（mobile-first，水平定位以 viewport 寬度為準）。
+- 音效 / 觸覺回饋。
+- Push notification 整合（這純粹是 in-app、in-process 的 UI primitive）。
 
-## Risks / open notes
+## 風險 / 待註記
 
-- **z-index conflict with Dialog**: existing `Dialog` is `1000`, but the guideline says in-app notification should sit *below* dialogs. With `z-index: 1050`, the in-app notification will visually cover an open dialog. Resolution: in v1 we pick `1050` (above Tooltip/Sheet, below Toast). If a workflow ever shows a notification while a dialog is open, follow up by raising `Dialog` to `1100+` and lowering this to `~900`. Document this in code comments.
-- **`update()` semantics**: only the *currently visible* notification is updatable; queued items are not. If a use case requires updating queued items, revisit.
-- **Story preview vs real app**: the story's `previewWidth` might differ from `390-414px` mobile widths; manual test on Chrome DevTools iPhone 14 Pro before sign-off.
+- **z-index 與 Dialog 衝突**：既有 `Dialog` 是 `1000`，但 guideline 說 in-app notification 應在 dialog 之下。設 `z-index: 1050` 視覺上會蓋住開啟中的 dialog。權衡：v1 取 `1050`（在 Tooltip/Sheet 之上、Toast 之下）。若日後遇到 dialog 開啟中還要顯通知的情境，再把 Dialog 拉到 `1100+`、把這個降到 `~900`。程式碼註解標註。
+- **`update()` 語意**：只能更新「目前顯示中」那則，佇列中的不能更新。如有需求再回來討論。
+- **Story 寬度 vs 實機**：故事預覽寬度可能跟 390-414px 行動寬度不同，sign-off 前用 Chrome DevTools iPhone 14 Pro 模擬器手測。
