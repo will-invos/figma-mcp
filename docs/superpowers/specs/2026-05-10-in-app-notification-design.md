@@ -102,7 +102,7 @@ interface InAppNotificationContextValue {
 ### Container
 - `position: fixed`、`left: var(--space-300)`、`right: var(--space-300)`（左右各 12px）
 - `top: calc(env(safe-area-inset-top, 0px) + var(--space-200))`（status bar 下方 8px）
-- `z-index: 1050`（在 Tooltip/Sheet 1000、Dialog 1000 之上，Toast 1100 之下）
+- `z-index: 900`（在 Dialog/Sheet/Tooltip 1000 之下，符合 guideline「在 Dialog 之下」；Toast 1100 仍最上）
 - `background: var(--color-background-default)`
 - `padding: var(--space-300)`（12px）
 - `border-radius: var(--radius-400)`（16px）
@@ -206,6 +206,6 @@ Mount 點：`src/main.tsx`，與既有的 `ToastProvider` 並排（如 `<InAppNo
 
 ## 風險 / 待註記
 
-- **z-index 與 Dialog 衝突**：既有 `Dialog` 是 `1000`，但 guideline 說 in-app notification 應在 dialog 之下。設 `z-index: 1050` 視覺上會蓋住開啟中的 dialog。權衡：v1 取 `1050`（在 Tooltip/Sheet 之上、Toast 之下）。若日後遇到 dialog 開啟中還要顯通知的情境，再把 Dialog 拉到 `1100+`、把這個降到 `~900`。程式碼註解標註。
+- **z-index 設 `900`**：依 guideline「在 Dialog 之下」（既有 Dialog/Sheet/Tooltip 是 1000，Toast 1100）。若 Dialog 與 Tooltip 之間未來要再分層，可再調整。
 - **`update()` 語意**：只能更新「目前顯示中」那則，佇列中的不能更新。如有需求再回來討論。
 - **Story 寬度 vs 實機**：故事預覽寬度可能跟 390-414px 行動寬度不同，sign-off 前用 Chrome DevTools iPhone 14 Pro 模擬器手測。

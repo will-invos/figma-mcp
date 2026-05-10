@@ -50,6 +50,16 @@ export type { DialogProps, DialogAction } from './Dialog';
 export { ToastProvider, useToast } from './Toast';
 export type { ToastMessage } from './Toast';
 
+export { InAppNotificationProvider, useInAppNotification } from './InAppNotification';
+export type {
+  InAppNotificationOptions,
+  InAppNotificationVariant,
+  InAppNotificationTrailing,
+  InAppNotificationButton,
+  InAppNotificationIconButton,
+  InAppNotificationContextValue,
+} from './InAppNotification';
+
 // === New components mirroring iOS UI Kit 2025 ===
 
 // iOS chrome

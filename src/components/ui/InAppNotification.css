@@ -1,0 +1,238 @@
+/* InAppNotification — top-anchored, slide-down notification.
+   Spec: docs/superpowers/specs/2026-05-10-in-app-notification-design.md
+   Figma:
+     - Component variants: 8pE8KHl50y72IP7JseLH55 / 6475:6103
+     - 5 named variants:    mLsUp3q2ewYZEQwfIjhsfg / 2367:4051
+     - Guideline:           7b0nj4qql59Oefcl9t7upr / 76:38969 */
+
+.ui-in-app-notification__viewport {
+  position: fixed;
+  left: var(--space-300);
+  right: var(--space-300);
+  top: calc(env(safe-area-inset-top, 0px) + var(--space-200));
+  /* Below Dialog/Sheet/Tooltip (1000) per guideline; Toast (1100) sits above. */
+  z-index: 900;
+  pointer-events: none;
+}
+
+.ui-in-app-notification {
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  gap: var(--space-300);
+  padding: var(--space-300);
+  background: var(--color-background-default);
+  border-radius: var(--radius-400);
+  box-shadow: var(--shadow-large);
+  width: 100%;
+  box-sizing: border-box;
+  /* Honor inline transform set by drag handlers without animating mid-drag. */
+  will-change: transform, opacity;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.ui-in-app-notification--pressable {
+  cursor: pointer;
+}
+
+.ui-in-app-notification--pressable:focus-visible {
+  outline: 2px solid var(--color-content-brand-default);
+  outline-offset: 2px;
+}
+
+/* ========================================
+ * Animation states
+ * Driven by data-state on the card element.
+ * ======================================== */
+
+.ui-in-app-notification[data-state='entering'] {
+  animation: ui-in-app-notification-enter 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+}
+
+.ui-in-app-notification[data-state='exiting'] {
+  animation: ui-in-app-notification-exit 0.3s cubic-bezier(0.6, -0.28, 0.735, 0.045) both;
+}
+
+/* Drag in progress: no animation, transform is set inline by JS. */
+.ui-in-app-notification[data-dragging='true'] {
+  animation: none !important;
+  transition: none !important;
+}
+
+/* Spring-back from a non-committing drag. */
+.ui-in-app-notification[data-springback='true'] {
+  transition: transform 0.15s ease-out, opacity 0.15s ease-out;
+}
+
+@keyframes ui-in-app-notification-enter {
+  from {
+    transform: translateY(-120%);
+    opacity: 0.7;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes ui-in-app-notification-exit {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-120%);
+    opacity: 0;
+  }
+}
+
+/* ========================================
+ * Leading element (40×40 box)
+ * ======================================== */
+
+.ui-in-app-notification__leading {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-200);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.ui-in-app-notification__leading--image {
+  background: transparent;
+}
+
+.ui-in-app-notification__leading--image > * {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Inner icon at 24×24 driven by the project's icon font. */
+.ui-in-app-notification__leading-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+}
+
+.ui-in-app-notification__leading-icon i[class^='icon-'],
+.ui-in-app-notification__leading-icon i[class*=' icon-'] {
+  width: 24px;
+  height: 24px;
+  font-size: 24px;
+}
+
+/* Variant icon background + icon color. */
+.ui-in-app-notification__leading--default {
+  background: var(--color-background-sunken);
+  color: var(--color-content-default);
+}
+
+.ui-in-app-notification__leading--completion {
+  background: var(--color-background-success-subtlest);
+  color: var(--color-content-success-bold);
+}
+
+.ui-in-app-notification__leading--danger {
+  background: var(--color-background-danger-subtlest);
+  color: var(--color-content-danger-bold);
+}
+
+.ui-in-app-notification__leading--announcement {
+  background: var(--color-background-brand-subtlest);
+  color: var(--color-content-brand-bold);
+}
+
+.ui-in-app-notification__leading--reward {
+  background: var(--color-background-prize-subtlest);
+  color: var(--color-content-prize-bold);
+}
+
+/* ========================================
+ * Content
+ * ======================================== */
+
+.ui-in-app-notification__content {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-50);
+}
+
+.ui-in-app-notification__headline,
+.ui-in-app-notification__description {
+  margin: 0;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ui-in-app-notification__headline {
+  color: var(--color-content-bold);
+}
+
+.ui-in-app-notification__description {
+  color: var(--color-content-subtle);
+}
+
+/* ========================================
+ * Trailing
+ * ======================================== */
+
+.ui-in-app-notification__trailing {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+
+/* Text button: borderless, inherits brand color. */
+.ui-in-app-notification__trailing-button {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  color: var(--color-content-brand-default);
+  font: inherit;
+}
+
+.ui-in-app-notification__trailing-button:focus-visible {
+  outline: 2px solid var(--color-content-brand-default);
+  outline-offset: 2px;
+  border-radius: var(--radius-150, 6px);
+}
+
+/* ========================================
+ * Reduced motion
+ * ======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .ui-in-app-notification[data-state='entering'] {
+    animation: ui-in-app-notification-enter-rm 0.15s linear both;
+  }
+
+  .ui-in-app-notification[data-state='exiting'] {
+    animation: ui-in-app-notification-exit-rm 0.15s linear both;
+  }
+
+  .ui-in-app-notification[data-springback='true'] {
+    transition: opacity 0.15s linear;
+  }
+}
+
+@keyframes ui-in-app-notification-enter-rm {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes ui-in-app-notification-exit-rm {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
