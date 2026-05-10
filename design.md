@@ -265,12 +265,7 @@ max-width 480、不寫桌機 breakpoint、顏色用 var(--color-*)、字級用 .
 間距用 var(--space-*)、:hover 包 @media (hover: hover)、dark mode 不需處理。
 ```
 
-**Figma → 程式碼**：
-```
-[Figma URL] → 解析 fileKey/nodeId → 呼叫 mcp__figma-remote__get_design_context →
-對照 figma-tokens.json 找 React 元件 → 翻譯成本專案元件（不要產出 Tailwind）→
-顏色換 var(--color-*)、文字換 .text-* class → 沒對應元件用最接近的 + TODO 註記。
-```
+**Figma → 程式碼**：完整流程（含 Plugin API 反向組裝、Variable Collection key、PingFang TC 限制）見 [CLAUDE.md「Figma Integration」](./CLAUDE.md)。重點：解析 nodeId（**dash → colon**）→ 呼叫 `get_design_context` → 對照 `figma-tokens.json` 翻譯成本專案元件 + token，**不要產出 Tailwind**。
 
 **狀態反饋色**：
 ```

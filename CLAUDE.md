@@ -1,28 +1,38 @@
 # Project: @invos/ios-ui-kit
 
-> Repo: `will-invos/invos-ui` · npm 套件名稱 `@invos/ios-ui-kit`
-> 本機工作目錄目前仍為 `~/Github/figma-mcp/`（未重新命名，避免影響 IDE / terminal 工作區）
+> Repo: `will-invos/invos-ui` · npm 套件 `@invos/ios-ui-kit`
 
-React + TypeScript + Vite 專案，內含一套以行動網頁為主的 UI Kit 與 design tokens。可供內部多個專案共用，並搭配 Figma MCP 讓 AI 快速建立新頁面。
+React + TypeScript + Vite，「發票存摺」共用 UI Kit 與 design tokens。搭配 Figma MCP 讓 AI 快速建立新頁面。
+
+## 兩份規範文件分工
+
+- **CLAUDE.md（本檔）** — AI 行為規則：**該用什麼元件**、Figma 整合流程、新頁面起手式
+- **[design.md](./design.md)** — **長什麼樣**：完整 token、色彩 / 排版 / 間距 / 動效規格、anti-patterns、AI prompt 範本
+
+> 寫程式時，元件選擇查本檔；視覺數值查 design.md。
 
 ## Platform Positioning
 
-- **未來可能延伸原生 iOS app**（React Native 或 Swift）— 這是為什麼 token / text style 命名保留 `iOS/` 前綴。
-- **不是桌機優先** — 不要預設 hover 互動、不要加桌機 breakpoint、不要假設滑鼠。
-- **字體** — 使用各平台系統預設字體（不指定特定中文字體名稱），見下方「Font Family」章節。
+- **未來可能延伸原生 iOS app**（React Native 或 Swift）— token / text style 命名保留 `iOS/` 前綴
+- **行動裝置優先**（mobile web + 未來 native）— 不加桌機 breakpoint、不假設滑鼠
+- **Hover 為漸進增強**：`:hover` 必須包在 `@media (hover: hover)` 內，避免觸控 sticky hover（詳見 [design.md §6.1](./design.md)）
+- **字體**：依賴系統預設，不指定中文字體名稱（詳見 [design.md §2.1](./design.md)）
 
 ## Tech Stack
-- React 19, TypeScript, Vite
-- No CSS framework (plain CSS with design token CSS variables)
-- No router library (hash-based routing in App.tsx)
 
-## UI Kit
-All components live in `src/components/ui/` with matching `.css` files.
-Design tokens: `src/components/ui/tokens/` (colors, radius, shadows, spacing, typography).
+- React 19、TypeScript、Vite
+- No CSS framework — plain CSS with design token CSS variables
+- No router library — hash-based routing in App.tsx
 
-### Component Decision Tree
+## UI Kit 結構
 
-給 AI：下列場景 → 使用的元件。**永遠優先使用這些元件，不要用原生 HTML 或自製版本**。
+- 元件：`src/components/ui/`（每個元件配 `.css`）
+- Token：`src/components/ui/tokens/`（colors / radius / shadows / spacing / typography）
+- Stories：`src/pages/stories/`（各元件 props 範例）
+
+## Component Decision Tree
+
+下列場景 → 使用的元件。**永遠優先使用這些元件，不要用原生 HTML 或自製版本**。
 
 | 需求 | 用哪個元件 |
 |------|-----------|
@@ -34,18 +44,21 @@ Design tokens: `src/components/ui/tokens/` (colors, radius, shadows, spacing, ty
 | 多行輸入欄位 | `<TextArea>` |
 | 下拉選單 | `<Select>` |
 | 搜尋輸入 | `<SearchField>` |
+| OTP / 驗證碼 | `<PinInput>` |
 | 切換 on/off | `<Switch>` |
 | 單選 | `<Radio>` |
 | 多選 | `<Checkbox>` |
 | 滑桿 | `<Slider>` |
 | 表單分組容器 | `<FieldGroup>` + `<FieldGroupHeader>` + `<FieldGroupHelpText>` |
 | 全螢幕對話（需使用者決策） | `<Dialog>` |
-| 從底部滑上來的面板（行動主要模式） | `<Sheet>` / 搭配 `<SheetHeader>` |
-| 即時通知（短訊） | `<Toast>`（Provider 模式、`useToast()`）|
-| 操作結果告知（可含動作按鈕） | `<SnackBar>` |
+| 從底部滑上的面板（行動主要模式） | `<Sheet>` / 搭配 `<SheetHeader>` |
+| 即時通知（中央短訊） | `<Toast>`（Provider 模式、`useToast()`）|
+| 操作結果告知（底部、可含動作） | `<SnackBar>` |
+| 頂部 push 通知（含 leading icon、可點擊跳轉） | `<InAppNotification>`（Provider 模式、`useInAppNotification()`） |
 | 區塊內告示（警告、資訊） | `<Alert>` |
-| 頁面頂部標題列 | `<NavigationBar>`（支援 regular / large / home / search / tabs）|
+| 頁面頂部標題列 | `<NavigationBar>`（regular / large / home / search / tabs）|
 | 底部 tab 導覽 | `<TabBar>` |
+| 分頁切換（內容區） | `<Tabs>` |
 | 列表項（設定、選單） | `<ListItem>` |
 | 卡片（內容 + 描述） | `<CardItem>` |
 | 列表的 header / footer | `<ListHeader>` / `<ListFooter>` |
@@ -57,175 +70,76 @@ Design tokens: `src/components/ui/tokens/` (colors, radius, shadows, spacing, ty
 | 進度條 | `<ProgressBar>` / 多條用 `<ProgressGroup>` |
 | 提示氣泡（簡短說明） | `<Tooltip>` |
 
-**找不到對應？** 先看 `figma-tokens.json.componentKeys` 是否有對應 Figma 元件尚未實作，再考慮新增；避免自己組裝。
+**找不到對應？** 先查 `figma-tokens.json.componentKeys` 是否有 Figma 元件尚未實作；再考慮新增，避免自己組裝。
 
-### Coding Rules
-
-- **No hard-coded colors.** Never use hex (`#fff`), `rgb()`, `rgba()`, or named colors (`white`, `black`) directly in component CSS. Always reference a design token CSS variable (`var(--color-*)`). If a needed token doesn't exist, add it to `tokens/colors.css` first, then reference it.
-  - ✅ `color: var(--color-content-fixed-white);`
-  - ❌ `color: white;` / `color: #ffffff;` / `color: rgba(255,255,255,0.2);`
-  - The only file allowed to contain raw color values is `tokens/colors.css` (token definitions).
-- **No fallback values in `var()`.** Tokens are always defined; fallback hex is dead code that can silently diverge. Write `var(--color-background-brand-default)`, not `var(--color-background-brand-default, #3560ff)`.
-- **Use typography tokens.** Use `var(--font-family)` for UI text and `var(--font-family-code)` for monospace. Typography classes live in `tokens/typography.css`.
-
-### Anti-patterns（AI 禁止產出）
-
-| ❌ 不要 | ✅ 改用 |
-|---------|--------|
-| `<button onClick={...}>` 原生 button | `<Button>` / `<IconButton>` |
-| `<input type="text">` 原生 input | `<TextField>` |
-| 自己寫 modal / overlay / backdrop | `<Dialog>`（全螢幕決策）或 `<Sheet>`（底部滑上） |
-| 自己寫 toast / snackbar 動畫 | `<Toast>` 配 `ToastProvider` / `<SnackBar>` |
-| `style={{ color: '#...' }}` inline | CSS class + `var(--color-*)` |
-| `color: #fff`、`rgb()`、命名色 | `var(--color-*)` token |
-| `var(--color-x, #fallback)` 兩參數 fallback | `var(--color-x)` 直接引用 |
-| `@media (min-width: 768px)` 桌機 breakpoint | Mobile-first，不加桌機斷點（除非真的要做響應式） |
-| `:hover` 作為主要互動（行動裝置無 hover） | 用 `:active` 或 `:focus-visible` |
-| `position: fixed` 自製 BottomSheet | `<Sheet>` 或 `<BottomSheet>` |
-| 從 `@/components/ui/Button` 深層 import | 從 `@/components/ui` 匯入（index barrel） |
-| 用 `<div onClick>` 當按鈕 | `<Button variant="text">` 或 `<IconButton>` |
-
-### Font Family (system default)
-
-**策略：不指定特定中文字體名稱**，完全依賴各平台的系統預設字體。`tokens/typography.css` 的 `--font-family` 定義如下：
-
-```css
---font-family: -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-```
-
-原因：
-- **Apple（iOS/macOS）** `-apple-system` / `BlinkMacSystemFont` 會自動選擇 SF Pro（英文）+ PingFang TC（中文）
-- **Android** `system-ui` 會用 Roboto + Noto Sans CJK
-- **Windows** `system-ui` 會用 Segoe UI + Microsoft JhengHei
-- **不列舉** `'PingFang TC'`、`'Noto Sans TC'`、`'Microsoft JhengHei'` — 讓 OS 挑最合適的字體，避免硬指定導致字體檔不存在時跳回 sans-serif
-
-**規則**：
-- ❌ 不要在任何元件或新 token 裡自己寫 `font-family: 'PingFang TC', ...`
-- ❌ 不要在 `--font-family` 加任何中文字體字串
-- ✅ 永遠透過 `var(--font-family)` 或 `var(--font-family-code)` 引用
-
-> figma-tokens.json 的 text styles 裡仍有 `iOS/Body-CN/*` 等條目，那是 Figma 設計系統的**設計端資料**，讓 Figma Plugin API 能套對應 text style。Code 這邊實作只保留一組通用 class（不分 EN/CN），靠 browser 智能選字。
+> Top 5 常踩的雷（完整 anti-patterns 與範例見 [design.md §7.1](./design.md)）：
+> 1. 不要 hex / rgb / 命名色 → 用 `var(--color-*)` token
+> 2. 不要寫 `var(--x, fallback)` → token 一定存在
+> 3. 不要 `<div onClick>` 假按鈕 → 用 `<Button>` / `<IconButton>`
+> 4. 不要 `:hover` 不包 `@media (hover: hover)`
+> 5. 不要深層 import `'@/components/ui/Button'` → 用 barrel `'@/components/ui'`
 
 ## Figma Integration
 
 ### Design System
+
 - **Figma file**: `zbdxaNIbxN4Iujx6Qi1DlI` (MCP-test)
-- **Library**: 🧰 iOS - UI Kit 2025 (components), 🧰 Design System 2025 (variables, text styles)
-- **Token reference**: `figma-tokens.json` — contains all component keys, text style keys, and variable collection keys
+- **Library**: 🧰 iOS - UI Kit 2025（components）、🧰 Design System 2025（variables、text styles）
+- **Token reference**: `figma-tokens.json` — 完整 component / text style / variable collection keys
 
 ### Code Connect（目前未啟用）
 
-Figma Code Connect 可以讓 Dev Mode 直接顯示 React 呼叫（取代預設的 Tailwind），但 **publish 需要 Organization 以上方案**，目前帳號不具備。因此本專案**沒有 `.figma.tsx` 映射檔**，AI 讀 Figma 時會拿到 Tailwind 或純 CSS 預設輸出，需自行翻譯成本專案元件。
+Figma Code Connect publish 需要 Organization 以上方案，目前帳號不具備。本專案沒有 `.figma.tsx`；`get_design_context` 會回傳 Tailwind 或純 CSS，AI 需自行翻譯成本專案元件。
 
-未來若升級方案，可重建 `.figma.tsx` + `figma.config.json` 走 `npx figma connect publish`。
+### Figma → Code workflow
 
-### Figma → Code workflow（現行流程）
+當使用者貼 `https://www.figma.com/design/{fileKey}/...?node-id=123-456`：
 
-1. 呼叫 `mcp__figma-remote__get_design_context` with `{ fileKey, nodeId }`
-2. 回傳通常是 Tailwind / 原生 CSS 的 reference code
-3. **AI 必須自己翻譯**：
-   - 對照下方 `figma-tokens.json.componentKeys` 找出 Figma 元件對應哪個 React 元件
-   - 套用上方「Component Decision Tree」挑選正確元件與變體
-   - 顏色對照 `tokens/colors.css`，換成 `var(--color-*)`
-   - Text style 對照 `tokens/typography.css` 的 class（`.text-display`、`.text-body-large` 等）
-4. **絕對不要**直接產出 Tailwind class 到本專案程式碼
+1. 解析 fileKey 與 nodeId（**dash 轉 colon**：`123-456` → `123:456`）
+2. 呼叫 `mcp__figma-remote__get_design_context` with `{ fileKey, nodeId }`
+3. 對照 `figma-tokens.json.componentKeys` 找對應 React 元件
+4. 翻譯成本專案元件：
+   - 顏色：對照 `tokens/colors.css` 換成 `var(--color-*)`（raw hex 反查 semantic token）
+   - 文字 style：換成 `tokens/typography.css` 的 `.text-*` class
+   - 元件變體：套用上方 Component Decision Tree
+5. **絕對不要** 直接產出 Tailwind class，即使 `get_design_context` 回傳的是 Tailwind
+6. 沒對應元件 → 用最接近的元件頂替並在 plan 註記 TODO
 
-### Code → Figma workflow (IMPORTANT)
-**Do NOT use `generate_figma_design` (HTML capture).** It loses variables, text styles, and component structure.
+### Code → Figma workflow
 
-Instead, use `use_figma` Plugin API to directly assemble library component instances:
-1. Read `figma-tokens.json` for component set keys and text style keys
-2. Import components via `figma.importComponentSetByKeyAsync(setKey)`
-3. Find the correct variant, create instances
-4. Set text overrides via `instance.setProperties({ '↳ PropName#id': 'value' })`
-5. Import and apply text styles via `figma.importStyleByKeyAsync(key)` → `textNode.textStyleId = style.id`
-6. Import and bind variables via `figma.teamLibrary.getVariablesInLibraryCollectionAsync(collectionKey)` → `figma.variables.setBoundVariableForPaint()`
+**Do NOT use `generate_figma_design` (HTML capture)** — 會丟失 variables、text styles、元件結構。
 
-### Text Styles (from Design System 2025)
-| Style                  | Font                      | Usage                          |
-|------------------------|---------------------------|--------------------------------|
-| iOS/Label/Large        | SF Pro Medium 16          | Field labels, section headers  |
-| iOS/Body-CN/Large      | PingFang TC Regular 16    | Input placeholders, body text  |
-| iOS/Body-CN/Medium     | PingFang TC Regular 14    | Descriptions, secondary text   |
-| iOS/Body-CN/Small      | PingFang TC Regular 12    | Help text, captions            |
-| iOS/Label-CN/Large     | PingFang TC Medium 16     | Nav title, button text         |
+改用 `use_figma` Plugin API 直接組合 library 元件 instances：
 
-### Variable Collections
-| Collection       | Key                                        | Library              |
-|------------------|--------------------------------------------|----------------------|
-| Semantic: Colors | `aca99ba7f5e3b863523761870ab4fa8d4b24c0be` | Design System 2025   |
-| Sementic: Sizes  | `b2b4d349ff3e569ea2799606edbc77e3b5c1aa60` | Design System 2025   |
+1. 讀 `figma-tokens.json` 拿 component set keys 與 text style keys
+2. `figma.importComponentSetByKeyAsync(setKey)` 匯入元件
+3. 找正確 variant 建立 instance
+4. `instance.setProperties({ '↳ PropName#id': 'value' })` 設文字 / 變體
+5. `figma.importStyleByKeyAsync(key)` → `textNode.textStyleId = style.id` 套 text style
+6. `figma.teamLibrary.getVariablesInLibraryCollectionAsync(collectionKey)` → `figma.variables.setBoundVariableForPaint()` 綁色彩變數
 
-### Fonts (Figma Plugin API note)
-PingFang TC is NOT available in the remote Figma Plugin API. When modifying text directly (not via `setProperties`), use `Noto Sans TC` as a fallback, then re-apply the correct text style via `textNode.textStyleId`.
+### Variable Collections（Design System 2025）
 
-## Do / Don't Examples
+| Collection | Key |
+|------------|-----|
+| Semantic: Colors | `aca99ba7f5e3b863523761870ab4fa8d4b24c0be` |
+| Semantic: Sizes | `b2b4d349ff3e569ea2799606edbc77e3b5c1aa60` |
 
-### Colors
-```tsx
-/* ❌ Don't */
-<div style={{ color: '#3560ff', background: 'rgba(53, 96, 255, 0.1)' }}>...</div>
+### Figma 端 vs Code 端 text style
 
-/* ✅ Do — in CSS */
-.my-box {
-  color: var(--color-content-brand-default);
-  background: var(--color-background-brand-subtle);
-}
-```
+`figma-tokens.json` 的 text styles（如 `iOS/Body-CN/Large`）是 **Figma 設計端資料**，Plugin API 套對應 text style 用。Code 端只有一組通用 class（`.text-body-large` 等不分 EN/CN），靠 browser 智能選字。
 
-### Typography
-```tsx
-/* ❌ Don't */
-<h1 style={{ fontSize: 24, fontWeight: 600, fontFamily: 'PingFang TC' }}>Title</h1>
+### Fonts（Plugin API note）
 
-/* ✅ Do — apply the text style class */
-<h1 className="text-heading-cn-large">Title</h1>
-```
-
-### Spacing
-```css
-/* ❌ Don't — magic numbers */
-padding: 12px 16px;
-gap: 8px;
-
-/* ✅ Do — use spacing tokens */
-padding: var(--space-150) var(--space-200);
-gap: var(--space-100);
-```
-
-### Structure
-```tsx
-/* ❌ Don't — depth imports + hand-rolled modal */
-import Button from '@/components/ui/Button'
-function MyModal() {
-  return <div style={{ position: 'fixed', inset: 0 }}>...</div>
-}
-
-/* ✅ Do — barrel import + Dialog primitive */
-import { Button, Dialog } from '@/components/ui'
-function MyModal() {
-  return <Dialog title="..." actions={[...]}>...</Dialog>
-}
-```
+PingFang TC 在 remote Figma Plugin API 不可用。直接修改文字（非透過 `setProperties`）時用 `Noto Sans TC` 作為 fallback，再用 `textNode.textStyleId` 套對應 text style。
 
 ## 新頁面起手式（給 AI）
 
-1. **確認需求類型** → 查「Component Decision Tree」找對應元件
-2. **確認字型 / 顏色** → 查 `tokens/typography.css` 與 `tokens/colors.css`；如果需要新 token，**先**加到 tokens 檔，再在元件引用
-3. **參考既有結構** → 可從 `src/pages/stories/` 底下的故事檔看每個元件的 props 範例
-4. **必用 barrel import** → `import { Button, TextField, Dialog } from '@/components/ui'`
-5. **必用行動網頁尺寸** → 頁面 max-width 設 `428px`，viewport meta 設 `width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover`
-6. **測試時** → 用 Chrome DevTools 裝置模擬器（iPhone 14 Pro）確認
-
-## Figma URL → 程式碼實作流程範例
-
-當使用者貼 `https://www.figma.com/design/zbdxaNIbxN4Iujx6Qi1DlI/MCP-test?node-id=123-456` 時：
-
-1. **解析 URL** → fileKey `zbdxaNIbxN4Iujx6Qi1DlI`、nodeId `123:456`（dash 轉 colon）
-2. **呼叫 `mcp__figma-remote__get_design_context`** with `{ fileKey, nodeId }`
-3. **讀回傳**：
-   - 若有 Code Connect 映射 → 直接使用回傳的 React 呼叫
-   - 若有 CSS variables → 對照 `tokens/colors.css`，用對應 `var(--color-*)`
-   - 若回傳 raw hex → 去 `tokens/colors.css` 反查對應 semantic token
-4. **若是新增元件** → 先查 `figma-tokens.json.componentKeys` 是否有對應；沒有就在 plan 中註記，先用最接近的現有元件頂替
-5. **永遠不要** 產出 Tailwind class，即使 `get_design_context` 回傳的是 Tailwind — 要翻譯回本專案的 CSS class + `var(--color-*)` 系統
+1. 查 Component Decision Tree 找對應元件
+2. 從 `'@/components/ui'` barrel import（**不要深層 import**）
+3. **頁面 `max-width: 480px`**、viewport meta：`width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover`
+4. 結構：`NavigationBar` → 內容區（自由捲動）→ `TabBar`（可選）
+5. 顏色 / 字級 / 間距 / 圓角 / 陰影 / 動效 → 用 token，不寫 magic number；完整規格見 [design.md](./design.md)
+6. `:hover` 包 `@media (hover: hover)`
+7. dark mode 不需特別處理（token 自動切換）
+8. 測試：Chrome DevTools 裝置模擬器（iPhone 14 Pro）
