@@ -7,8 +7,12 @@
 
 .ui-in-app-notification__viewport {
   position: fixed;
-  left: var(--space-300);
-  right: var(--space-300);
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: calc(100% - var(--space-300) * 2);
+  /* Match Dialog max-width so the notification doesn't stretch on tablets. */
+  max-width: 480px;
   top: calc(env(safe-area-inset-top, 0px) + var(--space-200));
   /* Below Dialog/Sheet/Tooltip (1000) per guideline; Toast (1100) sits above. */
   z-index: 900;
