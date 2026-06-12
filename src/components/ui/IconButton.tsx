@@ -5,7 +5,9 @@ import './IconButton.css';
 
 interface IconButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'children'> {
   variant?: 'filled' | 'outline' | 'ghost';
-  colorType?: 'primary' | 'neutral' | 'danger' | 'prize' | 'donation';
+  /** `fixed-white` is ghost-only (per Figma) — a white icon for use on photos /
+   *  colored backgrounds; stays white in both themes, press feedback via opacity. */
+  colorType?: 'primary' | 'neutral' | 'danger' | 'prize' | 'donation' | 'fixed-white';
   size?: 'large' | 'medium' | 'small' | 'xsmall';
   loading?: boolean;
   /** The icon element to render inside the button. */
@@ -22,7 +24,8 @@ interface IconButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElem
 function resolveSpinnerColor(
   variant: IconButtonProps['variant'],
   colorType: IconButtonProps['colorType']
-): 'primary' | 'inverse' | 'neutral' | 'fixed-bold' {
+): 'primary' | 'inverse' | 'neutral' | 'fixed-bold' | 'fixed-white' {
+  if (colorType === 'fixed-white') return 'fixed-white';
   if (variant === 'filled') {
     switch (colorType) {
       case 'neutral': return 'neutral';

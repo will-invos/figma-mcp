@@ -213,46 +213,19 @@
   background-color: var(--color-background-transparent-active);
 }
 
-/* ghost — danger */
-.ui-icon-button--ghost.ui-icon-button--ghost-danger {
-  background-color: var(--color-background-transparent-default);
-  color: var(--color-content-danger-default);
+/* ghost — fixed-white */
+.ui-icon-button--ghost.ui-icon-button--ghost-fixed-white {
+  background-color: transparent;
+  color: var(--color-content-fixed-white);
+  transition: opacity 0.15s;
 }
 @media (hover: hover) {
-  .ui-icon-button--ghost.ui-icon-button--ghost-danger:hover {
-    background-color: var(--color-background-danger-subtlest);
+  .ui-icon-button--ghost.ui-icon-button--ghost-fixed-white:hover {
+    opacity: 0.8;
   }
 }
-.ui-icon-button--ghost.ui-icon-button--ghost-danger:active {
-  background-color: var(--color-background-danger-subtle);
-}
-
-/* ghost — prize */
-.ui-icon-button--ghost.ui-icon-button--ghost-prize {
-  background-color: var(--color-background-transparent-default);
-  color: var(--color-content-prize-default);
-}
-@media (hover: hover) {
-  .ui-icon-button--ghost.ui-icon-button--ghost-prize:hover {
-    background-color: var(--color-background-prize-subtlest);
-  }
-}
-.ui-icon-button--ghost.ui-icon-button--ghost-prize:active {
-  background-color: var(--color-background-prize-subtle);
-}
-
-/* ghost — donation */
-.ui-icon-button--ghost.ui-icon-button--ghost-donation {
-  background-color: var(--color-background-transparent-default);
-  color: var(--color-content-donation-default);
-}
-@media (hover: hover) {
-  .ui-icon-button--ghost.ui-icon-button--ghost-donation:hover {
-    background-color: var(--color-background-donation-subtlest);
-  }
-}
-.ui-icon-button--ghost.ui-icon-button--ghost-donation:active {
-  background-color: var(--color-background-donation-subtle);
+.ui-icon-button--ghost.ui-icon-button--ghost-fixed-white:active {
+  opacity: 0.6;
 }
 
 /* ========================================
