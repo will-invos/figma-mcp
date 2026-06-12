@@ -1,0 +1,29 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__claude_ai_Figma__get_metadata",
+      "mcp__claude_ai_Figma__get_design_context",
+      "Bash(node -e \"console.log\\(JSON.stringify\\(require\\('/Users/will.huang/Documents/GitHub/figma-mcp/package.json'\\).scripts,null,2\\)\\)\")",
+      "Bash(npx tsc *)",
+      "Bash(echo \"=== TSC EXIT: $? ===\")",
+      "Bash(npx eslint *)",
+      "Bash(echo \"=== ESLINT EXIT: $? ===\")",
+      "Bash(npm run *)",
+      "Bash(echo \"LINT EXIT: $?\")",
+      "Read(//tmp/**)",
+      "Bash(echo \"BUILD EXIT: $?\")",
+      "Bash(echo \"TSC EXIT: $?\")",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(npx tsc -b > /tmp/tsc.out 2>&1; echo \"TSC EXIT: $?\"; cat /tmp/tsc.out *)",
+      "mcp__claude_ai_Figma__get_screenshot",
+      "Bash(curl -s -o /tmp/fw.png \"https://www.figma.com/api/mcp/asset/560c2a5a-9525-46c8-8bf3-b5fe52564fee\")",
+      "Bash(grep -rnE \"text-display\\(\\\\\"|'| |$\\)\" src --include=\"*.tsx\" --include=\"*.ts\" --include=\"*.css\")",
+      "Bash(npm version *)",
+      "Bash(echo \"=== NPM VERSION EXIT: $? ===\")"
+    ],
+    "additionalDirectories": [
+      "/private/tmp"
+    ]
+  }
+}
