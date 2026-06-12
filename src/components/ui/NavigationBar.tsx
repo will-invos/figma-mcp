@@ -94,7 +94,7 @@ const NavigationBar = React.forwardRef<HTMLElement, NavigationBarProps>(
       return (
         <header ref={ref} className={classes}>
           <div className="ui-nav-bar__nav">
-            <h1 className="text-display">{title}</h1>
+            <h1 className="text-display-small">{title}</h1>
             {trailing && <div className="ui-nav-bar__trailing">{trailing}</div>}
           </div>
           {bottomAddon}
@@ -126,7 +126,7 @@ const NavigationBar = React.forwardRef<HTMLElement, NavigationBarProps>(
           <div className="ui-nav-bar__trailing">{trailing}</div>
         </div>
         <div className="ui-nav-bar__nav">
-          <h1 className="text-display">{title}</h1>
+          <h1 className="text-display-small">{title}</h1>
         </div>
         {bottomDivider}
       </header>

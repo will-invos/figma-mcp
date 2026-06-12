@@ -17,7 +17,7 @@ interface ListHeaderProps {
 const HEADLINE_CLASS = {
   small:  'text-label-medium',
   medium: 'text-heading-small',
-  large:  'text-display',
+  large:  'text-display-small',
 } as const
 
 /** Typography for the default text fallback only — not applied to swapped-in elements. */
