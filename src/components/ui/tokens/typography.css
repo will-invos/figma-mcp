@@ -11,9 +11,9 @@
  *   Code    — system monospace (ui-monospace / SF Mono fallback chain)
  *
  * Weight mapping:
- *   Regular = 400, Medium = 500, Semibold = 600
+ *   Regular = 400, Medium = 500, Semibold = 600, Bold = 700
  *
- * All text styles use letter-spacing: 0.04em
+ * Letter-spacing: not set (browser default); .text-code-* explicitly use 0
  */
 
 :root {

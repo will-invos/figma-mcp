@@ -79,17 +79,17 @@
 
 ### 2.2 文字 class
 
-統一規則：`letter-spacing: 0.04em`（code 系列為 0）。**套 class，不自訂 `font-size`**。
+統一規則：**套 class，不自訂 `font-size`**；不額外設 `letter-spacing`（採預設，`.text-code-*` 明確設 `0`）。
 
 | Class | Size/Line | Weight | 用途 |
 |-------|-----------|--------|------|
-| `.text-display` | 28/36 | 500 | 頁面大標、Large nav title |
-| `.text-heading-{large/medium/small}` | 24/20/18 | 600 | Dialog / 卡片 / 子區段標題 |
+| `.text-display-small` | 28/36 | 700 | 頁面大標、Large nav title |
+| `.text-heading-{large/medium/small}` | 24/20/18 | 700 | Dialog / 卡片 / 子區段標題 |
 | `.text-body-{xlarge/large/medium/small}` | 18/16/14/12 | 400 | 強調內文 / **預設正文** / 描述 / 註解 |
 | `.text-label-{large/medium/small}` | 16/14/12 | 500 | Button large/medium/small、欄位 label / Tag / Badge |
 | `.text-code-{large/medium/small}` | 16/14/12 | 400 | 等寬代碼 / 數字 |
 
-> 完整定義（含 `-display-regular`、`-body-xsmall`、`-label-xsmall`）見 [tokens/typography.css](./src/components/ui/tokens/typography.css)。
+> 完整定義（含 `-display-small-light`、`-body-xsmall`、`-label-xsmall`）見 [tokens/typography.css](./src/components/ui/tokens/typography.css)。
 
 **配色預設**：標題→`--color-content-bold`、正文→`--color-content-default`、次要→`--color-content-subtle`、提示→`--color-content-subtlest`、連結→`--color-content-link-default`。
 
