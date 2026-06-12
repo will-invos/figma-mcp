@@ -26,9 +26,9 @@ function resolveSpinnerColor(
   colorType: IconButtonProps['colorType']
 ): 'primary' | 'inverse' | 'neutral' | 'fixed-bold' | 'fixed-white' {
   if (colorType === 'fixed-white') return 'fixed-white';
+  if (colorType === 'neutral') return 'neutral';
   if (variant === 'filled') {
     switch (colorType) {
-      case 'neutral': return 'neutral';
       case 'prize': return 'fixed-bold';
       default: return 'inverse';
     }
