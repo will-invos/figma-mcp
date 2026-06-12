@@ -12,8 +12,17 @@
   min-width: 0;
   margin: 0;
 }
+/* Layout-only slot (Figma "↳ Slot") — holds text or any element (Button, Tag…)
+   without imposing typography or color on swapped-in content. */
 .ui-list-header__trailing {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  gap: var(--space-200);
   flex-shrink: 0;
+}
+/* Default text fallback only — color is set per size below. */
+.ui-list-header__trailing-text {
   white-space: nowrap;
 }
 
@@ -26,7 +35,7 @@
   padding-bottom: var(--space-200);
 }
 .ui-list-header--small .ui-list-header__headline,
-.ui-list-header--small .ui-list-header__trailing {
+.ui-list-header--small .ui-list-header__trailing-text {
   color: var(--color-content-subtle);
 }
 
@@ -39,7 +48,7 @@
 .ui-list-header--medium .ui-list-header__headline {
   color: var(--color-content-bold);
 }
-.ui-list-header--medium .ui-list-header__trailing {
+.ui-list-header--medium .ui-list-header__trailing-text {
   color: var(--color-content-default);
 }
 
@@ -52,6 +61,6 @@
 .ui-list-header--large .ui-list-header__headline {
   color: var(--color-content-bold);
 }
-.ui-list-header--large .ui-list-header__trailing {
+.ui-list-header--large .ui-list-header__trailing-text {
   color: var(--color-content-default);
 }
