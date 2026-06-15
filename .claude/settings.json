@@ -22,7 +22,9 @@
       "Bash(npm version *)",
       "Bash(echo \"=== NPM VERSION EXIT: $? ===\")",
       "Bash(git push *)",
-      "Bash(echo \"=== PUSH EXIT: $? ===\")"
+      "Bash(echo \"=== PUSH EXIT: $? ===\")",
+      "Bash(node -e \"const p=require\\('/Users/will.huang/Documents/GitHub/figma-mcp/package.json'\\); console.log\\('license:', p.license\\); console.log\\('private:', p.private\\); console.log\\('author:', p.author\\); console.log\\('name:', p.name\\)\")",
+      "Bash(node -e \"JSON.parse\\(require\\('fs'\\).readFileSync\\('package.json','utf8'\\)\\); console.log\\('package.json valid ✓ license:', require\\('./package.json'\\).license\\)\")"
     ],
     "additionalDirectories": [
       "/private/tmp"
