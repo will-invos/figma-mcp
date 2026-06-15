@@ -4,7 +4,7 @@
   "description": "Mobile-web UI Kit with iOS-flavored design tokens; synced with Figma via MCP.",
   "private": true,
   "type": "module",
-  "license": "MIT",
+  "license": "UNLICENSED",
   "sideEffects": [
     "**/*.css"
   ],
