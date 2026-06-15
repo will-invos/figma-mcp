@@ -215,7 +215,3 @@ Code Connect 能讓 Figma Dev Mode 直接顯示 React 呼叫，但 publish 需�
 | Semantic Sizes collection | `b2b4d349ff3e569ea2799606edbc77e3b5c1aa60` |
 
 所有元件 / 樣式 / 變數的 key 都存在 [figma-tokens.json](figma-tokens.json)。
-
-## License
-
-MIT
