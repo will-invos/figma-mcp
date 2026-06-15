@@ -20,7 +20,9 @@
       "Bash(curl -s -o /tmp/fw.png \"https://www.figma.com/api/mcp/asset/560c2a5a-9525-46c8-8bf3-b5fe52564fee\")",
       "Bash(grep -rnE \"text-display\\(\\\\\"|'| |$\\)\" src --include=\"*.tsx\" --include=\"*.ts\" --include=\"*.css\")",
       "Bash(npm version *)",
-      "Bash(echo \"=== NPM VERSION EXIT: $? ===\")"
+      "Bash(echo \"=== NPM VERSION EXIT: $? ===\")",
+      "Bash(git push *)",
+      "Bash(echo \"=== PUSH EXIT: $? ===\")"
     ],
     "additionalDirectories": [
       "/private/tmp"
