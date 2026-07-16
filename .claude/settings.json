@@ -3,7 +3,7 @@
     "allow": [
       "mcp__claude_ai_Figma__get_metadata",
       "mcp__claude_ai_Figma__get_design_context",
-      "Bash(node -e \"console.log\\(JSON.stringify\\(require\\('/Users/will.huang/Documents/GitHub/figma-mcp/package.json'\\).scripts,null,2\\)\\)\")",
+      "Bash(node -e \"console.log\\(JSON.stringify\\(require\\('/Users/will.huang/Documents/GitHub/iv-design-system/package.json'\\).scripts,null,2\\)\\)\")",
       "Bash(npx tsc *)",
       "Bash(echo \"=== TSC EXIT: $? ===\")",
       "Bash(npx eslint *)",
@@ -23,7 +23,7 @@
       "Bash(echo \"=== NPM VERSION EXIT: $? ===\")",
       "Bash(git push *)",
       "Bash(echo \"=== PUSH EXIT: $? ===\")",
-      "Bash(node -e \"const p=require\\('/Users/will.huang/Documents/GitHub/figma-mcp/package.json'\\); console.log\\('license:', p.license\\); console.log\\('private:', p.private\\); console.log\\('author:', p.author\\); console.log\\('name:', p.name\\)\")",
+      "Bash(node -e \"const p=require\\('/Users/will.huang/Documents/GitHub/iv-design-system/package.json'\\); console.log\\('license:', p.license\\); console.log\\('private:', p.private\\); console.log\\('author:', p.author\\); console.log\\('name:', p.name\\)\")",
       "Bash(node -e \"JSON.parse\\(require\\('fs'\\).readFileSync\\('package.json','utf8'\\)\\); console.log\\('package.json valid ✓ license:', require\\('./package.json'\\).license\\)\")"
     ],
     "additionalDirectories": [

@@ -1,6 +1,6 @@
 # Project: @invos/ios-ui-kit
 
-> Repo: `will-invos/invos-ui` · npm 套件 `@invos/ios-ui-kit`
+> Repo: `will-invos/iv-design-system` · npm 套件 `@invos/ios-ui-kit`
 
 React + TypeScript + Vite，「發票存摺」共用 UI Kit 與 design tokens。搭配 Figma MCP 讓 AI 快速建立新頁面。
 

@@ -1,6 +1,6 @@
 # @invos/ios-ui-kit
 
-> Repo: [`will-invos/invos-ui`](https://github.com/will-invos/invos-ui) — npm 套件名稱 `@invos/ios-ui-kit`
+> Repo: [`will-invos/iv-design-system`](https://github.com/will-invos/iv-design-system) — npm 套件名稱 `@invos/ios-ui-kit`
 
 一套 iOS 風格、**行動網頁為主**的 React UI Kit，可供內部多個專案共用。
 
@@ -59,7 +59,7 @@ pnpm lint           # ESLint
 ```json
 {
   "dependencies": {
-    "@invos/ios-ui-kit": "github:will-invos/invos-ui#v0.1.0",
+    "@invos/ios-ui-kit": "github:will-invos/iv-design-system#v0.1.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
   }
@@ -143,8 +143,8 @@ npm version patch     # 0.1.0 → 0.1.1（bug fix）
 修改消費端 `package.json`：
 
 ```diff
-- "@invos/ios-ui-kit": "github:will-invos/invos-ui#v0.1.0",
-+ "@invos/ios-ui-kit": "github:will-invos/invos-ui#v0.1.1",
+- "@invos/ios-ui-kit": "github:will-invos/iv-design-system#v0.1.0",
++ "@invos/ios-ui-kit": "github:will-invos/iv-design-system#v0.1.1",
 ```
 
 ```bash
