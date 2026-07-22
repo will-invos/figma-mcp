@@ -201,12 +201,15 @@ tokens.css  ios-colors/*.colorset   values(+night)/colors.xml
 
 ### 5.2 web prototype 表達不了的原生行為〔P1〕
 - hash routing 無法表達 push / modal / sheet / tab 差異；手勢、鍵盤、haptics、動效曲線無載體。
-- [ ] 建「prototype 隨附規格」模板：navigation map（呈現方式 + 返回行為）＋ 手勢（sheet drag/detents、swipe actions）＋ 鍵盤（avoidance / return key）＋ haptics（對獎/金流關鍵點）＋ 動效 CSS→native 對應
+- [x] ✅ 已建模板 [docs/prototype-spec-template.md](./prototype-spec-template.md)：navigation map（呈現+返回）、手勢（drag/detents/swipe）、鍵盤（avoidance/return key）、haptics（對獎/金流）、系統整合點、動效。PM 交付 prototype 時複製填寫
+- [ ] 導入流程：把「附上 prototype 隨附規格」設為 PM 交付 checklist 的一項
 
 ### 5.3 Icon / 資產管線是 web-only〔P1〕
 - icon 為 icon font（`src/components/ui/icons/invos.woff2`，255 顆），native 無法直接吃。
-- [x] ~~確認是否有 SVG 源~~ ✅ **SVG 源已入 repo**（2026-07-22）：[src/assets/icons/](../src/assets/icons/) 274 顆，16×16 viewBox。注意：`fill="black"` 寫死（非 `currentColor`），建管線時需正規化
-- [ ] 建 SVG → web font + iOS asset catalog + Android vector drawable 管線 + 命名對照（`icon-scan` ↔ `ic_scan`）
+- [x] ~~確認是否有 SVG 源~~ ✅ SVG 源已入 repo：[src/assets/icons/](../src/assets/icons/) 273 顆，16×16
+- [x] ✅ **native 管線已建**（`npm run icons:build`，見 [icons/](../icons/)）：SVG → iOS Asset Catalog（273 imagesets，template 可 tint）+ Android vector drawable（273 `ic_*.xml`）+ `manifest.json` 命名對照（`icon-scan` ↔ iOS `scan` ↔ Android `ic_scan`）。fill 正規化、產物進 `icons/dist/`（gitignore）
+- [ ] web font 重生（SVG → woff2 + ui-icons.css）：opt-in —— font 已略舊（273 SVG > 255 glyph，差 18 顆多為品牌 logo）；動二進位字型 + 需視覺回歸，要做再議
+- [ ] 來源瑕疵 Figma 端修：`document-check-aside.pdf`（非 SVG）、`volumn`→`volume` typo、`bell_filled` 底線（清單見 icons manifest）
 
 ### 5.4 a11y / 內容規則 —— 2026-07-22 定案
 - [x] 字級縮放：**iOS 寫死字級**（不隨 Dynamic Type）、**Android 依系統設定縮放**（Android 版面需容忍放大，個案驗收）；已記入 design.md §2.2
@@ -227,8 +230,8 @@ tokens.css  ios-colors/*.colorset   values(+night)/colors.xml
 | 4 | 補填 parity 空格（Android/iOS 待確認格） | §2 | P1 | 文件 |
 | 5 | ~~web 元件 parity~~ ✅ 已收斂（FAB / PageNavigation / DottedController / PageStatus 補齊；Date picker 採原生） | §2 | — | 完成 |
 | 6 | mapping 維護機制上線（owner + PR 模板） | §4 | P1 | 流程 |
-| 7 | prototype 隨附規格模板 | §5.2 | P1 | 文件 |
-| 8 | Icon SVG 管線 | §5.3 | P1 | 建置 |
+| 7 | ~~prototype 隨附規格模板~~ ✅ 已建（docs/prototype-spec-template.md） | §5.2 | — | 完成 |
+| 8 | ~~Icon SVG 管線（native）~~ ✅ 已建（`icons:build`；web font 重生為 opt-in） | §5.3 | — | 完成 |
 | 9 | ~~a11y / 內容規則~~ ✅ 已定案（字級縮放現況、48dp、金額/期數/日期/時間格式 → design.md §2.3、§6.2；剩長字串截斷個案處理） | §5.4 | — | 完成 |
 
 ## 附錄 — 名詞
