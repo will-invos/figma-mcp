@@ -169,7 +169,8 @@ tokens.css  ios-colors/*.colorset   values(+night)/colors.xml
   - [x] `radius/full` 定案 **999**：CSS `--radius-full` 已由 9999px 改為 999px（視覺等效）
   - [x] ~~Figma-only token 不納入 web 輸出~~ **2026-07-22 更正定案：web 對齊 app 全收錄顏色（275 色全出），僅大間距 space 維持排除**。與手寫 CSS 的共同 token 已驗證 light/dark 值零差異
 - [x] **第二步 B（native 輸出）已建置**：`tokens:build` 直接產出 iOS Asset Catalog colorsets ×275 與 Android `values(+night)/colors.xml`（格式即既有交付格式）。與 plugin 轉出版比對：名稱 275/275 一致、63 處值差 1/255（plugin 端量化偏差；pipeline 版與 Figma API / web 完全一致，以 pipeline 為準）。plugin 流程可退役
-- [ ] 第二步：`dist/tokens.css` 正式接管 `src/components/ui/tokens/{colors,spacing,radius}.css`；加開 Swift + Compose 輸出格式，iOS / Android 專案改吃產生檔
+- [x] **第二步 A 已完成（2026-07-22）**：`tokens:build` 直接接管 `src/components/ui/tokens/{colors,spacing,radius}.css`（驗證：共同 340 token 值零變更、零消失、新增 221、build 通過）。舊 plugin 交付檔已移除，同步路徑收斂為單一條
+- [ ] 收尾：iOS / Android 工程師改吃 `tokens/dist/native/` 產出（copy 交付；下次色彩變更時自然驗證）；sizes 的 native 輸出（pt / dp）需要時再開
 - [ ] 補 Android typography（Roboto / Noto Sans TC 字級行高）進 Design System 2025 與 token
 - [ ] 定義 `px ↔ pt ↔ dp/sp` 換算與 Dynamic Type / font scale 規則
 - [ ] 三端 color / text-style 命名對照表（補進本文件或各 mapping 文件）

@@ -9,7 +9,7 @@ Figma variables（設計師改這裡）
 tokens.json（排序後的 git 母版，diff 可審）
    │ ② npm run tokens:build（Style Dictionary + native 產生器）
    ▼
-dist/tokens.css（:root light + [data-theme="dark"]）
+src/components/ui/tokens/{colors,spacing,radius}.css（**直接接管**，:root + [data-theme="dark"]）
 dist/native/ios-colors/*.colorset（Xcode Asset Catalog，275 色 × light/dark）
 dist/native/android/values/colors.xml + values-night/colors.xml（ARGB）
 ```
@@ -21,7 +21,7 @@ dist/native/android/values/colors.xml + values-night/colors.xml（ARGB）
 | `figma-dump/colors.txt`、`sizes.txt` | 從 Figma 倒出的原始值（`name\|light\|dark`） | ❌ 由同步產生 |
 | `tokens.json` | 排序後的中繼母版，每次同步的 git diff 就看它 | ❌ 由 build 產生 |
 | `build.mjs` | dump → tokens.json → CSS | ✅ 管線邏輯在這 |
-| `dist/tokens.css` | 產出的 CSS custom properties | ❌ 唯讀投影 |
+| `src/components/ui/tokens/{colors,spacing,radius}.css` | 產出的 CSS（**已接管**，檔頭有產生警語） | ❌ 唯讀投影（typography.css、shadows.css 仍為手寫） |
 | `dist/native/ios-colors/` | Xcode Asset Catalog colorsets（iOS 工程師 copy 進 Assets.xcassets） | ❌ 唯讀投影 |
 | `dist/native/android/` | `values/` + `values-night/` 的 colors.xml（Android 工程師 copy 進 res/） | ❌ 唯讀投影 |
 
@@ -37,4 +37,5 @@ dist/native/android/values/colors.xml + values-night/colors.xml（ARGB）
 - 首次倒出：colors 275（Light/Dark）、sizes 38，與手寫 CSS 比對 **值零漂移**；`radius/full` = 999 已定案對齊
 - **web 全收錄顏色**（2026-07-22 更正定案，對齊 app）：`dist/tokens.css` 含全部 275 色 + sizes（僅大間距 space 維持排除）
 - **native 輸出已建置**，格式對齊既有交付：iOS Asset Catalog colorsets、Android `values(+night)/colors.xml`。與 plugin 轉出版驗證：**名稱 275/275 一致；值有 63 處相差 1/255**（plugin 端量化偏差 —— pipeline 版與 Figma API / web CSS 完全一致，視覺不可辨），**以 pipeline 版為準**
-- `dist/tokens.css` **尚未接管** `src/components/ui/tokens/*.css` —— 正式切換屬第二步 A
+- **第二步 A 已完成（2026-07-22）**：`tokens:build` 直接接管 `src/components/ui/tokens/{colors,spacing,radius}.css`。接管驗證：共同 340 token 值零變更、零消失、新增 221（全收錄帶入）、`build:lib` 通過。typography.css / shadows.css 不在 Figma variables 範圍，維持手寫
+- plugin（color2code）交付流程已退役，舊交付檔（src/assets/ios-colors、android-colors.csv）已移除

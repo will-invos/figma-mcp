@@ -50,44 +50,50 @@ const WEB_EXCLUDE = [
 ]
 const webInclude = (name) => !WEB_EXCLUDE.some((re) => re.test(name))
 
-const lightTree = {}, darkTree = {}
-let excluded = 0
+const colorLightTree = {}, colorDarkTree = {}, spaceTree = {}, radiusTree = {}
+let excluded = 0, darkOverrides = 0
 for (const t of colors) {
-  if (!webInclude(t.name)) { excluded++; continue }
-  insert(lightTree, t.name, t.light); insert(darkTree, t.name, t.dark)
+  insert(colorLightTree, t.name, t.light)
+  if (t.dark !== t.light) { insert(colorDarkTree, t.name, t.dark); darkOverrides++ }
 }
 for (const t of sizes) {
   if (!webInclude(t.name)) { excluded++; continue }
-  insert(lightTree, t.name, t.value)
+  if (t.name.startsWith('space/')) insert(spaceTree, t.name, t.value)
+  else insert(radiusTree, t.name, t.value)
 }
 
-// ---------- 4. 產出 CSS（light → :root、dark → [data-theme="dark"]） ----------
+// ---------- 4. 產出 CSS，直接接管 src/components/ui/tokens/ 三檔 ----------
 mkdirSync(`${HERE}dist`, { recursive: true })
-async function buildCss(tokens, destination, selector) {
+const SRC_TOKENS = `${HERE}../src/components/ui/tokens/`
+async function renderCss(tokens, selector) {
+  const tmp = `_tmp-${selector.replace(/[^a-z]/gi, '')}.css`
   const sd = new StyleDictionary({
     tokens,
     platforms: {
       css: {
         transforms: ['name/kebab'],
         buildPath: `${HERE}dist/`,
-        files: [{ destination, format: 'css/variables', options: { selector } }],
+        files: [{ destination: tmp, format: 'css/variables', options: { selector } }],
       },
     },
     log: { verbosity: 'silent' },
   })
   await sd.buildAllPlatforms()
+  const css = readFileSync(`${HERE}dist/${tmp}`, 'utf8').replace(/^\/\*\*[\s\S]*?\*\/\n*/, '') // 去 SD 時間戳檔頭
+  rmSync(`${HERE}dist/${tmp}`)
+  return css
 }
-await buildCss(lightTree, 'tokens.light.css', ':root')
-await buildCss(darkTree, 'tokens.dark.css', '[data-theme="dark"]')
+const header = (what) =>
+  `/*\n * ${what} — 由 \`npm run tokens:build\` 產生（來源：Figma variables，經 tokens/tokens.json）\n * 手改會被下次產生覆蓋。要改值：改 Figma variables → publish library → 同步（見 tokens/README.md）\n */\n`
 
-const light = readFileSync(`${HERE}dist/tokens.light.css`, 'utf8')
-const dark = readFileSync(`${HERE}dist/tokens.dark.css`, 'utf8')
+const colorLightCss = await renderCss(colorLightTree, ':root')
+const colorDarkCss = await renderCss(colorDarkTree, '[data-theme="dark"]')
 writeFileSync(
-  `${HERE}dist/tokens.css`,
-  `/* 由 tokens/build.mjs 產生 — 唯讀投影，要改請改 Figma variables（見 tokens/README.md） */\n${light}\n${dark}`
+  `${SRC_TOKENS}colors.css`,
+  header(`Color tokens（${colors.length} 色；dark 覆寫 ${darkOverrides} 個，未覆寫者沿用 light）`) + colorLightCss + '\n' + colorDarkCss
 )
-rmSync(`${HERE}dist/tokens.light.css`)
-rmSync(`${HERE}dist/tokens.dark.css`)
+writeFileSync(`${SRC_TOKENS}spacing.css`, header('Spacing tokens（4px grid）') + (await renderCss(spaceTree, ':root')))
+writeFileSync(`${SRC_TOKENS}radius.css`, header('Radius tokens') + (await renderCss(radiusTree, ':root')))
 
 // ---------- 5. Native 輸出（格式對齊既有交付：iOS Asset Catalog colorsets、Android colors.xml） ----------
 function parseColor(s) {
@@ -150,5 +156,5 @@ writeFileSync(`${HERE}dist/native/android/values/colors.xml`, androidXml('light'
 writeFileSync(`${HERE}dist/native/android/values-night/colors.xml`, androidXml('dark'))
 
 console.log(`✅ tokens.json：colors ${colors.length}、sizes ${sizes.length}（母版全收）`)
-console.log(`✅ dist/tokens.css 已產出（web 全收錄顏色；排除 ${excluded} 個大間距）`)
+console.log(`✅ src/components/ui/tokens/{colors,spacing,radius}.css 已接管（dark 覆寫 ${darkOverrides}；排除 ${excluded} 個大間距）`)
 console.log(`✅ dist/native/：iOS colorsets ×${colors.length}、Android values(+night)/colors.xml`)

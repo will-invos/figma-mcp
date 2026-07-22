@@ -1,125 +1,24 @@
 /*
- * Semantic Color Tokens
- * Generated from Figma design system
- * Naming: color/{category}/{variant} → --color-{category}-{variant}
- *
- * Light mode (:root) — 164 tokens
- * Dark mode ([data-theme="dark"]) — 150 overrides for non-fixed tokens
+ * Color tokens（275 色；dark 覆寫 252 個，未覆寫者沿用 light） — 由 `npm run tokens:build` 產生（來源：Figma variables，經 tokens/tokens.json）
+ * 手改會被下次產生覆蓋。要改值：改 Figma variables → publish library → 同步（見 tokens/README.md）
  */
-
 :root {
-  /* ========================================
-   * Content
-   * ======================================== */
-
-  /* Content — Base */
-  --color-content-bold: #101119;
-  --color-content-default: #3b3c43;
-  --color-content-plain: #000000;
-  --color-content-subtle: #737380;
-  --color-content-subtlest: #9b9baa;
-
-  /* Content — Brand */
-  --color-content-brand-default: #3560ff;
-  --color-content-brand-bold: #2b38c8;
-  --color-content-brand-hover: #2f4be6;
-  --color-content-brand-active: #2b38c8;
-  --color-content-brand-subtle: #82a8ff;
-  --color-content-brand-gradient-primary: #3560ff;
-  --color-content-brand-gradient-secondary: #00d3f7;
-
-  /* Content — Danger */
-  --color-content-danger-default: #f4252d;
-  --color-content-danger-bold: #b30913;
-  --color-content-danger-hover: #dd0815;
-  --color-content-danger-active: #b30913;
-  --color-content-danger-subtle: #ff9090;
-
-  /* Content — Donation */
-  --color-content-donation-default: #f61372;
-  --color-content-donation-bold: #a3094a;
-  --color-content-donation-hover: #d60c5f;
-  --color-content-donation-active: #a3094a;
-  --color-content-donation-subtle: #ff79b1;
-
-  /* Content — Fixed (do NOT change in dark mode) */
-  --color-content-fixed-black: #000000;
-  --color-content-fixed-bold: #101119;
-  --color-content-fixed-brand: #3560ff;
-  --color-content-fixed-default: #3b3c43;
-  --color-content-fixed-white: #ffffff;
-
-  /* Content — Inverse */
-  --color-content-inverse-bold: #f7f8f9;
-  --color-content-inverse-brand: #5586ff;
-  --color-content-inverse-default: #dcdee5;
-  --color-content-inverse-plain: #ffffff;
-  --color-content-inverse-subtle: #9b9baa;
-
-  /* Content — Link */
-  --color-content-link-default: #3560ff;
-  --color-content-link-hover: #2f4be6;
-  --color-content-link-active: #2b38c8;
-
-  /* Content — Neutral */
-  --color-content-neutral-default: #737380;
-  --color-content-neutral-hover: #575762;
-  --color-content-neutral-active: #3b3c43;
-
-  /* Content — Prize */
-  --color-content-prize-default: #f1ad00;
-  --color-content-prize-bold: #9c6a05;
-  --color-content-prize-hover: #c78b07;
-  --color-content-prize-active: #9c6a05;
-  --color-content-prize-subtle: #ffd45b;
-
-  /* Content — Secondary */
-  --color-content-secondary-default: #00b3d6;
-  --color-content-secondary-bold: #007387;
-  --color-content-secondary-hover: #0a90b1;
-  --color-content-secondary-active: #007387;
-  --color-content-secondary-subtle: #66e6fd;
-
-  /* Content — Success */
-  --color-content-success-default: #00bd64;
-  --color-content-success-bold: #007746;
-  --color-content-success-hover: #099a57;
-  --color-content-success-active: #007746;
-  --color-content-success-subtle: #7befb1;
-
-  /* Content — Warning */
-  --color-content-warning-default: #f58700;
-  --color-content-warning-bold: #a54200;
-  --color-content-warning-hover: #db6a00;
-  --color-content-warning-active: #a54200;
-  --color-content-warning-subtle: #ffbe5f;
-
-  /* ========================================
-   * Background
-   * ======================================== */
-
-  /* Background — Base */
-  --color-background-default: #ffffff;
-  --color-background-disable: #edeff3;
-  --color-background-elevated-brand: #edf4ff;
-  --color-background-plain: #ffffff;
-  --color-background-skeleton: rgba(22, 25, 29, 0.1);
-  --color-background-skeleton-bold: rgba(22, 25, 29, 0.2);
-  --color-background-sunken: #f7f8f9;
-  --color-background-toast: rgba(0, 0, 0, 0.8);
-
-  /* Background — Brand */
   --color-background-brand-active: #2b38c8;
   --color-background-brand-bold: #2b38c8;
   --color-background-brand-boldest: #202da8;
   --color-background-brand-default: #3560ff;
+  --color-background-brand-gradient-primary: #3560ff;
+  --color-background-brand-gradient-secondary: #00d3f7;
   --color-background-brand-hover: #2f4be6;
   --color-background-brand-subtle: #82a8ff;
   --color-background-brand-subtlest: #d6e5ff;
-  --color-background-brand-gradient-primary: #3560ff;
-  --color-background-brand-gradient-secondary: #00d3f7;
-
-  /* Background — Danger */
+  --color-background-category-all: #3b3c43;
+  --color-background-category-entertainment: #f0ac00;
+  --color-background-category-food: #ff8710;
+  --color-background-category-life: #00b185;
+  --color-background-category-other: #6c6d79;
+  --color-background-category-shopping: #3560ff;
+  --color-background-category-transportation: #009ae2;
   --color-background-danger-active: #b30913;
   --color-background-danger-bold: #b30913;
   --color-background-danger-boldest: #920810;
@@ -127,8 +26,8 @@
   --color-background-danger-hover: #dd0815;
   --color-background-danger-subtle: #ff9090;
   --color-background-danger-subtlest: #ffdede;
-
-  /* Background — Donation */
+  --color-background-default: #ffffff;
+  --color-background-disable: #edeff3;
   --color-background-donation-active: #a3094a;
   --color-background-donation-bold: #a3094a;
   --color-background-donation-boldest: #7f0739;
@@ -136,19 +35,14 @@
   --color-background-donation-hover: #d60c5f;
   --color-background-donation-subtle: #ff79b1;
   --color-background-donation-subtlest: #fcddea;
-
-  /* Background — Fixed (do NOT change in dark mode) */
+  --color-background-elevated-brand: #edf4ff;
   --color-background-fixed-black: #000000;
   --color-background-fixed-transparent-black: rgba(0, 0, 0, 0);
   --color-background-fixed-transparent-white: rgba(255, 255, 255, 0);
   --color-background-fixed-white: #ffffff;
-
-  /* Background — Inverse */
   --color-background-inverse-default: #2a2c35;
   --color-background-inverse-plain: #000000;
   --color-background-inverse-sunken: #101119;
-
-  /* Background — Neutral */
   --color-background-neutral-active: #737380;
   --color-background-neutral-bold: #737380;
   --color-background-neutral-bold-active: #3b3c43;
@@ -156,14 +50,11 @@
   --color-background-neutral-default: #bbbbc8;
   --color-background-neutral-hover: #9b9baa;
   --color-background-neutral-subtle: #edeff3;
-  --color-background-neutral-subtle-hover: #dcdee5;
   --color-background-neutral-subtle-active: #bbbbc8;
-
-  /* Background — Overlay */
+  --color-background-neutral-subtle-hover: #dcdee5;
   --color-background-overlay-bold: rgba(0, 0, 0, 0.8);
   --color-background-overlay-default: rgba(0, 0, 0, 0.3);
-
-  /* Background — Prize */
+  --color-background-plain: #ffffff;
   --color-background-prize-active: #c78b07;
   --color-background-prize-bold: #9c6a05;
   --color-background-prize-boldest: #7a5105;
@@ -171,8 +62,6 @@
   --color-background-prize-hover: #f1ad00;
   --color-background-prize-subtle: #ffd45b;
   --color-background-prize-subtlest: #fff1cd;
-
-  /* Background — Secondary */
   --color-background-secondary-active: #007387;
   --color-background-secondary-bold: #007387;
   --color-background-secondary-boldest: #005867;
@@ -180,8 +69,8 @@
   --color-background-secondary-hover: #0a90b1;
   --color-background-secondary-subtle: #66e6fd;
   --color-background-secondary-subtlest: #c7f7ff;
-
-  /* Background — Success */
+  --color-background-skeleton: rgba(22, 25, 29, 0.1);
+  --color-background-skeleton-bold: rgba(22, 25, 29, 0.2);
   --color-background-success-active: #007746;
   --color-background-success-bold: #007746;
   --color-background-success-boldest: #055b3c;
@@ -189,13 +78,53 @@
   --color-background-success-hover: #099a57;
   --color-background-success-subtle: #7befb1;
   --color-background-success-subtlest: #d5fbe5;
-
-  /* Background — Transparent */
+  --color-background-sunken: #f7f8f9;
+  --color-background-theme-apple-active: #8f2b21;
+  --color-background-theme-apple-bold: #8f2b21;
+  --color-background-theme-apple-boldest: #6a1813;
+  --color-background-theme-apple-default: #d14730;
+  --color-background-theme-apple-hover: #bb3f2c;
+  --color-background-theme-apple-subtle: #f48873;
+  --color-background-theme-apple-subtlest: #fde4dd;
+  --color-background-theme-girl-active: #97245a;
+  --color-background-theme-girl-bold: #97245a;
+  --color-background-theme-girl-boldest: #721d47;
+  --color-background-theme-girl-default: #cc3775;
+  --color-background-theme-girl-hover: #af2b67;
+  --color-background-theme-girl-subtle: #f391b7;
+  --color-background-theme-girl-subtlest: #fddfea;
+  --color-background-theme-green-active: #344c17;
+  --color-background-theme-green-bold: #344c17;
+  --color-background-theme-green-boldest: #26390d;
+  --color-background-theme-green-default: #57802a;
+  --color-background-theme-green-hover: #41611c;
+  --color-background-theme-green-subtle: #92c361;
+  --color-background-theme-green-subtlest: #dbf3c8;
+  --color-background-theme-lake-active: #1f5349;
+  --color-background-theme-lake-bold: #1f5349;
+  --color-background-theme-lake-boldest: #123c33;
+  --color-background-theme-lake-default: #398276;
+  --color-background-theme-lake-hover: #2a695d;
+  --color-background-theme-lake-subtle: #73d1c3;
+  --color-background-theme-lake-subtlest: #d0f2ee;
+  --color-background-theme-lavender-active: #4f1e8a;
+  --color-background-theme-lavender-bold: #4f1e8a;
+  --color-background-theme-lavender-boldest: #3d1474;
+  --color-background-theme-lavender-default: #8149b8;
+  --color-background-theme-lavender-hover: #6834a2;
+  --color-background-theme-lavender-subtle: #b98de3;
+  --color-background-theme-lavender-subtlest: #eddef8;
+  --color-background-theme-rock-active: #2e546a;
+  --color-background-theme-rock-bold: #2e546a;
+  --color-background-theme-rock-boldest: #1b4154;
+  --color-background-theme-rock-default: #507c99;
+  --color-background-theme-rock-hover: #39667f;
+  --color-background-theme-rock-subtle: #83a8c3;
+  --color-background-theme-rock-subtlest: #dceaf5;
+  --color-background-toast: rgba(0, 0, 0, 0.8);
   --color-background-transparent-active: rgba(0, 0, 0, 0.2);
   --color-background-transparent-default: rgba(0, 0, 0, 0);
   --color-background-transparent-hover: rgba(0, 0, 0, 0.1);
-
-  /* Background — Warning */
   --color-background-warning-active: #a54200;
   --color-background-warning-bold: #a54200;
   --color-background-warning-boldest: #843203;
@@ -203,35 +132,147 @@
   --color-background-warning-hover: #db6a00;
   --color-background-warning-subtle: #ffbe5f;
   --color-background-warning-subtlest: #ffedcd;
-
-  /* ========================================
-   * Border
-   * ======================================== */
   --color-border-bold: #737380;
   --color-border-boldest: #3b3c43;
   --color-border-brand: #3560ff;
   --color-border-brand-subtle: #82a8ff;
+  --color-border-category-entertainment: #f0ac00;
+  --color-border-category-food: #ff8710;
+  --color-border-category-life: #00b185;
+  --color-border-category-other: #6c6d79;
+  --color-border-category-shopping: #3560ff;
+  --color-border-category-transportation: #009ae2;
   --color-border-danger: #f4252d;
   --color-border-default: #bbbbc8;
   --color-border-divider: rgba(0, 0, 0, 0.1);
   --color-border-donation: #f61372;
   --color-border-fixed-black: #000000;
   --color-border-fixed-bold: #101119;
+  --color-border-fixed-brand: #3560ff;
   --color-border-fixed-success-highlight: #34da86;
   --color-border-fixed-white: #ffffff;
   --color-border-inverse-bold: #f7f8f9;
   --color-border-inverse-divider: rgba(255, 255, 255, 0.1);
-  --color-border-inverse-plain: #FFFFFF;
+  --color-border-inverse-plain: #ffffff;
   --color-border-plain: #000000;
   --color-border-prize: #f1ad00;
   --color-border-secondary: #00b3d6;
   --color-border-subtle: #edeff3;
   --color-border-success: #00bd64;
+  --color-border-theme-apple: #d14730;
+  --color-border-theme-girl: #cc3775;
+  --color-border-theme-green: #57802a;
+  --color-border-theme-lake: #398276;
+  --color-border-theme-lavender: #8149b8;
+  --color-border-theme-rock: #507c99;
   --color-border-warning: #f58700;
-
-  /* ========================================
-   * Shadow
-   * ======================================== */
+  --color-content-bold: #101119;
+  --color-content-brand-active: #2b38c8;
+  --color-content-brand-bold: #2b38c8;
+  --color-content-brand-default: #3560ff;
+  --color-content-brand-gradient-primary: #3560ff;
+  --color-content-brand-gradient-secondary: #00d3f7;
+  --color-content-brand-hover: #2f4be6;
+  --color-content-brand-subtle: #82a8ff;
+  --color-content-category-all: #3b3c43;
+  --color-content-category-entertainment: #f0ac00;
+  --color-content-category-food: #ff8710;
+  --color-content-category-life: #00b185;
+  --color-content-category-other: #6c6d79;
+  --color-content-category-shopping: #3560ff;
+  --color-content-category-transportation: #009ae2;
+  --color-content-danger-active: #b30913;
+  --color-content-danger-bold: #b30913;
+  --color-content-danger-default: #f4252d;
+  --color-content-danger-hover: #dd0815;
+  --color-content-danger-subtle: #ff9090;
+  --color-content-default: #3b3c43;
+  --color-content-donation-active: #a3094a;
+  --color-content-donation-bold: #a3094a;
+  --color-content-donation-default: #f61372;
+  --color-content-donation-hover: #d60c5f;
+  --color-content-donation-subtle: #ff79b1;
+  --color-content-fixed-black: #000000;
+  --color-content-fixed-bold: #101119;
+  --color-content-fixed-brand: #3560ff;
+  --color-content-fixed-default: #3b3c43;
+  --color-content-fixed-white: #ffffff;
+  --color-content-inverse-bold: #f7f8f9;
+  --color-content-inverse-brand: #5586ff;
+  --color-content-inverse-default: #dcdee5;
+  --color-content-inverse-plain: #ffffff;
+  --color-content-inverse-subtle: #9b9baa;
+  --color-content-link-active: #2b38c8;
+  --color-content-link-default: #3560ff;
+  --color-content-link-hover: #2f4be6;
+  --color-content-neutral-active: #3b3c43;
+  --color-content-neutral-default: #737380;
+  --color-content-neutral-hover: #575762;
+  --color-content-plain: #000000;
+  --color-content-prize-active: #9c6a05;
+  --color-content-prize-bold: #9c6a05;
+  --color-content-prize-default: #f1ad00;
+  --color-content-prize-hover: #c78b07;
+  --color-content-prize-subtle: #ffd45b;
+  --color-content-secondary-active: #007387;
+  --color-content-secondary-bold: #007387;
+  --color-content-secondary-default: #00b3d6;
+  --color-content-secondary-hover: #0a90b1;
+  --color-content-secondary-subtle: #66e6fd;
+  --color-content-subtle: #737380;
+  --color-content-subtlest: #9b9baa;
+  --color-content-success-active: #007746;
+  --color-content-success-bold: #007746;
+  --color-content-success-default: #00bd64;
+  --color-content-success-hover: #099a57;
+  --color-content-success-subtle: #7befb1;
+  --color-content-theme-apple-active: #8f2b21;
+  --color-content-theme-apple-bold: #8f2b21;
+  --color-content-theme-apple-default: #d14730;
+  --color-content-theme-apple-gradient-primary: #d14730;
+  --color-content-theme-apple-gradient-secondary: #f48873;
+  --color-content-theme-apple-hover: #bb3f2c;
+  --color-content-theme-apple-subtle: #f48873;
+  --color-content-theme-girl-active: #97245a;
+  --color-content-theme-girl-bold: #97245a;
+  --color-content-theme-girl-default: #cc3775;
+  --color-content-theme-girl-gradient-primary: #cc3775;
+  --color-content-theme-girl-gradient-secondary: #f391b7;
+  --color-content-theme-girl-hover: #af2b67;
+  --color-content-theme-girl-subtle: #f391b7;
+  --color-content-theme-green-active: #344c17;
+  --color-content-theme-green-bold: #344c17;
+  --color-content-theme-green-default: #57802a;
+  --color-content-theme-green-gradient-primary: #57802a;
+  --color-content-theme-green-gradient-secondary: #92c361;
+  --color-content-theme-green-hover: #41611c;
+  --color-content-theme-green-subtle: #92c361;
+  --color-content-theme-lake-active: #1f5349;
+  --color-content-theme-lake-bold: #1f5349;
+  --color-content-theme-lake-default: #398276;
+  --color-content-theme-lake-gradient-primary: #398276;
+  --color-content-theme-lake-gradient-secondary: #73d1c3;
+  --color-content-theme-lake-hover: #2a695d;
+  --color-content-theme-lake-subtle: #73d1c3;
+  --color-content-theme-lavender-active: #4f1e8a;
+  --color-content-theme-lavender-bold: #4f1e8a;
+  --color-content-theme-lavender-default: #8149b8;
+  --color-content-theme-lavender-gradient-primary: #8149b8;
+  --color-content-theme-lavender-gradient-secondary: #b98de3;
+  --color-content-theme-lavender-hover: #6834a2;
+  --color-content-theme-lavender-subtle: #b98de3;
+  --color-content-theme-rock-active: #2e546a;
+  --color-content-theme-rock-bold: #2e546a;
+  --color-content-theme-rock-default: #507c99;
+  --color-content-theme-rock-gradient-primary: #507c99;
+  --color-content-theme-rock-gradient-secondary: #83a8c3;
+  --color-content-theme-rock-hover: #39667f;
+  --color-content-theme-rock-subtle: #83a8c3;
+  --color-content-warning-active: #a54200;
+  --color-content-warning-bold: #a54200;
+  --color-content-warning-default: #f58700;
+  --color-content-warning-hover: #db6a00;
+  --color-content-warning-subtle: #ffbe5f;
   --color-shadow-bold: rgba(0, 0, 0, 0.4);
   --color-shadow-default: rgba(22, 25, 29, 0.2);
   --color-shadow-fixed-bold: rgba(0, 0, 0, 0.4);
@@ -239,116 +280,20 @@
   --color-shadow-sheet: rgba(22, 25, 29, 0.1);
 }
 
-/* ==========================================
- * Dark Mode Overrides
- * Fixed tokens are NOT overridden.
- * ========================================== */
 [data-theme="dark"] {
-  /* ========================================
-   * Content — Dark Mode
-   * ======================================== */
-
-  /* Content — Base: light ↔ dark inversion */
-  --color-content-bold: #f7f8f9;
-  --color-content-default: #dcdee5;
-  --color-content-plain: #ffffff;
-  --color-content-subtle: #bbbbc8;
-  --color-content-subtlest: #737380;
-
-  /* Content — Brand: slightly lighter for dark-bg visibility */
-  --color-content-brand-default: #5586ff;
-  --color-content-brand-bold: #b7cdff;
-  --color-content-brand-hover: #82a8ff;
-  --color-content-brand-active: #b7cdff;
-  --color-content-brand-subtle: #2f4be6;
-  --color-content-brand-gradient-primary: #3560ff;
-  --color-content-brand-gradient-secondary: #00d3f7;
-
-  /* Content — Danger: lighter for dark-bg readability */
-  --color-content-danger-default: #ff595c;
-  --color-content-danger-bold: #ffc2c2;
-  --color-content-danger-hover: #ff9090;
-  --color-content-danger-active: #ffc2c2;
-  --color-content-danger-subtle: #dd0815;
-
-  /* Content — Donation: lighter for dark-bg readability */
-  --color-content-donation-default: #ff4898;
-  --color-content-donation-bold: #ffb7d5;
-  --color-content-donation-hover: #ff79b1;
-  --color-content-donation-active: #ffb7d5;
-  --color-content-donation-subtle: #d60c5f;
-
-  /* Content — Inverse: invert back to dark values */
-  --color-content-inverse-bold: #101119;
-  --color-content-inverse-brand: #3560ff;
-  --color-content-inverse-default: #3b3c43;
-  --color-content-inverse-plain: #000000;
-  --color-content-inverse-subtle: #737380;
-
-  /* Content — Link: lighter for dark-bg readability */
-  --color-content-link-default: #5586ff;
-  --color-content-link-hover: #82a8ff;
-  --color-content-link-active: #82a8ff;
-
-  /* Content — Neutral: lighter tones */
-  --color-content-neutral-default: #9b9baa;
-  --color-content-neutral-hover: #bbbbc8;
-  --color-content-neutral-active: #dcdee5;
-
-  /* Content — Prize: lighter for dark-bg readability */
-  --color-content-prize-default: #ffc423;
-  --color-content-prize-bold: #ffe8a6;
-  --color-content-prize-hover: #ffd45b;
-  --color-content-prize-active: #ffe8a6;
-  --color-content-prize-subtle: #c78b07;
-
-  /* Content — Secondary: lighter for dark-bg readability */
-  --color-content-secondary-default: #00d3f7;
-  --color-content-secondary-bold: #9cedfb;
-  --color-content-secondary-hover: #66e6fd;
-  --color-content-secondary-active: #9cedfb;
-  --color-content-secondary-subtle: #0a90b1;
-
-  /* Content — Success: lighter for dark-bg readability */
-  --color-content-success-default: #34da86;
-  --color-content-success-bold: #adf6cd;
-  --color-content-success-hover: #7befb1;
-  --color-content-success-active: #adf6cd;
-  --color-content-success-subtle: #099a57;
-
-  /* Content — Warning: lighter for dark-bg readability */
-  --color-content-warning-default: #ff9e2d;
-  --color-content-warning-bold: #ffdfa0;
-  --color-content-warning-hover: #ffbe5f;
-  --color-content-warning-active: #ffdfa0;
-  --color-content-warning-subtle: #db6a00;
-
-  /* ========================================
-   * Background — Dark Mode
-   * ======================================== */
-
-  /* Background — Base */
-  --color-background-default: #2a2c35;
-  --color-background-disable: #3b3c43;
-  --color-background-elevated-brand: #3b3c43;
-  --color-background-plain: #000000;
-  --color-background-skeleton: rgba(255, 255, 255, 0.1);
-  --color-background-skeleton-bold: rgba(255, 255, 255, 0.2);
-  --color-background-sunken: #101119;
-  --color-background-toast: rgba(255, 255, 255, 0.9);
-
-  /* Background — Brand */
   --color-background-brand-active: #b7cdff;
   --color-background-brand-bold: #b7cdff;
   --color-background-brand-boldest: #d6e5ff;
-  --color-background-brand-default: #3560ff;
   --color-background-brand-hover: #82a8ff;
   --color-background-brand-subtle: #2f4be6;
   --color-background-brand-subtlest: #202da8;
-  --color-background-brand-gradient-primary: #3560ff;
-  --color-background-brand-gradient-secondary: #00d3f7;
-
-  /* Background — Danger */
+  --color-background-category-all: #dcdee5;
+  --color-background-category-entertainment: #ffc937;
+  --color-background-category-food: #ffa135;
+  --color-background-category-life: #12d3a6;
+  --color-background-category-other: #9093a1;
+  --color-background-category-shopping: #467bff;
+  --color-background-category-transportation: #00bff4;
   --color-background-danger-active: #ffc2c2;
   --color-background-danger-bold: #ffc2c2;
   --color-background-danger-boldest: #ffdede;
@@ -356,8 +301,8 @@
   --color-background-danger-hover: #ff9090;
   --color-background-danger-subtle: #dd0815;
   --color-background-danger-subtlest: #920810;
-
-  /* Background — Donation */
+  --color-background-default: #2a2c35;
+  --color-background-disable: #3b3c43;
   --color-background-donation-active: #ffb7d5;
   --color-background-donation-bold: #ff79b1;
   --color-background-donation-boldest: #fcddea;
@@ -365,37 +310,26 @@
   --color-background-donation-hover: #ff79b1;
   --color-background-donation-subtle: #d60c5f;
   --color-background-donation-subtlest: #7f0739;
-
-  /* Background — Inverse: flip to light */
+  --color-background-elevated-brand: #3b3c43;
   --color-background-inverse-default: #ffffff;
   --color-background-inverse-plain: #ffffff;
   --color-background-inverse-sunken: #f7f8f9;
-
-  /* Background — Neutral */
   --color-background-neutral-active: #bbbbc8;
   --color-background-neutral-bold: #bbbbc8;
   --color-background-neutral-bold-active: #edeff3;
   --color-background-neutral-bold-hover: #dcdee5;
   --color-background-neutral-default: #737380;
-  --color-background-neutral-hover: #9b9baa;
   --color-background-neutral-subtle: #3b3c43;
-  --color-background-neutral-subtle-hover: #575762;
   --color-background-neutral-subtle-active: #737380;
-
-  /* Background — Overlay */
-  --color-background-overlay-bold: rgba(0, 0, 0, 0.8);
+  --color-background-neutral-subtle-hover: #575762;
   --color-background-overlay-default: rgba(0, 0, 0, 0.4);
-
-  /* Background — Prize */
+  --color-background-plain: #000000;
   --color-background-prize-active: #ffe8a6;
   --color-background-prize-bold: #ffe8a6;
   --color-background-prize-boldest: #fff1cd;
-  --color-background-prize-default: #ffc423;
   --color-background-prize-hover: #ffd45b;
   --color-background-prize-subtle: #c78b07;
   --color-background-prize-subtlest: #7a5105;
-
-  /* Background — Secondary */
   --color-background-secondary-active: #9cedfb;
   --color-background-secondary-bold: #9cedfb;
   --color-background-secondary-boldest: #c7f7ff;
@@ -403,8 +337,8 @@
   --color-background-secondary-hover: #66e6fd;
   --color-background-secondary-subtle: #0a90b1;
   --color-background-secondary-subtlest: #005867;
-
-  /* Background — Success */
+  --color-background-skeleton: rgba(255, 255, 255, 0.1);
+  --color-background-skeleton-bold: rgba(255, 255, 255, 0.2);
   --color-background-success-active: #adf6cd;
   --color-background-success-bold: #adf6cd;
   --color-background-success-boldest: #d5fbe5;
@@ -412,13 +346,53 @@
   --color-background-success-hover: #7befb1;
   --color-background-success-subtle: #099a57;
   --color-background-success-subtlest: #055b3c;
-
-  /* Background — Transparent */
+  --color-background-sunken: #101119;
+  --color-background-theme-apple-active: #f8bcaf;
+  --color-background-theme-apple-bold: #f8bcaf;
+  --color-background-theme-apple-boldest: #fde4dd;
+  --color-background-theme-apple-default: #e4664f;
+  --color-background-theme-apple-hover: #f48873;
+  --color-background-theme-apple-subtle: #bb3f2c;
+  --color-background-theme-apple-subtlest: #6a1813;
+  --color-background-theme-girl-active: #f3b9cf;
+  --color-background-theme-girl-bold: #f3b9cf;
+  --color-background-theme-girl-boldest: #fddfea;
+  --color-background-theme-girl-default: #e75e95;
+  --color-background-theme-girl-hover: #f391b7;
+  --color-background-theme-girl-subtle: #af2b67;
+  --color-background-theme-girl-subtlest: #721d47;
+  --color-background-theme-green-active: #b8e591;
+  --color-background-theme-green-bold: #b8e591;
+  --color-background-theme-green-boldest: #dbf3c8;
+  --color-background-theme-green-default: #76a446;
+  --color-background-theme-green-hover: #92c361;
+  --color-background-theme-green-subtle: #41611c;
+  --color-background-theme-green-subtlest: #26390d;
+  --color-background-theme-lake-active: #a3e8e0;
+  --color-background-theme-lake-bold: #a3e8e0;
+  --color-background-theme-lake-boldest: #d0f2ee;
+  --color-background-theme-lake-default: #48b1a0;
+  --color-background-theme-lake-hover: #73d1c3;
+  --color-background-theme-lake-subtle: #2a695d;
+  --color-background-theme-lake-subtlest: #123c33;
+  --color-background-theme-lavender-active: #d9bef1;
+  --color-background-theme-lavender-bold: #d9bef1;
+  --color-background-theme-lavender-boldest: #eddef8;
+  --color-background-theme-lavender-default: #a76ce0;
+  --color-background-theme-lavender-hover: #b98de3;
+  --color-background-theme-lavender-subtle: #6834a2;
+  --color-background-theme-lavender-subtlest: #3d1474;
+  --color-background-theme-rock-active: #b4cee3;
+  --color-background-theme-rock-bold: #b4cee3;
+  --color-background-theme-rock-boldest: #dceaf5;
+  --color-background-theme-rock-default: #6992b0;
+  --color-background-theme-rock-hover: #83a8c3;
+  --color-background-theme-rock-subtle: #39667f;
+  --color-background-theme-rock-subtlest: #1b4154;
+  --color-background-toast: rgba(255, 255, 255, 0.9);
   --color-background-transparent-active: rgba(255, 255, 255, 0.2);
   --color-background-transparent-default: rgba(255, 255, 255, 0);
   --color-background-transparent-hover: rgba(255, 255, 255, 0.1);
-
-  /* Background — Warning */
   --color-background-warning-active: #ffdfa0;
   --color-background-warning-bold: #ffdfa0;
   --color-background-warning-boldest: #ffedcd;
@@ -426,14 +400,16 @@
   --color-background-warning-hover: #ffbe5f;
   --color-background-warning-subtle: #db6a00;
   --color-background-warning-subtlest: #843203;
-
-  /* ========================================
-   * Border — Dark Mode
-   * ======================================== */
   --color-border-bold: #bbbbc8;
   --color-border-boldest: #edeff3;
   --color-border-brand: #5586ff;
   --color-border-brand-subtle: #2f4be6;
+  --color-border-category-entertainment: #ffc937;
+  --color-border-category-food: #ffa135;
+  --color-border-category-life: #12d3a6;
+  --color-border-category-other: #9093a1;
+  --color-border-category-shopping: #467bff;
+  --color-border-category-transportation: #00bff4;
   --color-border-danger: #ff595c;
   --color-border-default: #737380;
   --color-border-divider: rgba(255, 255, 255, 0.1);
@@ -446,11 +422,113 @@
   --color-border-secondary: #00d3f7;
   --color-border-subtle: #3b3c43;
   --color-border-success: #34da86;
+  --color-border-theme-apple: #e4664f;
+  --color-border-theme-girl: #e75e95;
+  --color-border-theme-green: #76a446;
+  --color-border-theme-lake: #48b1a0;
+  --color-border-theme-lavender: #a76ce0;
+  --color-border-theme-rock: #6992b0;
   --color-border-warning: #ff9e2d;
-
-  /* ========================================
-   * Shadow — Dark Mode (increased opacity)
-   * ======================================== */
+  --color-content-bold: #f7f8f9;
+  --color-content-brand-active: #b7cdff;
+  --color-content-brand-bold: #b7cdff;
+  --color-content-brand-default: #5586ff;
+  --color-content-brand-hover: #82a8ff;
+  --color-content-brand-subtle: #2f4be6;
+  --color-content-category-all: #dcdee5;
+  --color-content-category-entertainment: #ffc937;
+  --color-content-category-food: #ffa135;
+  --color-content-category-life: #12d3a6;
+  --color-content-category-other: #9093a1;
+  --color-content-category-shopping: #467bff;
+  --color-content-category-transportation: #00bff4;
+  --color-content-danger-active: #ffc2c2;
+  --color-content-danger-bold: #ffc2c2;
+  --color-content-danger-default: #ff595c;
+  --color-content-danger-hover: #ff9090;
+  --color-content-danger-subtle: #dd0815;
+  --color-content-default: #dcdee5;
+  --color-content-donation-active: #ffb7d5;
+  --color-content-donation-bold: #ffb7d5;
+  --color-content-donation-default: #ff4898;
+  --color-content-donation-hover: #ff79b1;
+  --color-content-donation-subtle: #d60c5f;
+  --color-content-inverse-bold: #101119;
+  --color-content-inverse-brand: #3560ff;
+  --color-content-inverse-default: #3b3c43;
+  --color-content-inverse-plain: #000000;
+  --color-content-inverse-subtle: #737380;
+  --color-content-link-active: #82a8ff;
+  --color-content-link-default: #5586ff;
+  --color-content-link-hover: #82a8ff;
+  --color-content-neutral-active: #dcdee5;
+  --color-content-neutral-default: #9b9baa;
+  --color-content-neutral-hover: #bbbbc8;
+  --color-content-plain: #ffffff;
+  --color-content-prize-active: #ffe8a6;
+  --color-content-prize-bold: #ffe8a6;
+  --color-content-prize-default: #ffc423;
+  --color-content-prize-hover: #ffd45b;
+  --color-content-prize-subtle: #c78b07;
+  --color-content-secondary-active: #9cedfb;
+  --color-content-secondary-bold: #9cedfb;
+  --color-content-secondary-default: #00d3f7;
+  --color-content-secondary-hover: #66e6fd;
+  --color-content-secondary-subtle: #0a90b1;
+  --color-content-subtle: #bbbbc8;
+  --color-content-subtlest: #737380;
+  --color-content-success-active: #adf6cd;
+  --color-content-success-bold: #adf6cd;
+  --color-content-success-default: #34da86;
+  --color-content-success-hover: #7befb1;
+  --color-content-success-subtle: #099a57;
+  --color-content-theme-apple-active: #f8bcaf;
+  --color-content-theme-apple-bold: #f8bcaf;
+  --color-content-theme-apple-default: #e4664f;
+  --color-content-theme-apple-gradient-primary: #e4664f;
+  --color-content-theme-apple-gradient-secondary: #bb3f2c;
+  --color-content-theme-apple-hover: #f48873;
+  --color-content-theme-apple-subtle: #bb3f2c;
+  --color-content-theme-girl-active: #f3b9cf;
+  --color-content-theme-girl-bold: #f3b9cf;
+  --color-content-theme-girl-default: #e75e95;
+  --color-content-theme-girl-gradient-primary: #e75e95;
+  --color-content-theme-girl-gradient-secondary: #af2b67;
+  --color-content-theme-girl-hover: #f391b7;
+  --color-content-theme-girl-subtle: #af2b67;
+  --color-content-theme-green-active: #b8e591;
+  --color-content-theme-green-bold: #b8e591;
+  --color-content-theme-green-default: #76a446;
+  --color-content-theme-green-gradient-primary: #76a446;
+  --color-content-theme-green-gradient-secondary: #41611c;
+  --color-content-theme-green-hover: #92c361;
+  --color-content-theme-green-subtle: #41611c;
+  --color-content-theme-lake-active: #a3e8e0;
+  --color-content-theme-lake-bold: #a3e8e0;
+  --color-content-theme-lake-default: #48b1a0;
+  --color-content-theme-lake-gradient-primary: #48b1a0;
+  --color-content-theme-lake-gradient-secondary: #2a695d;
+  --color-content-theme-lake-hover: #73d1c3;
+  --color-content-theme-lake-subtle: #2a695d;
+  --color-content-theme-lavender-active: #d9bef1;
+  --color-content-theme-lavender-bold: #d9bef1;
+  --color-content-theme-lavender-default: #a76ce0;
+  --color-content-theme-lavender-gradient-primary: #a76ce0;
+  --color-content-theme-lavender-gradient-secondary: #6834a2;
+  --color-content-theme-lavender-hover: #b98de3;
+  --color-content-theme-lavender-subtle: #6834a2;
+  --color-content-theme-rock-active: #b4cee3;
+  --color-content-theme-rock-bold: #b4cee3;
+  --color-content-theme-rock-default: #6992b0;
+  --color-content-theme-rock-gradient-primary: #6992b0;
+  --color-content-theme-rock-gradient-secondary: #39667f;
+  --color-content-theme-rock-hover: #83a8c3;
+  --color-content-theme-rock-subtle: #39667f;
+  --color-content-warning-active: #ffdfa0;
+  --color-content-warning-bold: #ffdfa0;
+  --color-content-warning-default: #ff9e2d;
+  --color-content-warning-hover: #ffbe5f;
+  --color-content-warning-subtle: #db6a00;
   --color-shadow-bold: rgba(0, 0, 0, 0.5);
   --color-shadow-default: rgba(22, 25, 29, 0.8);
   --color-shadow-glow-default: rgba(255, 255, 255, 0.2);

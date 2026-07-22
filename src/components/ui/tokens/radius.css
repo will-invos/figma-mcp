@@ -1,3 +1,7 @@
+/*
+ * Radius tokens — 由 `npm run tokens:build` 產生（來源：Figma variables，經 tokens/tokens.json）
+ * 手改會被下次產生覆蓋。要改值：改 Figma variables → publish library → 同步（見 tokens/README.md）
+ */
 :root {
   --radius-0: 0px;
   --radius-50: 2px;
@@ -11,5 +15,5 @@
   --radius-600: 24px;
   --radius-800: 32px;
   --radius-1000: 40px;
-  --radius-full: 999px; /* 對齊 Figma radius/full（2026-07-22 定案） */
+  --radius-full: 999px;
 }

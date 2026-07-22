@@ -1,3 +1,7 @@
+/*
+ * Spacing tokens（4px grid） — 由 `npm run tokens:build` 產生（來源：Figma variables，經 tokens/tokens.json）
+ * 手改會被下次產生覆蓋。要改值：改 Figma variables → publish library → 同步（見 tokens/README.md）
+ */
 :root {
   --space-25: 1px;
   --space-50: 2px;
