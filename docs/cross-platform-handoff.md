@@ -126,13 +126,48 @@
   - **色彩**：iOS 已有 semantic 對應（`.colorBackgroundBrandDefault` 等，見 ios-figma-mapping.md）、Android 對到 `colors.xml`（見 references/colors.md）。三端命名相近但無單一產生器。
   - **排版**：web `.text-*` class ↔ iOS `UIFont.*`（ios-figma-mapping.md 已列）↔ Compose `TextStyle`（android references/text-styles.md）。但 Figma text styles 全是 `iOS/` 前綴（SF Pro + PingFang TC）；**Android 的 Roboto + Noto Sans TC 字級/行高缺單一規格**（SF Pro 16pt ≠ Roboto 16sp，行高字寬會反映在版面）。
   - **間距 / 圓角 / 陰影**：`px ↔ pt ↔ dp` 換算規則、Dynamic Type / Android font scale 對應無文件。
-- **建議**：token 源升級為 platform-agnostic（Style Dictionary / Tokens Studio），**一個源一次產出** CSS vars / Swift / Kotlin(Compose)。這是唯一「一次投資、永久止漂移」的項目，也是三端一致的地基。
-- **待確認/待辦**
-  - [ ] 決定 token 源工具（Style Dictionary / Tokens Studio / 其他）
-  - [ ] 從單一源產出 CSS + Swift + Compose 三份 token
-  - [ ] 補 Android typography（Roboto / Noto Sans TC 字級行高）進 Design System 2025 與 token
-  - [ ] 定義 `px ↔ pt ↔ dp/sp` 換算與 Dynamic Type / font scale 規則
-  - [ ] 三端 color / text-style 命名對照表（補進本文件或各 mapping 文件）
+### 3.1 ✅ 已定案方案：MCP 同步腳本 + Style Dictionary（2026-07-22）
+
+**一句話**：現在是四個人各抄一份筆記（Figma / CSS / Swift / Kotlin），改成「一份母版 + 三個唯讀分享連結」——就像 Figma 的 library publish，只是發佈的是「數值」。
+
+```
+      Figma variables（設計師改這裡，原地不動、不搬家）
+              │  MCP 同步腳本（手動觸發，整批倒出）
+              ▼
+        tokens.json（git 裡的中繼母版，每次變更都有 diff 記錄可審）
+              │  Style Dictionary（免費開源，自動產生 ↓，人不碰）
+   ┌──────────┼──────────────┐
+   ▼          ▼              ▼
+colors.css  Colors.swift   Colors.kt / colors.xml
+ (web)       (iOS)          (Android)
+```
+
+**為什麼選這條**（三選一的結論）：
+
+| 選項 | 不選 / 選的理由 |
+|------|----------------|
+| Tokens Studio plugin | ❌ 進階功能付費，且 token 編輯主場要從 Figma variables 搬進 plugin（搬家成本） |
+| Figma Variables REST API | ❌ 只開放 Enterprise 方案（本團隊方案不符，同 Code Connect 受限原因） |
+| **MCP 同步腳本** | ✅ 零額外成本；variables 留在 Figma 原地當唯一真相；MCP 讀取管道現成（本文件的比對就是靠它讀的） |
+
+**日常流程（設計師視角）**：
+1. 在 Figma variables 改值（例：`warning/default` 從 `#ff8710` 調成 `#f57c00`）
+2. 觸發同步（跑一次腳本 / 請 AI 執行）→ `tokens.json` 產生一筆看得懂的 git 變更：「warning/default: #ff8710 → #f57c00」
+3. Style Dictionary 自動重產三端檔案 → 工程師像收 library publish 一樣收到更新，不用手改
+
+**特性與限制（期待管理）**：
+- 產出的三端檔案是**唯讀投影**（如同 instance）——直接改會被下次產生蓋掉，要改就改 Figma
+- 同步是**手動觸發**（半自動），不是即時；之後方案升級可換全自動進水口，`tokens.json` 中心不變
+- pipeline 只搬**數值**：命名決策、Android 行高微調、元件行為仍是人的事
+
+### 3.2 待辦
+
+- [x] ~~決定 token 源工具~~ 已定案：MCP 同步腳本 + Style Dictionary（見 §3.1）
+- [ ] 第一步（驗證）：MCP 倒出 Semantic Colors / Sizes 兩個 collection → `tokens.json`，並讓 Style Dictionary 產出與現行 `colors.css` **等值**的檔案（證明無縫接軌）
+- [ ] 第二步：加開 Swift + Compose 輸出格式，iOS / Android 專案改吃產生檔
+- [ ] 補 Android typography（Roboto / Noto Sans TC 字級行高）進 Design System 2025 與 token
+- [ ] 定義 `px ↔ pt ↔ dp/sp` 換算與 Dynamic Type / font scale 規則
+- [ ] 三端 color / text-style 命名對照表（補進本文件或各 mapping 文件）
 
 ---
 
@@ -179,8 +214,8 @@
 | # | 項目 | 章節 | 優先 | 性質 |
 |---|------|------|------|------|
 | 1 | §2 對照表定案 + 命名地雷加註 | §2 | P0 | 文件 |
-| 2 | 修 safe-area（TabBar / Sheet） | §5.1 | P0 | 改碼 |
-| 3 | Token 單一源 → 三端 + Android 字體 | §3 | P0 | 建置 |
+| 2 | ~~修 safe-area（TabBar / Sheet）~~ ✅ 已修（`4eb38fd`） | §5.1 | — | 完成 |
+| 3 | Token pipeline 建置（✅ 選型已定：MCP 腳本 + Style Dictionary，見 §3.1；先驗證 CSS 等值再擴到 Swift/Compose + Android 字體） | §3 | P0 | 建置 |
 | 4 | 補填 parity 空格（Android/iOS 待確認格） | §2 | P1 | 文件 |
 | 5 | ~~web 元件 parity~~ ✅ 已收斂（FAB / PageNavigation / DottedController / PageStatus 補齊；Date picker 採原生） | §2 | — | 完成 |
 | 6 | mapping 維護機制上線（owner + PR 模板） | §4 | P1 | 流程 |
