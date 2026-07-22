@@ -23,6 +23,7 @@ dist/tokens.css（:root light + [data-theme="dark"]）…未來加 Swift / Compo
 
 ## 同步流程（設計師改了 Figma variables 之後）
 
+0. **先 publish library**！同步讀的是 library 已發佈快照 —— 改完 variables 沒 publish，抓到的會是舊版
 1. 對 AI 說：「同步 design tokens」。AI 會用 MCP（`use_figma`）從 `🎨 Design System 2025` 的兩個 collection（key 見 `tokens.json` 的 `$meta`）整批倒出變數、解析別名、寫入 `figma-dump/*.txt`
 2. 跑 `npm run tokens:build`
 3. 看 `tokens.json` 的 git diff 確認變更符合預期 → commit
