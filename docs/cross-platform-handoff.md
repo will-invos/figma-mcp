@@ -208,10 +208,12 @@ tokens.css  ios-colors/*.colorset   values(+night)/colors.xml
 - [x] ~~確認是否有 SVG 源~~ ✅ **SVG 源已入 repo**（2026-07-22）：[src/assets/icons/](../src/assets/icons/) 274 顆，16×16 viewBox。注意：`fill="black"` 寫死（非 `currentColor`），建管線時需正規化
 - [ ] 建 SVG → web font + iOS asset catalog + Android vector drawable 管線 + 命名對照（`icon-scan` ↔ `ic_scan`）
 
-### 5.4 a11y / 內容規則〔P2〕
-- [ ] 字級放大（Dynamic Type / font scale）截斷換行規則
-- [ ] VoiceOver / TalkBack 朗讀順序；Android 48dp 觸控標準（目前只有 iOS 44×44）
-- [ ] 金額 / 日期格式、長字串截斷規則
+### 5.4 a11y / 內容規則 —— 2026-07-22 定案
+- [x] 字級縮放：**iOS 寫死字級**（不隨 Dynamic Type）、**Android 依系統設定縮放**（Android 版面需容忍放大，個案驗收）；已記入 design.md §2.2
+- [x] VoiceOver / TalkBack 朗讀順序：**暫不處理**（定案）
+- [x] 觸控標準：web / iOS 44×44px、**Android 48×48dp** 已寫入 design.md §6.2
+- [x] 內容格式已寫入 [design.md §2.3](../design.md)：金額前綴 `$`；發票期數**民國年** N-N 月（1〜9 不補 0，例 `115 年 7-8 月`）；日期**西元** `YYYY/MM/DD`（例 `2026/07/31`）；時間 **24 小時制** `HH:mm:ss`（例 `18:30:25`）
+- [ ] 長字串截斷規則（未定，個案處理）
 
 ---
 
@@ -227,7 +229,7 @@ tokens.css  ios-colors/*.colorset   values(+night)/colors.xml
 | 6 | mapping 維護機制上線（owner + PR 模板） | §4 | P1 | 流程 |
 | 7 | prototype 隨附規格模板 | §5.2 | P1 | 文件 |
 | 8 | Icon SVG 管線 | §5.3 | P1 | 建置 |
-| 9 | a11y / 內容規則 | §5.4 | P2 | 文件 |
+| 9 | ~~a11y / 內容規則~~ ✅ 已定案（字級縮放現況、48dp、金額/期數/日期/時間格式 → design.md §2.3、§6.2；剩長字串截斷個案處理） | §5.4 | — | 完成 |
 
 ## 附錄 — 名詞
 - **join key**：把三端資料接起來的共同欄位；本文件用「web 元件名」。

@@ -145,6 +145,7 @@ PingFang TC 在 remote Figma Plugin API 不可用。直接修改文字（非透�
 3. **頁面 `max-width: 480px`**、viewport meta：`width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover`
 4. 結構：`NavigationBar` → 內容區（自由捲動）→ `TabBar`（可選）
 5. 顏色 / 字級 / 間距 / 圓角 / 陰影 / 動效 → 用 token，不寫 magic number；完整規格見 [design.md](./design.md)
-6. `:hover` 包 `@media (hover: hover)`
-7. dark mode 不需特別處理（token 自動切換）
-8. 測試：Chrome DevTools 裝置模擬器（iPhone 14 Pro）
+6. 金額（`$` 前綴）/ 發票期數（民國年 `115 年 7-8 月`）/ 日期（西元 `2026/07/31`）/ 時間（`18:30:25`）→ 照 [design.md §2.3](./design.md) 內容格式，不要自創
+7. `:hover` 包 `@media (hover: hover)`
+8. dark mode 不需特別處理（token 自動切換）
+9. 測試：Chrome DevTools 裝置模擬器（iPhone 14 Pro）
