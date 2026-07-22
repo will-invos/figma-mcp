@@ -41,6 +41,8 @@
   box-shadow: var(--shadow-sheet);
   animation: ui-sheet-slideup 0.3s ease-out;
   overflow: hidden;
+  /* 貼底面板：body / footer 內容保持在 home indicator / gesture bar 之上（有無 footer 皆適用） */
+  padding-bottom: env(safe-area-inset-bottom, 0px);
 }
 
 .ui-sheet__body {

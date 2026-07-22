@@ -114,6 +114,7 @@
 - **頁面 max-width: 480px**，**不加桌機 breakpoint**（mobile-first）
 - viewport meta：`<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />`
 - 頁面結構：`NavigationBar` (top) → 內容區（自由捲動）→ `TabBar` (bottom，可選)
+- **Safe area**：`viewport-fit=cover` 下內容會延伸到瀏海 / home indicator 底下。貼底 chrome（`TabBar`、`Sheet`）與貼頂懸浮元件（`InAppNotification`）已自帶 `env(safe-area-inset-*, 0px)` padding；**自製貼邊容器時要照做**（桌機 env() 為 0，不影響非瀏海裝置）
 
 ### 3.3 圓角（實測元件對應）
 

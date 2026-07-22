@@ -1,6 +1,8 @@
 .ui-tab-bar {
   background: var(--color-background-default);
   border-top: 1px solid var(--color-border-subtle);
+  /* 貼底 chrome：讓 items 保持在 home indicator / gesture bar 之上，背景自然延伸到螢幕底緣 */
+  padding-bottom: env(safe-area-inset-bottom, 0px);
 }
 .ui-tab-bar__items {
   display: flex;

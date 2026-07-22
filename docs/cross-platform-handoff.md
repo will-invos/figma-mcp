@@ -156,7 +156,7 @@
 
 ### 5.1 safe-area — prototype 版面會「說謊」〔P0，可直接修〕
 - **現況**：全 repo 只有 [InAppNotification.css:16](../src/components/ui/InAppNotification.css#L16) 處理 `env(safe-area-inset-*)`；[TabBar.css](../src/components/ui/TabBar.css) 與 Sheet **未處理 bottom inset**，真機會被 home indicator 遮住 → 交出去的版面 spec 是錯的。
-- [ ] 修 `TabBar` / `Sheet` 的 `env(safe-area-inset-bottom)`
+- [x] 修 `TabBar` / `Sheet` 的 `env(safe-area-inset-bottom)` —— 已修（兩者容器補 `padding-bottom: env(safe-area-inset-bottom, 0px)`；規則已寫入 design.md §3.2）
 
 ### 5.2 web prototype 表達不了的原生行為〔P1〕
 - hash routing 無法表達 push / modal / sheet / tab 差異；手勢、鍵盤、haptics、動效曲線無載體。
