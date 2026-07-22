@@ -165,9 +165,9 @@ colors.css  Colors.swift   Colors.kt / colors.xml
 - [x] ~~決定 token 源工具~~ 已定案：MCP 同步腳本 + Style Dictionary（見 §3.1）
 - [x] ~~第一步（驗證）~~ ✅ 完成（2026-07-22）：倒出 colors 275（Light/Dark）+ sizes 38、零錯誤；建置 [tokens/](../tokens/)（`npm run tokens:build`）；**端到端等值驗證 163/163 共同 token 全數一致、值零漂移** —— 手動對齊的品質很好，切換不會造成任何視覺變化
 - [x] 第一步驗證發現的待決事項 —— **全數定案（2026-07-22）**：
-  - [x] `seondary` / `graident` 命名：**照 Figma 為準、不改名**（皆屬 web 排除範圍，無影響）
+  - [x] `seondary` / `graident` 命名：**Figma 端已修正並重新 publish**（`color/border/secondary`、`theme/green/gradient/*`），dump 已同步
   - [x] `radius/full` 定案 **999**：CSS `--radius-full` 已由 9999px 改為 999px（視覺等效）
-  - [x] Figma-only token **不納入 web 輸出**（theme/*、category/* 等 124 個；`build.mjs` 的 `WEB_EXCLUDE` 落實）；brand gradient 4 個 web 有用，保留。過濾後產出 189 個 token 與手寫 CSS 完全對齊，唯一差異 `--color-border-secondary`（web 未使用、Figma 無對應，接管時自然移除）
+  - [x] Figma-only token **不納入 web 輸出**（theme/*、category/* 等 123 個；`build.mjs` 的 `WEB_EXCLUDE` 落實）；brand gradient 與 `border/secondary` web 有收錄，保留。**最終驗證：產出 190 / 手寫 190，集合零差異、light/dark 值零差異 —— 可無縫替換**
 - [ ] 第二步：`dist/tokens.css` 正式接管 `src/components/ui/tokens/{colors,spacing,radius}.css`；加開 Swift + Compose 輸出格式，iOS / Android 專案改吃產生檔
 - [ ] 補 Android typography（Roboto / Noto Sans TC 字級行高）進 Design System 2025 與 token
 - [ ] 定義 `px ↔ pt ↔ dp/sp` 換算與 Dynamic Type / font scale 規則

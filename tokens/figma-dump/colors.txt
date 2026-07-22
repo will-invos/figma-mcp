@@ -239,14 +239,14 @@ color/border/brand-subtle|#82a8ff|#2f4be6
 color/background/elevated-brand|#edf4ff|#3b3c43
 color/content/link/hover|#2f4be6|#82a8ff
 color/content/theme/lavender/gradient/secondary|#b98de3|#6834a2
-color/content/theme/green/graident/primary|#57802a|#76a446
+color/content/theme/green/gradient/primary|#57802a|#76a446
 color/content/brand/gradient/secondary|#00d3f7|#00d3f7
 color/content/theme/girl/gradient/secondary|#f391b7|#af2b67
 color/content/theme/girl/gradient/primary|#cc3775|#e75e95
 color/content/theme/rock/gradient/secondary|#83a8c3|#39667f
 color/content/brand/gradient/primary|#3560ff|#3560ff
 color/content/theme/apple/gradient/primary|#d14730|#e4664f
-color/content/theme/green/graident/secondary|#92c361|#41611c
+color/content/theme/green/gradient/secondary|#92c361|#41611c
 color/content/theme/apple/gradient/secondary|#f48873|#bb3f2c
 color/content/theme/rock/gradient/primary|#507c99|#6992b0
 color/content/theme/lake/gradient/secondary|#73d1c3|#2a695d
@@ -265,7 +265,7 @@ color/content/secondary/default|#00b3d6|#00d3f7
 color/background/secondary/subtle|#66e6fd|#0a90b1
 color/content/secondary/hover|#0a90b1|#66e6fd
 color/background/secondary/bold|#007387|#9cedfb
-color/border/seondary|#00b3d6|#00d3f7
+color/border/secondary|#00b3d6|#00d3f7
 color/content/secondary/active|#007387|#9cedfb
 color/background/secondary/boldest|#005867|#c7f7ff
 color/content/secondary/subtle|#66e6fd|#0a90b1

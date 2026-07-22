@@ -46,10 +46,9 @@ function insert(tree, path, value) {
 
 // web 輸出排除清單（2026-07-22 定案：Figma-only token 不納入 web 輸出；tokens.json 母版仍保留全部）
 const WEB_EXCLUDE = [
-  /\/theme\//,          // 主題色系（green/rock/lavender/girl/lake/apple，含其 gradient/graident——graident 為 Figma 端既有命名，照 Figma 為準）
+  /\/theme\//,          // 主題色系（green/rock/lavender/girl/lake/apple，含其 gradient）
   /\/category\//,       // 消費類別色
-  // 注意：brand gradient（color/*/brand/gradient/*）web 有使用，不排除
-  /^color\/border\/seondary$/,   // Figma 端既有命名，web 未使用
+  // 注意：brand gradient（color/*/brand/gradient/*）與 color/border/secondary web 有收錄，不排除
   /^color\/border\/fixed\/brand$/,
   /^space\/(0|1000|1200|1400|1600|1800|2000|2400|3000|3600|4000|5000)$/, // 大間距，web 未使用
 ]

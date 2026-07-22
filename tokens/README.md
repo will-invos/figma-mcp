@@ -30,6 +30,7 @@ dist/tokens.css（:root light + [data-theme="dark"]）…未來加 Swift / Compo
 ## 現況（2026-07-22 驗證與定案）
 
 - 首次倒出：colors 275（Light/Dark）、sizes 38，與手寫 CSS 比對 **值零漂移**
-- 已定案：`radius/full` = 999（CSS 已對齊）；Figma-only token（theme/*、category/* 等）**不納入 web 輸出**（`build.mjs` 的 `WEB_EXCLUDE`）；Figma 端命名照現狀為準
-- 過濾後 `dist/tokens.css` 共 189 個 token，與手寫 CSS **完全對齊**（唯一差異：`--color-border-secondary` 為 CSS 殘留、未使用，接管時自然移除）
+- 已定案：`radius/full` = 999（CSS 已對齊）；Figma-only token（theme/*、category/* 等）**不納入 web 輸出**（`build.mjs` 的 `WEB_EXCLUDE`）
+- Figma 端 `seondary` / `graident` 已修正並重新 publish，dump 已同步
+- 過濾後 `dist/tokens.css` 共 **190 個 token，與手寫 CSS 100% 對齊**（集合零差異、light/dark 值零差異）——「可無縫替換」狀態
 - `dist/tokens.css` **尚未接管** `src/components/ui/tokens/*.css` —— 正式切換屬第二步（連同 Swift / Compose 輸出）
