@@ -1,6 +1,6 @@
 /* ========================================
- * Basic Alert
- * Figma: Basic alert (node 4031:5686)
+ * Basic banner
+ * Figma: Basic banner (node 4031:5686)
  *
  * Default: rounded radius/200, px space/300, py space/200
  * Full width: no radius, px space/400, py space/200
@@ -9,7 +9,7 @@
  * Text: iOS/Body-CN/Medium — 14px/22px weight 400, letter-spacing 0.04em
  * ======================================== */
 
-.ui-alert {
+.ui-banner {
   display: flex;
   align-items: flex-start;
   gap: var(--space-200);
@@ -20,12 +20,12 @@
  * Variants
  * ======================================== */
 
-.ui-alert--default {
+.ui-banner--default {
   padding: var(--space-200) var(--space-300);
   border-radius: var(--radius-200);
 }
 
-.ui-alert--full-width {
+.ui-banner--full-width {
   padding: var(--space-200) var(--space-400);
   border-radius: 0;
 }
@@ -34,32 +34,32 @@
  * Color Types
  * ======================================== */
 
-.ui-alert--primary {
+.ui-banner--primary {
   background-color: var(--color-background-brand-subtlest);
   color: var(--color-content-brand-bold);
 }
 
-.ui-alert--neutral {
+.ui-banner--neutral {
   background-color: var(--color-background-neutral-subtle);
   color: var(--color-content-default);
 }
 
-.ui-alert--success {
+.ui-banner--success {
   background-color: var(--color-background-success-subtlest);
   color: var(--color-content-success-bold);
 }
 
-.ui-alert--warning {
+.ui-banner--warning {
   background-color: var(--color-background-warning-subtlest);
   color: var(--color-content-warning-bold);
 }
 
-.ui-alert--danger {
+.ui-banner--danger {
   background-color: var(--color-background-danger-subtlest);
   color: var(--color-content-danger-bold);
 }
 
-.ui-alert--prize {
+.ui-banner--prize {
   background-color: var(--color-background-prize-subtlest);
   color: var(--color-content-prize-bold);
 }
@@ -68,7 +68,7 @@
  * Leading icon: 16×16 in 22px-height container
  * ======================================== */
 
-.ui-alert__icon {
+.ui-banner__icon {
   flex-shrink: 0;
   display: flex;
   align-items: center;
@@ -76,19 +76,19 @@
   color: inherit;
 }
 
-.ui-alert__icon i[class^='icon-'],
-.ui-alert__icon i[class*=' icon-'] {
+.ui-banner__icon i[class^='icon-'],
+.ui-banner__icon i[class*=' icon-'] {
   width: 16px;
   height: 16px;
   font-size: 16px;
 }
 
-.ui-alert__content {
+.ui-banner__content {
   flex: 1 0 0;
   min-width: 0px;
 }
 
-.ui-alert__trailing {
+.ui-banner__trailing {
   flex-shrink: 0;
   display: flex;
   align-items: center;
@@ -97,14 +97,14 @@
   color: inherit;
 }
 
-.ui-alert__trailing i[class^='icon-'],
-.ui-alert__trailing i[class*=' icon-'] {
+.ui-banner__trailing i[class^='icon-'],
+.ui-banner__trailing i[class*=' icon-'] {
   width: 16px;
   height: 16px;
   font-size: 16px;
 }
 
-.ui-alert__trailing--button {
+.ui-banner__trailing--button {
   background: transparent;
   border: none;
   cursor: pointer;

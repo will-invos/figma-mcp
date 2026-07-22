@@ -188,14 +188,16 @@
     },
 
     "_feedback": "— Feedback —",
-    "BasicAlert": {
+    "BasicBanner": {
       "setKey": "4d92f6db95ffb11cd2b748170f81ab4edd08d809",
       "defaultVariant": { "Style": "Default", "Type": "Primary" },
       "textProps": ["↳ Text#4031:0"],
-      "booleanProps": ["Leading icon#4031:5", "Trailing icon#4031:10"]
+      "booleanProps": ["Leading icon#4031:5", "Trailing icon#4031:10"],
+      "notes": "Figma 元件名：Basic banner（原 Basic alert 更名，key 不變）→ code 端 <Banner>"
     },
-    "RichAlert": {
-      "setKey": "9b0731420b97b4530e9b2f41275af45aaef13132"
+    "RichBanner": {
+      "setKey": "9b0731420b97b4530e9b2f41275af45aaef13132",
+      "notes": "Figma 元件名：Rich banner（原 Rich alert 更名，key 不變）。code 端尚未實作"
     },
     "Toast": {
       "setKey": "4829e08fdf78d9f9e10a3c0e03801cbf0679bcb0"

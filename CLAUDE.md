@@ -56,7 +56,7 @@ React + TypeScript + Vite，「發票存摺」共用 UI Kit 與 design tokens。
 | 即時通知（中央短訊） | `<Toast>`（Provider 模式、`useToast()`）|
 | 操作結果告知（底部、可含動作） | `<SnackBar>` |
 | 頂部 push 通知（含 leading icon、可點擊跳轉） | `<InAppNotification>`（Provider 模式、`useInAppNotification()`） |
-| 區塊內告示（警告、資訊） | `<Alert>` |
+| 區塊內告示（警告、資訊） | `<Banner>` |
 | 頁面頂部標題列 | `<NavigationBar>`（regular / large / home / search / tabs）|
 | 底部 tab 導覽 | `<TabBar>` |
 | 分頁切換（內容區） | `<Tabs>` |

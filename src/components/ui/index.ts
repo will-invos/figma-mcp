@@ -40,8 +40,13 @@ export type { TagProps } from './Tag';
 export { default as Badge } from './Badge';
 export type { BadgeProps } from './Badge';
 
-export { default as Alert } from './Alert';
-export type { AlertProps } from './Alert';
+export { default as Banner } from './Banner';
+export type { BannerProps } from './Banner';
+
+/** @deprecated 已更名為 `Banner`（對齊 Figma「Basic banner」），請改用 `Banner`。 */
+export { default as Alert } from './Banner';
+/** @deprecated 請改用 `BannerProps`。 */
+export type { BannerProps as AlertProps } from './Banner';
 
 export { default as ListItem } from './ListItem';
 export type { ListItemProps } from './ListItem';

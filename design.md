@@ -120,7 +120,7 @@
 | Token | 值 | 元件 |
 |-------|-----|------|
 | `--radius-150` | 6 | Checkbox、Tag (small) |
-| `--radius-200` | 8 | Alert、Button small、SearchField、Tag (medium)、TabBar item、Tooltip |
+| `--radius-200` | 8 | Banner、Button small、SearchField、Tag (medium)、TabBar item、Tooltip |
 | `--radius-250` | 10 | Button medium |
 | `--radius-300` | 12 | **Button large、CardItem、PinInput、Select、SnackBar、TextField、TextArea**（最常用） |
 | `--radius-400` | 16 | Dialog、Toast、InAppNotification |
@@ -142,7 +142,7 @@
 | `--shadow-bold` | `0 0 16px` | **無方向 glow** | （目前未使用，保留給需要光暈強調的容器） |
 
 **層次原則**：
-1. **無陰影**（最常見）：頁面背景、CardItem、Alert、ListItem、NavigationBar、TabBar、Button、**Dialog、Toast** — 靠背景色、分隔線或 overlay 對比建立層級
+1. **無陰影**（最常見）：頁面背景、CardItem、Banner、ListItem、NavigationBar、TabBar、Button、**Dialog、Toast** — 靠背景色、分隔線或 overlay 對比建立層級
 2. **小立體感**：Slider thumb、Switch thumb → `--shadow-small`
 3. **浮起 / 投影**：Tooltip、Sheet、SnackBar、InAppNotification → 對應 token
 
@@ -273,7 +273,7 @@ max-width 480、不寫桌機 breakpoint、顏色用 var(--color-*)、字級用 .
 - 瞬時短訊（中央）→ useToast()
 - 操作結果（底部，可帶動作）→ <SnackBar action>
 - push 通知（頂部，帶 leading icon、可點擊跳轉）→ useInAppNotification()
-- 區塊內持續告示 → <Alert>
+- 區塊內持續告示 → <Banner>
 - 表單錯誤 → TextField 自帶 error prop；顏色用 --color-*-{intent}-* token
 ```
 

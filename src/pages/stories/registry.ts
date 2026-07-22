@@ -33,7 +33,7 @@ import { CardItemStory } from './CardItem.story.tsx'
 import { IconsStory } from './Icons.story.tsx'
 
 // Feedback
-import { AlertStory } from './Alert.story'
+import { BannerStory } from './Banner.story'
 import { SpinnerStory } from './Spinner.story'
 import { ProgressBarStory } from './ProgressBar.story'
 import { ProgressGroupStory } from './ProgressGroup.story'
@@ -61,7 +61,7 @@ export const categories: StoryCategory[] = [
   },
   {
     name: 'Feedback',
-    stories: [AlertStory, SpinnerStory, ProgressBarStory, ProgressGroupStory, ToastStory, SnackBarStory, InAppNotificationStory, TooltipStory],
+    stories: [BannerStory, SpinnerStory, ProgressBarStory, ProgressGroupStory, ToastStory, SnackBarStory, InAppNotificationStory, TooltipStory],
   },
   {
     name: 'Overlay',

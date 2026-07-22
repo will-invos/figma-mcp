@@ -1,9 +1,9 @@
-import Alert from '@/components/ui/Alert'
+import Banner from '@/components/ui/Banner'
 import type { StoryDef } from './types'
 
-export const AlertStory: StoryDef = {
-  component: Alert,
-  name: 'Alert',
+export const BannerStory: StoryDef = {
+  component: Banner,
+  name: 'Banner',
   category: 'Feedback',
   previewWidth: 360,
   props: {
