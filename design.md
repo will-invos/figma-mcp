@@ -123,11 +123,11 @@
 | `--radius-200` | 8 | Banner、Button small、SearchField、Tag (medium)、TabBar item、Tooltip |
 | `--radius-250` | 10 | Button medium |
 | `--radius-300` | 12 | **Button large、CardItem、PinInput、Select、SnackBar、TextField、TextArea**（最常用） |
-| `--radius-400` | 16 | Dialog、Toast、InAppNotification |
+| `--radius-400` | 16 | Dialog、Toast、InAppNotification、Fab |
 | `--radius-600` | 24 | Sheet 頂部、Switch track |
 | `--radius-full` | 9999 | Avatar、Badge、IconButton、ProgressBar、Slider track、Switch thumb、ChipBar、SheetHeader 把手 |
 
-> Radio / Spinner / Slider thumb / TabBar 圓點直寫 `border-radius: 50%`（純圓形 width=height，不透過 token）。`--radius-0/50/100/500/800/1000` 目前未使用。
+> Radio / Spinner / Slider thumb / TabBar 圓點 / DottedController 圓點直寫 `border-radius: 50%`（純圓形 width=height，不透過 token）。`--radius-0/50/100/500/800/1000` 目前未使用。
 
 ---
 
@@ -135,8 +135,8 @@
 
 | Token | 規格 | 性質 | 元件 |
 |-------|------|------|------|
-| `--shadow-small` | `0 2px 4px` | 微投影 | Slider thumb、Switch thumb（小立體感） |
-| `--shadow-medium` | `0 4px 8px` | 中投影 | Tooltip（用 `filter: drop-shadow` 含三角尾巴） |
+| `--shadow-small` | `0 2px 4px` | 微投影 | Slider thumb、Switch thumb（小立體感）、DottedController overlap（`drop-shadow`，照片上的指示點） |
+| `--shadow-medium` | `0 4px 8px` | 中投影 | Tooltip（用 `filter: drop-shadow` 含三角尾巴）、Fab（懸浮於內容上） |
 | `--shadow-large` | `0 8px 16px` | 大投影 | SnackBar、InAppNotification（從頂端 / 底部浮起） |
 | `--shadow-sheet` | `0 -4px 8px` | 反向投影 | Sheet（向上發散） |
 | `--shadow-bold` | `0 0 16px` | **無方向 glow** | （目前未使用，保留給需要光暈強調的容器） |
@@ -144,7 +144,7 @@
 **層次原則**：
 1. **無陰影**（最常見）：頁面背景、CardItem、Banner、ListItem、NavigationBar、TabBar、Button、**Dialog、Toast** — 靠背景色、分隔線或 overlay 對比建立層級
 2. **小立體感**：Slider thumb、Switch thumb → `--shadow-small`
-3. **浮起 / 投影**：Tooltip、Sheet、SnackBar、InAppNotification → 對應 token
+3. **浮起 / 投影**：Tooltip、Sheet、SnackBar、InAppNotification、Fab → 對應 token
 
 > Dialog 靠半透明 overlay backdrop 把背景變暗，Toast 靠 `--color-background-toast` 半透明深底建立對比，**都不需要陰影**。`--shadow-bold` 是 **glow 風格**（無 y-offset），與其他向下投影 token 性質不同——適合放在多彩背景或照片上的強調容器，**不要拿來當一般卡片陰影**。Dark mode 陰影 opacity 自動加重。
 
@@ -209,6 +209,8 @@
 
 最小可點擊區 **44×44px**（iOS HIG）；小尺寸元件（Tag、Badge）若可點擊，加透明 padding 擴大命中區。
 
+> **例外**：`DottedController` interactive 模式的命中區為 16×16 —— 輪播以滑動為主、點按僅輔助，且放大會使相鄰點命中區重疊或墊高佈局（已確認維持現狀，不要「修正」）。
+
 ### 6.3 Animation
 
 **Duration 三檔**：`0.15s` 微互動 / `0.2s` 中型彈出 modal / `0.3s` 大型位移或長時程。
@@ -237,7 +239,7 @@
 | `font-family: 'PingFang TC', ...` | `var(--font-family)` |
 | `padding: 13px 17px` 任意值 | 4px-grid，`var(--space-*)` |
 | `border-radius: 8px` 寫死 | `var(--radius-200)` |
-| 卡片 / 按鈕加陰影 | 卡片無陰影、按鈕用背景色狀態區分 |
+| 卡片 / 按鈕加陰影 | 卡片無陰影、按鈕用背景色狀態區分（**Fab 除外**：懸浮元件，用 `--shadow-medium`） |
 | 桌機 breakpoint `@media (min-width: 768px)` | mobile-first，max-width 480 |
 | `:hover` 不包 `@media (hover: hover)` | 包進去，避免 touch 裝置 sticky hover |
 | 自製 modal / sheet / toast / dropdown | 用 `Dialog` / `Sheet` / `Toast` / `Select` |

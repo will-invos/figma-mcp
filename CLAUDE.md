@@ -2,7 +2,7 @@
 
 > Repo: `will-invos/iv-design-system` · npm 套件 `@invos/ios-ui-kit`
 
-React + TypeScript + Vite，「發票存摺」共用 UI Kit 與 design tokens。搭配 Figma MCP 讓 AI 快速建立新頁面。
+React + TypeScript + Vite，「發票存摺」APP 設計系統，包含 UI Kit 與 design tokens。搭配 Figma MCP 讓 AI 快速建立 Prototype 頁面。
 
 ## 兩份規範文件分工
 
@@ -62,6 +62,7 @@ React + TypeScript + Vite，「發票存摺」共用 UI Kit 與 design tokens。
 | 底部 tab 導覽 | `<TabBar>` |
 | 分頁切換（內容區） | `<Tabs>` |
 | 上一頁 / 下一頁導覽（含置中標題） | `<PageNavigation>` |
+| 日期選擇 | 原生 `<input type="date">`（已定案：雙平台採原生 picker，**不要自製、不要拿 `<Select>` 頂替**） |
 | 列表項（設定、選單） | `<ListItem>` |
 | 卡片（內容 + 描述） | `<CardItem>` |
 | 列表的 header / footer | `<ListHeader>` / `<ListFooter>` |

@@ -69,7 +69,7 @@
     },
     "PageNavigation": {
       "compKey": "bd3d9dc2711935925eb1b9840b464c6f1ca9cd16",
-      "notes": "上一頁 / 置中標題 / 下一頁導覽列（single component, not a set）。iOS 與 Android kit 皆有，此為 iOS kit key。code 端以 IconButton(ghost/neutral) + chevron 組裝 <PageNavigation>"
+      "notes": "上一頁 / 置中標題 / 下一頁導覽列（single component, not a set）。原 Figma「Month picker」更名而來（key 不變，舊 MonthPicker 條目已移除）。iOS 與 Android kit 皆有，此為 iOS kit key。code 端以 IconButton(ghost/neutral) + chevron 組裝 <PageNavigation>"
     },
     "Divider": {
       "setKey": "9c4f8569dffe5ea9dbfe6f3f3864847b816a15fc"
@@ -132,9 +132,6 @@
     "DatePicker": {
       "setKey": "11abf97f4890e6f73fd6d224c0fe36c3d51a263a"
     },
-    "MonthPicker": {
-      "setKey": "bd3d9dc2711935925eb1b9840b464c6f1ca9cd16"
-    },
 
     "_buttons": "— Buttons —",
     "Button": {
@@ -154,6 +151,10 @@
     "IconButtonMedium": {
       "setKey": "28cb4faab4de891d5deefc357a4c863efab13c20",
       "defaultVariant": { "Style": "Ghost", "Type": "Neutral", "State": "Enabled" }
+    },
+    "FAB": {
+      "setKey": "0a42b72640ca3b2ff4cce1f4db1222fe52e6ac9b",
+      "notes": "56×56、radius-400、shadow-medium、brand 底 fixed-white 前景；Has text 變體 icon 縮 24 下方加 Label/Small 文字"
     },
 
     "_containers": "— Containers & layout —",
@@ -244,7 +245,7 @@
     },
     "DottedController": {
       "setKey": "c77776d59cc24a84395792bb48689c4eddb58cd8",
-      "notes": "頁面 / 輪播位置指示點。variant Type=Default（brand 藍點）/ Overlap（白點 + 半透明點 + shadow，用於照片上）→ code 端 <DottedController>"
+      "notes": "頁面 / 輪播位置指示點（原 Figma「Page Controller」更名）。variant Type=Default（brand 藍點）/ Overlap（白點 + 半透明點 + shadow，用於照片上）→ code 端 <DottedController>"
     },
     "Avatar": {
       "compKey": "9349bac40a7eb29779e81da592d4485d375b59c4",
