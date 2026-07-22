@@ -7,9 +7,11 @@ Figma variables（設計師改這裡）
    │ ① 同步：請 AI 用 MCP 整批倒出（見下方「同步指令」）→ figma-dump/*.txt
    ▼
 tokens.json（排序後的 git 母版，diff 可審）
-   │ ② npm run tokens:build（Style Dictionary）
+   │ ② npm run tokens:build（Style Dictionary + native 產生器）
    ▼
-dist/tokens.css（:root light + [data-theme="dark"]）…未來加 Swift / Compose 輸出
+dist/tokens.css（:root light + [data-theme="dark"]）
+dist/native/ios-colors/*.colorset（Xcode Asset Catalog，275 色 × light/dark）
+dist/native/android/values/colors.xml + values-night/colors.xml（ARGB）
 ```
 
 ## 檔案說明
@@ -20,6 +22,8 @@ dist/tokens.css（:root light + [data-theme="dark"]）…未來加 Swift / Compo
 | `tokens.json` | 排序後的中繼母版，每次同步的 git diff 就看它 | ❌ 由 build 產生 |
 | `build.mjs` | dump → tokens.json → CSS | ✅ 管線邏輯在這 |
 | `dist/tokens.css` | 產出的 CSS custom properties | ❌ 唯讀投影 |
+| `dist/native/ios-colors/` | Xcode Asset Catalog colorsets（iOS 工程師 copy 進 Assets.xcassets） | ❌ 唯讀投影 |
+| `dist/native/android/` | `values/` + `values-night/` 的 colors.xml（Android 工程師 copy 進 res/） | ❌ 唯讀投影 |
 
 ## 同步流程（設計師改了 Figma variables 之後）
 
@@ -30,8 +34,7 @@ dist/tokens.css（:root light + [data-theme="dark"]）…未來加 Swift / Compo
 
 ## 現況（2026-07-22 驗證與定案）
 
-- 首次倒出：colors 275（Light/Dark）、sizes 38，與手寫 CSS 比對 **值零漂移**
-- 已定案：`radius/full` = 999（CSS 已對齊）；Figma-only token（theme/*、category/* 等）**不納入 web 輸出**（`build.mjs` 的 `WEB_EXCLUDE`）
-- Figma 端 `seondary` / `graident` 已修正並重新 publish，dump 已同步
-- 過濾後 `dist/tokens.css` 共 **190 個 token，與手寫 CSS 100% 對齊**（集合零差異、light/dark 值零差異）——「可無縫替換」狀態
-- `dist/tokens.css` **尚未接管** `src/components/ui/tokens/*.css` —— 正式切換屬第二步（連同 Swift / Compose 輸出）
+- 首次倒出：colors 275（Light/Dark）、sizes 38，與手寫 CSS 比對 **值零漂移**；`radius/full` = 999 已定案對齊
+- **web 全收錄顏色**（2026-07-22 更正定案，對齊 app）：`dist/tokens.css` 含全部 275 色 + sizes（僅大間距 space 維持排除）
+- **native 輸出已建置**，格式對齊既有交付：iOS Asset Catalog colorsets、Android `values(+night)/colors.xml`。與 plugin 轉出版驗證：**名稱 275/275 一致；值有 63 處相差 1/255**（plugin 端量化偏差 —— pipeline 版與 Figma API / web CSS 完全一致，視覺不可辨），**以 pipeline 版為準**
+- `dist/tokens.css` **尚未接管** `src/components/ui/tokens/*.css` —— 正式切換屬第二步 A

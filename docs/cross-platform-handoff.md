@@ -138,8 +138,8 @@
               │  Style Dictionary（免費開源，自動產生 ↓，人不碰）
    ┌──────────┼──────────────┐
    ▼          ▼              ▼
-colors.css  Colors.swift   Colors.kt / colors.xml
- (web)       (iOS)          (Android)
+tokens.css  ios-colors/*.colorset   values(+night)/colors.xml
+ (web)      (iOS Asset Catalog)     (Android)
 ```
 
 **為什麼選這條**（三選一的結論）：
@@ -167,7 +167,8 @@ colors.css  Colors.swift   Colors.kt / colors.xml
 - [x] 第一步驗證發現的待決事項 —— **全數定案（2026-07-22）**：
   - [x] `seondary` / `graident` 命名：**Figma 端已修正並重新 publish**（`color/border/secondary`、`theme/green/gradient/*`），dump 已同步
   - [x] `radius/full` 定案 **999**：CSS `--radius-full` 已由 9999px 改為 999px（視覺等效）
-  - [x] Figma-only token **不納入 web 輸出**（theme/*、category/* 等 123 個；`build.mjs` 的 `WEB_EXCLUDE` 落實）；brand gradient 與 `border/secondary` web 有收錄，保留。**最終驗證：產出 190 / 手寫 190，集合零差異、light/dark 值零差異 —— 可無縫替換**
+  - [x] ~~Figma-only token 不納入 web 輸出~~ **2026-07-22 更正定案：web 對齊 app 全收錄顏色（275 色全出），僅大間距 space 維持排除**。與手寫 CSS 的共同 token 已驗證 light/dark 值零差異
+- [x] **第二步 B（native 輸出）已建置**：`tokens:build` 直接產出 iOS Asset Catalog colorsets ×275 與 Android `values(+night)/colors.xml`（格式即既有交付格式）。與 plugin 轉出版比對：名稱 275/275 一致、63 處值差 1/255（plugin 端量化偏差；pipeline 版與 Figma API / web 完全一致，以 pipeline 為準）。plugin 流程可退役
 - [ ] 第二步：`dist/tokens.css` 正式接管 `src/components/ui/tokens/{colors,spacing,radius}.css`；加開 Swift + Compose 輸出格式，iOS / Android 專案改吃產生檔
 - [ ] 補 Android typography（Roboto / Noto Sans TC 字級行高）進 Design System 2025 與 token
 - [ ] 定義 `px ↔ pt ↔ dp/sp` 換算與 Dynamic Type / font scale 規則

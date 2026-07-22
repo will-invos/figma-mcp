@@ -44,12 +44,8 @@ function insert(tree, path, value) {
   node[leaf] = { value }
 }
 
-// web 輸出排除清單（2026-07-22 定案：Figma-only token 不納入 web 輸出；tokens.json 母版仍保留全部）
+// web 輸出排除清單（2026-07-22 更正定案：web 對齊 app **全收錄顏色**；僅大間距維持排除）
 const WEB_EXCLUDE = [
-  /\/theme\//,          // 主題色系（green/rock/lavender/girl/lake/apple，含其 gradient）
-  /\/category\//,       // 消費類別色
-  // 注意：brand gradient（color/*/brand/gradient/*）與 color/border/secondary web 有收錄，不排除
-  /^color\/border\/fixed\/brand$/,
   /^space\/(0|1000|1200|1400|1600|1800|2000|2400|3000|3600|4000|5000)$/, // 大間距，web 未使用
 ]
 const webInclude = (name) => !WEB_EXCLUDE.some((re) => re.test(name))
@@ -93,5 +89,66 @@ writeFileSync(
 rmSync(`${HERE}dist/tokens.light.css`)
 rmSync(`${HERE}dist/tokens.dark.css`)
 
+// ---------- 5. Native 輸出（格式對齊既有交付：iOS Asset Catalog colorsets、Android colors.xml） ----------
+function parseColor(s) {
+  let m
+  if ((m = s.match(/^#([0-9a-f]{6})$/i))) {
+    const h = m[1]
+    return { r: parseInt(h.slice(0, 2), 16), g: parseInt(h.slice(2, 4), 16), b: parseInt(h.slice(4, 6), 16), a: 1 }
+  }
+  if ((m = s.match(/^rgba\((\d+), (\d+), (\d+), ([\d.]+)\)$/))) return { r: +m[1], g: +m[2], b: +m[3], a: +m[4] }
+  throw new Error(`無法解析顏色：${s}`)
+}
+// color/background/skeleton-bold → colorBackgroundSkeletonBold
+function camelName(name) {
+  return name.split('/').map((seg, i) => {
+    const parts = seg.split('-')
+    const merged = parts.map((p, j) => (i === 0 && j === 0 ? p : p[0].toUpperCase() + p.slice(1))).join('')
+    return merged
+  }).join('')
+}
+
+// iOS：每色一個 .colorset/Contents.json（universal + light + dark appearance，sRGB float）
+const iosDir = `${HERE}dist/native/ios-colors`
+rmSync(iosDir, { recursive: true, force: true })
+mkdirSync(iosDir, { recursive: true })
+const colorEntry = (c, appearance) => ({
+  ...(appearance ? { appearances: [{ appearance: 'luminosity', value: appearance }] } : {}),
+  color: {
+    'color-space': 'srgb',
+    components: {
+      alpha: c.a.toFixed(3),
+      blue: (c.b / 255).toFixed(3),
+      green: (c.g / 255).toFixed(3),
+      red: (c.r / 255).toFixed(3),
+    },
+  },
+  idiom: 'universal',
+})
+for (const t of colors) {
+  const light = parseColor(t.light), dark = parseColor(t.dark)
+  const dir = `${iosDir}/${camelName(t.name)}.colorset`
+  mkdirSync(dir, { recursive: true })
+  writeFileSync(`${dir}/Contents.json`, JSON.stringify({
+    colors: [colorEntry(light, null), colorEntry(light, 'light'), colorEntry(dark, 'dark')],
+    info: { author: 'iv-design-system tokens pipeline', version: 1 },
+  }, null, 2) + '\n')
+}
+
+// Android：values/colors.xml（light）+ values-night/colors.xml（dark），ARGB hex
+const argb = (c) => {
+  const hex = (n) => Math.round(n).toString(16).padStart(2, '0')
+  return `#${hex(c.a * 255)}${hex(c.r)}${hex(c.g)}${hex(c.b)}`
+}
+function androidXml(mode) {
+  const rows = colors.map((t) => `    <color name="${camelName(t.name)}">${argb(parseColor(t[mode]))}</color>`)
+  return `<?xml version="1.0" encoding="utf-8"?>\n<resources>\n${rows.join('\n')}\n</resources>\n`
+}
+mkdirSync(`${HERE}dist/native/android/values`, { recursive: true })
+mkdirSync(`${HERE}dist/native/android/values-night`, { recursive: true })
+writeFileSync(`${HERE}dist/native/android/values/colors.xml`, androidXml('light'))
+writeFileSync(`${HERE}dist/native/android/values-night/colors.xml`, androidXml('dark'))
+
 console.log(`✅ tokens.json：colors ${colors.length}、sizes ${sizes.length}（母版全收）`)
-console.log(`✅ dist/tokens.css 已產出（web 輸出排除 ${excluded} 個 Figma-only token）`)
+console.log(`✅ dist/tokens.css 已產出（web 全收錄顏色；排除 ${excluded} 個大間距）`)
+console.log(`✅ dist/native/：iOS colorsets ×${colors.length}、Android values(+night)/colors.xml`)
