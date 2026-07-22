@@ -1,0 +1,49 @@
+/* Per Figma 6416:7094 — Page Status (empty / error states)
+   Column, centered, gap 16 (space-400), horizontal padding 16 (space-400).
+   Illustration: 120×120 at 40% opacity.
+   Title: Heading/Small (bold 18/26), Description: Body/Large (16/24); both content/subtle.
+   Note: illustrations are exported artwork with baked light-mode grays — they do not
+   re-tint in dark mode (acceptable for muted 40%-opacity imagery). */
+.ui-page-status {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-400);
+  padding: 0 var(--space-400);
+  width: 100%;
+}
+
+.ui-page-status__image {
+  flex-shrink: 0;
+  width: 120px;
+  height: 120px;
+  opacity: 0.4;
+  overflow: hidden;
+}
+.ui-page-status__image img,
+.ui-page-status__image svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.ui-page-status__text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-100);
+  width: 100%;
+  text-align: center;
+  color: var(--color-content-subtle);
+}
+.ui-page-status__title,
+.ui-page-status__description {
+  color: inherit;
+}
+
+.ui-page-status__action {
+  display: flex;
+  gap: var(--space-400);
+  align-items: flex-start;
+}

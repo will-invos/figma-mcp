@@ -226,6 +226,10 @@
     "ProgressGroup": {
       "setKey": "922500f9f9eadad8305527fa4500ed5fd221df85"
     },
+    "PageStatus": {
+      "setKey": "99b26ab45f5e3b30ed03a6e12ba8f73ffbd6642f",
+      "notes": "整頁空 / 錯誤狀態。variant Status=Disconnected / System error / No results / Empty / Not exist，各含插圖 + 標題 + 描述，boolean image / action。code 端 <PageStatus>，5 張插圖 SVG 內建於 src/assets/illustrations/page-status/"
+    },
 
     "_display": "— Display —",
     "Tag": {

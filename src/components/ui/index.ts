@@ -51,6 +51,9 @@ export { default as Alert } from './Banner';
 /** @deprecated 請改用 `BannerProps`。 */
 export type { BannerProps as AlertProps } from './Banner';
 
+export { default as PageStatus } from './PageStatus';
+export type { PageStatusProps, PageStatusType } from './PageStatus';
+
 export { default as ListItem } from './ListItem';
 export type { ListItemProps } from './ListItem';
 
