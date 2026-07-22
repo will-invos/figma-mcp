@@ -16,6 +16,9 @@ export type { IconButtonProps } from './IconButton';
 export { default as Fab } from './Fab';
 export type { FabProps } from './Fab';
 
+export { default as DottedController } from './DottedController';
+export type { DottedControllerProps } from './DottedController';
+
 export { default as TextField } from './TextField';
 export type { TextFieldProps } from './TextField';
 

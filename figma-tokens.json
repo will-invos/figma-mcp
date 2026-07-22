@@ -234,6 +234,10 @@
     "Badge": {
       "setKey": "f62007065326efd7432939c1c562f9bccccc55ab"
     },
+    "DottedController": {
+      "setKey": "c77776d59cc24a84395792bb48689c4eddb58cd8",
+      "notes": "頁面 / 輪播位置指示點。variant Type=Default（brand 藍點）/ Overlap（白點 + 半透明點 + shadow，用於照片上）→ code 端 <DottedController>"
+    },
     "Avatar": {
       "compKey": "9349bac40a7eb29779e81da592d4485d375b59c4",
       "notes": "Single component (not a set)"

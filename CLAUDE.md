@@ -69,6 +69,7 @@ React + TypeScript + Vite，「發票存摺」共用 UI Kit 與 design tokens。
 | 使用者頭像 | `<Avatar>` |
 | 載入指示器 | `<Spinner>` |
 | 進度條 | `<ProgressBar>` / 多條用 `<ProgressGroup>` |
+| 輪播 / 分頁位置指示點 | `<DottedController>`（照片上用 `type="overlap"`） |
 | 提示氣泡（簡短說明） | `<Tooltip>` |
 
 **找不到對應？** 先查 `figma-tokens.json.componentKeys` 是否有 Figma 元件尚未實作；再考慮新增，避免自己組裝。

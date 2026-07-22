@@ -1,0 +1,76 @@
+/* Per Figma 5940:14610 — Dotted Controller (page indicator)
+   Container: inline-flex, gap 8 (space-200), padding 4 (space-100)
+   Dot: 8×8 circle
+     - Default: active brand blue, inactive neutral gray
+     - Overlap: active white, inactive translucent overlay, container drop-shadow
+       (shadow-small) so dots stay legible over photos / content
+   Interactive: dots become buttons with a widened 16px tap target. Each button's
+     4px padding + zero container gap reproduces the same 8px visual gap / 4px edge
+     inset as the static layout. */
+.ui-dotted-controller {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-200);
+  padding: var(--space-100);
+}
+
+.ui-dotted-controller--overlap {
+  filter: drop-shadow(var(--shadow-small));
+}
+
+.ui-dotted-controller__dot {
+  flex-shrink: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  transition: background-color 0.15s;
+}
+
+/* Default — on solid backgrounds */
+.ui-dotted-controller--default .ui-dotted-controller__dot {
+  background-color: var(--color-background-neutral-default);
+}
+.ui-dotted-controller--default .ui-dotted-controller__dot--active {
+  background-color: var(--color-background-brand-default);
+}
+
+/* Overlap — on photos / content */
+.ui-dotted-controller--overlap .ui-dotted-controller__dot {
+  background-color: var(--color-background-overlay-default);
+}
+.ui-dotted-controller--overlap .ui-dotted-controller__dot--active {
+  background-color: var(--color-background-fixed-white);
+}
+
+/* ========================================
+ * Interactive — tappable dots
+ * ======================================== */
+
+.ui-dotted-controller--interactive {
+  gap: 0;
+  padding: 0;
+}
+
+.ui-dotted-controller__hit {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-100);
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.ui-dotted-controller__hit:focus-visible .ui-dotted-controller__dot {
+  outline: 2px solid var(--color-border-brand);
+  outline-offset: 2px;
+}
+
+@media (hover: hover) {
+  .ui-dotted-controller--default .ui-dotted-controller__hit:hover .ui-dotted-controller__dot:not(.ui-dotted-controller__dot--active) {
+    background-color: var(--color-background-neutral-hover);
+  }
+}
