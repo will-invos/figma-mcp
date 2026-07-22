@@ -67,6 +67,10 @@
     "TabBar": {
       "setKey": "43a7374c4a22f98300cef8b07f1720121f2850e2"
     },
+    "PageNavigation": {
+      "compKey": "bd3d9dc2711935925eb1b9840b464c6f1ca9cd16",
+      "notes": "上一頁 / 置中標題 / 下一頁導覽列（single component, not a set）。iOS 與 Android kit 皆有，此為 iOS kit key。code 端以 IconButton(ghost/neutral) + chevron 組裝 <PageNavigation>"
+    },
     "Divider": {
       "setKey": "9c4f8569dffe5ea9dbfe6f3f3864847b816a15fc"
     },

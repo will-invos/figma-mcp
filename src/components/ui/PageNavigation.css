@@ -1,0 +1,21 @@
+/* Per Figma (Android UI Kit) 5474:21691 — Page Navigation
+   prev / label / next row.
+   Container: bg default, flex, gap 16 (space-400), center-aligned,
+     px 8 (space-200), py 4 (space-100). Label flex-grows so it stays centered
+     between the two icon buttons. */
+.ui-page-navigation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-400);
+  width: 100%;
+  padding: var(--space-100) var(--space-200);
+  background: var(--color-background-default);
+}
+
+.ui-page-navigation__label {
+  flex: 1 0 0;
+  min-width: 0;
+  text-align: center;
+  color: var(--color-content-default);
+}

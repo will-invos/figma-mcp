@@ -60,6 +60,7 @@ React + TypeScript + Vite，「發票存摺」共用 UI Kit 與 design tokens。
 | 頁面頂部標題列 | `<NavigationBar>`（regular / large / home / search / tabs）|
 | 底部 tab 導覽 | `<TabBar>` |
 | 分頁切換（內容區） | `<Tabs>` |
+| 上一頁 / 下一頁導覽（含置中標題） | `<PageNavigation>` |
 | 列表項（設定、選單） | `<ListItem>` |
 | 卡片（內容 + 描述） | `<CardItem>` |
 | 列表的 header / footer | `<ListHeader>` / `<ListFooter>` |

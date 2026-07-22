@@ -80,6 +80,9 @@ export type { NavigationBarProps } from './NavigationBar';
 export { default as TabBar } from './TabBar';
 export type { TabBarProps, TabItem } from './TabBar';
 
+export { default as PageNavigation } from './PageNavigation';
+export type { PageNavigationProps } from './PageNavigation';
+
 export { default as Tabs } from './Tabs';
 export type { TabsProps, TabsItem } from './Tabs';
 
