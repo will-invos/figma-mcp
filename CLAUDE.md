@@ -40,6 +40,7 @@ React + TypeScript + Vite，「發票存摺」共用 UI Kit 與 design tokens。
 | 次要動作按鈕 | `<Button variant="outline">` |
 | 弱化動作（文字樣式） | `<Button variant="text">` 或 `<Button variant="ghost">` |
 | 只有 icon 的點擊 | `<IconButton aria-label="...">` |
+| 懸浮主要動作按鈕（FAB） | `<Fab aria-label="...">`（可加 `text` 顯示標籤） |
 | 單行輸入欄位 | `<TextField>` |
 | 多行輸入欄位 | `<TextArea>` |
 | 下拉選單 | `<Select>` |

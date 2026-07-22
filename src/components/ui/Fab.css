@@ -1,0 +1,73 @@
+.ui-fab {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  padding: var(--space-400);
+  border: none;
+  border-radius: var(--radius-400);
+  background-color: var(--color-background-brand-default);
+  color: var(--color-content-fixed-white);
+  box-shadow: var(--shadow-medium);
+  font-family: var(--font-family);
+  cursor: pointer;
+  transition: background-color 0.15s;
+  flex-shrink: 0;
+  outline: none;
+  position: relative;
+}
+
+.ui-fab > svg,
+.ui-fab > img,
+.ui-fab > i[class^='icon-'],
+.ui-fab > i[class*=' icon-'] {
+  width: 28px;
+  height: 28px;
+  font-size: 28px;
+}
+
+@media (hover: hover) {
+  .ui-fab:hover {
+    background-color: var(--color-background-brand-hover);
+  }
+}
+.ui-fab:active {
+  background-color: var(--color-background-brand-active);
+}
+
+/* ========================================
+ * Has text — icon shrinks to 24px with a label underneath
+ * ======================================== */
+
+.ui-fab--has-text {
+  flex-direction: column;
+  padding: var(--space-200);
+}
+.ui-fab--has-text > svg,
+.ui-fab--has-text > img,
+.ui-fab--has-text > i[class^='icon-'],
+.ui-fab--has-text > i[class*=' icon-'] {
+  width: 24px;
+  height: 24px;
+  font-size: 24px;
+}
+
+.ui-fab__text {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 18px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* ========================================
+ * States
+ * ======================================== */
+
+.ui-fab:disabled,
+.ui-fab[data-loading] {
+  opacity: 0.4;
+  pointer-events: none;
+  cursor: not-allowed;
+}

@@ -13,6 +13,9 @@ export type { ButtonProps } from './Button';
 export { default as IconButton } from './IconButton';
 export type { IconButtonProps } from './IconButton';
 
+export { default as Fab } from './Fab';
+export type { FabProps } from './Fab';
+
 export { default as TextField } from './TextField';
 export type { TextFieldProps } from './TextField';
 

@@ -9,6 +9,7 @@ import { DividerStory } from './Divider.story'
 // Forms
 import { ButtonStory } from './Button.story'
 import { IconButtonStory } from './IconButton.story.tsx'
+import { FabStory } from './Fab.story.tsx'
 import { TextFieldStory } from './TextField.story.tsx'
 import { PinInputStory } from './PinInput.story.tsx'
 import { TextAreaStory } from './TextArea.story'
@@ -52,7 +53,7 @@ export const categories: StoryCategory[] = [
   },
   {
     name: 'Forms',
-    stories: [ButtonStory, IconButtonStory, TextFieldStory, TextAreaStory, PinInputStory, SelectStory, CheckboxStory, RadioStory, SwitchStory, SliderStory, SearchFieldStory, FieldGroupStory],
+    stories: [ButtonStory, IconButtonStory, FabStory, TextFieldStory, TextAreaStory, PinInputStory, SelectStory, CheckboxStory, RadioStory, SwitchStory, SliderStory, SearchFieldStory, FieldGroupStory],
   },
   {
     name: 'Display',
