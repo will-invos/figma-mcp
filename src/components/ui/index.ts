@@ -132,5 +132,10 @@ export { default as ProgressGroup } from './ProgressGroup';
 export type { ProgressGroupProps } from './ProgressGroup';
 
 // Tag variants
-export { default as TagBar } from './TagBar';
-export type { TagBarProps, TagBarItem } from './TagBar';
+export { default as ChipBar } from './ChipBar';
+export type { ChipBarProps, ChipBarItem } from './ChipBar';
+
+/** @deprecated 已更名為 `ChipBar`（對齊 Figma「Chip bar」），請改用 `ChipBar`。 */
+export { default as TagBar } from './ChipBar';
+/** @deprecated 請改用 `ChipBarProps` / `ChipBarItem`。 */
+export type { ChipBarProps as TagBarProps, ChipBarItem as TagBarItem } from './ChipBar';

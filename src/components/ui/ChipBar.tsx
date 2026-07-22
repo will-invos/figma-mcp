@@ -1,16 +1,16 @@
 import React from 'react'
 import Badge from './Badge'
-import './TagBar.css'
+import './ChipBar.css'
 
-interface TagBarItem {
+interface ChipBarItem {
   key: string
   label: string
   /** Optional badge next to the label: 'dot' (unread marker) or a numeric count. */
   badge?: 'dot' | number
 }
 
-interface TagBarProps {
-  items: TagBarItem[]
+interface ChipBarProps {
+  items: ChipBarItem[]
   /** Currently selected key (single-select). */
   activeKey?: string
   onChange?: (key: string) => void
@@ -19,12 +19,12 @@ interface TagBarProps {
   className?: string
 }
 
-/** Horizontal selectable tag bar — pick one of several options. */
-const TagBar = React.forwardRef<HTMLDivElement, TagBarProps>(
+/** Horizontal selectable chip bar — pick one of several options. */
+const ChipBar = React.forwardRef<HTMLDivElement, ChipBarProps>(
   ({ items, activeKey, onChange, scrollable = true, className }, ref) => {
     const classes = [
-      'ui-tag-bar',
-      scrollable && 'ui-tag-bar--scroll',
+      'ui-chip-bar',
+      scrollable && 'ui-chip-bar--scroll',
       className,
     ].filter(Boolean).join(' ')
     return (
@@ -37,7 +37,7 @@ const TagBar = React.forwardRef<HTMLDivElement, TagBarProps>(
               type="button"
               role="tab"
               aria-selected={active}
-              className={['ui-tag-bar__item', active && 'ui-tag-bar__item--active']
+              className={['ui-chip-bar__item', active && 'ui-chip-bar__item--active']
                 .filter(Boolean).join(' ')}
               onClick={() => onChange?.(item.key)}
             >
@@ -55,6 +55,6 @@ const TagBar = React.forwardRef<HTMLDivElement, TagBarProps>(
     )
   }
 )
-TagBar.displayName = 'TagBar'
-export default TagBar
-export type { TagBarProps, TagBarItem }
+ChipBar.displayName = 'ChipBar'
+export default ChipBar
+export type { ChipBarProps, ChipBarItem }

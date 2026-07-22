@@ -125,7 +125,7 @@
 | `--radius-300` | 12 | **Button large、CardItem、PinInput、Select、SnackBar、TextField、TextArea**（最常用） |
 | `--radius-400` | 16 | Dialog、Toast、InAppNotification |
 | `--radius-600` | 24 | Sheet 頂部、Switch track |
-| `--radius-full` | 9999 | Avatar、Badge、IconButton、ProgressBar、Slider track、Switch thumb、TagBar、SheetHeader 把手 |
+| `--radius-full` | 9999 | Avatar、Badge、IconButton、ProgressBar、Slider track、Switch thumb、ChipBar、SheetHeader 把手 |
 
 > Radio / Spinner / Slider thumb / TabBar 圓點直寫 `border-radius: 50%`（純圓形 width=height，不透過 token）。`--radius-0/50/100/500/800/1000` 目前未使用。
 
@@ -169,7 +169,7 @@
 | 文字輸入欄 focus | `border-color: var(--color-border-brand)` + `box-shadow: inset 0 0 0 1px var(--color-border-brand)`（1px border + 1px inset shadow，視覺 2px、避免 layout shift） |
 | 文字輸入欄 error | `border-color: var(--color-border-danger)` + 同樣 inset shadow（**僅 `:not(:focus)` 時生效**——focus 永遠優先顯示 brand 框） |
 | Checkbox / Radio | 預設 `2px solid var(--color-border-default)`，選中 / 錯誤改 `border-color` |
-| 卡片 / 容器分隔（CardItem、TagBar item） | `1px solid var(--color-border-subtle)` |
+| 卡片 / 容器分隔（CardItem、ChipBar item） | `1px solid var(--color-border-subtle)` |
 | TabBar 上緣（chrome ↔ 內容） | `border-top: 1px solid var(--color-border-subtle)` |
 
 > **不畫線的地方**：ListItem / ListHeader / ListFooter 之間沒有 border，靠背景色與 padding 區隔；Divider 元件用 `background-color + height`（不是 border）；Badge / TabBar 重疊描邊用 `--color-background-*`（不破壞語意 border 色）。

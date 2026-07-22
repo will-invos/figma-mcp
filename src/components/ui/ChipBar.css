@@ -1,25 +1,25 @@
-/* Per Figma 19639663 — Tag bar
-   Container: bg white, padding 12 16, gap 8 between tags
-   Tag button:
+/* Per Figma 10972:5455 — Chip bar
+   Container: bg white, padding 12 16, gap 8 between chips
+   Chip:
      - Default: white bg, 1px #edeff3 border, text #3b3c43
      - Selected: #2a2c35 bg, no border, text #f7f8f9
      - Padding: 6 16, radius 999 (pill), gap 4 (between text/badges) */
-.ui-tag-bar {
+.ui-chip-bar {
   display: flex;
   align-items: center;
   gap: var(--space-200);
   padding: var(--space-300) var(--space-400);
   background: var(--color-background-default);
 }
-.ui-tag-bar--scroll {
+.ui-chip-bar--scroll {
   overflow-x: auto;
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
-.ui-tag-bar--scroll::-webkit-scrollbar {
+.ui-chip-bar--scroll::-webkit-scrollbar {
   display: none;
 }
-.ui-tag-bar__item {
+.ui-chip-bar__item {
   flex-shrink: 0;
   display: inline-flex;
   align-items: center;
@@ -33,11 +33,11 @@
   transition: background-color 0.15s, color 0.15s, border-color 0.15s;
 }
 @media (hover: hover) {
-  .ui-tag-bar__item:not(.ui-tag-bar__item--active):hover {
+  .ui-chip-bar__item:not(.ui-chip-bar__item--active):hover {
     background: var(--color-background-sunken);
   }
 }
-.ui-tag-bar__item--active {
+.ui-chip-bar__item--active {
   background: var(--color-background-inverse-default);
   color: var(--color-content-inverse-bold);
   border-color: transparent;

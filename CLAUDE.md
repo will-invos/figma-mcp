@@ -64,7 +64,7 @@ React + TypeScript + Vite，「發票存摺」共用 UI Kit 與 design tokens。
 | 卡片（內容 + 描述） | `<CardItem>` |
 | 列表的 header / footer | `<ListHeader>` / `<ListFooter>` |
 | 分隔線 | `<Divider>` |
-| 標籤（可多個） | `<Tag>` / 多個並排用 `<TagBar>` |
+| 標籤（可多個） | `<Tag>` / 可選取的 chips 列用 `<ChipBar>` |
 | 數字徽章（通知未讀數） | `<Badge>` |
 | 使用者頭像 | `<Avatar>` |
 | 載入指示器 | `<Spinner>` |

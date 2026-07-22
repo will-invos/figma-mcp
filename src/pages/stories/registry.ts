@@ -23,7 +23,7 @@ import { FieldGroupStory } from './FieldGroup.story.tsx'
 
 // Display
 import { TagStory } from './Tag.story'
-import { TagBarStory } from './TagBar.story.tsx'
+import { ChipBarStory } from './ChipBar.story.tsx'
 import { BadgeStory } from './Badge.story'
 import { AvatarStory } from './Avatar.story'
 import { ListItemStory } from './ListItem.story.tsx'
@@ -57,7 +57,7 @@ export const categories: StoryCategory[] = [
   },
   {
     name: 'Display',
-    stories: [TagStory, TagBarStory, BadgeStory, AvatarStory, ListItemStory, ListHeaderStory, ListFooterStory, CardItemStory, IconsStory],
+    stories: [TagStory, ChipBarStory, BadgeStory, AvatarStory, ListItemStory, ListHeaderStory, ListFooterStory, CardItemStory, IconsStory],
   },
   {
     name: 'Feedback',
