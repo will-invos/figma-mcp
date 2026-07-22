@@ -44,9 +44,27 @@ function insert(tree, path, value) {
   node[leaf] = { value }
 }
 
+// web 輸出排除清單（2026-07-22 定案：Figma-only token 不納入 web 輸出；tokens.json 母版仍保留全部）
+const WEB_EXCLUDE = [
+  /\/theme\//,          // 主題色系（green/rock/lavender/girl/lake/apple，含其 gradient/graident——graident 為 Figma 端既有命名，照 Figma 為準）
+  /\/category\//,       // 消費類別色
+  // 注意：brand gradient（color/*/brand/gradient/*）web 有使用，不排除
+  /^color\/border\/seondary$/,   // Figma 端既有命名，web 未使用
+  /^color\/border\/fixed\/brand$/,
+  /^space\/(0|1000|1200|1400|1600|1800|2000|2400|3000|3600|4000|5000)$/, // 大間距，web 未使用
+]
+const webInclude = (name) => !WEB_EXCLUDE.some((re) => re.test(name))
+
 const lightTree = {}, darkTree = {}
-for (const t of colors) { insert(lightTree, t.name, t.light); insert(darkTree, t.name, t.dark) }
-for (const t of sizes) insert(lightTree, t.name, t.value)
+let excluded = 0
+for (const t of colors) {
+  if (!webInclude(t.name)) { excluded++; continue }
+  insert(lightTree, t.name, t.light); insert(darkTree, t.name, t.dark)
+}
+for (const t of sizes) {
+  if (!webInclude(t.name)) { excluded++; continue }
+  insert(lightTree, t.name, t.value)
+}
 
 // ---------- 4. 產出 CSS（light → :root、dark → [data-theme="dark"]） ----------
 mkdirSync(`${HERE}dist`, { recursive: true })
@@ -76,5 +94,5 @@ writeFileSync(
 rmSync(`${HERE}dist/tokens.light.css`)
 rmSync(`${HERE}dist/tokens.dark.css`)
 
-console.log(`✅ tokens.json：colors ${colors.length}、sizes ${sizes.length}`)
-console.log('✅ dist/tokens.css 已產出')
+console.log(`✅ tokens.json：colors ${colors.length}、sizes ${sizes.length}（母版全收）`)
+console.log(`✅ dist/tokens.css 已產出（web 輸出排除 ${excluded} 個 Figma-only token）`)

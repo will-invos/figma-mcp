@@ -126,7 +126,7 @@
 | `--radius-300` | 12 | **Button large、CardItem、PinInput、Select、SnackBar、TextField、TextArea**（最常用） |
 | `--radius-400` | 16 | Dialog、Toast、InAppNotification、Fab |
 | `--radius-600` | 24 | Sheet 頂部、Switch track |
-| `--radius-full` | 9999 | Avatar、Badge、IconButton、ProgressBar、Slider track、Switch thumb、ChipBar、SheetHeader 把手 |
+| `--radius-full` | 999 | Avatar、Badge、IconButton、ProgressBar、Slider track、Switch thumb、ChipBar、SheetHeader 把手 |
 
 > Radio / Spinner / Slider thumb / TabBar 圓點 / DottedController 圓點直寫 `border-radius: 50%`（純圓形 width=height，不透過 token）。`--radius-0/50/100/500/800/1000` 目前未使用。
 

@@ -11,5 +11,5 @@
   --radius-600: 24px;
   --radius-800: 32px;
   --radius-1000: 40px;
-  --radius-full: 9999px;
+  --radius-full: 999px; /* 對齊 Figma radius/full（2026-07-22 定案） */
 }

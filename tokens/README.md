@@ -27,7 +27,9 @@ dist/tokens.css（:root light + [data-theme="dark"]）…未來加 Swift / Compo
 2. 跑 `npm run tokens:build`
 3. 看 `tokens.json` 的 git diff 確認變更符合預期 → commit
 
-## 現況（2026-07-22 驗證結果）
+## 現況（2026-07-22 驗證與定案）
 
-- 首次倒出：colors 275（Light/Dark）、sizes 38，與手寫 CSS 比對 **值零漂移**（163/164 色彩 token 完全等值；唯一差異為命名與涵蓋範圍，見 handoff §3.2）
-- `dist/tokens.css` **尚未接管** `src/components/ui/tokens/*.css` —— 正式切換屬第二步，需先解決：Figma 端 `seondary` / `graident` 錯字、`radius/full` 999 vs 9999 對齊、112 個 theme/category token 是否納入 web
+- 首次倒出：colors 275（Light/Dark）、sizes 38，與手寫 CSS 比對 **值零漂移**
+- 已定案：`radius/full` = 999（CSS 已對齊）；Figma-only token（theme/*、category/* 等）**不納入 web 輸出**（`build.mjs` 的 `WEB_EXCLUDE`）；Figma 端命名照現狀為準
+- 過濾後 `dist/tokens.css` 共 189 個 token，與手寫 CSS **完全對齊**（唯一差異：`--color-border-secondary` 為 CSS 殘留、未使用，接管時自然移除）
+- `dist/tokens.css` **尚未接管** `src/components/ui/tokens/*.css` —— 正式切換屬第二步（連同 Swift / Compose 輸出）
