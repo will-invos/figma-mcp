@@ -205,7 +205,7 @@ tokens.css  ios-colors/*.colorset   values(+night)/colors.xml
 
 ### 5.3 Icon / 資產管線是 web-only〔P1〕
 - icon 為 icon font（`src/components/ui/icons/invos.woff2`，255 顆），native 無法直接吃。
-- [ ] 確認是否有 SVG 源
+- [x] ~~確認是否有 SVG 源~~ ✅ **SVG 源已入 repo**（2026-07-22）：[src/assets/icons/](../src/assets/icons/) 274 顆，16×16 viewBox。注意：`fill="black"` 寫死（非 `currentColor`），建管線時需正規化
 - [ ] 建 SVG → web font + iOS asset catalog + Android vector drawable 管線 + 命名對照（`icon-scan` ↔ `ic_scan`）
 
 ### 5.4 a11y / 內容規則〔P2〕
