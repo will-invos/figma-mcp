@@ -20,6 +20,23 @@
   color: var(--color-content-default);
 }
 
+/* storybook 預覽用：把整頁範本框成固定手機尺寸（實際頁面不會用到這個 class）。
+   內部 .tpl-page 改為填滿框、可捲動，取代原本的 100dvh / 置中。 */
+.tpl-preview-frame {
+  width: 393px;
+  height: 760px;
+  overflow: hidden;
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-500);
+}
+
+.tpl-preview-frame .tpl-page {
+  min-height: 0;
+  height: 100%;
+  max-width: none;
+  margin: 0;
+}
+
 /* 內容捲動區：夾在 NavigationBar 與 TabBar 之間，只有這一段會捲動 */
 .tpl-page__body {
   flex: 1 1 auto;

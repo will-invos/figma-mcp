@@ -1,4 +1,12 @@
-import type { StoryCategory, StoryDef } from './types'
+import type { StoryCategory, StorySection, StoryDef } from './types'
+
+// Templates (頁面範本 —— 新頁面起手式)
+import {
+  MainTabTemplateStory,
+  ListTemplateStory,
+  FormTemplateStory,
+  DetailTemplateStory,
+} from './Templates.story.tsx'
 
 // Chrome
 import { NavigationBarStory } from './NavigationBar.story.tsx'
@@ -49,28 +57,46 @@ import { InAppNotificationStory } from './InAppNotification.story.tsx'
 import { DialogStory } from './Dialog.story.tsx'
 import { SheetStory } from './Sheet.story.tsx'
 
-export const categories: StoryCategory[] = [
+/** 側邊欄頂層區塊（可收合）→ category → story */
+export const sections: StorySection[] = [
   {
-    name: 'Chrome',
-    stories: [NavigationBarStory, TabBarStory, PageNavigationStory, TabsStory, DividerStory],
+    name: 'UI Kit',
+    categories: [
+      {
+        name: 'Chrome',
+        stories: [NavigationBarStory, TabBarStory, PageNavigationStory, TabsStory, DividerStory],
+      },
+      {
+        name: 'Forms',
+        stories: [ButtonStory, IconButtonStory, FabStory, TextFieldStory, TextAreaStory, PinInputStory, SelectStory, CheckboxStory, RadioStory, SwitchStory, SliderStory, SearchFieldStory, FieldGroupStory],
+      },
+      {
+        name: 'Display',
+        stories: [TagStory, ChipBarStory, BadgeStory, AvatarStory, ListItemStory, ListHeaderStory, ListFooterStory, CardItemStory, DottedControllerStory, IconsStory],
+      },
+      {
+        name: 'Feedback',
+        stories: [BannerStory, SpinnerStory, ProgressBarStory, ProgressGroupStory, ToastStory, SnackBarStory, InAppNotificationStory, TooltipStory, PageStatusStory],
+      },
+      {
+        name: 'Overlay',
+        stories: [DialogStory, SheetStory],
+      },
+    ],
   },
   {
-    name: 'Forms',
-    stories: [ButtonStory, IconButtonStory, FabStory, TextFieldStory, TextAreaStory, PinInputStory, SelectStory, CheckboxStory, RadioStory, SwitchStory, SliderStory, SearchFieldStory, FieldGroupStory],
-  },
-  {
-    name: 'Display',
-    stories: [TagStory, ChipBarStory, BadgeStory, AvatarStory, ListItemStory, ListHeaderStory, ListFooterStory, CardItemStory, DottedControllerStory, IconsStory],
-  },
-  {
-    name: 'Feedback',
-    stories: [BannerStory, SpinnerStory, ProgressBarStory, ProgressGroupStory, ToastStory, SnackBarStory, InAppNotificationStory, TooltipStory, PageStatusStory],
-  },
-  {
-    name: 'Overlay',
-    stories: [DialogStory, SheetStory],
+    name: 'Template',
+    // 單一 category、無次標題（name 留空，Sidebar 不 render label）
+    categories: [
+      {
+        name: '',
+        stories: [MainTabTemplateStory, ListTemplateStory, FormTemplateStory, DetailTemplateStory],
+      },
+    ],
   },
 ]
+
+export const categories: StoryCategory[] = sections.flatMap((s) => s.categories)
 
 export const storyMap: Record<string, StoryDef> = Object.fromEntries(
   categories.flatMap((cat) => cat.stories.map((s) => [s.name, s]))

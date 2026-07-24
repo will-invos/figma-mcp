@@ -89,24 +89,26 @@ export default function Preview({ story, values }: PreviewProps) {
         </div>
       </div>
 
-      <section className="cs-preview__code">
-        <div className="cs-preview__code-header">
-          <span className="cs-preview__code-title">Code</span>
-          <button
-            type="button"
-            className="cs-preview__code-copy"
-            onClick={handleCopy}
-          >
-            {copied ? 'Copied' : 'Copy'}
-          </button>
-        </div>
-        {story.Render && (
-          <div className="cs-preview__code-note">
-            ✱ 此 story 採自訂渲染，下方僅顯示根元件 props，未含外層包裝或 children
+      {!story.hideCode && (
+        <section className="cs-preview__code">
+          <div className="cs-preview__code-header">
+            <span className="cs-preview__code-title">Code</span>
+            <button
+              type="button"
+              className="cs-preview__code-copy"
+              onClick={handleCopy}
+            >
+              {copied ? 'Copied' : 'Copy'}
+            </button>
           </div>
-        )}
-        <pre className="cs-preview__code-block"><code>{snippet}</code></pre>
-      </section>
+          {story.Render && (
+            <div className="cs-preview__code-note">
+              ✱ 此 story 採自訂渲染，下方僅顯示根元件 props，未含外層包裝或 children
+            </div>
+          )}
+          <pre className="cs-preview__code-block"><code>{snippet}</code></pre>
+        </section>
+      )}
     </main>
   )
 }

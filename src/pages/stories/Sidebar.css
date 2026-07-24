@@ -17,12 +17,36 @@
   display: contents;
 }
 
-.cs-sidebar__title {
-  margin: 0 0 var(--space-400);
-  padding: 0 var(--space-200);
+.cs-sidebar__section {
+  margin-bottom: var(--space-300);
+}
+
+/* 頂層可收合區塊標題（Template / UI Kit） */
+.cs-sidebar__section-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-100);
+  width: 100%;
+  margin-bottom: var(--space-200);
+  padding: var(--space-150) var(--space-200);
+  border: none;
+  border-radius: var(--radius-150);
+  background: transparent;
+  font-family: var(--font-family);
   font-size: 14px;
   font-weight: 600;
   color: var(--color-content-bold);
+  cursor: pointer;
+  transition: background-color 0.15s;
+}
+
+.cs-sidebar__section-header:hover {
+  background: var(--color-background-neutral-subtle);
+}
+
+.cs-sidebar__section-header i {
+  font-size: 16px;
+  color: var(--color-content-subtle);
 }
 
 .cs-sidebar__group {

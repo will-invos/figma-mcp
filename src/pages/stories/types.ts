@@ -41,6 +41,8 @@ export interface StoryDef {
   fixedProps?: Record<string, any>
   /** Optional fixed width (px) for the preview container */
   previewWidth?: number
+  /** 隱藏 Code 區塊——用於不會被程式碼直接引用的 story（如頁面範本）。 */
+  hideCode?: boolean
   /** Custom render component for stories needing extra state or wrappers (e.g. Dialog, Toast).
    *  Receives current controlled prop values. Omit for default: <Component {...fixedProps} {...values} /> */
   Render?: React.ComponentType<{ values: Record<string, any> }>
@@ -49,4 +51,10 @@ export interface StoryDef {
 export interface StoryCategory {
   name: string
   stories: StoryDef[]
+}
+
+/** 側邊欄頂層可收合區塊，內含若干 category。 */
+export interface StorySection {
+  name: string
+  categories: StoryCategory[]
 }
