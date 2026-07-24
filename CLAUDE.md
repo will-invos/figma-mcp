@@ -119,7 +119,7 @@ PingFang TC 在 remote Figma Plugin API 不可用。直接修改文字（非透�
 
 | 場景 | 複製這份 | 預覽路由 |
 |------|---------|---------|
-| 一般頁面（起手式骨架） | `BlankTemplate.tsx` | `#/templates/blank` |
+| 一般頁面（起手式骨架） | `MainTabTemplate.tsx` | `#/templates/blank` |
 | 清單 / 設定 / 選單 | `ListTemplate.tsx` | `#/templates/list` |
 | 新增 / 編輯表單 | `FormTemplate.tsx` | `#/templates/form` |
 | 單筆資料詳情 | `DetailTemplate.tsx` | `#/templates/detail` |

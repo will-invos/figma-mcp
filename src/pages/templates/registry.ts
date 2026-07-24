@@ -1,5 +1,5 @@
 import type { ComponentType } from 'react'
-import BlankTemplate from './BlankTemplate'
+import MainTabTemplate from './MainTabTemplate'
 import ListTemplate from './ListTemplate'
 import FormTemplate from './FormTemplate'
 import DetailTemplate from './DetailTemplate'
@@ -21,8 +21,8 @@ export const templates: TemplateDef[] = [
     slug: 'blank',
     name: '基本空白頁',
     description: 'NavigationBar + 內容區 + TabBar 的最小骨架，所有頁面的起手式。',
-    file: 'BlankTemplate.tsx',
-    Component: BlankTemplate,
+    file: 'MainTabTemplate.tsx',
+    Component: MainTabTemplate,
   },
   {
     slug: 'list',

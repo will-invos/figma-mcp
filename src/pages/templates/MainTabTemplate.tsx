@@ -1,12 +1,12 @@
 /* ================================================================== *
- * Template：基本空白頁（五個主要 tab 的頁面起手式）
+ * Template：五個主要 tab 的頁面起手式
  * 從這份複製新頁面，再依需求修改。細節規則見 CLAUDE.md「新頁面起手式」。
  * 結構：NavigationBar（large 標題）→ 內容區（自由捲動）→ TabBar
  * ================================================================== */
 import { useState } from 'react'
 import { NavigationBar, TabBar } from '@/components/ui'
 
-export default function BlankTemplate() {
+export default function MainTabTemplate() {
   const [tab, setTab] = useState('invoice')
 
   return (

@@ -1,8 +1,8 @@
 /* ================================================================== *
  * Template：詳情 / 內容頁（單筆資料細節）
- * 對齊 Figma「Detail」母版：NavigationBar（back + 置中標題）→ sunken 底色上
- * 堆疊白色 section 卡片 → 置底 CTA 按鈕（上緣 divider）。
- * 元件選用見 CLAUDE.md 決策樹；金額 / 期數 / 日期格式照 design.md §2.3。
+ * 對齊 Figma「Detail」母版：NavigationBar（back + 置中標題）
+ * 堆疊白色 section 卡片 → 置底 CTA 按鈕（上緣 divider）
+ * 元件選用見 CLAUDE.md 決策樹；金額 / 期數 / 日期格式照 design.md §2.3
  * ================================================================== */
 import { NavigationBar, IconButton, Button, Divider } from '@/components/ui'
 
