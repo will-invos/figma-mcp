@@ -19,7 +19,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   line-height: 1.5;
   color: var(--color-content-default, #3b3c43);
-  background-color: var(--color-background-default, #ffffff);
+  background-color: var(--color-background-neutral-subtle);
 }
 
 h1, h2, h3, h4, h5, h6 {

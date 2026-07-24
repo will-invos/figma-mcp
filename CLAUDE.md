@@ -115,6 +115,17 @@ PingFang TC 在 remote Figma Plugin API 不可用。直接修改文字（非透�
 
 ## 新頁面起手式（給 AI）
 
+**先從範本複製**，不要從零建頁面。範本在 `src/pages/templates/`，涵蓋預設建立格式（外框、結構、token 用法都已就位）：
+
+| 場景 | 複製這份 | 預覽路由 |
+|------|---------|---------|
+| 一般頁面（起手式骨架） | `BlankTemplate.tsx` | `#/templates/blank` |
+| 清單 / 設定 / 選單 | `ListTemplate.tsx` | `#/templates/list` |
+| 新增 / 編輯表單 | `FormTemplate.tsx` | `#/templates/form` |
+| 單筆資料詳情 | `DetailTemplate.tsx` | `#/templates/detail` |
+
+`#/templates` 是範本索引頁。外框規則收斂在 `templates.css`（`.tpl-page` = max-width 480px 等）。複製後照下列規則調整：
+
 1. 查 Component Decision Tree 找對應元件
 2. 從 `'@/components/ui'` barrel import（**不要深層 import**）
 3. **頁面 `max-width: 480px`**、viewport meta：`width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover`
