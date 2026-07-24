@@ -40,10 +40,28 @@
   gap: var(--space-300);
 }
 
-/* 底部主要動作區（表單送出等），貼齊 body 底部 */
+/* 底部主要動作區（表單送出、置底 CTA），貼齊 body 底部 */
 .tpl-actions {
   padding: var(--space-400);
   display: flex;
   flex-direction: column;
   gap: var(--space-200);
+}
+
+/* 詳情頁：sunken 底色上，白色 section 卡片以 16px 間距堆疊 */
+.tpl-section-stack {
+  min-height: 100%;
+  background: var(--color-background-sunken);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-400);
+}
+
+/* 單張白色 section 卡片 */
+.tpl-section-card {
+  background: var(--color-background-default);
+  padding: var(--space-400);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-400);
 }

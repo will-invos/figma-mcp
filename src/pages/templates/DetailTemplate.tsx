@@ -1,9 +1,10 @@
 /* ================================================================== *
  * Template：詳情 / 內容頁（單筆資料細節）
- * 返回鍵 + 可捲動內容 + PageNavigation 上下筆。元件選用見 CLAUDE.md 決策樹。
- * 金額 / 期數 / 日期格式照 design.md §2.3（範例見下方 ListItem）。
+ * 對齊 Figma「Detail」母版：NavigationBar（back + 置中標題）→ sunken 底色上
+ * 堆疊白色 section 卡片 → 置底 CTA 按鈕（上緣 divider）。
+ * 元件選用見 CLAUDE.md 決策樹；金額 / 期數 / 日期格式照 design.md §2.3。
  * ================================================================== */
-import { NavigationBar, IconButton, PageNavigation, ListItem, Divider } from '@/components/ui'
+import { NavigationBar, IconButton, Button, Divider } from '@/components/ui'
 
 interface DetailTemplateProps {
   onBack?: () => void
@@ -13,7 +14,7 @@ export default function DetailTemplate({ onBack }: DetailTemplateProps) {
   return (
     <div className="tpl-page">
       <NavigationBar
-        title="發票明細"
+        title="頁面標題"
         titleSize="regular"
         leading={
           <IconButton
@@ -25,39 +26,36 @@ export default function DetailTemplate({ onBack }: DetailTemplateProps) {
             onClick={onBack}
           />
         }
-        trailing={
-          <IconButton
-            variant="ghost"
-            colorType="neutral"
-            size="medium"
-            aria-label="更多"
-            icon={<i className="icon-dots-arrow-right" aria-hidden="true" />}
-          />
-        }
       />
 
+      {/* 內容區：sunken 底色，白色 section 卡片以間距堆疊 */}
       <div className="tpl-page__body">
-        {/* 上一筆 / 下一筆導覽 */}
-        <PageNavigation
-          label="AB-12345678"
-          onPrev={() => {}}
-          onNext={() => {}}
-        />
+        <div className="tpl-section-stack">
+          {/* 主標題 section */}
+          <section className="tpl-section-card">
+            <h2 className="text-heading-large" style={{ color: 'var(--color-content-bold)' }}>
+              標題
+            </h2>
+            <p className="text-body-large">說明文字，補充這筆資料的重點描述。</p>
+          </section>
 
-        <div className="tpl-section" style={{ gap: 'var(--space-200)' }}>
-          {/* 金額主資訊 */}
-          <span className="text-body-medium" style={{ color: 'var(--color-content-subtle)' }}>
-            消費金額
-          </span>
-          <span className="text-display-small">$1,280</span>
+          {/* 內容 section（可複製多個） */}
+          <section className="tpl-section-card">
+            <h3 className="text-heading-small">段落標題</h3>
+            <p className="text-body-large">段落內容，放這個區塊要呈現的細節。</p>
+          </section>
+
+          <section className="tpl-section-card">
+            <h3 className="text-heading-small">段落標題</h3>
+            <p className="text-body-large">段落內容，放這個區塊要呈現的細節。</p>
+          </section>
         </div>
+      </div>
 
-        <Divider />
-
-        {/* 明細列 —— 用 ListItem 的 text trailing 呈現 key-value */}
-        <ListItem headline="開立日期" trailing="text" trailingText="2026/07/31" />
-        <ListItem headline="發票期數" trailing="text" trailingText="115 年 7-8 月" />
-        <ListItem headline="賣方" trailing="text" trailingText="全聯實業" showDivider={false} />
+      {/* 置底 CTA：上緣 divider + 整寬主要動作按鈕 */}
+      <Divider />
+      <div className="tpl-actions">
+        <Button variant="filled" colorType="primary" size="large" text="主要動作" onClick={() => {}} />
       </div>
     </div>
   )
