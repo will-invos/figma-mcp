@@ -65,6 +65,24 @@
   gap: var(--space-200);
 }
 
+/* 表單內並排的單選 / 多選項（radio group、checkbox group） */
+.tpl-field-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-400);
+}
+
+/* 與上一個表單元件再拉開一段（例如置底的同意條款） */
+.tpl-field-offset {
+  margin-top: var(--space-200);
+}
+
+/* 表單內嵌的文字連結（例如同意條款） */
+.tpl-link {
+  color: var(--color-content-link-default);
+  text-decoration: underline;
+}
+
 /* 詳情頁：sunken 底色上，白色 section 卡片以 16px 間距堆疊 */
 .tpl-section-stack {
   min-height: 100%;
