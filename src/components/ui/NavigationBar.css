@@ -96,13 +96,8 @@
   height: 44px;
 }
 
-/* ===== Home + Large: single 56px nav, title left, trailing right ===== */
-.ui-nav-bar--home.ui-nav-bar--large {
-  flex-direction: row;
-  align-items: center;
-  padding: 0;
-  min-height: 56px;
-}
+/* ===== Home / Search / Tabs + Large: 56px nav row (title left, trailing right).
+   Root stays column so the add-on / divider stack below the title row. ===== */
 .ui-nav-bar__nav {
   position: relative;
   display: flex;
@@ -112,7 +107,8 @@
   height: 56px;
   padding: 0 0 0 var(--space-400);
 }
-.ui-nav-bar--home.ui-nav-bar--large .ui-nav-bar__trailing {
+/* Trailing sits in __nav's space-between flow, not absolutely pinned. */
+.ui-nav-bar__nav .ui-nav-bar__trailing {
   position: static;
   flex-shrink: 0;
   padding-right: var(--space-100);

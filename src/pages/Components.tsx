@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react'
-import { categories, storyMap, defaultStoryName } from './stories/registry'
+import { sections, storyMap, defaultStoryName } from './stories/registry'
 import Sidebar from './stories/Sidebar'
 import Preview from './stories/Preview'
 import Controls from './stories/Controls'
@@ -66,7 +66,7 @@ export default function Components() {
   return (
     <div className="cs-layout">
       <Sidebar
-        categories={categories}
+        sections={sections}
         activeStory={activeStory}
         onSelect={handleSelect}
         open={sidebarOpen}

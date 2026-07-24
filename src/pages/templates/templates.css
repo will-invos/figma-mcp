@@ -1,0 +1,102 @@
+/* ------------------------------------------------------------------ *
+ * 頁面外框（Page shell）—— 所有 prototype 頁面共用的預設格式
+ *
+ * 起手式規則（見 CLAUDE.md「新頁面起手式」）都收斂在這裡：
+ *  - 頁面 max-width: 480px、水平置中（桌機模擬手機視窗）
+ *  - 直向 flex：NavigationBar 固定頂部 → body 自由捲動 → TabBar 固定底部
+ *  - 顏色一律走 token，dark mode 由 token 自動切換，不需另寫
+ *
+ * 複製 template 時連同這份 class 一起用即可，不要另寫 magic number。
+ * ------------------------------------------------------------------ */
+
+.tpl-page {
+  max-width: 480px;
+  margin: 0 auto;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-background-default);
+  color: var(--color-content-default);
+}
+
+/* storybook 預覽用：把整頁範本框成固定手機尺寸（實際頁面不會用到這個 class）。
+   內部 .tpl-page 改為填滿框、可捲動，取代原本的 100dvh / 置中。 */
+.tpl-preview-frame {
+  width: 393px;
+  height: 760px;
+  overflow: hidden;
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-500);
+}
+
+.tpl-preview-frame .tpl-page {
+  min-height: 0;
+  height: 100%;
+  max-width: none;
+  margin: 0;
+}
+
+/* 內容捲動區：夾在 NavigationBar 與 TabBar 之間，只有這一段會捲動 */
+.tpl-page__body {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* 分組型頁面（設定、列表）常用的下沉底色 */
+.tpl-page__body--sunken {
+  background: var(--color-background-neutral-subtle);
+}
+
+/* 一般內容用的內距容器 */
+.tpl-section {
+  padding: var(--space-400);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-300);
+}
+
+/* 底部主要動作區（表單送出、置底 CTA），貼齊 body 底部 */
+.tpl-actions {
+  padding: var(--space-400);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-200);
+}
+
+/* 表單內並排的單選 / 多選項（radio group、checkbox group） */
+.tpl-field-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-400);
+}
+
+/* 與上一個表單元件再拉開一段（例如置底的同意條款） */
+.tpl-field-offset {
+  margin-top: var(--space-200);
+}
+
+/* 表單內嵌的文字連結（例如同意條款） */
+.tpl-link {
+  color: var(--color-content-link-default);
+  text-decoration: underline;
+}
+
+/* 詳情頁：sunken 底色上，白色 section 卡片以 16px 間距堆疊 */
+.tpl-section-stack {
+  min-height: 100%;
+  background: var(--color-background-sunken);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-400);
+}
+
+/* 單張白色 section 卡片 */
+.tpl-section-card {
+  background: var(--color-background-default);
+  padding: var(--space-400);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-400);
+}
