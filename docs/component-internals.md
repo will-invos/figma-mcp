@@ -19,7 +19,7 @@
 
 | 場景 | 規格 |
 |------|------|
-| Outline 按鈕（Button、IconButton） | `1.5px solid var(--color-border-brand)` |
+| Outline 按鈕（Button、IconButton） | `1px solid var(--color-border-brand)` |
 | 文字輸入欄 default（TextField、TextArea、Select、PinInput） | `1px solid var(--color-border-default)` |
 | 文字輸入欄 focus | `border-color: var(--color-border-brand)` + `box-shadow: inset 0 0 0 1px var(--color-border-brand)`（1px border + 1px inset shadow，視覺 2px、避免 layout shift） |
 | 文字輸入欄 error | `border-color: var(--color-border-danger)` + 同樣 inset shadow（**僅 `:not(:focus)` 時生效**——focus 永遠優先顯示 brand 框） |
