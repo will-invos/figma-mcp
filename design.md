@@ -1,20 +1,23 @@
-# Design Spec — @invos/ios-ui-kit
+# Design Spec — @invos/design-system
 
-> 「發票存摺」行動端產品的設計規範。涵蓋色彩、排版、間距、元件、陰影、互動。
-> 與 [CLAUDE.md](./CLAUDE.md) 互補：CLAUDE.md 規範「**該用什麼元件**」，本檔規範「**長什麼樣**」。
+> 「發票存摺」行動端產品的設計準則。涵蓋視覺調性、色彩、排版、間距、圓角、陰影、互動與 anti-patterns。
+> 與 [CLAUDE.md](./CLAUDE.md) 互補：CLAUDE.md 規範「**該用什麼元件**」，本檔規範「**怎麼用、長什麼樣**」。
+> 元件的內部實作規格（尺寸 / 邊框 / 內距實測）另見 [docs/component-internals.md](./docs/component-internals.md)。
 
 ---
 
 ## 0. 產品定位與視覺主題
 
-**產品**：「發票存摺」mobile web + iOS/Android app。**使用者**：一般消費者 / 會員，非技術背景，單手操作。**核心任務**：雲端發票自動對獎與領獎、載具歸戶、紙本掃描對獎、消費明細查詢。
+**產品**：「發票存摺」mobile web + iOS/Android app。
+**使用者**：一般消費者 / 會員，非技術背景，優先單手操作。
+**核心任務**：雲端發票自動對獎與領獎、紙本掃描對獎、消費明細查詢、參與任務與兌換獎勵。
 
-- **整體調性**：「現代極簡」—乾淨、留白充足、藍色品牌色點綴
+- **整體調性**：「現代極簡」—乾淨、留白充足、藍色品牌色點綴，背景搭配科技感的輕量漸層色
 - **色彩語法**：大面積中性灰白底 + 藍色 (`#3560FF`) 為唯一主動作色，其他語意色僅用於提示
 - **形狀語法**：圓角偏大（按鈕 8–12、卡片 12–16），無銳角；按鈕、卡片、輸入欄統一節奏
 - **動效調性**：短促克制（0.15–0.3s），ease-in-out 為主
 
-> **AI 決策方向**：預設選 **安靜、克制、平衡**；遇對獎、發票、金流相關元件 **信任 > 趣味**，資訊清晰不誤導為先；獎勵與捐贈區塊可帶輕量正向感（用 prize / donation 語意色點綴）。
+> **AI 決策方向**：預設選 **安靜、平衡**；遇對獎、發票、金流相關元件 **信任 > 趣味**，資訊清晰不誤導為先；獎勵與捐贈區塊可帶輕量正向感（用 prize / donation 語意色點綴）。
 
 ---
 
@@ -50,13 +53,14 @@
 
 | Intent | default | 用途（發票存摺情境） |
 |--------|---------|--------------------|
-| `brand` | `#3560ff` | 主動作 / 連結 |
-| `success` | `#00bd64` | 對獎成功、已歸戶、匯款完成 |
-| `danger` | `#f4252d` | 綁定失敗、刪除 |
-| `warning` | `#ff8710` | 即將開獎、領獎期限 |
-| `prize` | `#ffc423` | 中獎獎項、累計獎金 |
-| `donation` | `#f61372` | 發票愛心碼、中獎捐贈 |
-| `neutral` | `#737380` | 灰階、無情緒語意 |
+| `brand` | `#3560ff` | 主動作 |
+| `success` | `#00bd64` | 操作成功 |
+| `danger` | `#f4252d` | 嚴重警示、操作失敗、刪除 |
+| `warning` | `#ff8710` | 預設警示 |
+| `prize` | `#ffc423` | 中獎公告、獎金/獎項 |
+| `donation` | `#f61372` | 愛心碼、捐贈發票 |
+| `neutral` | `#737380` | 無情緒語意、中性操作 |
+| `link` | `#3560ff` | 文字連結 |
 
 ### 1.4 Fixed 與 Dark Mode
 
@@ -91,11 +95,11 @@
 
 > 完整定義（含 `-display-small-light`、`-body-xsmall`、`-label-xsmall`）見 [tokens/typography.css](./src/components/ui/tokens/typography.css)。
 
-**配色預設**：標題→`--color-content-bold`、正文→`--color-content-default`、次要→`--color-content-subtle`、提示→`--color-content-subtlest`、連結→`--color-content-link-default`。
+**配色預設**：標題→`--color-content-bold`、正文→`--color-content-default`、次要→`--color-content-subtle`、失效/輸入框提示→`--color-content-subtlest`、連結→`--color-content-link-default`。
 
 > **字級縮放（跨平台現況）**：web 與 iOS 為**固定字級**（iOS 不隨 Dynamic Type）；**Android 依系統字級設定縮放** —— Android 端版面需容忍字級放大（優先換行，個案驗收）。
 
-### 2.3 內容格式規則（2026-07-22 定案）
+### 2.3 內容格式規則
 
 | 內容 | 格式 | 範例 |
 |------|------|------|
@@ -110,14 +114,14 @@
 
 ## 3. 間距與佈局
 
-### 3.1 4px-grid token（最常用幾檔）
+### 3.1 4px-grid token
 
 | Token | 值 | 用途 |
 |-------|-----|------|
 | `--space-50 / 100` | 2 / 4 | 標題↔描述微距、tag 內距 |
 | `--space-150 / 200 / 250` | 6 / 8 / 10 | small/medium 按鈕 padding、icon↔text |
 | `--space-300` | 12 | large 按鈕 padding、緊湊內距 |
-| `--space-400` | 16 | **標準容器內距、欄位間距（最常用）** |
+| `--space-400` | 16 | **標準容器內距、欄位間距** |
 | `--space-600` | 24 | 強調區塊、Dialog body |
 
 > 完整定義（含 `--space-25 / 500 / 700 / 800 / 900`）見 [tokens/spacing.css](./src/components/ui/tokens/spacing.css)。**自製容器三檔內距**：標準 16 / 緊湊 12 / 強調 24。
@@ -127,7 +131,7 @@
 - **頁面 max-width: 480px**，**不加桌機 breakpoint**（mobile-first）
 - viewport meta：`<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />`
 - 頁面結構：`NavigationBar` (top) → 內容區（自由捲動）→ `TabBar` (bottom，可選)
-- **Safe area**：`viewport-fit=cover` 下內容會延伸到瀏海 / home indicator 底下。貼底 chrome（`TabBar`、`Sheet`）與貼頂懸浮元件（`InAppNotification`）已自帶 `env(safe-area-inset-*, 0px)` padding；**自製貼邊容器時要照做**（桌機 env() 為 0，不影響非瀏海裝置）
+- **Safe area**：`viewport-fit=cover` 下內容會延伸到瀏海 / home indicator 底下。貼底 chrome（`TabBar`、`Sheet`）與貼頂懸浮元件（`InAppNotification`）已自帶 `env(safe-area-inset-*, 0px)` padding
 
 ### 3.3 圓角（實測元件對應）
 
@@ -141,7 +145,7 @@
 | `--radius-600` | 24 | Sheet 頂部、Switch track |
 | `--radius-full` | 999 | Avatar、Badge、IconButton、ProgressBar、Slider track、Switch thumb、ChipBar、SheetHeader 把手 |
 
-> Radio / Spinner / Slider thumb / TabBar 圓點 / DottedController 圓點直寫 `border-radius: 50%`（純圓形 width=height，不透過 token）。`--radius-0/50/100/500/800/1000` 目前未使用。
+> Radio / Spinner / Slider thumb / TabBar 圓點 / DottedController 圓點直寫 `border-radius: 50%`（純圓形 width=height，不透過 token）。
 
 ---
 
@@ -164,41 +168,11 @@
 
 ---
 
-## 5. 元件樣式
+## 5. 元件樣式（內部規格 → 另檔）
 
-### 5.1 Button 尺寸
+元件的**確切尺寸**（Button 各 size 的 height / radius / padding）、**邊框規格**（各輸入欄 default / focus / error、Checkbox / Radio、卡片分隔）、**容器內距實測**（CardItem / ListItem / Sheet / Dialog / FieldGroup）已移到 [docs/component-internals.md](./docs/component-internals.md)。
 
-| Size | Height | Radius | Padding | Font |
-|------|--------|--------|---------|------|
-| `large` | 48 | `--radius-300` | `--space-300` | `.text-label-large` |
-| `medium` | 38 | `--radius-250` | `--space-200` | `.text-label-medium` |
-| `small` | 30 | `--radius-200` | `--space-150` | `.text-label-small` |
-
-### 5.2 邊框
-
-| 場景 | 規格 |
-|------|------|
-| Outline 按鈕（Button、IconButton） | `1.5px solid var(--color-border-brand)` |
-| 文字輸入欄 default（TextField、TextArea、Select、PinInput） | `1px solid var(--color-border-default)` |
-| 文字輸入欄 focus | `border-color: var(--color-border-brand)` + `box-shadow: inset 0 0 0 1px var(--color-border-brand)`（1px border + 1px inset shadow，視覺 2px、避免 layout shift） |
-| 文字輸入欄 error | `border-color: var(--color-border-danger)` + 同樣 inset shadow（**僅 `:not(:focus)` 時生效**——focus 永遠優先顯示 brand 框） |
-| Checkbox / Radio | 預設 `2px solid var(--color-border-default)`，選中 / 錯誤改 `border-color` |
-| 卡片 / 容器分隔（CardItem、ChipBar item） | `1px solid var(--color-border-subtle)` |
-| TabBar 上緣（chrome ↔ 內容） | `border-top: 1px solid var(--color-border-subtle)` |
-
-> **不畫線的地方**：ListItem / ListHeader / ListFooter 之間沒有 border，靠背景色與 padding 區隔；Divider 元件用 `background-color + height`（不是 border）；Badge / TabBar 重疊描邊用 `--color-background-*`（不破壞語意 border 色）。
-
-### 5.3 容器內距（實測）
-
-| 容器 | padding | gap |
-|------|---------|-----|
-| `CardItem` Large | 無外距（父層決定） | body 內 `--space-200` |
-| `CardItem` Medium | `0 --space-400`（水平 16） | container `--space-400`、content 內 `--space-100` |
-| `ListItem` | 水平 `--space-400`；上下 `--space-400`（default/rich）或 `--space-300`（compact） | row gap `--space-400` |
-| `Sheet` body / footer | body 水平 16、footer 全 16 | 無 flex gap |
-| `SheetHeader` | 水平 `--space-400`、頂部 `--space-300` | — |
-| `Dialog` body / footer | body 全 24、footer `0 24 24` | body 主軸 `--space-600`、content 內 `--space-400`、actions `--space-400` |
-| `FieldGroup` header / help | header `--space-200 0`（無水平）、help 頂部 `--space-200` | header `--space-50`、help `--space-200` |
+> 引用這套系統做頁面 **用不到** 這些數字 —— 直接用元件 props（`<Button size="large">`）即可,它們已烘進元件。只有 **維護或擴充元件** 時才需要查,且以 code 為準。
 
 ---
 
@@ -208,7 +182,7 @@
 
 順序：`default → :focus-visible → :active → [disabled]`。
 
-**Hover 為漸進增強**，`:hover` 一定要包在 `@media (hover: hover)` 內——不是因為「行動沒有 hover」（iPad 配滑鼠、桌機開 mobile web 都有），而是要避免 **觸控點擊後 hover 樣式「黏住」** 到下次點擊他處。
+**Hover 為漸進增強**，`:hover` 一定要包在 `@media (hover: hover)` 內，避免 **觸控點擊後 hover 樣式「黏住」** 到下次點擊他處。
 
 ```css
 @media (hover: hover) { .ui-button:hover { background: var(--color-background-brand-hover); } }
@@ -223,7 +197,7 @@
 
 最小可點擊區：web / iOS **44×44px**（iOS HIG）、Android 原生端 **48×48dp**（Material 標準）；小尺寸元件（Tag、Badge）若可點擊，加透明 padding 擴大命中區。
 
-> **例外**：`DottedController` interactive 模式的命中區為 16×16 —— 輪播以滑動為主、點按僅輔助，且放大會使相鄰點命中區重疊或墊高佈局（已確認維持現狀，不要「修正」）。
+> **例外**：`DottedController` interactive 模式的命中區為 16×16 —— 輪播以滑動為主、點按僅輔助。
 
 ### 6.3 Animation
 
@@ -232,8 +206,8 @@
 **Easing 按動效類型對應**（不要混用）：
 - **pop-in**（opacity + scale）→ `ease-in-out`：Dialog body、Toast、Tooltip
 - **slide-in**（位移進入）→ `ease-out`：Sheet 從底部滑上（`0.3s`）
-- **fade-only / 連續變化** → `ease`：Dialog overlay（`0.2s`）、ProgressBar 寬度（`0.3s`）
-- **0.15s 狀態切換** → `linear`（省略不寫）：hover、focus、color
+- **fade-only / 連續變化** → `ease`：Dialog overlay（`0.2s`）
+- **0.15s 狀態切換** → `linear`：hover、focus、color、background
 - **spring-like 進出場**（客製 `cubic-bezier`，**僅限 push notification 類**）→ InAppNotification 進場用 overshoot 曲線、退場用反向 ease；`prefers-reduced-motion` 自動降為 `0.15s linear` opacity-only
 
 > 一般元件不用 spring / bounce / 客製 cubic-bezier；觸控延遲約 100ms，動畫超過 0.3s 會感覺卡。客製曲線僅在 InAppNotification 這類「需要 spring 感」的進出場使用，且**必須**附 `prefers-reduced-motion` fallback。
@@ -298,6 +272,7 @@ max-width 480、不寫桌機 breakpoint、顏色用 var(--color-*)、字級用 .
 ## 附錄
 
 - [CLAUDE.md](./CLAUDE.md) — 元件決策樹 / Figma 整合 / anti-patterns
+- [docs/component-internals.md](./docs/component-internals.md) — 元件內部規格（尺寸 / 邊框 / 內距，維護元件用）
 - [docs/dark-mode.md](./docs/dark-mode.md) — Dark mode 設定
 - [src/components/ui/tokens/](./src/components/ui/tokens/) — token 定義
 - [figma-tokens.json](./figma-tokens.json) — Figma component / style key 索引

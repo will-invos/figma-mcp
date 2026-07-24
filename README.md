@@ -1,6 +1,6 @@
-# @invos/ios-ui-kit
+# @invos/design-system
 
-> Repo: [`will-invos/iv-design-system`](https://github.com/will-invos/iv-design-system) — npm 套件名稱 `@invos/ios-ui-kit`
+> Repo: [`will-invos/iv-design-system`](https://github.com/will-invos/iv-design-system) — npm 套件名稱 `@invos/design-system`
 
 一套 iOS 風格、**行動網頁為主**的 React UI Kit，可供內部多個專案共用。
 
@@ -59,7 +59,7 @@ pnpm lint           # ESLint
 ```json
 {
   "dependencies": {
-    "@invos/ios-ui-kit": "github:will-invos/iv-design-system#v0.1.0",
+    "@invos/design-system": "github:will-invos/iv-design-system#v0.1.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
   }
@@ -76,7 +76,7 @@ npm install
 
 ```tsx
 // src/main.tsx
-import '@invos/ios-ui-kit/styles.css'
+import '@invos/design-system/styles.css'
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import App from './App'
@@ -97,8 +97,8 @@ import {
   Dialog,
   NavigationBar,
   ListItem,
-} from '@invos/ios-ui-kit'
-import type { ButtonProps } from '@invos/ios-ui-kit'
+} from '@invos/design-system'
+import type { ButtonProps } from '@invos/design-system'
 
 export default function LoginPage() {
   return (
@@ -111,7 +111,7 @@ export default function LoginPage() {
 }
 ```
 
-完整元件清單與決策樹請見 Kit 內的 [CLAUDE.md](CLAUDE.md)（被 `npm install` 時一起裝進 `node_modules/@invos/ios-ui-kit/`，AI 會自動讀到）。
+完整元件清單與決策樹請見 Kit 內的 [CLAUDE.md](CLAUDE.md)（被 `npm install` 時一起裝進 `node_modules/@invos/design-system/`，AI 會自動讀到）。
 
 ### 4. Viewport（行動網頁）
 
@@ -143,12 +143,12 @@ npm version patch     # 0.1.0 → 0.1.1（bug fix）
 修改消費端 `package.json`：
 
 ```diff
-- "@invos/ios-ui-kit": "github:will-invos/iv-design-system#v0.1.0",
-+ "@invos/ios-ui-kit": "github:will-invos/iv-design-system#v0.1.1",
+- "@invos/design-system": "github:will-invos/iv-design-system#v0.1.0",
++ "@invos/design-system": "github:will-invos/iv-design-system#v0.1.1",
 ```
 
 ```bash
-rm -rf node_modules/@invos/ios-ui-kit
+rm -rf node_modules/@invos/design-system
 npm install
 ```
 
@@ -157,7 +157,7 @@ npm install
 驗證：
 
 ```bash
-npm ls @invos/ios-ui-kit
+npm ls @invos/design-system
 ```
 
 ## Claude Code + Figma MCP 工作流程

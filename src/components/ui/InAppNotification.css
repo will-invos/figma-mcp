@@ -213,19 +213,8 @@
   border-radius: var(--radius-150, 6px);
 }
 
-/* Trailing IconButton: flat like in NavigationBar — no background on
-   hover/active. Pair the base + variant modifier so this beats the
-   IconButton per-colorType rules (0,3,0). */
-.ui-in-app-notification__trailing .ui-icon-button.ui-icon-button--ghost:active {
-  background-color: transparent;
-  color: var(--color-content-bold);
-}
-@media (hover: hover) {
-  .ui-in-app-notification__trailing .ui-icon-button.ui-icon-button--ghost:hover {
-    background-color: transparent;
-    color: var(--color-content-bold);
-  }
-}
+/* Trailing IconButton uses the ghost variant, which is already flat (no
+   background) and dims on hover/press — no per-component override needed. */
 
 /* ========================================
  * Reduced motion

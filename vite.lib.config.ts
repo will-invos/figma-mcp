@@ -13,8 +13,8 @@ import path from 'path'
  *   - index.d.ts       (type declarations via vite-plugin-dts)
  *
  * Consumers:
- *   import { Button } from '@invos/ios-ui-kit'
- *   import '@invos/ios-ui-kit/styles.css'
+ *   import { Button } from '@invos/design-system'
+ *   import '@invos/design-system/styles.css'
  */
 export default defineConfig({
   plugins: [

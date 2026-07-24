@@ -73,17 +73,8 @@
   height: 32px;
 }
 
-/* Flatten nested icon-button hover — sheet headers are already elevated */
-.ui-sheet-header .ui-icon-button:active {
-  background: transparent;
-  color: var(--color-content-default);
-}
-@media (hover: hover) {
-  .ui-sheet-header .ui-icon-button:hover {
-    background: transparent;
-    color: var(--color-content-default);
-  }
-}
+/* The close button is a ghost IconButton — already flat and dims on
+   hover/press, so no background-flattening override is needed here. */
 
 /* ===== Titles — typography comes from text-* utility classes ===== */
 .ui-sheet-header__title {
