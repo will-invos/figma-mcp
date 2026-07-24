@@ -1,6 +1,6 @@
 # Dark Mode 設定指南
 
-> 適用：消費端引入 `@invos/ios-ui-kit` 後，要在 app 加上 dark mode 支援。
+> 適用：消費端引入 `@invos/design-system` 後，要在 app 加上 dark mode 支援。
 
 ## 契約
 

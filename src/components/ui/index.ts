@@ -1,5 +1,5 @@
 // Design tokens (colors, spacing, radius, typography, shadows, icons).
-// Imported here so consumers only need `import '@invos/ios-ui-kit/styles.css'`
+// Imported here so consumers only need `import '@invos/design-system/styles.css'`
 // to get both tokens + component styles in one go.
 import './tokens/index.css';
 
