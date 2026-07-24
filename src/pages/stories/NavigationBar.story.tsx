@@ -64,7 +64,9 @@ export const NavigationBarStory: StoryDef = {
     titleSize: { type: 'enum', options: ['regular', 'large'], default: 'regular' },
     title:     { type: 'string', default: 'Title' },
     searchPlaceholder: { type: 'string', default: 'Search', when: { type: 'search' } },
-    leading:   { type: 'enum', options: ['none', 'back', 'close', 'avatar', 'text'], default: 'back' },
+    // leading 只在 regular，或 large + default 版面會渲染；large 的 home/search/tabs 沒有 leading。
+    leading:   { type: 'enum', options: ['none', 'back', 'close', 'avatar', 'text'], default: 'back',
+      when: (v) => v.titleSize === 'regular' || v.type === 'default' },
     trailing:  { type: 'enum', options: ['none', 'icon', 'icons', 'text', 'avatar'], default: 'icon' },
     divider:   { type: 'boolean', default: true },
   },

@@ -2,7 +2,10 @@ import type React from 'react'
 
 export type WhenCondition = Record<string, string | number | boolean>
 
-type PropDefBase = { when?: WhenCondition }
+/** Visibility condition: an equality map (all must match) or a predicate over current values. */
+export type WhenClause = WhenCondition | ((values: Record<string, any>) => boolean)
+
+type PropDefBase = { when?: WhenClause }
 
 export type PropDef =
   | (PropDefBase & { type: 'enum'; options: string[]; default: string;
@@ -16,6 +19,7 @@ export type PropDef =
 /** Returns true if the prop should be visible given the current values. */
 export function isPropVisible(def: PropDef, values: Record<string, any>): boolean {
   if (!def.when) return true
+  if (typeof def.when === 'function') return def.when(values)
   return Object.entries(def.when).every(([key, required]) => values[key] === required)
 }
 
