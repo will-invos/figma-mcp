@@ -185,47 +185,35 @@
  * Ghost Variant
  * ======================================== */
 
-/* ghost — primary */
-.ui-icon-button--ghost.ui-icon-button--ghost-primary {
-  background-color: var(--color-background-transparent-default);
-  color: var(--color-content-brand-default);
+/* All ghost types stay flat — no background in any state. Press/hover feedback
+ * comes from dimming the icon (opacity), so ghost buttons sit cleanly inside
+ * nav bars, sheet headers, text fields, etc. without a background chip. */
+.ui-icon-button--ghost {
+  background-color: transparent;
+  transition: opacity 0.15s;
 }
 @media (hover: hover) {
-  .ui-icon-button--ghost.ui-icon-button--ghost-primary:hover {
-    background-color: var(--color-background-transparent-hover);
+  .ui-icon-button--ghost:hover {
+    opacity: 0.8;
   }
 }
-.ui-icon-button--ghost.ui-icon-button--ghost-primary:active {
-  background-color: var(--color-background-transparent-active);
+.ui-icon-button--ghost:active {
+  opacity: 0.6;
+}
+
+/* ghost — primary */
+.ui-icon-button--ghost.ui-icon-button--ghost-primary {
+  color: var(--color-content-brand-default);
 }
 
 /* ghost — neutral */
 .ui-icon-button--ghost.ui-icon-button--ghost-neutral {
-  background-color: transparent;
   color: var(--color-content-neutral-default);
-}
-@media (hover: hover) {
-  .ui-icon-button--ghost.ui-icon-button--ghost-neutral:hover {
-    background-color: var(--color-background-transparent-hover);
-  }
-}
-.ui-icon-button--ghost.ui-icon-button--ghost-neutral:active {
-  background-color: var(--color-background-transparent-active);
 }
 
 /* ghost — fixed-white */
 .ui-icon-button--ghost.ui-icon-button--ghost-fixed-white {
-  background-color: transparent;
   color: var(--color-content-fixed-white);
-  transition: opacity 0.15s;
-}
-@media (hover: hover) {
-  .ui-icon-button--ghost.ui-icon-button--ghost-fixed-white:hover {
-    opacity: 0.8;
-  }
-}
-.ui-icon-button--ghost.ui-icon-button--ghost-fixed-white:active {
-  opacity: 0.6;
 }
 
 /* ========================================

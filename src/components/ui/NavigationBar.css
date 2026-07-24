@@ -47,18 +47,8 @@
   height: 44px;
   color: var(--color-content-default);
 }
-.ui-nav-bar__leading .ui-icon-button.ui-icon-button--ghost:active,
-.ui-nav-bar__trailing .ui-icon-button.ui-icon-button--ghost:active {
-  background-color: transparent;
-  color: var(--color-content-bold);
-}
-@media (hover: hover) {
-  .ui-nav-bar__leading .ui-icon-button.ui-icon-button--ghost:hover,
-  .ui-nav-bar__trailing .ui-icon-button.ui-icon-button--ghost:hover {
-    background-color: transparent;
-    color: var(--color-content-bold);
-  }
-}
+/* Ghost IconButtons are already flat and dim on hover/press — the nav bar
+   only needs to set the resting color above; no state override required. */
 
 /* Text button inside nav bar: use content-default color */
 .ui-nav-bar .ui-nav-bar__leading .ui-button--text {

@@ -193,15 +193,8 @@
   font-size: 24px;
 }
 
-.ui-text-field__trailing-icon .ui-icon-button:active {
-  background: none;
-  opacity: 0.6;
-}
-@media (hover: hover) {
-  .ui-text-field__trailing-icon .ui-icon-button:hover {
-    background: none;
-  }
-}
+/* The trailing clear/action button is a ghost IconButton — already flat and
+   dims on hover/press, so no per-component override is needed here. */
 
 /* Error: leading icon turns danger */
 .ui-text-field--error .ui-text-field__leading-icon {
