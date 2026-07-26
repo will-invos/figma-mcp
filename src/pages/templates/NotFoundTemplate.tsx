@@ -31,7 +31,7 @@ export default function NotFoundTemplate({ onBack, onHome }: NotFoundTemplatePro
       />
 
       {/* 內容區：不放其他內容，PageStatus 垂直置中；空狀態頁不用 sunken 底色 */}
-      <div className="tpl-page__body tpl-page__body--plain tpl-page__body--center">
+      <div className="tpl-page__body tpl-page__body--center">
         {/* 標題與說明由 status 帶預設值（「無法顯示頁面」），
             需要客製時再傳 title / description 覆寫。
             斷線 / 系統忙碌頁的動作通常是「重試」而不是「回首頁」。 */}
@@ -39,8 +39,7 @@ export default function NotFoundTemplate({ onBack, onHome }: NotFoundTemplatePro
           status="not-exist"
           action={
             <Button
-              variant="filled"
-              colorType="neutral"
+              variant="outline"
               text="回前一頁"
               onClick={onHome}
             />
