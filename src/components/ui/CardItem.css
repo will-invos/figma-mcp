@@ -18,10 +18,11 @@
   gap: var(--space-200);
 }
 
-/* Hero image — full width, aspect ratio via padding, border + radius */
+/* Hero image — full width, 固定比例（Figma 361×148），border + radius */
 .ui-card-item__hero {
   position: relative;
   width: 100%;
+  aspect-ratio: 361 / 148;
   border-radius: var(--radius-300);
   border: 1px solid var(--color-border-subtle);
   overflow: hidden;
@@ -30,7 +31,7 @@
   position: absolute;
   inset: 0;
   width: 100%;
-  height: auto;
+  height: 100%;
   object-fit: cover;
   display: block;
 }
