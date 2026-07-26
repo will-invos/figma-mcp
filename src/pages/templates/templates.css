@@ -27,7 +27,8 @@
   height: 760px;
   overflow: hidden;
   border: 1px solid var(--color-border-subtle);
-  border-radius: var(--radius-500);
+  /* 讓框內 position: fixed 的內容（如 Sheet portal）以此框為邊界，不會蓋滿整個瀏覽器視窗 */
+  contain: layout;
 }
 
 .tpl-preview-frame .tpl-page {

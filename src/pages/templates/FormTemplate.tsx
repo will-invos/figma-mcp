@@ -11,10 +11,11 @@ import {
   Button,
   FieldGroup,
   TextField,
-  Select,
   Radio,
   Checkbox,
   Divider,
+  Sheet,
+  ListItem,
 } from '@/components/ui'
 
 interface FormTemplateProps {
@@ -31,12 +32,16 @@ const BANK_OPTIONS = [
 export default function FormTemplate({ onBack }: FormTemplateProps) {
   const [holder, setHolder] = useState('')
   const [bank, setBank] = useState('')
+  const [bankSheetOpen, setBankSheetOpen] = useState(false)
   const [accountType, setAccountType] = useState('general')
   const [account, setAccount] = useState('')
   const [agreed, setAgreed] = useState(false)
+  const [pageEl, setPageEl] = useState<HTMLDivElement | null>(null)
+
+  const selectedBank = BANK_OPTIONS.find((option) => option.value === bank)
 
   return (
-    <div className="tpl-page">
+    <div className="tpl-page" ref={setPageEl}>
       <NavigationBar
         title="退款帳戶"
         titleSize="regular"
@@ -62,12 +67,29 @@ export default function FormTemplate({ onBack }: FormTemplateProps) {
           </FieldGroup>
 
           <FieldGroup headline="銀行">
-            <Select
-              placeholder="請選擇銀行"
-              options={BANK_OPTIONS}
-              value={bank}
-              onChange={(e) => setBank(e.target.value)}
-            />
+            <div className={`ui-select ui-select--default${!bank ? ' ui-select--placeholder' : ''}`}>
+              <div
+                className="ui-select__input-wrapper"
+                role="button"
+                tabIndex={0}
+                onClick={() => setBankSheetOpen(true)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault()
+                    setBankSheetOpen(true)
+                  }
+                }}
+              >
+                <div className="ui-select__content">
+                  <span className="text-body-large ui-select__value">
+                    {selectedBank?.label ?? '請選擇銀行'}
+                  </span>
+                </div>
+                <span className="ui-select__chevron" aria-hidden="true">
+                  <i className="icon-chevron-down" />
+                </span>
+              </div>
+            </div>
           </FieldGroup>
 
           <FieldGroup headline="帳戶類型">
@@ -129,6 +151,29 @@ export default function FormTemplate({ onBack }: FormTemplateProps) {
           onClick={() => {}}
         />
       </div>
+
+      <Sheet
+        open={bankSheetOpen}
+        onClose={() => setBankSheetOpen(false)}
+        headline="選擇銀行"
+        Handle={false}
+        bodyPadding="none"
+        container={pageEl ?? undefined}
+      >
+        {BANK_OPTIONS.map((option, index) => (
+          <ListItem
+            key={option.value}
+            headline={option.label}
+            trailing={bank === option.value ? 'icon' : 'none'}
+            trailingIcon={<i className="icon-check" aria-hidden="true" />}
+            showDivider={index < BANK_OPTIONS.length - 1}
+            onClick={() => {
+              setBank(option.value)
+              setBankSheetOpen(false)
+            }}
+          />
+        ))}
+      </Sheet>
     </div>
   )
 }
