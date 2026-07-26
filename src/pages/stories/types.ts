@@ -5,7 +5,12 @@ export type WhenCondition = Record<string, string | number | boolean>
 /** Visibility condition: an equality map (all must match) or a predicate over current values. */
 export type WhenClause = WhenCondition | ((values: Record<string, any>) => boolean)
 
-type PropDefBase = { when?: WhenClause }
+type PropDefBase = {
+  when?: WhenClause
+  /** 元件必填的 prop：即使值還是預設值，code 區塊也一定要印出來
+   *  （enum / boolean 預設值平常會被省略，因為那與元件自身預設相同）。 */
+  required?: boolean
+}
 
 export type PropDef =
   | (PropDefBase & { type: 'enum'; options: string[]; default: string;
@@ -46,6 +51,14 @@ export interface StoryDef {
   /** Custom render component for stories needing extra state or wrappers (e.g. Dialog, Toast).
    *  Receives current controlled prop values. Omit for default: <Component {...fixedProps} {...values} /> */
   Render?: React.ComponentType<{ values: Record<string, any> }>
+  /** Code 區塊專用：把控制項的值換算成「實際傳給元件的 props」。
+   *  只要 `Render` 會把控制值轉成 React node / 陣列 slot（leading、trailing、items…），
+   *  就必須提供，否則 code 區塊只會印出控制項的原始字串，或整個漏掉那個 slot。
+   *  回傳物件裡的 `children` 會被印成元件的子節點。 */
+  codeProps?: (values: Record<string, any>) => Record<string, any>
+  /** Code 區塊專用逃生門：直接回傳整段程式碼字串。
+   *  給不是「渲染一個元件」的 API 用（例如 `useToast().show({...})`）。 */
+  codeSnippet?: (values: Record<string, any>) => string
 }
 
 export interface StoryCategory {

@@ -22,4 +22,6 @@ export const CheckboxStory: StoryDef = {
     disabled:    { type: 'boolean', default: false },
   },
   Render: CheckboxRender,
+  // 預覽會排兩顆示範互動，code 區塊只示範單一顆（label 是 Render 補上的，不是控制項）
+  codeProps: (values) => ({ ...values, label: 'Option A' }),
 }

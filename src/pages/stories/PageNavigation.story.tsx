@@ -35,4 +35,9 @@ export const PageNavigationStory: StoryDef = {
   previewWidth: 360,
   props: {},
   Render: PageNavigationRender,
+  codeProps: () => ({
+    label: formatPeriod(LATEST),
+    prevAriaLabel: '上一期',
+    nextAriaLabel: '下一期',
+  }),
 }

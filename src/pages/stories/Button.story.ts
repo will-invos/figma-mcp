@@ -2,14 +2,21 @@ import React from 'react'
 import Button from '@/components/ui/Button'
 import type { StoryDef } from './types'
 
-const ButtonRender: React.FC<{ values: Record<string, any> }> = ({ values }) => {
+const plusIcon = React.createElement('i', { className: 'icon-plus', 'aria-hidden': 'true' })
+const chevronRightIcon = React.createElement('i', { className: 'icon-chevron-right', 'aria-hidden': 'true' })
+
+/** 控制項的值 → 實際傳給 Button 的 props（Render 與 code 區塊共用）。 */
+function resolveProps(values: Record<string, any>) {
   const { leadingIcon, trailingIcon, ...props } = values
-  return React.createElement(Button, {
+  return {
     ...props,
-    leadingIcon: leadingIcon ? React.createElement('i', { className: 'icon-plus', 'aria-hidden': 'true' }) : undefined,
-    trailingIcon: trailingIcon ? React.createElement('i', { className: 'icon-chevron-right', 'aria-hidden': 'true' }) : undefined,
-  })
+    leadingIcon: leadingIcon ? plusIcon : undefined,
+    trailingIcon: trailingIcon ? chevronRightIcon : undefined,
+  }
 }
+
+const ButtonRender: React.FC<{ values: Record<string, any> }> = ({ values }) =>
+  React.createElement(Button, resolveProps(values))
 
 export const ButtonStory: StoryDef = {
   component: Button,
@@ -33,4 +40,5 @@ export const ButtonStory: StoryDef = {
     loading:      { type: 'boolean', default: false },
   },
   Render: ButtonRender,
+  codeProps: resolveProps,
 }

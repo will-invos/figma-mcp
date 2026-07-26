@@ -19,25 +19,26 @@ const COMPACT_ITEMS = [
   { key: 'tab7', label: 'Tab' },
 ]
 
-const TabsRender: React.FC<{ values: Record<string, any> }> = ({ values }) => {
+/** 控制項的值 → 實際傳給 Tabs 的 props（Render 與 code 區塊共用）。 */
+function resolveProps(values: Record<string, any>) {
   const baseItems = values.type === 'compact' ? COMPACT_ITEMS : FILL_ITEMS
-  const [active, setActive] = useState(baseItems[0].key)
+  return {
+    type: values.type,
+    items: baseItems.map((it, i) => ({
+      ...it,
+      badge: i === 1 && values.badge === 'dot' ? 'dot' as const
+           : i === 1 && values.badge === 'number' ? 1
+           : undefined,
+    })),
+    activeKey: baseItems[0].key,
+  }
+}
 
-  const items = baseItems.map((it, i) => ({
-    ...it,
-    badge: i === 1 && values.badge === 'dot' ? 'dot' as const
-         : i === 1 && values.badge === 'number' ? 1
-         : undefined,
-  }))
+const TabsRender: React.FC<{ values: Record<string, any> }> = ({ values }) => {
+  const resolved = resolveProps(values)
+  const [active, setActive] = useState(resolved.activeKey)
 
-  return (
-    <Tabs
-      type={values.type}
-      items={items}
-      activeKey={active}
-      onChange={setActive}
-    />
-  )
+  return <Tabs {...resolved} activeKey={active} onChange={setActive} />
 }
 
 export const TabsStory: StoryDef = {
@@ -50,4 +51,5 @@ export const TabsStory: StoryDef = {
     badge: { type: 'enum', options: ['none', 'dot', 'number'], default: 'none' },
   },
   Render: TabsRender,
+  codeProps: resolveProps,
 }

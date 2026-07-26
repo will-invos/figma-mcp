@@ -12,7 +12,8 @@ const BUTTON_SIZE = {
   large:  'large',
 } as const
 
-const ListHeaderRender: React.FC<{ values: Record<string, any> }> = ({ values }) => {
+/** 控制項的值 → 實際傳給 ListHeader 的 props（Render 與 code 區塊共用）。 */
+function resolveProps(values: Record<string, any>) {
   const { headline, trailing, size = 'small', ...rest } = values
   const trailingNode =
     trailing === 'text' ? 'Text' :
@@ -25,8 +26,12 @@ const ListHeaderRender: React.FC<{ values: Record<string, any> }> = ({ values })
         leadingIcon={<i className="icon-plus" aria-hidden="true" />}
       />
     ) : undefined
-  return <ListHeader headline={headline} size={size} {...rest} trailing={trailingNode} />
+  return { headline, size, ...rest, trailing: trailingNode }
 }
+
+const ListHeaderRender: React.FC<{ values: Record<string, any> }> = ({ values }) => (
+  <ListHeader {...resolveProps(values)} />
+)
 
 export const ListHeaderStory: StoryDef = {
   component: ListHeader,
@@ -39,4 +44,5 @@ export const ListHeaderStory: StoryDef = {
     trailing: { type: 'enum', options: ['none', 'text', 'button'], default: 'none' },
   },
   Render: ListHeaderRender,
+  codeProps: resolveProps,
 }

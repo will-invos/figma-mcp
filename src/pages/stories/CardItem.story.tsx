@@ -9,15 +9,19 @@ const defaultDescriptions = [
   { icon: <i className="icon-clock" aria-hidden="true" />, text: '截止日 2026/05/15' },
 ]
 
-const CardItemRender: React.FC<{ values: Record<string, any> }> = ({ values }) => {
-  return (
-    <CardItem
-      {...values}
-      imageUrl={sampleImage}
-      descriptions={values.content === 'list-item' ? defaultDescriptions : undefined}
-    />
-  )
+/** 控制項的值 → 實際傳給 CardItem 的 props（Render 與 code 區塊共用）。 */
+function resolveProps(values: Record<string, any>) {
+  return {
+    ...values,
+    // medium 版面才吃 showThumbnail；large 一律有 hero 圖
+    imageUrl: values.size === 'medium' && !values.showThumbnail ? undefined : sampleImage,
+    descriptions: values.content === 'list-item' ? defaultDescriptions : undefined,
+  }
 }
+
+const CardItemRender: React.FC<{ values: Record<string, any> }> = ({ values }) => (
+  <CardItem {...resolveProps(values)} />
+)
 
 export const CardItemStory: StoryDef = {
   component: CardItem,
@@ -35,4 +39,5 @@ export const CardItemStory: StoryDef = {
     divider:       { type: 'boolean', default: true, when: { size: 'medium' } },
   },
   Render: CardItemRender,
+  codeProps: resolveProps,
 }

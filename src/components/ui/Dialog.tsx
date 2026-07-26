@@ -144,5 +144,7 @@ function Dialog({
   );
 }
 
+Dialog.displayName = 'Dialog';
+
 export default Dialog;
 export type { DialogProps, DialogAction };

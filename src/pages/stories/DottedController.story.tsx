@@ -44,4 +44,10 @@ export const DottedControllerStory: StoryDef = {
     interactive: { type: 'boolean', default: true },
   },
   Render: DottedControllerRender,
+  codeProps: (values) => ({
+    count: values.count,
+    type: values.type,
+    activeIndex: 0,
+    'aria-label': '範例輪播',
+  }),
 }

@@ -1,6 +1,7 @@
 import type { StoryDef } from './types'
 import Button from '@/components/ui/Button'
 import { useToast } from '@/components/ui'
+import { printExpression } from './codegen'
 
 const ToastRender: React.FC<{ values: Record<string, any> }> = ({ values }) => {
   const { show, update, dismiss } = useToast()
@@ -40,4 +41,30 @@ export const ToastStory: StoryDef = {
     button: { type: 'boolean', default: true, when: { type: 'rich' } },
   },
   Render: ToastRender,
+  // Toast 是 Provider + hook API，不是渲染一個元件，所以自己組 snippet
+  codeSnippet: (values) =>
+    values.type === 'loading'
+      ? [
+          'const { show, dismiss } = useToast()',
+          '',
+          '// loading 不會自動消失（其他型別預設 3s），工作結束後自行 dismiss',
+          "const id = show({ type: 'loading' })",
+          'try {',
+          '  await submitInvoice()',
+          '} finally {',
+          '  dismiss(id)',
+          '}',
+        ].join('\n')
+      : [
+          'const { show } = useToast()',
+          '',
+          `show(${printExpression(
+            {
+              type: 'rich',
+              message: values.text,
+              action: values.button ? { label: 'Cancel', onClick: () => {} } : undefined,
+            },
+            ''
+          )})`,
+        ].join('\n'),
 }

@@ -2,23 +2,25 @@ import ChipBar from '@/components/ui/ChipBar'
 import type { StoryDef } from './types'
 import { useState } from 'react'
 
-const ChipBarRender: React.FC<{ values: Record<string, any> }> = ({ values }) => {
-  const [active, setActive] = useState('all')
+/** 控制項的值 → 實際傳給 ChipBar 的 props（Render 與 code 區塊共用）。 */
+function resolveProps(values: Record<string, any>) {
   const badgeOnSecond: 'dot' | number | undefined =
     values.badge === 'dot' ? 'dot' : values.badge === 'number' ? 1 : undefined
-  return (
-    <ChipBar
-      activeKey={active}
-      onChange={setActive}
-      scrollable={values.scrollable}
-      items={[
-        { key: 'all', label: '全部' },
-        { key: 'unused', label: '未對獎', badge: badgeOnSecond },
-        { key: 'won', label: '中獎' },
-        { key: 'cashed', label: '已兌領' },
-      ]}
-    />
-  )
+  return {
+    activeKey: 'all',
+    scrollable: values.scrollable,
+    items: [
+      { key: 'all', label: '全部' },
+      { key: 'unused', label: '未對獎', badge: badgeOnSecond },
+      { key: 'won', label: '中獎' },
+      { key: 'cashed', label: '已兌領' },
+    ],
+  }
+}
+
+const ChipBarRender: React.FC<{ values: Record<string, any> }> = ({ values }) => {
+  const [active, setActive] = useState('all')
+  return <ChipBar {...resolveProps(values)} activeKey={active} onChange={setActive} />
 }
 
 export const ChipBarStory: StoryDef = {
@@ -30,4 +32,5 @@ export const ChipBarStory: StoryDef = {
     scrollable: { type: 'boolean', default: true },
   },
   Render: ChipBarRender,
+  codeProps: resolveProps,
 }
