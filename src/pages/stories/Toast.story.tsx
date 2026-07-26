@@ -47,7 +47,6 @@ export const ToastStory: StoryDef = {
       ? [
           'const { show, dismiss } = useToast()',
           '',
-          '// loading 不會自動消失（其他型別預設 3s），工作結束後自行 dismiss',
           "const id = show({ type: 'loading' })",
           'try {',
           '  await submitInvoice()',
