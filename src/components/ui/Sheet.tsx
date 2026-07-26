@@ -67,7 +67,7 @@ function Sheet({
       const focusables = getFocusable(sheetEl)
       if (focusables.length === 0) {
         e.preventDefault()
-        sheetEl.focus()
+        sheetEl.focus({ preventScroll: true })
         return
       }
 
@@ -102,10 +102,12 @@ function Sheet({
     if (!sheetEl) return
 
     const previouslyFocused = document.activeElement as HTMLElement | null
-    sheetEl.focus()
+    // preventScroll：sheet 進場時還在 translateY(100%)（畫面外），瀏覽器會為了把它
+    // 捲進視野而拉動背後的捲動容器，看起來像背景自己捲了一下。
+    sheetEl.focus({ preventScroll: true })
 
     return () => {
-      if (previouslyFocused?.isConnected) previouslyFocused.focus()
+      if (previouslyFocused?.isConnected) previouslyFocused.focus({ preventScroll: true })
     }
   }, [open])
 
