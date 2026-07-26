@@ -31,6 +31,15 @@
   transition: border-color 0.15s, box-shadow 0.15s;
 }
 
+/* Custom-picker mode renders the wrapper as a <button> — neutralize UA styles
+   so it matches the <label> version. */
+button.ui-select__input-wrapper {
+  width: 100%;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+}
+
 /* Focus: 1px border + 1px inset box-shadow = visual 2px */
 .ui-select__input-wrapper:focus-within {
   border-color: var(--color-border-brand);

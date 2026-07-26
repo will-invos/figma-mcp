@@ -14,6 +14,11 @@ interface SelectProps extends Omit<React.SelectHTMLAttributes<HTMLSelectElement>
   options: SelectOption[];
   status?: 'default' | 'error' | 'disabled';
   leadingIcon?: React.ReactNode;
+  /** Delegate opening to a custom picker (e.g. a `<Sheet>` + `<ListItem>` menu)
+   *  instead of the native dropdown. The field renders as a button and calls
+   *  this on activation; `options` + `value` still drive the displayed label.
+   *  In this mode there is no native `<select>`, so `ref` / `...rest` are unused. */
+  onPickerOpen?: () => void;
 }
 
 const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
@@ -25,6 +30,7 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       options,
       status = 'default',
       leadingIcon,
+      onPickerOpen,
       id,
       className,
       value,
@@ -71,29 +77,53 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
     const currentValue = (value ?? defaultValue ?? '') as string;
     const selectedOption = options.find((o) => o.value === currentValue);
 
+    const field = (
+      <>
+        {leadingIcon && (
+          <span className="ui-select__leading-icon">{leadingIcon}</span>
+        )}
+        <div className="ui-select__content">
+          {isInnerLabel && (
+            <span
+              className={`${shouldFloat ? 'text-body-small' : 'text-body-large'} ui-select__label`}
+            >
+              {shouldFloat ? label : (placeholder || label)}
+            </span>
+          )}
+          {(!isInnerLabel || shouldFloat) && (
+            <span className="text-body-large ui-select__value">
+              {selectedOption?.label ?? (!isInnerLabel ? placeholder : '')}
+            </span>
+          )}
+        </div>
+        <span className="ui-select__chevron" aria-hidden="true">
+          <i className="icon-chevron-down" />
+        </span>
+      </>
+    );
+
+    // Custom picker: the field itself is the trigger, no native dropdown.
+    if (onPickerOpen) {
+      return (
+        <div className={rootClasses}>
+          <button
+            type="button"
+            className="ui-select__input-wrapper"
+            disabled={isDisabled}
+            aria-haspopup="dialog"
+            aria-invalid={isError || undefined}
+            onClick={onPickerOpen}
+          >
+            {field}
+          </button>
+        </div>
+      );
+    }
+
     return (
       <div className={rootClasses}>
         <label className="ui-select__input-wrapper" htmlFor={selectId}>
-          {leadingIcon && (
-            <span className="ui-select__leading-icon">{leadingIcon}</span>
-          )}
-          <div className="ui-select__content">
-            {isInnerLabel && (
-              <span
-                className={`${shouldFloat ? 'text-body-small' : 'text-body-large'} ui-select__label`}
-              >
-                {shouldFloat ? label : (placeholder || label)}
-              </span>
-            )}
-            {(!isInnerLabel || shouldFloat) && (
-              <span className="text-body-large ui-select__value">
-                {selectedOption?.label ?? (!isInnerLabel ? placeholder : '')}
-              </span>
-            )}
-          </div>
-          <span className="ui-select__chevron" aria-hidden="true">
-            <i className="icon-chevron-down" />
-          </span>
+          {field}
           <select
             ref={ref}
             id={selectId}
