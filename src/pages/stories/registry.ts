@@ -7,6 +7,7 @@ import {
   SettingsTemplateStory,
   FormTemplateStory,
   DetailTemplateStory,
+  NotFoundTemplateStory,
 } from './Templates.story.tsx'
 
 // Chrome
@@ -91,7 +92,7 @@ export const sections: StorySection[] = [
     categories: [
       {
         name: '',
-        stories: [MainTabTemplateStory, ListTemplateStory, SettingsTemplateStory, FormTemplateStory, DetailTemplateStory],
+        stories: [MainTabTemplateStory, ListTemplateStory, SettingsTemplateStory, FormTemplateStory, DetailTemplateStory, NotFoundTemplateStory],
       },
     ],
   },

@@ -124,8 +124,9 @@ PingFang TC 在 remote Figma Plugin API 不可用。直接修改文字（非透�
 | 設定 / 選單（分組清單） | `SettingsTemplate.tsx` |
 | 新增 / 編輯表單 | `FormTemplate.tsx` |
 | 單筆資料詳情 | `DetailTemplate.tsx` |
+| 404 / 空狀態（斷線、無結果） | `NotFoundTemplate.tsx` |
 
-五份範本可在 storybook（`src/pages/Components.tsx`）側邊欄「頁面範本」分類預覽。範本是**參考用**，不是共用元件：外框規則寫在 `templates.css`（`.tpl-page` = max-width 480px 等），複製後把用到的規則搬進新頁面自己的 CSS，不要 import `templates.css`、也不要 import 範本元件。複製後照下列規則調整：
+六份範本可在 storybook（`src/pages/Components.tsx`）側邊欄「頁面範本」分類預覽。範本是**參考用**，不是共用元件：外框規則寫在 `templates.css`（`.tpl-page` = max-width 480px 等），複製後把用到的規則搬進新頁面自己的 CSS，不要 import `templates.css`、也不要 import 範本元件。複製後照下列規則調整：
 
 1. 查 Component Decision Tree 找對應元件
 2. 從 `'@/components/ui'` barrel import（**不要深層 import**）

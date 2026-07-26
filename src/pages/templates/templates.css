@@ -34,6 +34,13 @@
   background-color: var(--color-background-default);
 }
 
+/* 整頁只有一塊內容時垂直置中（404 / 空狀態頁的 PageStatus） */
+.tpl-page__body--center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 /* ------------------------------------------------------------------
  * 內容區塊
  * ------------------------------------------------------------------ */

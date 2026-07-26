@@ -5,6 +5,7 @@ import ListTemplate from '../templates/ListTemplate'
 import SettingsTemplate from '../templates/SettingsTemplate'
 import FormTemplate from '../templates/FormTemplate'
 import DetailTemplate from '../templates/DetailTemplate'
+import NotFoundTemplate from '../templates/NotFoundTemplate'
 import '../templates/templates.css'
 import './Templates.story.css'
 
@@ -56,4 +57,13 @@ export const DetailTemplateStory: StoryDef = {
   props: {},
   hideCode: true,
   Render: () => <Frame><DetailTemplate /></Frame>,
+}
+
+export const NotFoundTemplateStory: StoryDef = {
+  component: NotFoundTemplate,
+  name: '404 頁',
+  category: '頁面範本',
+  props: {},
+  hideCode: true,
+  Render: () => <Frame><NotFoundTemplate /></Frame>,
 }
