@@ -1,12 +1,4 @@
-/* Per Figma 5940:14610 — Dotted Controller (page indicator)
-   Container: inline-flex, gap 8 (space-200), padding 4 (space-100)
-   Dot: 8×8 circle
-     - Default: active brand blue, inactive neutral gray
-     - Overlap: active white, inactive translucent overlay, container drop-shadow
-       (shadow-small) so dots stay legible over photos / content
-   Interactive: dots become buttons with a widened 16px tap target. Each button's
-     4px padding + zero container gap reproduces the same 8px visual gap / 4px edge
-     inset as the static layout. */
+/* 可點版把容器 gap 歸零、改由每顆按鈕的 4px 內距撐開 */
 .ui-dotted-controller {
   display: inline-flex;
   align-items: center;
@@ -26,7 +18,6 @@
   transition: background-color 0.15s;
 }
 
-/* Default — on solid backgrounds */
 .ui-dotted-controller--default .ui-dotted-controller__dot {
   background-color: var(--color-background-neutral-default);
 }
@@ -34,17 +25,12 @@
   background-color: var(--color-background-brand-default);
 }
 
-/* Overlap — on photos / content */
 .ui-dotted-controller--overlap .ui-dotted-controller__dot {
   background-color: var(--color-background-overlay-default);
 }
 .ui-dotted-controller--overlap .ui-dotted-controller__dot--active {
   background-color: var(--color-background-fixed-white);
 }
-
-/* ========================================
- * Interactive — tappable dots
- * ======================================== */
 
 .ui-dotted-controller--interactive {
   gap: 0;

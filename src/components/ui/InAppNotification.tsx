@@ -57,9 +57,9 @@ interface NotificationItem extends InAppNotificationOptions {
 type Phase = 'entering' | 'visible' | 'exiting'
 
 const DEFAULT_DURATION = 3000
-/** Past this many px upward, treat the touch release as "dismiss". */
+/** 向上拖超過這個距離（px）放手就關閉 */
 const SWIPE_DISMISS_DISTANCE = 32
-/** Or past this velocity (px/ms upward), still dismiss even on a short swipe. */
+/** 或向上快滑到這個速度（px/ms）就關閉，不看拖了多遠 */
 const SWIPE_DISMISS_VELOCITY = 0.3
 
 const VARIANT_ICON_CLASS: Record<InAppNotificationVariant, string> = {
@@ -94,11 +94,11 @@ function InAppNotificationProvider({ children }: { children: React.ReactNode }) 
     delta: number
     active: boolean
   } | null>(null)
-  /** Set to true on touchend after a non-trivial drag, so the synthetic click
-   *  iOS fires right after touchend doesn't double-trigger onPress. */
+  /** 拖曳結束時設為 true：iOS 會在 touchend 後補一個 click，
+   *  不擋掉會讓 onPress 被觸發兩次 */
   const suppressClickRef = useRef(false)
 
-  // Promote next from queue when nothing is showing.
+  // 目前沒有在顯示時，從佇列取下一則
   const promoteNext = useCallback(() => {
     const next = queueRef.current.shift() ?? null
     setCurrent(next)
@@ -119,8 +119,7 @@ function InAppNotificationProvider({ children }: { children: React.ReactNode }) 
 
   const dismiss = useCallback(
     (id: string) => {
-      // Only the currently-mounted notification can be dismissed; others get
-      // dropped from the queue silently.
+      // 只有正在顯示的那則會走退場動畫，其餘直接從佇列移除
       if (current?.id === id) {
         startExit()
         return
@@ -153,7 +152,7 @@ function InAppNotificationProvider({ children }: { children: React.ReactNode }) 
         if (!prev || prev.id !== id) return prev
         return { ...prev, ...patch, id }
       })
-      // Reset auto-dismiss timer for the patched duration if visible.
+      // 已在顯示中的話，duration 可能被改掉，計時器要重新起算
       if (current?.id === id && phase === 'visible') {
         clearTimer()
         const duration = patch.duration ?? current.duration ?? DEFAULT_DURATION
@@ -163,7 +162,7 @@ function InAppNotificationProvider({ children }: { children: React.ReactNode }) 
     [current, phase, clearTimer, startExit]
   )
 
-  // Auto-dismiss timer: starts when phase becomes 'visible'.
+  // 等進場動畫跑完（phase 變 visible）才開始計時
   useEffect(() => {
     if (!current || phase !== 'visible') return
     const duration = current.duration ?? DEFAULT_DURATION
@@ -173,18 +172,17 @@ function InAppNotificationProvider({ children }: { children: React.ReactNode }) 
     }
   }, [current, phase, clearTimer, startExit])
 
-  // Cleanup timer on unmount.
   useEffect(() => () => clearTimer(), [clearTimer])
 
   const handleAnimationEnd = useCallback(
     (event: React.AnimationEvent<HTMLDivElement>) => {
-      // Only react to our own enter/exit animations, not nested ones.
+      // 只理自己的進退場動畫，內層元素的動畫要忽略
       if (event.target !== event.currentTarget) return
       if (phase === 'entering') {
         setPhase('visible')
       } else if (phase === 'exiting') {
         setCurrent(null)
-        // Promote next on the next tick so animation node fully unmounts first.
+        // 等這個節點確實卸載後再接下一則，否則新的進場動畫不會重播
         queueMicrotask(() => {
           if (queueRef.current.length > 0) promoteNext()
         })
@@ -193,7 +191,6 @@ function InAppNotificationProvider({ children }: { children: React.ReactNode }) 
     [phase, promoteNext]
   )
 
-  // === Drag handlers ===
   const handleTouchStart = useCallback(
     (e: React.TouchEvent<HTMLDivElement>) => {
       if (phase !== 'visible' || !cardRef.current) return
@@ -207,7 +204,7 @@ function InAppNotificationProvider({ children }: { children: React.ReactNode }) 
       clearTimer()
       const card = cardRef.current
       card.dataset.dragging = 'true'
-      // Clear any previous spring-back state.
+      // 清掉上一次彈回留下的狀態
       delete card.dataset.springback
       card.style.transform = ''
       card.style.opacity = ''
@@ -237,7 +234,7 @@ function InAppNotificationProvider({ children }: { children: React.ReactNode }) 
       drag.active = false
       delete card.dataset.dragging
       const elapsed = Math.max(1, e.timeStamp - drag.startTime)
-      const velocity = Math.abs(drag.delta) / elapsed // px per ms
+      const velocity = Math.abs(drag.delta) / elapsed // px/ms
       const movedMeaningfully = Math.abs(drag.delta) > 4
       const shouldDismiss =
         drag.delta < -SWIPE_DISMISS_DISTANCE ||
@@ -245,19 +242,19 @@ function InAppNotificationProvider({ children }: { children: React.ReactNode }) 
 
       if (movedMeaningfully) {
         suppressClickRef.current = true
-        // Clear after the synthetic click has had a chance to fire.
+        // 等 iOS 補的那個 click 有機會發生後再清掉
         setTimeout(() => {
           suppressClickRef.current = false
         }, 50)
       }
 
       if (shouldDismiss) {
-        // Clear inline styles and let the exit animation take over.
+        // 清掉 inline style，交給退場動畫接手
         card.style.transform = ''
         card.style.opacity = ''
         startExit()
       } else {
-        // Spring back via CSS transition, then clear inline styles.
+        // 用 CSS transition 彈回，結束後再清掉 inline style
         card.dataset.springback = 'true'
         card.style.transform = ''
         card.style.opacity = ''
@@ -266,7 +263,7 @@ function InAppNotificationProvider({ children }: { children: React.ReactNode }) 
           card.removeEventListener('transitionend', onTransitionEnd)
         }
         card.addEventListener('transitionend', onTransitionEnd)
-        // Restart auto-dismiss timer.
+        // 拖曳時停掉的計時器要重新起算
         if (current) {
           const duration = current.duration ?? DEFAULT_DURATION
           timerRef.current = setTimeout(startExit, duration)
@@ -277,7 +274,6 @@ function InAppNotificationProvider({ children }: { children: React.ReactNode }) 
     [current, startExit]
   )
 
-  // === Click handlers ===
   const handleCardClick = useCallback(() => {
     if (phase !== 'visible' || !current) return
     if (suppressClickRef.current) return

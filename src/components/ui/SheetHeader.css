@@ -1,11 +1,3 @@
-/* SheetHeader — per Figma 3929:7248 (iOS UI Kit)
-   Total heights by (type, headlineSize):
-     grabber + none    → 24px  (12 grabber + 12 spacer)
-     grabber + regular → 60px  (12 grabber + 48 nav)
-     grabber + large   → 56px  (12 grabber + 44 content)
-     default + regular → 48px  (nav only)
-     default + large   → 80px  (48 nav + 32 title) */
-
 .ui-sheet-header {
   background: var(--color-background-default);
   border-top-left-radius: var(--radius-600);
@@ -18,9 +10,8 @@
   flex-shrink: 0;
 }
 
-/* ===== Grabber ===== */
-/* Grabber variant turns the whole header into the drag-to-dismiss surface.
-   touch-action: none prevents the browser from hijacking vertical drags as page scroll. */
+/* grabber 版把整個 header 當成下拉關閉的手把。
+   touch-action: none 是為了不讓瀏覽器把垂直拖曳吃成頁面捲動。 */
 .ui-sheet-header--grabber {
   touch-action: none;
   cursor: grab;
@@ -44,12 +35,11 @@
   border-radius: var(--radius-full);
   background: var(--color-background-neutral-default);
 }
-/* headline=none → add 12px spacer below grabber (total 24px) */
+/* 沒有標題時在 grabber 下方補 12px，湊滿 24px */
 .ui-sheet-header--grabber.ui-sheet-header--headline-none {
   min-height: 24px;
 }
 
-/* ===== Nav bar + leading / trailing slots ===== */
 .ui-sheet-header__nav {
   position: relative;
   height: 48px;
@@ -67,16 +57,15 @@
 .ui-sheet-header__leading  { left: 0;  padding-left: var(--space-100); }
 .ui-sheet-header__trailing { right: 0; padding-right: var(--space-100); }
 
-/* In the large content block the trailing is bottom-anchored (32px tall) */
+/* large 內容區塊裡的 trailing 改為對齊底部 */
 .ui-sheet-header__trailing--inline {
   top: auto;
   height: 32px;
 }
 
-/* The close button is a ghost IconButton — already flat and dims on
-   hover/press, so no background-flattening override is needed here. */
+/* 關閉鍵用 ghost IconButton，本身就沒有背景，這裡不需要再壓平 */
 
-/* ===== Titles — typography comes from text-* utility classes ===== */
+/* 字級由 SheetHeader.tsx 掛 .text-* 決定，這裡只管定位與顏色 */
 .ui-sheet-header__title {
   margin: 0;
   color: var(--color-content-bold);
@@ -92,7 +81,6 @@
   flex: 1;
 }
 
-/* ===== Large headline content block (only rendered for headlineSize=large) ===== */
 .ui-sheet-header__content {
   position: relative;
   display: flex;
@@ -100,12 +88,10 @@
   flex-shrink: 0;
   overflow: hidden;
 }
-/* grabber variant: inline row with 12px top padding */
 .ui-sheet-header--grabber .ui-sheet-header__content {
   padding-top: var(--space-300);
   align-items: center;
 }
-/* default variant: column, title fills width */
 .ui-sheet-header--default .ui-sheet-header__content {
   flex-direction: column;
   align-items: flex-start;

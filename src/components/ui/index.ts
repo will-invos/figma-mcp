@@ -1,9 +1,7 @@
-// Design tokens (colors, spacing, radius, typography, shadows, icons).
-// Imported here so consumers only need `import '@invos/design-system/styles.css'`
-// to get both tokens + component styles in one go.
+// 在這裡 import token，使用端只要 `import '@invos/design-system/styles.css'`
+// 就能一次拿到 token + 元件樣式。
 import './tokens/index.css';
 
-// === Existing components ===
 export { default as Spinner } from './Spinner';
 export type { SpinnerProps } from './Spinner';
 
@@ -74,9 +72,7 @@ export type {
   InAppNotificationContextValue,
 } from './InAppNotification';
 
-// === New components mirroring iOS UI Kit 2025 ===
-
-// iOS chrome
+// 頁面框架
 export { default as NavigationBar } from './NavigationBar';
 export type { NavigationBarProps } from './NavigationBar';
 
@@ -92,7 +88,7 @@ export type { TabsProps, TabsItem } from './Tabs';
 export { default as Divider } from './Divider';
 export type { DividerProps } from './Divider';
 
-// Form helpers
+// 表單
 export { default as FieldGroup } from './FieldGroup';
 export type { FieldGroupProps } from './FieldGroup';
 
@@ -111,7 +107,7 @@ export type { TextAreaProps } from './TextArea';
 export { default as SearchField } from './SearchField';
 export type { SearchFieldProps } from './SearchField';
 
-// Containers
+// 容器
 export { default as SheetHeader } from './SheetHeader';
 export type { SheetHeaderProps } from './SheetHeader';
 
@@ -121,14 +117,14 @@ export type { SheetProps } from './Sheet';
 export { default as CardItem } from './CardItem';
 export type { CardItemProps, CardItemDescRow } from './CardItem';
 
-// List
+// 列表
 export { default as ListHeader } from './ListHeader';
 export type { ListHeaderProps } from './ListHeader';
 
 export { default as ListFooter } from './ListFooter';
 export type { ListFooterProps } from './ListFooter';
 
-// Display
+// 顯示
 export { default as Avatar } from './Avatar';
 export type { AvatarProps } from './Avatar';
 
@@ -145,7 +141,6 @@ export type { ProgressBarProps } from './ProgressBar';
 export { default as ProgressGroup } from './ProgressGroup';
 export type { ProgressGroupProps } from './ProgressGroup';
 
-// Tag variants
 export { default as ChipBar } from './ChipBar';
 export type { ChipBarProps, ChipBarItem } from './ChipBar';
 

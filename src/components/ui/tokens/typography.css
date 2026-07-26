@@ -1,36 +1,24 @@
 /*
- * Typography Tokens
- * Generated from Figma 🧰 Design System 2025 — iOS text styles
+ * 字級 token —— 來源為 Figma「🧰 Design System 2025」的 iOS text styles。
+ * 這支不在 `npm run tokens:build` 的產出範圍內，要改值請手動同步。
  *
- * Naming: iOS/{category}/{size} → .text-{category}-{size}
- * (the "iOS/" prefix in Figma maps to the unprefixed CSS class)
- *
- * Font families:
- *   Default — system default (-apple-system / system-ui fallback chain,
- *             which resolves to each OS's preferred Chinese font)
- *   Code    — system monospace (ui-monospace / SF Mono fallback chain)
- *
- * Weight mapping:
- *   Regular = 400, Medium = 500, Semibold = 600, Bold = 700
- *
- * Letter-spacing: not set (browser default); .text-code-* explicitly use 0
+ * 命名對應：Figma 的 iOS/{category}/{size} → .text-{category}-{size}
+ *（Figma 的 "iOS/" 前綴在 code 端不保留；code 端也不分 EN / CN，靠瀏覽器選字）
  */
 
 :root {
   /*
-   * System font stack — let each platform pick its own default Chinese font.
-   *   Apple  (iOS/macOS)    → SF Pro + PingFang TC (auto via -apple-system)
-   *   Android              → Roboto + Noto Sans CJK (auto via system-ui)
-   *   Windows              → Segoe UI + Microsoft JhengHei (auto via system-ui)
-   * Do NOT list explicit Chinese font names here — rely on the OS default.
+   * 讓每個平台自己挑預設中文字型：
+   *   Apple（iOS / macOS）→ SF Pro + PingFang TC（由 -apple-system 帶出）
+   *   Android            → Roboto + Noto Sans CJK（由 system-ui 帶出）
+   *   Windows            → Segoe UI + 微軟正黑（由 system-ui 帶出）
+   * 不要在這裡列具體中文字型名稱，交給 OS 預設。
    */
   --font-family: -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
   --font-family-code: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
 }
 
-/* ========================================
- * Display — page headline, large nav title
- * ======================================== */
+/* Display —— 頁面主標題、large 版 NavigationBar 標題 */
 
 .text-display-small {
   font-family: var(--font-family);
@@ -46,9 +34,7 @@
   line-height: 36px;
 }
 
-/* ========================================
- * Heading — section titles, dialog titles
- * ======================================== */
+/* Heading —— 區塊標題、Dialog 標題 */
 
 .text-heading-large {
   font-family: var(--font-family);
@@ -71,9 +57,7 @@
   line-height: 26px;
 }
 
-/* ========================================
- * Body — body text, descriptions, captions
- * ======================================== */
+/* Body —— 正文、說明文字、註解 */
 
 .text-body-xlarge {
   font-family: var(--font-family);
@@ -110,9 +94,7 @@
   line-height: 16px;
 }
 
-/* ========================================
- * Label — buttons, field labels
- * ======================================== */
+/* Label —— 按鈕、欄位標籤 */
 
 .text-label-large {
   font-family: var(--font-family);
@@ -142,9 +124,7 @@
   line-height: 16px;
 }
 
-/* ========================================
- * Code — monospace text
- * ======================================== */
+/* Code —— 等寬字 */
 
 .text-code-large {
   font-family: var(--font-family-code);

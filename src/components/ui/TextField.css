@@ -1,19 +1,9 @@
-/* ========================================
- * TextField
- * Figma: Text field (node 3850:4356)
- * Types: Simple | Has label (floating label)
- *
- * inner-label behavior:
- *   empty + unfocused → label at 16px as placeholder
- *   focused or filled → label floats to 12px, input visible below
- * ======================================== */
+/* inner-label：空且未對焦時 label 當佔位字；一對焦或有值就浮起，input 顯示在下方 */
 
 .ui-text-field {
   display: flex;
   flex-direction: column;
 }
-
-/* --- Input container --- */
 
 .ui-text-field__input-wrapper {
   display: flex;
@@ -31,19 +21,18 @@
   box-sizing: border-box;
 }
 
-/* Focus: 1px border + 1px inset box-shadow = visual 2px */
+/* 1px border + 1px inset shadow＝視覺 2px，比改 border-width 不會位移 */
 .ui-text-field__input-wrapper:focus-within {
   border-color: var(--color-border-brand);
   box-shadow: inset 0 0 0 1px var(--color-border-brand);
 }
 
-/* Error border: only when NOT focused — focus should show brand border */
+/* 錯誤框線只在沒對焦時顯示，對焦時要讓位給品牌色 */
 .ui-text-field--error .ui-text-field__input-wrapper:not(:focus-within) {
   border-color: var(--color-border-danger);
   box-shadow: inset 0 0 0 1px var(--color-border-danger);
 }
 
-/* Disabled */
 .ui-text-field--disabled .ui-text-field__input-wrapper {
   background-color: var(--color-background-disable);
   pointer-events: none;
@@ -67,8 +56,6 @@
   color: var(--color-content-subtlest);
 }
 
-/* --- Content area --- */
-
 .ui-text-field__content {
   display: flex;
   flex-direction: column;
@@ -79,31 +66,13 @@
   position: relative;
 }
 
-/* ========================================
- * Simple type
- * ======================================== */
-
 .ui-text-field--default .ui-text-field__content {
   padding-top: var(--space-400);
   padding-bottom: var(--space-400);
 }
 
-/* ========================================
- * Has-label type: floating label
- *
- * Content area uses position relative, fixed padding.
- * Label and input are positioned so that the content
- * area is always the same height (no jitter).
- *
- * Unfloated: label centered at 16px (acts as placeholder),
- *            input is absolute overlay (invisible but focusable).
- * Floated:   label shrinks to 12px at top,
- *            input visible below label.
- *
- * Content padding: space/400 (16px) — same as default type.
- * The visual difference comes from label + input stacking,
- * not from padding changes.
- * ======================================== */
+/* 浮動 label：內距固定不變，靠 label 與 input 的堆疊方式做出視覺差異，
+   這樣切換浮起狀態時整塊高度不變，欄位才不會抖動。 */
 
 .ui-text-field--inner-label .ui-text-field__content {
   padding-top: var(--space-400);
@@ -117,7 +86,7 @@
   transition: color 0.15s;
 }
 
-/* Not floated: input is absolute, transparent but focusable */
+/* input 透明疊在上面但仍可對焦，此時看到的字其實是 label */
 .ui-text-field--inner-label:not(.ui-text-field--float) .ui-text-field__input {
   position: absolute;
   inset: 0;
@@ -126,7 +95,6 @@
   opacity: 0;
 }
 
-/* Floated: label shrinks, content switches to column layout */
 .ui-text-field--inner-label.ui-text-field--float .ui-text-field__content {
   padding-top: var(--space-150);
   padding-bottom: var(--space-150);
@@ -143,14 +111,12 @@
   height: auto;
 }
 
-/* Error label color — overrides both floated and unfloated states */
+/* 兩個選擇器是為了同時蓋掉浮起與未浮起狀態 */
 .ui-text-field--error .ui-text-field__label,
 .ui-text-field--inner-label.ui-text-field--error:not(.ui-text-field--float) .ui-text-field__label,
 .ui-text-field--inner-label.ui-text-field--float.ui-text-field--error .ui-text-field__label {
   color: var(--color-content-danger-default);
 }
-
-/* --- Input element --- */
 
 .ui-text-field__input {
   display: block;
@@ -170,8 +136,6 @@
 .ui-text-field--error .ui-text-field__input::placeholder {
   color: var(--color-content-danger-default);
 }
-
-/* --- Leading / Trailing icons --- */
 
 .ui-text-field__leading-icon,
 .ui-text-field__trailing-icon {
@@ -193,15 +157,11 @@
   font-size: 24px;
 }
 
-/* The trailing clear/action button is a ghost IconButton — already flat and
-   dims on hover/press, so no per-component override is needed here. */
+/* trailing 的清除鍵用 ghost IconButton，本身就沒有背景，這裡不需要再壓平 */
 
-/* Error: leading icon turns danger */
 .ui-text-field--error .ui-text-field__leading-icon {
   color: var(--color-content-danger-default);
 }
-
-/* --- Help text (below input) --- */
 
 .ui-text-field__help {
   display: flex;

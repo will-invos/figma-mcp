@@ -1,10 +1,10 @@
-/* ================================================================== *
- * Template：設定頁（設定 / 選單）
+/*
+ * 範本：設定頁（設定 / 選單）
  * NavigationBar（返回 + 置中標題）→ 分組 ListHeader + ListItem
  * → 版號 ListFooter → 獨立「登出」列。
  * 對齊 Figma「個人設定」母版（4hJVIr7fkiE1UTrUkfpbBt · 2905:6882）；
  * 元件選用見 CLAUDE.md 決策樹。
- * ================================================================== */
+ */
 import { useState } from 'react'
 import { NavigationBar, IconButton, ListHeader, ListItem, ListFooter } from '@/components/ui'
 

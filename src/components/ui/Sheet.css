@@ -1,6 +1,3 @@
-/* Sheet — shell styles only.
-   Header structure lives in SheetHeader.css */
-
 @keyframes ui-sheet-slideup {
   from { transform: translateY(100%); }
   to   { transform: translateY(0); }

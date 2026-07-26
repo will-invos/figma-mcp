@@ -1,9 +1,9 @@
-/* ================================================================== *
- * Template：表單頁（新增 / 編輯 / 送出）
+/*
+ * 範本：表單頁（新增 / 編輯 / 送出）
  * NavigationBar（關閉）→ FieldGroup 欄位（文字 / 下拉 / 單選 / 說明）
  * → 同意條款 Checkbox → 底部置底 CTA。
- * 元件選用見 CLAUDE.md 決策樹；日期欄位用原生 <input type="date">。
- * ================================================================== */
+ * 元件選用見 CLAUDE.md 決策樹（若要加日期欄位，用原生 <input type="date">）。
+ */
 import { useState } from 'react'
 import {
   NavigationBar,

@@ -12,9 +12,9 @@ export default function Preview({ story, values }: PreviewProps) {
   const [dark, setDark] = useState(false)
   const [copied, setCopied] = useState(false)
 
-  // Mirror theme to <html> so portal'd elements (Toast / Dialog / Sheet) inherit it.
-  // Without this, components rendered into document.body via createPortal escape the
-  // canvas-scoped data-theme and fall back to :root (light) tokens.
+  // 把主題同步到 <html>，portal 出去的元素（Toast / Dialog / Sheet）才吃得到。
+  // 少了這段，createPortal 到 document.body 的元素會逃出 canvas 上的 data-theme，
+  // 退回 :root 的淺色 token。
   useEffect(() => {
     const html = document.documentElement
     if (dark) html.dataset.theme = 'dark'
@@ -32,7 +32,7 @@ export default function Preview({ story, values }: PreviewProps) {
       setCopied(true)
       window.setTimeout(() => setCopied(false), 1200)
     } catch {
-      /* clipboard API unavailable; silently no-op */
+      /* 沒有 clipboard API（非 https 等），靜靜略過 */
     }
   }
 

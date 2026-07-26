@@ -15,7 +15,7 @@ const DottedControllerRender: React.FC<{ values: Record<string, any> }> = ({ val
       aria-label="範例輪播"
     />
   )
-  // Overlap dots are white / translucent — show them over a colored backdrop so they read.
+  // overlap 是白色 / 半透明的點，要墊一層彩色底才看得出來
   if (values.type === 'overlap') {
     return (
       <div

@@ -5,17 +5,16 @@ type SheetHeaderType = 'grabber' | 'default'
 type SheetHeadlineSize = 'none' | 'regular' | 'large'
 
 interface SheetHeaderProps {
-  /** Visual type — `grabber` shows a drag handle at top; `default` shows a nav bar only. */
+  /** grabber 上方有可拖曳的手把；default 只有一列 nav bar */
   type?: SheetHeaderType
-  /** Headline size — `none` hides the title, `regular` is 16px centered, `large` is 24px. */
+  /** none 不顯示標題；regular 為 16px 置中；large 為 24px 靠左 */
   headlineSize?: SheetHeadlineSize
-  /** Headline text (shown when `headlineSize !== 'none'`). */
   headline?: string
-  /** Id set on the rendered headline, so a parent can point `aria-labelledby` at it. */
+  /** 掛在標題上的 id，供外層 aria-labelledby 指向 */
   titleId?: string
-  /** Left element (icon / text button). Rendered only in variants where Figma allows it. */
+  /** 只有 Figma 允許的組合會渲染，見下方 navShowsLeading */
   leading?: React.ReactNode
-  /** Right element (icon / text button). Rendered only in variants where Figma allows it. */
+  /** 只有 Figma 允許的組合會渲染，見下方 navShowsTrailing / contentShowsTrailing */
   trailing?: React.ReactNode
   className?: string
 }
@@ -42,11 +41,11 @@ const SheetHeader = React.forwardRef<HTMLDivElement, SheetHeaderProps>(
     const showNav = isGrabberRegular || isDefaultRegular || isDefaultLarge
     const showLargeBlock = headlineSize === 'large'
 
-    // Leading is allowed in default (both sizes) and grabber+regular (not grabber+large).
+    // 只在 default（兩種 size）與 grabber+regular 給 leading，grabber+large 沒有
     const navShowsLeading = isDefaultRegular || isDefaultLarge || isGrabberRegular
-    // Trailing in nav bar: default (both sizes) and grabber+regular.
+    // nav bar 裡的 trailing：default（兩種 size）與 grabber+regular
     const navShowsTrailing = isDefaultRegular || isDefaultLarge || isGrabberRegular
-    // Trailing in large content block: only grabber+large.
+    // large 內容區塊裡的 trailing：只有 grabber+large
     const contentShowsTrailing = isGrabberLarge
 
     const rootClass = [

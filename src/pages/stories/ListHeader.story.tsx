@@ -3,9 +3,8 @@ import ListHeader from '@/components/ui/ListHeader'
 import { Button } from '@/components/ui'
 import type { StoryDef } from './types'
 
-/** Button size matched to the trailing text size:
- *  small → medium Button (label-medium 14px = body-medium trailing text),
- *  medium/large → large Button (label-large 16px = body-large trailing text). */
+/** 按鈕尺寸對齊該 size 的 trailing 文字字級：small 配 medium（14px）、
+ *  medium / large 配 large（16px），換成按鈕時視覺高度才不會跳 */
 const BUTTON_SIZE = {
   small:  'medium',
   medium: 'large',

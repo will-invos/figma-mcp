@@ -2,13 +2,13 @@ import React, { useId, useState, useCallback } from 'react';
 import './TextField.css';
 
 interface TextFieldProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'disabled' | 'type'> {
-  /** 'default' = plain input, 'inner-label' = floating label that acts as placeholder when empty+unfocused */
+  /** inner-label：空且未對焦時 label 當佔位字，一對焦或有值就浮到上方 */
   variant?: 'default' | 'inner-label';
   label?: string;
   status?: 'default' | 'error' | 'disabled';
   leadingIcon?: React.ReactNode;
   trailingIcon?: React.ReactNode;
-  /** HTML input type */
+  /** 原生 input 的 type；因為 type 已被 Omit 掉，這裡改名避免衝突 */
   inputType?: React.HTMLInputTypeAttribute;
 }
 
@@ -41,13 +41,11 @@ const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
     const isError = status === 'error';
     const isInnerLabel = variant === 'inner-label';
 
-    // Track focus and whether input has value for floating label
     const [focused, setFocused] = useState(false);
     const [hasValue, setHasValue] = useState(() => {
       return Boolean(value || defaultValue);
     });
 
-    // Float label when focused or has value
     const shouldFloat = isInnerLabel && (focused || hasValue || Boolean(value));
 
     const handleFocus = useCallback(
@@ -86,7 +84,7 @@ const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
       .filter(Boolean)
       .join(' ');
 
-    // Click wrapper to focus input
+    // 點外框任一處都要能對焦到 input
     const handleWrapperClick = useCallback(() => {
       document.getElementById(inputId)?.focus();
     }, [inputId]);

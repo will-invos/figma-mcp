@@ -1,9 +1,3 @@
-/* ========================================
- * Radio Item
- * Figma: Radio item (node 6005:5524)
- * States: Enabled/Error/Disabled × Checked/Unchecked
- * ======================================== */
-
 .ui-radio {
   display: inline-flex;
   align-items: flex-start;
@@ -12,7 +6,6 @@
   user-select: none;
 }
 
-/* Visually hidden native input */
 .ui-radio__input {
   position: absolute;
   opacity: 0;
@@ -22,7 +15,6 @@
   pointer-events: none;
 }
 
-/* Indicator: 24×24 outer, 22×22 inner circle centered */
 .ui-radio__indicator {
   flex-shrink: 0;
   width: 24px;
@@ -48,7 +40,6 @@
   box-sizing: border-box;
 }
 
-/* Selected: 22×22 brand fill + 8px white center dot */
 .ui-radio__input:checked + .ui-radio__indicator::before {
   background-color: var(--color-background-brand-default);
   border-color: var(--color-background-brand-default);
@@ -72,19 +63,16 @@
   display: block;
 }
 
-/* Error state */
 .ui-radio--error .ui-radio__indicator::before {
   border-color: var(--color-border-danger);
 }
 
-/* Disabled state */
 .ui-radio--disabled {
   opacity: 0.4;
   pointer-events: none;
   cursor: not-allowed;
 }
 
-/* Content: label + optional description */
 .ui-radio__content {
   display: flex;
   flex-direction: column;

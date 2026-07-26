@@ -4,25 +4,19 @@ import FieldGroupHelpText from './FieldGroupHelpText'
 import './FieldGroup.css'
 
 interface FieldGroupProps {
-  /** Headline shown in the header (the field's main label). */
   headline?: string
-  /** Optional secondary description shown under the headline. */
   description?: string
-  /** Optional help text shown below the input. */
+  /** 顯示在輸入元件下方的說明文字 */
   helpText?: string
-  /** Help text alignment. */
   helpTextAlign?: 'left' | 'right'
-  /** Whether the field is in error state (affects help text color). */
+  /** error 會讓 helpText 轉為錯誤色 */
   status?: 'default' | 'error'
-  /** Children = the input control(s) — TextField, Select, Radio group, etc. */
+  /** 輸入元件本體（TextField / Select / Radio 群組…） */
   children: React.ReactNode
   className?: string
 }
 
-/**
- * Form field wrapper composing FieldGroupHeader + content + FieldGroupHelpText,
- * matching the Figma "Field group" component structure.
- */
+/** 表單欄位容器：FieldGroupHeader + 內容 + FieldGroupHelpText */
 const FieldGroup = React.forwardRef<HTMLDivElement, FieldGroupProps>(
   ({ headline, description, helpText, helpTextAlign = 'left', status = 'default', children, className }, ref) => {
     const classes = [

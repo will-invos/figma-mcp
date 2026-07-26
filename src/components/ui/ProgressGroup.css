@@ -1,7 +1,3 @@
-/* Per Figma 5867:21532 — ProgressGroup
-   - Top variant   : flex-col, gap 4, texts row above bar (left brand / right default)
-   - Aside variant : flex-row, gap 8, bar takes flex-1, trailing text on the right (brand)
-   - Bar: 8px tall, base #edeff3, fill #3560ff, radius 999 */
 .ui-progress-group {
   display: flex;
   width: 100%;
@@ -33,7 +29,7 @@
   white-space: nowrap;
 }
 
-/* Aside layout: let the ProgressBar fill remaining row width beside the text. */
+/* 讓 ProgressBar 吃掉文字以外的剩餘寬度 */
 .ui-progress-group--aside .ui-progress-bar {
   flex: 1;
   min-width: 0;

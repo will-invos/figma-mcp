@@ -11,21 +11,20 @@ interface ToastAction {
 
 interface ToastMessage {
   id: string
-  /** Text shown below icon (Rich variant). */
   message?: string
-  /** 'rich' (default) shows icon + text + optional button; 'loading' shows just a spinner. */
+  /** rich 顯示 icon + 文字 + 選用按鈕；loading 只有 spinner */
   type?: 'rich' | 'loading'
-  /** Optional icon shown above the text (Rich only). Defaults to a Spinner if omitted. */
+  /** rich 專用；不傳會用 Spinner 當預設 */
   icon?: React.ReactNode
-  /** Optional action button shown below the text (Rich only). */
+  /** rich 專用 */
   action?: ToastAction
-  /** Auto-dismiss after this many ms. Loading toasts never auto-dismiss. */
+  /** 幾毫秒後自動關閉；loading 永不自動關閉 */
   duration?: number
 }
 
 interface ToastContextValue {
   show: (opts: Omit<ToastMessage, 'id'>) => string
-  /** Merge `patch` into an existing toast and reset its auto-dismiss timer. No-op if id is gone. */
+  /** 把 patch 併進既有 toast 並重新計時；id 已消失就什麼都不做 */
   update: (id: string, patch: Partial<Omit<ToastMessage, 'id'>>) => void
   dismiss: (id: string) => void
 }
@@ -45,7 +44,6 @@ function ToastProvider({ children }: { children: React.ReactNode }) {
   const counterRef = useRef(0)
   const timersRef = useRef<Map<string, ReturnType<typeof setTimeout>>>(new Map())
 
-  // Clear all timers on unmount
   useEffect(() => {
     const timers = timersRef.current
     return () => { timers.forEach((t) => clearTimeout(t)); timers.clear() }
@@ -88,7 +86,7 @@ function ToastProvider({ children }: { children: React.ReactNode }) {
 
       if (!captured) return
 
-      // Reset auto-dismiss timer to reflect new type / duration
+      // type / duration 可能被改掉，計時器要重新起算
       const existing = timersRef.current.get(id)
       if (existing) { clearTimeout(existing); timersRef.current.delete(id) }
       const merged: ToastMessage = captured

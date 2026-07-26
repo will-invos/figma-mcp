@@ -12,7 +12,8 @@ const ToastRender: React.FC<{ values: Record<string, any> }> = ({ values }) => {
       setTimeout(() => dismiss(id), 3000)
     } else {
       // rich: 一直保持 rich 樣式，3s 後把預設 Spinner icon 換成 check icon。
-      // duration 設大於 3s 避免 icon 切換前就被 auto-dismiss；update 後 timer 會重置為預設 3s。
+      // duration 設大於 3s 避免 icon 切換前就被 auto-dismiss；update 會把 timer 重新計時
+      // （沿用同一個 duration，所以換 icon 後還有 5s）。
       const id = show({
         type: 'rich',
         message: values.text,

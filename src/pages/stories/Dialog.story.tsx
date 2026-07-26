@@ -97,13 +97,13 @@ function resolveProps(values: Record<string, any>, close: () => void = () => {},
   if (values.cta === '1-button') {
     actions = [primary]
   } else if (values.cta === '2-buttons-vertical') {
-    // Vertical: top = primary filled, bottom = secondary text
+    // 直排：上 primary filled、下 secondary text
     actions = [primary, secondary]
   } else if (values.type === 'danger') {
-    // Horizontal danger: primary on left, secondary on right
+    // 橫排 danger：primary 在左
     actions = [primary, secondary]
   } else {
-    // Horizontal default: secondary on left, primary on right
+    // 橫排 default：primary 在右
     actions = [secondary, primary]
   }
 

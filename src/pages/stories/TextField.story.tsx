@@ -29,7 +29,7 @@ const TextFieldRender: React.FC<{ values: Record<string, any> }> = ({ values }) 
   const { value: controlValue, ...rest } = resolveProps(values)
   const [value, setValue] = useState(controlValue ?? '')
 
-  // Sync when Controls panel changes value
+  // 控制項面板改值時同步進來
   useEffect(() => { setValue(controlValue ?? '') }, [controlValue])
 
   return (

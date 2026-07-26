@@ -2,14 +2,12 @@ import React from 'react'
 import './ProgressBar.css'
 
 interface ProgressBarProps {
-  /** Progress 0–100. Ignored when `indeterminate` is true. */
+  /** 0–100；indeterminate 為 true 時忽略 */
   value: number
-  /** Animated indeterminate state (e.g. unknown progress). */
   indeterminate?: boolean
   className?: string
 }
 
-/** Per Figma Web 3:1985 — 8px brand-filled bar with subtle track. */
 const ProgressBar = React.forwardRef<HTMLDivElement, ProgressBarProps>(
   ({ value, indeterminate = false, className }, ref) => {
     const pct = Math.max(0, Math.min(100, value))

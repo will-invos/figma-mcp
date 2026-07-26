@@ -7,17 +7,16 @@ interface SelectOption {
 }
 
 interface SelectProps extends Omit<React.SelectHTMLAttributes<HTMLSelectElement>, 'disabled'> {
-  /** 'default' = no label, 'inner-label' = floating label */
+  /** inner-label：有值時 label 浮到上方（與 TextField 不同，單純對焦不浮） */
   variant?: 'default' | 'inner-label';
   label?: string;
   placeholder?: string;
   options: SelectOption[];
   status?: 'default' | 'error' | 'disabled';
   leadingIcon?: React.ReactNode;
-  /** Delegate opening to a custom picker (e.g. a `<Sheet>` + `<ListItem>` menu)
-   *  instead of the native dropdown. The field renders as a button and calls
-   *  this on activation; `options` + `value` still drive the displayed label.
-   *  In this mode there is no native `<select>`, so `ref` / `...rest` are unused. */
+  /** 改用自訂選單（例如 <Sheet> + <ListItem>）取代原生下拉。
+   *  欄位會渲染成 button 並在點擊時呼叫這個 callback；顯示的文字仍由 options + value 決定。
+   *  這個模式下沒有原生 <select>，所以 ref / ...rest 不會生效。 */
   onPickerOpen?: () => void;
 }
 
@@ -51,7 +50,7 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       return Boolean(value || defaultValue);
     });
 
-    // Select only floats when it has a value (not on focus)
+    // 與 TextField 不同：只有有值才浮起，單純對焦不浮
     const shouldFloat = isInnerLabel && (hasValue || Boolean(value));
 
     const handleChange = useCallback(
@@ -102,7 +101,7 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       </>
     );
 
-    // Custom picker: the field itself is the trigger, no native dropdown.
+    // 自訂選單模式：欄位本身就是觸發器，不渲染原生下拉
     if (onPickerOpen) {
       return (
         <div className={rootClasses}>

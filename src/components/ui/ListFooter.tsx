@@ -2,13 +2,10 @@ import React from 'react'
 import './ListFooter.css'
 
 interface ListFooterProps {
-  /** Caption text shown below the list. */
   footer: string
-  /** Visual state — danger turns text and icon red. */
   state?: 'default' | 'danger'
-  /** Show a leading info icon (16×16). */
   icon?: boolean
-  /** Text alignment — 'end' right-aligns the caption (e.g. a version number). */
+  /** end 會靠右對齊（例如列表尾端的版號） */
   align?: 'start' | 'end'
   className?: string
 }

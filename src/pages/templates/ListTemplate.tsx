@@ -1,8 +1,8 @@
-/* ================================================================== *
- * Template：列表頁（票券 / 商品 / 圖文資料列表）
+/*
+ * 範本：列表頁（票券 / 商品 / 圖文資料列表）
  * NavigationBar（關閉 + large 標題 + 編輯）→ 圖文 ListItem（縮圖 + 標題 + Tag／到期時間）
  * 元件選用見 CLAUDE.md 決策樹；日期時間格式照 design.md §2.3。
- * ================================================================== */
+ */
 import type { ReactNode } from 'react'
 import { NavigationBar, IconButton, ListItem, Tag } from '@/components/ui'
 

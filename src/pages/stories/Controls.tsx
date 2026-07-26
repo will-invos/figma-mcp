@@ -12,9 +12,9 @@ interface ControlsProps {
 }
 
 /**
- * Number inputs need a local string buffer. If we use <input type="number"> directly,
- * React compares DOM value vs prop value with loose numeric equality, so "01" == 1
- * and the DOM is never rewritten after typing — leaving stale leading zeros visible.
+ * 數字欄位要自己留一份字串暫存。直接用 <input type="number"> 的話，React 比對
+ * DOM value 與 prop value 時是寬鬆數值比較（"01" == 1），輸入後就不會再改寫 DOM，
+ * 導致前面多打的 0 一直留在畫面上。
  */
 function NumberField({
   name, def, value, onCommit,
@@ -26,9 +26,8 @@ function NumberField({
 }) {
   const [raw, setRaw] = useState<string>(() => String(value))
 
-  // Re-sync only when parent value actually changes (story switch, reset, dependent control).
-  // We must NOT re-run based on raw — that would fight the user's typing (e.g. they clear
-  // the input to "" and the effect would immediately restore the previous number).
+  // 只在外部 value 真的變了才同步（切換 story、重設、連動控制項）。
+  // 不能把 raw 放進依賴：使用者把欄位清空成 "" 時，effect 會立刻把舊數字填回去。
   useEffect(() => {
     setRaw(String(value))
   }, [value])

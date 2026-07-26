@@ -2,7 +2,7 @@ import React, { useEffect, useId, useRef } from 'react'
 import './PinInput.css'
 
 interface PinInputProps {
-  /** 位數，預設 4 */
+  /** 驗證碼位數 */
   length?: number
   /** 受控值。長度可小於 length，表示尚未填滿 */
   value: string
@@ -62,10 +62,10 @@ const PinInput = React.forwardRef<HTMLInputElement, PinInputProps>(
       const raw = e.target.value.replace(/\D/g, '')
       if (!raw) return
 
-      // Heuristic: bulk fill vs single overwrite.
-      // - Autofill of the full code lands here as one change with raw.length === length.
-      // - Quick paste lands here with > 2 chars.
-      // - Typing over an existing single char arrives as 2 chars (old + new) — take last.
+      // 判斷是「整串填入」還是「單格覆寫」：
+      // - 自動填入整組驗證碼時，會一次進來且 raw.length === length
+      // - 快速貼上會超過 2 字
+      // - 在已有字的格子上重打，會收到 2 字（舊 + 新），取最後一個
       const isBulk = raw.length === length || raw.length > 2
       const next = isBulk
         ? (sanitized.slice(0, i) + raw).slice(0, length)
@@ -81,11 +81,11 @@ const PinInput = React.forwardRef<HTMLInputElement, PinInputProps>(
     const handleKeyDown = (i: number) => (e: React.KeyboardEvent<HTMLInputElement>) => {
       if (e.key === 'Backspace') {
         if (i < sanitized.length) {
-          // Filled cell — clear from this position onwards (forces left-to-right entry, no gaps)
+          // 有字的格子：從這裡往後全部清掉，強制由左而右輸入、不留空格
           e.preventDefault()
           commitValue(sanitized.slice(0, i))
         } else if (i > 0) {
-          // Empty cell — back up and clear previous
+          // 空格子：退一格並清掉前一個
           e.preventDefault()
           commitValue(sanitized.slice(0, i - 1))
           requestAnimationFrame(() => focusCell(i - 1))

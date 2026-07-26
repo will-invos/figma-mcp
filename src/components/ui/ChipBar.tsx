@@ -5,21 +5,21 @@ import './ChipBar.css'
 interface ChipBarItem {
   key: string
   label: string
-  /** Optional badge next to the label: 'dot' (unread marker) or a numeric count. */
+  /** 'dot' 是未讀標記，數字則顯示未讀數 */
   badge?: 'dot' | number
 }
 
 interface ChipBarProps {
   items: ChipBarItem[]
-  /** Currently selected key (single-select). */
+  /** 單選 */
   activeKey?: string
   onChange?: (key: string) => void
-  /** Allow horizontal scroll when items overflow. */
+  /** 超出寬度時可橫向捲動 */
   scrollable?: boolean
   className?: string
 }
 
-/** Horizontal selectable chip bar — pick one of several options. */
+/** 可選取的橫向 chip 列 */
 const ChipBar = React.forwardRef<HTMLDivElement, ChipBarProps>(
   ({ items, activeKey, onChange, scrollable = true, className }, ref) => {
     const classes = [

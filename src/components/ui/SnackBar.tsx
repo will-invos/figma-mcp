@@ -5,13 +5,11 @@ import './SnackBar.css'
 
 interface SnackBarProps {
   text: string
-  /** Optional leading icon. */
   icon?: React.ReactNode
-  /** Trailing type: 'none' (text only), 'button' (action text), 'spinner' (loading). */
+  /** none 只有文字；button 顯示動作文字；spinner 顯示載入中 */
   trailing?: 'none' | 'button' | 'spinner'
-  /** Button label when trailing is 'button'. */
+  /** trailing='button' 時的按鈕文字 */
   buttonText?: string
-  /** Callback when trailing button is clicked. */
   onButtonClick?: () => void
   className?: string
 }

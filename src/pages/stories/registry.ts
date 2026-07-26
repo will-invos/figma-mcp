@@ -10,14 +10,14 @@ import {
   NotFoundTemplateStory,
 } from './Templates.story.tsx'
 
-// Chrome
+// 頁面框架
 import { NavigationBarStory } from './NavigationBar.story.tsx'
 import { TabBarStory } from './TabBar.story.tsx'
 import { PageNavigationStory } from './PageNavigation.story.tsx'
 import { TabsStory } from './Tabs.story.tsx'
 import { DividerStory } from './Divider.story'
 
-// Forms
+// 表單
 import { ButtonStory } from './Button.story'
 import { IconButtonStory } from './IconButton.story.tsx'
 import { FabStory } from './Fab.story.tsx'
@@ -32,7 +32,7 @@ import { SliderStory } from './Slider.story.tsx'
 import { SearchFieldStory } from './SearchField.story.tsx'
 import { FieldGroupStory } from './FieldGroup.story.tsx'
 
-// Display
+// 顯示
 import { TagStory } from './Tag.story'
 import { ChipBarStory } from './ChipBar.story.tsx'
 import { BadgeStory } from './Badge.story'
@@ -44,7 +44,7 @@ import { CardItemStory } from './CardItem.story.tsx'
 import { DottedControllerStory } from './DottedController.story.tsx'
 import { IconsStory } from './Icons.story.tsx'
 
-// Feedback
+// 回饋
 import { BannerStory } from './Banner.story'
 import { PageStatusStory } from './PageStatus.story.tsx'
 import { SpinnerStory } from './Spinner.story'
@@ -55,7 +55,7 @@ import { SnackBarStory } from './SnackBar.story.tsx'
 import { TooltipStory } from './Tooltip.story.tsx'
 import { InAppNotificationStory } from './InAppNotification.story.tsx'
 
-// Overlay
+// 浮層
 import { DialogStory } from './Dialog.story.tsx'
 import { SheetStory } from './Sheet.story.tsx'
 

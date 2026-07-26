@@ -10,27 +10,16 @@ interface NavigationBarTab {
 
 interface NavigationBarProps {
   title?: string
-  /** 'regular' shows centered title (48px), 'large' shows large left-aligned title. */
   titleSize?: 'regular' | 'large'
-  /** Layout variant: default, home (large only), search (with search bar), tabs (with tab strip). */
   type?: 'default' | 'home' | 'search' | 'tabs'
-  /** Optional element on the leading (left) side, e.g. a back IconButton. */
   leading?: React.ReactNode
-  /** Optional element on the trailing (right) side. */
   trailing?: React.ReactNode
-  /** Show the bottom 1px divider. */
   divider?: boolean
-  /** Search bar placeholder (type='search'). */
   searchPlaceholder?: string
-  /** Controlled search value (type='search'). */
   searchValue?: string
-  /** Search change handler (type='search'). */
   onSearchChange?: (value: string) => void
-  /** Tab definitions (type='tabs'). */
   tabs?: NavigationBarTab[]
-  /** Active tab index (type='tabs'). */
   activeTab?: number
-  /** Tab change handler (type='tabs'). */
   onTabChange?: (index: number) => void
 }
 
@@ -63,11 +52,9 @@ const NavigationBar = React.forwardRef<HTMLElement, NavigationBarProps>(
       type === 'tabs' && 'ui-nav-bar--tabs',
     ].filter(Boolean).join(' ')
 
-    // Tabs type has its own divider inside the tab strip — don't double up.
     const bottomDivider = divider && type !== 'tabs' && <Divider />
 
 
-    /* ── Bottom add-ons (search bar / tab strip) ── */
     const searchBar = type === 'search' && (
       <div className="ui-nav-bar__search-bar">
         <SearchField
@@ -89,7 +76,6 @@ const NavigationBar = React.forwardRef<HTMLElement, NavigationBarProps>(
 
     const bottomAddon = searchBar || tabStrip || null
 
-    // Large + Home / Search / Tabs: 56px nav bar with title + trailing, then optional addon
     if (isLarge && type !== 'default') {
       return (
         <header ref={ref} className={classes}>
@@ -103,7 +89,6 @@ const NavigationBar = React.forwardRef<HTMLElement, NavigationBarProps>(
       )
     }
 
-    // Regular: centered title with leading/trailing + optional bottom addon
     if (!isLarge) {
       return (
         <header ref={ref} className={classes}>
@@ -118,7 +103,6 @@ const NavigationBar = React.forwardRef<HTMLElement, NavigationBarProps>(
       )
     }
 
-    // Large + Default: nav bar row on top (leading/trailing), title container below
     return (
       <header ref={ref} className={classes}>
         <div className="ui-nav-bar__row">

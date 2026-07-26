@@ -12,7 +12,6 @@
   position: relative;
 }
 
-/* Badge overlay: top-right notification dot */
 .ui-icon-button__badge {
   position: absolute;
   top: 2px;
@@ -20,10 +19,6 @@
   display: inline-flex;
   pointer-events: none;
 }
-
-/* ========================================
- * Sizes
- * ======================================== */
 
 .ui-icon-button--large {
   width: 52px;
@@ -89,11 +84,6 @@
   font-size: 16px;
 }
 
-/* ========================================
- * Filled Variant
- * ======================================== */
-
-/* filled — primary */
 .ui-icon-button--filled.ui-icon-button--filled-primary {
   background-color: var(--color-background-brand-default);
   color: var(--color-content-fixed-white);
@@ -107,7 +97,6 @@
   background-color: var(--color-background-brand-active);
 }
 
-/* filled — neutral */
 .ui-icon-button--filled.ui-icon-button--filled-neutral {
   background-color: var(--color-background-neutral-subtle);
   color: var(--color-content-default);
@@ -121,7 +110,6 @@
   background-color: var(--color-background-neutral-subtle-active);
 }
 
-/* filled — danger */
 .ui-icon-button--filled.ui-icon-button--filled-danger {
   background-color: var(--color-background-danger-default);
   color: var(--color-content-fixed-white);
@@ -135,7 +123,6 @@
   background-color: var(--color-background-danger-active);
 }
 
-/* filled — prize */
 .ui-icon-button--filled.ui-icon-button--filled-prize {
   background-color: var(--color-background-prize-default);
   color: var(--color-content-fixed-bold);
@@ -149,7 +136,6 @@
   background-color: var(--color-background-prize-active);
 }
 
-/* filled — donation */
 .ui-icon-button--filled.ui-icon-button--filled-donation {
   background-color: var(--color-background-donation-default);
   color: var(--color-content-fixed-white);
@@ -162,10 +148,6 @@
 .ui-icon-button--filled.ui-icon-button--filled-donation:active {
   background-color: var(--color-background-donation-active);
 }
-
-/* ========================================
- * Outline Variant
- * ======================================== */
 
 .ui-icon-button--outline {
   background-color: transparent;
@@ -181,13 +163,6 @@
   background-color: var(--color-background-transparent-active);
 }
 
-/* ========================================
- * Ghost Variant
- * ======================================== */
-
-/* All ghost types stay flat — no background in any state. Press/hover feedback
- * comes from dimming the icon (opacity), so ghost buttons sit cleanly inside
- * nav bars, sheet headers, text fields, etc. without a background chip. */
 .ui-icon-button--ghost {
   background-color: transparent;
   transition: opacity 0.15s;
@@ -201,24 +176,17 @@
   opacity: 0.6;
 }
 
-/* ghost — primary */
 .ui-icon-button--ghost.ui-icon-button--ghost-primary {
   color: var(--color-content-brand-default);
 }
 
-/* ghost — neutral */
 .ui-icon-button--ghost.ui-icon-button--ghost-neutral {
   color: var(--color-content-neutral-default);
 }
 
-/* ghost — fixed-white */
 .ui-icon-button--ghost.ui-icon-button--ghost-fixed-white {
   color: var(--color-content-fixed-white);
 }
-
-/* ========================================
- * States
- * ======================================== */
 
 .ui-icon-button:disabled,
 .ui-icon-button[data-loading] {

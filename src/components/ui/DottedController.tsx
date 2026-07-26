@@ -2,32 +2,18 @@ import React from 'react'
 import './DottedController.css'
 
 interface DottedControllerProps {
-  /** Total number of dots. */
   count: number
-  /** Active dot index (0-based). */
+  /** 目前位置，從 0 起算 */
   activeIndex?: number
-  /**
-   * Visual style:
-   *   - 'default' : on solid backgrounds — brand-blue active dot, neutral-gray inactive.
-   *   - 'overlap' : on photos / content — white active dot, translucent inactive, with a
-   *     drop shadow so the dots stay legible over arbitrary imagery.
-   */
+  /** default 放在單色底上；overlap 放在照片 / 內容上（白點加陰影才看得見） */
   type?: 'default' | 'overlap'
-  /**
-   * Called with the dot index when a dot is tapped. Providing this turns the dots into
-   * buttons (with a widened tap target); omit it for a purely visual indicator.
-   */
+  /** 傳了才會把點變成按鈕（點擊區也跟著加寬）；只要純指示器就別傳 */
   onChange?: (index: number) => void
-  /** Accessible label describing the paged view (e.g. "輪播圖片"). */
   'aria-label'?: string
   className?: string
 }
 
-/**
- * Per Figma 5940:14610 — Dotted Controller.
- * A row of dots marking the current position within a paged / carousel view.
- * Renders as a static indicator, or as tappable buttons when `onChange` is provided.
- */
+/** 輪播 / 分頁的位置指示點 */
 const DottedController = React.forwardRef<HTMLDivElement, DottedControllerProps>(
   ({ count, activeIndex = 0, type = 'default', onChange, className, ...rest }, ref) => {
     const interactive = typeof onChange === 'function'

@@ -2,7 +2,6 @@ import React from 'react'
 import './Divider.css'
 
 interface DividerProps {
-  /** horizontal (default) or vertical */
   orientation?: 'horizontal' | 'vertical'
   className?: string
 }

@@ -14,14 +14,14 @@ interface DialogProps {
   open: boolean;
   onClose: () => void;
   type?: 'default' | 'danger';
-  /** '2-buttons-horizontal' = row, '2-buttons-vertical' = column (filled + text), '1-button' = single */
+  /** horizontal 橫排；vertical 直排（上 filled、下 text）；1-button 只有一顆 */
   cta?: '2-buttons-horizontal' | '2-buttons-vertical' | '1-button';
   title: string;
   description?: string;
   actions: DialogAction[];
   image?: React.ReactNode;
   extraContent?: React.ReactNode;
-  /** Portal container element. Defaults to document.body. Set this to render inside a themed container. */
+  /** portal 目標，預設 document.body；想讓 dialog 跟著某個容器的主題與範圍走就傳它 */
   container?: Element;
 }
 
@@ -61,7 +61,7 @@ function Dialog({
 
   const renderActions = () => {
     if (isVertical) {
-      // Column layout: top = filled primary/danger, bottom = text primary
+      // 直排：上面 filled primary/danger，下面固定 text primary
       return (
         <div className="ui-dialog__actions--vertical">
           {actions.map((action, i) => {
@@ -81,12 +81,11 @@ function Dialog({
       );
     }
 
-    // Row layout (default): buttons are flex-1 equal width
     return (
       <div className="ui-dialog__actions">
         {actions.map((action, i) => {
-          // Default type: first = neutral, last = filled primary
-          // Danger type: first = filled danger, last = neutral
+          // default：最後一顆是 primary，其餘 neutral
+          // danger：第一顆是 danger，其餘 neutral
           let variant = action.variant;
           let colorType = action.colorType;
 
@@ -95,7 +94,6 @@ function Dialog({
               variant = i === 0 ? 'filled' : 'filled';
               colorType = i === 0 ? 'danger' : 'neutral';
             } else {
-              // Default: last button is primary filled, others are neutral filled
               const isLast = i === actions.length - 1;
               variant = 'filled';
               colorType = isLast ? 'primary' : 'neutral';

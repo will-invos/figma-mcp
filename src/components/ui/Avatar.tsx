@@ -2,11 +2,11 @@ import React from 'react'
 import './Avatar.css'
 
 interface AvatarProps {
-  /** Image URL — falls back to initials if missing or fails. */
+  /** 未提供或載入失敗時退回文字縮寫 */
   src?: string
-  /** Initials shown when no image. Auto-generated from `name` if not provided. */
+  /** 沒有圖時顯示的縮寫；不傳就從 name 自動取字 */
   initials?: string
-  /** Full name for accessible label and initials extraction. */
+  /** 同時用於無障礙標籤與縮寫來源 */
   name?: string
   size?: 'xsmall' | 'small' | 'medium' | 'large' | 'xlarge'
 }

@@ -1,24 +1,9 @@
-/* ========================================
- * Basic banner
- * Figma: Basic banner (node 4031:5686)
- *
- * Default: rounded radius/200, px space/300, py space/200
- * Full width: no radius, px space/400, py space/200
- * Gap: space/200 (8px)
- * Icon: 16×16 in 22px-height container (aligns with text line)
- * Text: iOS/Body-CN/Medium — 14px/22px weight 400, letter-spacing 0.04em
- * ======================================== */
-
 .ui-banner {
   display: flex;
   align-items: flex-start;
   gap: var(--space-200);
   font-family: var(--font-family);
 }
-
-/* ========================================
- * Variants
- * ======================================== */
 
 .ui-banner--default {
   padding: var(--space-200) var(--space-300);
@@ -29,10 +14,6 @@
   padding: var(--space-200) var(--space-400);
   border-radius: 0;
 }
-
-/* ========================================
- * Color Types
- * ======================================== */
 
 .ui-banner--primary {
   background-color: var(--color-background-brand-subtlest);
@@ -64,15 +45,11 @@
   color: var(--color-content-prize-bold);
 }
 
-/* ========================================
- * Leading icon: 16×16 in 22px-height container
- * ======================================== */
-
 .ui-banner__icon {
   flex-shrink: 0;
   display: flex;
   align-items: center;
-  height: 22px;
+  height: 22px; /* icon 容器高 22px 是為了對齊 .text-body-medium 的行高 */
   color: inherit;
 }
 

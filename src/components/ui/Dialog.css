@@ -1,25 +1,8 @@
-/* ========================================
- * Dialog
- * Figma: Dialog (node 6663:10360)
- *
- * Structure: outer (rounded, overflow hidden)
- *   > body (p 24, gap 24, flex-col)
- *     > content (gap 16: title + description)
- *   > footer (px 24, pb 24)
- *     > actions
- *
- * Width: 345px, max-width: 376px
- * Border radius: radius/400 (16px)
- * CTA types: 1 button, 2 buttons (row), 2 buttons straight (col)
- * ======================================== */
-
-/* Overlay: opacity-only fade-in */
 @keyframes ui-dialog-overlay-fade-in {
   from { opacity: 0; }
   to { opacity: 1; }
 }
 
-/* Dialog body: opacity + scale pop-in */
 @keyframes ui-dialog-pop {
   from {
     opacity: 0;
@@ -55,8 +38,6 @@
   font-family: var(--font-family);
 }
 
-/* --- Body --- */
-
 .ui-dialog__body {
   display: flex;
   flex-direction: column;
@@ -67,8 +48,6 @@
   width: 100%;
   box-sizing: border-box;
 }
-
-/* --- Content (title + description) --- */
 
 .ui-dialog__content {
   display: flex;
@@ -83,20 +62,16 @@
   margin: 0;
 }
 
-.ui-dialog__description { 
+.ui-dialog__description {
   color: var(--color-content-default);
   margin: 0;
 }
-
-/* --- Extra content slot --- */
 
 .ui-dialog__extra {
   width: 100%;
   text-align: left;
   align-self: stretch;
 }
-
-/* --- Footer --- */
 
 .ui-dialog__footer {
   display: flex;
@@ -108,8 +83,7 @@
   box-sizing: border-box;
 }
 
-/* --- Actions: 2 buttons (row) --- */
-
+/* 1 顆與 2 顆橫排共用 */
 .ui-dialog__actions {
   display: flex;
   gap: var(--space-400);
@@ -123,8 +97,6 @@
   flex: 1 0 0;
   min-width: 0;
 }
-
-/* --- Actions: 2 buttons straight (column) --- */
 
 .ui-dialog__actions--vertical {
   display: flex;

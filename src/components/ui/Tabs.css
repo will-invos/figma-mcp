@@ -1,13 +1,3 @@
-/* ========================================
- * Tabs — per Figma 10972:5454
- *
- * Fill:    each tab fills 1 0 0 of the row (min-width 48px), 48px tall
- * Compact: tabs auto-size; container has 24px gap and 16px horizontal padding
- *
- * Active indicator: 2px bold line at the bottom of the tab.
- * Bottom divider spans the full width of the Tabs container.
- * ======================================== */
-
 .ui-tabs {
   position: relative;
   display: flex;
@@ -16,7 +6,6 @@
   width: 100%;
 }
 
-/* Bottom divider spans full width, positioned absolutely under all tabs */
 .ui-tabs__divider {
   position: absolute;
   left: 0;
@@ -24,8 +13,6 @@
   bottom: 0;
   width: auto;
 }
-
-/* ===== Variants ===== */
 
 .ui-tabs--fill .ui-tabs__item {
   flex: 1 0 0;
@@ -44,8 +31,6 @@
 .ui-tabs--compact .ui-tabs__item {
   flex-shrink: 0;
 }
-
-/* ===== Tab item ===== */
 
 .ui-tabs__item {
   height: 48px;

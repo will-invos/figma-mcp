@@ -1,20 +1,9 @@
-/* ========================================
- * Select
- * Figma: Select (node 4083:6123)
- * Types: Simple (single-line) | Has label (floating label)
- *
- * Same visual structure as TextField.
- * inner-label behavior:
- *   empty + unfocused → label at 16px as placeholder
- *   focused or filled → label floats to 12px, select visible below
- * ======================================== */
+/* 外觀結構與 TextField 相同。inner-label 只在「有值」時浮起 —— 與 TextField 不同，單純對焦不浮，因為還沒展開選單時下方沒有東西可以顯示。 */
 
 .ui-select {
   display: flex;
   flex-direction: column;
 }
-
-/* --- Select container --- */
 
 .ui-select__input-wrapper {
   display: flex;
@@ -31,8 +20,7 @@
   transition: border-color 0.15s, box-shadow 0.15s;
 }
 
-/* Custom-picker mode renders the wrapper as a <button> — neutralize UA styles
-   so it matches the <label> version. */
+/* onPickerOpen 模式下 wrapper 是 <button>，要清掉瀏覽器預設樣式才會跟 <label> 版一致 */
 button.ui-select__input-wrapper {
   width: 100%;
   font: inherit;
@@ -40,19 +28,17 @@ button.ui-select__input-wrapper {
   text-align: left;
 }
 
-/* Focus: 1px border + 1px inset box-shadow = visual 2px */
+/* 1px border + 1px inset shadow＝視覺 2px，比改 border-width 不會位移 */
 .ui-select__input-wrapper:focus-within {
   border-color: var(--color-border-brand);
   box-shadow: inset 0 0 0 1px var(--color-border-brand);
 }
 
-/* Error */
 .ui-select--error .ui-select__input-wrapper {
   border-color: var(--color-border-danger);
   box-shadow: inset 0 0 0 1px var(--color-border-danger);
 }
 
-/* Disabled */
 .ui-select--disabled .ui-select__input-wrapper {
   background-color: var(--color-background-disable);
   pointer-events: none;
@@ -72,8 +58,6 @@ button.ui-select__input-wrapper {
   color: var(--color-content-subtlest);
 }
 
-/* --- Content area --- */
-
 .ui-select__content {
   display: flex;
   flex-direction: column;
@@ -83,30 +67,16 @@ button.ui-select__input-wrapper {
   justify-content: center;
 }
 
-/* ========================================
- * Simple type
- * ======================================== */
-
 .ui-select--default .ui-select__content {
   padding-top: var(--space-400);
   padding-bottom: var(--space-400);
 }
 
-/* ========================================
- * Has-label type
- *
- * Not floated (no value): label at 16px as placeholder, centered.
- *   select is absolute overlay (invisible but clickable).
- * Floated (has value): label 12px at top + select visible below.
- * ======================================== */
-
-/* Not floated: single-line placeholder layout */
 .ui-select--inner-label .ui-select__content {
   padding-top: var(--space-400);
   padding-bottom: var(--space-400);
 }
 
-/* Floated: two-line layout */
 .ui-select--inner-label.ui-select--float .ui-select__content {
   padding-top: var(--space-150);
   padding-bottom: var(--space-150);
@@ -118,19 +88,18 @@ button.ui-select__input-wrapper {
   pointer-events: none;
 }
 
-/* Floated: label turns subtle (color only — font-size handled by text-body-small utility). */
+/* 只改顏色；字級由 Select.tsx 換成 .text-body-small */
 .ui-select--inner-label.ui-select--float .ui-select__label {
   color: var(--color-content-subtle);
 }
 
-/* Error label color — needs higher specificity to override float state */
+/* 需要更高的 specificity 才壓得過上面的浮起狀態 */
 .ui-select--error .ui-select__label,
 .ui-select--inner-label.ui-select--float.ui-select--error .ui-select__label {
   color: var(--color-content-danger-default);
 }
 
-/* --- Native select (invisible overlay covering entire wrapper for a big click target) --- */
-
+/* 原生 select 透明鋪滿整個 wrapper，換取大一點的點擊區 */
 .ui-select__input {
   position: absolute;
   inset: 0;
@@ -146,8 +115,6 @@ button.ui-select__input-wrapper {
   cursor: pointer;
 }
 
-/* --- Value display (visible text shown for default variant always, inner-label when filled) --- */
-
 .ui-select__value {
   color: var(--color-content-default);
   overflow: hidden;
@@ -155,17 +122,14 @@ button.ui-select__input-wrapper {
   white-space: nowrap;
 }
 
-/* Placeholder state (no value): softened color */
 .ui-select--placeholder .ui-select__value {
   color: var(--color-content-subtlest);
 }
 
-/* Error + empty: placeholder text turns danger; filled value stays default */
+/* 只有佔位字轉紅；已選到值的文字維持原色 */
 .ui-select--error.ui-select--placeholder .ui-select__value {
   color: var(--color-content-danger-default);
 }
-
-/* --- Chevron icon --- */
 
 .ui-select__chevron {
   flex-shrink: 0;
@@ -190,8 +154,6 @@ button.ui-select__input-wrapper {
   font-size: 24px;
 }
 
-/* --- Leading icon --- */
-
 .ui-select__leading-icon {
   flex-shrink: 0;
   width: 24px;
@@ -214,12 +176,11 @@ button.ui-select__input-wrapper {
   font-size: 24px;
 }
 
-/* Error: leading icon turns danger */
 .ui-select--error .ui-select__leading-icon {
   color: var(--color-content-danger-default);
 }
 
-/* Disabled + empty: placeholder stays subtlest */
+/* 要放在 disabled 的一般規則之後才蓋得掉 */
 .ui-select--disabled.ui-select--placeholder .ui-select__value {
   color: var(--color-content-subtlest);
 }

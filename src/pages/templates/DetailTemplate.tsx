@@ -1,8 +1,8 @@
-/* ================================================================== *
- * Template：詳情 / 內容頁（單筆資料細節）
+/*
+ * 範本：詳情 / 內容頁（單筆資料細節）
  * NavigationBar（返回 + 置中標題）→ 主視覺 → 堆疊白色卡片（段落文字 / 項目列表）
- * 元件選用見 CLAUDE.md 決策樹；金額 / 期數 / 日期格式照 design.md §2.3。
- * ================================================================== */
+ * 元件選用見 CLAUDE.md 決策樹；填入金額 / 期數 / 日期時照 design.md §2.3 的格式。
+ */
 import { NavigationBar, IconButton, Button } from '@/components/ui'
 
 interface DetailTemplateProps {

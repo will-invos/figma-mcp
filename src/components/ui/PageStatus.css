@@ -1,9 +1,5 @@
-/* Per Figma 6416:7094 — Page Status (empty / error states)
-   Column, centered, gap 16 (space-400), horizontal padding 16 (space-400).
-   Illustration: 120×120 at 40% opacity.
-   Title: Heading/Small (bold 18/26), Description: Body/Large (16/24); both content/subtle.
-   Note: illustrations are exported artwork with baked light-mode grays — they do not
-   re-tint in dark mode (acceptable for muted 40%-opacity imagery). */
+/* 插圖是匯出好的圖檔，灰階已烘進去，dark mode 不會跟著換色；
+   因為壓到 40% 透明度所以可接受，換插圖時要記得這件事。 */
 .ui-page-status {
   display: flex;
   flex-direction: column;

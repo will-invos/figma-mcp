@@ -4,9 +4,9 @@ import './TabBar.css'
 interface TabItem {
   key: string
   label: string
-  /** Icon shown when inactive (outline). */
+  /** 未選取時的 icon（線框） */
   icon: React.ReactNode
-  /** Icon shown when active (filled). Falls back to `icon` if not provided. */
+  /** 選取時的 icon（實心）；不傳就沿用 icon */
   activeIcon?: React.ReactNode
   badge?: number | boolean
 }
