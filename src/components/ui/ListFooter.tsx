@@ -8,15 +8,18 @@ interface ListFooterProps {
   state?: 'default' | 'danger'
   /** Show a leading info icon (16×16). */
   icon?: boolean
+  /** Text alignment — 'end' right-aligns the caption (e.g. a version number). */
+  align?: 'start' | 'end'
   className?: string
 }
 
 
 const ListFooter = React.forwardRef<HTMLDivElement, ListFooterProps>(
-  ({ footer, state = 'default', icon = true, className }, ref) => {
+  ({ footer, state = 'default', icon = true, align = 'start', className }, ref) => {
     const classes = [
       'ui-list-footer',
       state === 'danger' && 'ui-list-footer--danger',
+      align === 'end' && 'ui-list-footer--end',
       className,
     ].filter(Boolean).join(' ')
 

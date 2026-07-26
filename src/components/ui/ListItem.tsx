@@ -8,7 +8,9 @@ import './ListItem.css';
 
 interface ListItemProps {
   headline: string;
-  description?: string;
+  /** Second line (type='rich'). Accepts a node so the Figma description slot
+      can hold e.g. a `<Tag>` + timestamp row, not just text. */
+  description?: React.ReactNode;
   /** 'default' = 56px, 'rich' = 80px, 'compact' = 48px */
   type?: 'default' | 'rich' | 'compact';
   trailing?: 'none' | 'drill-in' | 'text' | 'text-button' | 'cta' | 'switch' | 'checkbox' | 'icon' | 'spinner';

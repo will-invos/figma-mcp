@@ -10,5 +10,6 @@ export const ListFooterStory: StoryDef = {
     footer:   { type: 'string', default: 'This is a footer.' },
     icon: { type: 'boolean', default: true },
     state:    { type: 'enum', options: ['default', 'danger'], default: 'default' },
+    align:    { type: 'enum', options: ['start', 'end'], default: 'start' },
   },
 }

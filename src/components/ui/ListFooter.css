@@ -29,3 +29,8 @@
 .ui-list-footer--danger {
   color: var(--color-content-danger-default);
 }
+
+/* End-aligned caption（例如列表尾端的版號） */
+.ui-list-footer--end .ui-list-footer__text {
+  text-align: right;
+}

@@ -166,9 +166,11 @@
   width: 24px;
   height: 24px;
   font-size: 24px;
+  color: var(--color-content-brand-default);
 }
 
-.ui-list-item__chevron {
+.ui-list-item__chevron i[class^='icon-'],
+.ui-list-item__chevron i[class*=' icon-'] {
   color: var(--color-content-default);
 }
 
