@@ -4,6 +4,7 @@ import type { StoryCategory, StorySection, StoryDef } from './types'
 import {
   MainTabTemplateStory,
   ListTemplateStory,
+  SettingsTemplateStory,
   FormTemplateStory,
   DetailTemplateStory,
 } from './Templates.story.tsx'
@@ -90,7 +91,7 @@ export const sections: StorySection[] = [
     categories: [
       {
         name: '',
-        stories: [MainTabTemplateStory, ListTemplateStory, FormTemplateStory, DetailTemplateStory],
+        stories: [MainTabTemplateStory, ListTemplateStory, SettingsTemplateStory, FormTemplateStory, DetailTemplateStory],
       },
     ],
   },

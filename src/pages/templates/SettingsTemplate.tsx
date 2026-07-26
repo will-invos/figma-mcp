@@ -1,23 +1,26 @@
 /* ================================================================== *
- * Template：列表頁（設定 / 選單 / 清單）
- * large 標題 + 分組 ListItem + 底部 TabBar。元件選用見 CLAUDE.md 決策樹。
+ * Template：設定頁（設定 / 選單）
+ * NavigationBar（返回 + 置中標題）→ 分組 ListHeader + ListItem
+ * → 版號 ListFooter → 獨立「登出」列。
+ * 對齊 Figma「個人設定」母版（4hJVIr7fkiE1UTrUkfpbBt · 2905:6882）；
+ * 元件選用見 CLAUDE.md 決策樹。
  * ================================================================== */
 import { useState } from 'react'
-import { NavigationBar, IconButton, ListHeader, ListItem, TabBar } from '@/components/ui'
+import { NavigationBar, IconButton, ListHeader, ListItem, ListFooter } from '@/components/ui'
 
-interface ListTemplateProps {
+interface SettingsTemplateProps {
   onBack?: () => void
 }
 
-export default function ListTemplate({ onBack }: ListTemplateProps) {
-  const [tab, setTab] = useState('settings')
+export default function SettingsTemplate({ onBack }: SettingsTemplateProps) {
+  const [pushEnabled, setPushEnabled] = useState(true)
 
   return (
     <div className="tpl-page">
-      {/* large 標題列：左對齊大標，適合清單型頁面 */}
+      {/* regular 標題列：次層頁面用置中標題 + 返回鍵 */}
       <NavigationBar
-        title="設定"
-        titleSize="large"
+        title="個人設定"
+        titleSize="regular"
         leading={
           <IconButton
             variant="ghost"
@@ -28,30 +31,30 @@ export default function ListTemplate({ onBack }: ListTemplateProps) {
             onClick={onBack}
           />
         }
-        trailing={
-          <IconButton
-            variant="ghost"
-            colorType="neutral"
-            size="medium"
-            aria-label="搜尋"
-            icon={<i className="icon-magnifier" aria-hidden="true" />}
-          />
-        }
       />
 
-      <div className="tpl-page__body tpl-page__body--sunken">
-        {/* 分組一 */}
-        <ListHeader headline="帳號" size="small" />
+      <div className="tpl-page__body">
         <ListItem
-          headline="個人資料"
+          headline="會員資料"
+          description="0987654321"
+          type="rich"
           leadingIcon={<i className="icon-user" aria-hidden="true" />}
-          trailing="drill-in"
+          trailing="text-button"
+          trailingText="編輯"
           onClick={() => {}}
         />
         <ListItem
-          headline="通知設定"
-          description="推播、電子郵件"
-          leadingIcon={<i className="icon-bell" aria-hidden="true" />}
+          headline="手機載具"
+          description="/INV.888"
+          type="rich"
+          leadingIcon={<i className="icon-mobile-barcode" aria-hidden="true" />}
+          onClick={() => {}}
+        />
+
+        <ListHeader headline="使用偏好" size="small" />
+        <ListItem
+          headline="外觀樣式"
+          leadingIcon={<i className="icon-square-flash" aria-hidden="true" />}
           trailing="drill-in"
           onClick={() => {}}
         />
@@ -59,38 +62,17 @@ export default function ListTemplate({ onBack }: ListTemplateProps) {
           headline="接收推播"
           leadingIcon={<i className="icon-bell" aria-hidden="true" />}
           trailing="switch"
-          trailingChecked
-          onTrailingChange={() => {}}
+          trailingChecked={pushEnabled}
+          onTrailingChange={setPushEnabled}
         />
+        <ListFooter footer="v7.38.1" icon={false} align="end" />
 
-        {/* 分組二 */}
-        <ListHeader headline="其他" size="small" />
         <ListItem
-          headline="關於發票存摺"
-          trailing="text"
-          trailingText="v2.4.0"
-          showDivider={false}
+          headline="登出"
+          leadingIcon={<i className="icon-container-arrow-right" aria-hidden="true" />}
+          onClick={() => {}}
         />
       </div>
-
-      <TabBar
-        activeKey={tab}
-        onChange={setTab}
-        items={[
-          {
-            key: 'home',
-            label: '首頁',
-            icon: <i className="icon-home-user" aria-hidden="true" />,
-            activeIcon: <i className="icon-home-user-filled" aria-hidden="true" />,
-          },
-          {
-            key: 'settings',
-            label: '設定',
-            icon: <i className="icon-scanner" aria-hidden="true" />,
-            activeIcon: <i className="icon-scanner-filled" aria-hidden="true" />,
-          },
-        ]}
-      />
     </div>
   )
 }

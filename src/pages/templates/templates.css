@@ -1,12 +1,13 @@
-/* ------------------------------------------------------------------ *
- * 頁面外框（Page shell）—— 所有 prototype 頁面共用的預設格式
+/* ==================================================================
+ * 頁面範本共用樣式（src/pages/templates/）
  *
- * 起手式規則（見 CLAUDE.md「新頁面起手式」）都收斂在這裡：
- *  - 頁面 max-width: 480px、水平置中（桌機模擬手機視窗）
- *  - 直向 flex：NavigationBar 固定頂部 → body 自由捲動 → TabBar 固定底部
- *  - 顏色一律走 token，dark mode 由 token 自動切換，不需另寫
- *
- * 複製 template 時連同這份 class 一起用即可，不要另寫 magic number。
+ * 這份不是共用樣式庫，也不會進 npm 套件 —— 只是範本的示範外框。
+ * 複製範本開新頁面時，把用到的規則一併搬到那一頁自己的 CSS，
+ * 不要直接 import 這支檔案。所有數值一律走 token，不寫 magic number。
+ * ================================================================== */
+
+/* ------------------------------------------------------------------
+ * 頁面外框：NavigationBar → 捲動內容區 → TabBar
  * ------------------------------------------------------------------ */
 
 .tpl-page {
@@ -20,35 +21,22 @@
   color: var(--color-content-default);
 }
 
-/* storybook 預覽用：把整頁範本框成固定手機尺寸（實際頁面不會用到這個 class）。
-   內部 .tpl-page 改為填滿框、可捲動，取代原本的 100dvh / 置中。 */
-.tpl-preview-frame {
-  width: 393px;
-  height: 760px;
-  overflow: hidden;
-  border: 1px solid var(--color-border-subtle);
-  /* 讓框內 position: fixed 的內容（如 Sheet portal）以此框為邊界，不會蓋滿整個瀏覽器視窗 */
-  contain: layout;
-}
-
-.tpl-preview-frame .tpl-page {
-  min-height: 0;
-  height: 100%;
-  max-width: none;
-  margin: 0;
-}
-
 /* 內容捲動區：夾在 NavigationBar 與 TabBar 之間，只有這一段會捲動 */
 .tpl-page__body {
   flex: 1 1 auto;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
+  background-color: var(--color-background-sunken);
 }
 
-/* 分組型頁面（設定、列表）常用的下沉底色 */
-.tpl-page__body--sunken {
-  background: var(--color-background-neutral-subtle);
+/* 內容直接鋪在頁面上（表單頁），不需要 sunken 底色襯出區塊 */
+.tpl-page__body--plain {
+  background-color: var(--color-background-default);
 }
+
+/* ------------------------------------------------------------------
+ * 內容區塊
+ * ------------------------------------------------------------------ */
 
 /* 一般內容用的內距容器 */
 .tpl-section {
@@ -58,7 +46,23 @@
   gap: var(--space-300);
 }
 
-/* 底部主要動作區（表單送出、置底 CTA），貼齊 body 底部 */
+/* 白色卡片（詳情頁段落），以 .tpl-card-stack 堆疊 */
+.tpl-card-stack {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-400);
+}
+
+.tpl-card {
+  background: var(--color-background-default);
+  padding: var(--space-400);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-400);
+}
+
+/* 底部主要動作區（表單送出、置底 CTA），貼齊頁面底部 */
 .tpl-actions {
   padding: var(--space-400);
   display: flex;
@@ -66,7 +70,40 @@
   gap: var(--space-200);
 }
 
-/* 表單內並排的單選 / 多選項（radio group、checkbox group） */
+/* 讓 Button 依內容寬度靠左，不被 flex 拉滿 */
+.tpl-inline {
+  align-self: flex-start;
+}
+
+/* 頁面主視覺（滿版 2:1） */
+.tpl-hero {
+  display: block;
+  width: 100%;
+  aspect-ratio: 2 / 1;
+  object-fit: cover;
+}
+
+/* 編號列表：全站 reset 關掉了 list-style，這裡自己開回來 */
+.tpl-ordered-list {
+  list-style: decimal;
+  padding-inline-start: var(--space-500);
+  margin: 0;
+}
+
+.tpl-ordered-list > li + li {
+  margin-top: var(--space-200);
+}
+
+.tpl-link {
+  color: var(--color-content-link-default);
+  text-decoration: underline;
+}
+
+/* ------------------------------------------------------------------
+ * 表單
+ * ------------------------------------------------------------------ */
+
+/* 並排的單選 / 多選項（radio group、checkbox group） */
 .tpl-field-row {
   display: flex;
   flex-wrap: wrap;
@@ -78,26 +115,22 @@
   margin-top: var(--space-200);
 }
 
-/* 表單內嵌的文字連結（例如同意條款） */
-.tpl-link {
-  color: var(--color-content-link-default);
-  text-decoration: underline;
+/* ------------------------------------------------------------------
+ * 列表
+ * ------------------------------------------------------------------ */
+
+/* ListItem leadingExtra 的縮圖（Figma Image slot 64×64 / radius 200 / border subtle） */
+.tpl-thumb {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: var(--radius-200);
+  border: 1px solid var(--color-border-subtle);
 }
 
-/* 詳情頁：sunken 底色上，白色 section 卡片以 16px 間距堆疊 */
-.tpl-section-stack {
-  min-height: 100%;
-  background: var(--color-background-sunken);
+/* ListItem description 第二行 —— Tag + 到期時間並排 */
+.tpl-item-meta {
   display: flex;
-  flex-direction: column;
-  gap: var(--space-400);
-}
-
-/* 單張白色 section 卡片 */
-.tpl-section-card {
-  background: var(--color-background-default);
-  padding: var(--space-400);
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-400);
+  align-items: center;
+  gap: var(--space-100);
 }

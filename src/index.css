@@ -22,9 +22,12 @@ body {
   background-color: var(--color-background-neutral-subtle);
 }
 
+/* 字級 / 字重交給 .text-* utility，顏色統一走標題色（design.md §配色預設）。
+   元件內的標題若另有指定（如 .ui-dialog__title），class 選擇器優先，不受影響。 */
 h1, h2, h3, h4, h5, h6 {
   font-size: inherit;
   font-weight: inherit;
+  color: var(--color-content-bold);
 }
 
 a {
