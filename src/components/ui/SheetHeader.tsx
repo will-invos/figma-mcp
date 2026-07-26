@@ -11,6 +11,8 @@ interface SheetHeaderProps {
   headlineSize?: SheetHeadlineSize
   /** Headline text (shown when `headlineSize !== 'none'`). */
   headline?: string
+  /** Id set on the rendered headline, so a parent can point `aria-labelledby` at it. */
+  titleId?: string
   /** Left element (icon / text button). Rendered only in variants where Figma allows it. */
   leading?: React.ReactNode
   /** Right element (icon / text button). Rendered only in variants where Figma allows it. */
@@ -24,6 +26,7 @@ const SheetHeader = React.forwardRef<HTMLDivElement, SheetHeaderProps>(
       type = 'grabber',
       headlineSize = 'none',
       headline = 'Headline',
+      titleId,
       leading,
       trailing,
       className,
@@ -69,7 +72,10 @@ const SheetHeader = React.forwardRef<HTMLDivElement, SheetHeaderProps>(
               <div className="ui-sheet-header__leading">{leading}</div>
             )}
             {headlineSize === 'regular' && (
-              <span className="ui-sheet-header__title ui-sheet-header__title--regular text-label-large">
+              <span
+                id={titleId}
+                className="ui-sheet-header__title ui-sheet-header__title--regular text-label-large"
+              >
                 {headline}
               </span>
             )}
@@ -81,7 +87,10 @@ const SheetHeader = React.forwardRef<HTMLDivElement, SheetHeaderProps>(
 
         {showLargeBlock && (
           <div className="ui-sheet-header__content">
-            <h2 className="ui-sheet-header__title ui-sheet-header__title--large text-heading-large">
+            <h2
+              id={titleId}
+              className="ui-sheet-header__title ui-sheet-header__title--large text-heading-large"
+            >
               {headline}
             </h2>
             {contentShowsTrailing && trailing && (

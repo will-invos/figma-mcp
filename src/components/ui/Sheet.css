@@ -43,6 +43,12 @@
   padding-bottom: env(safe-area-inset-bottom, 0px);
 }
 
+/* 開啟時焦點會程式化移到 sheet 本身（tabindex="-1"）好讓輔助科技唸出對話框名稱，
+   它不在 Tab 順序內，所以不需要外框。 */
+.ui-sheet:focus {
+  outline: none;
+}
+
 /* 捲動容器，四周不留間距 —— 間距由內容自行負責，實作有內距內容時記得補上 var(--space-400) */
 .ui-sheet__body {
   flex: 1;

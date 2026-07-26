@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useId, useRef } from 'react'
 import { createPortal } from 'react-dom'
 import IconButton from './IconButton'
 import SheetHeader from './SheetHeader'
@@ -8,6 +8,17 @@ import './Sheet.css'
 const DISMISS_DISTANCE_RATIO = 0.25
 /** Downward flick velocity (px/ms) that auto-dismisses regardless of distance. */
 const DISMISS_VELOCITY = 0.5
+
+const FOCUSABLE_SELECTOR =
+  'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), ' +
+  'textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+
+/** Tabbable elements currently rendered inside the sheet, in DOM order. */
+function getFocusable(root: HTMLElement): HTMLElement[] {
+  return Array.from(root.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR)).filter(
+    (el) => el.getClientRects().length > 0
+  )
+}
 
 interface SheetProps {
   open: boolean
@@ -21,6 +32,8 @@ interface SheetProps {
   Handle?: boolean
   /** Portal container element. Defaults to document.body. Set this to render inside a themed container. */
   container?: Element
+  /** Accessible name for the dialog. Only needed when there is no visible `headline`. */
+  'aria-label'?: string
 }
 
 function Sheet({
@@ -32,21 +45,69 @@ function Sheet({
   footer,
   Handle = true,
   container,
+  'aria-label': ariaLabel,
 }: SheetProps) {
   const sheetRef = useRef<HTMLDivElement>(null)
+  const titleId = useId()
 
+  // Escape to close + keep Tab inside the sheet (aria-modal only hides the
+  // background from assistive tech; it does not stop Tab from walking out).
   useEffect(() => {
     if (!open) return
 
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         onClose()
+        return
+      }
+      if (e.key !== 'Tab') return
+
+      const sheetEl = sheetRef.current
+      if (!sheetEl) return
+      const focusables = getFocusable(sheetEl)
+      if (focusables.length === 0) {
+        e.preventDefault()
+        sheetEl.focus()
+        return
+      }
+
+      const first = focusables[0]
+      const last = focusables[focusables.length - 1]
+      const active = document.activeElement
+      const insideContent = !!active && active !== sheetEl && sheetEl.contains(active)
+
+      if (!insideContent) {
+        // Focus sits on the sheet root (just opened) or escaped to the page behind.
+        e.preventDefault()
+        ;(e.shiftKey ? last : first).focus()
+      } else if (e.shiftKey && active === first) {
+        e.preventDefault()
+        last.focus()
+      } else if (!e.shiftKey && active === last) {
+        e.preventDefault()
+        first.focus()
       }
     }
 
     document.addEventListener('keydown', handleKeyDown)
     return () => document.removeEventListener('keydown', handleKeyDown)
   }, [open, onClose])
+
+  // Move focus into the sheet on open, hand it back to the opener on close.
+  // The sheet root is focused rather than its first control, so screen readers
+  // announce the dialog name instead of landing straight on the close button.
+  useEffect(() => {
+    if (!open) return
+    const sheetEl = sheetRef.current
+    if (!sheetEl) return
+
+    const previouslyFocused = document.activeElement as HTMLElement | null
+    sheetEl.focus()
+
+    return () => {
+      if (previouslyFocused?.isConnected) previouslyFocused.focus()
+    }
+  }, [open])
 
   // Drag-to-dismiss: only active when the grabber Handle is shown.
   useEffect(() => {
@@ -136,11 +197,20 @@ function Sheet({
     <>
       <div className="ui-sheet-overlay" onClick={onClose} />
       <div className="ui-sheet-container">
-        <div ref={sheetRef} className="ui-sheet">
+        <div
+          ref={sheetRef}
+          className="ui-sheet"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby={hasHeadline ? titleId : undefined}
+          aria-label={hasHeadline ? undefined : ariaLabel}
+          tabIndex={-1}
+        >
           <SheetHeader
             type={headerType}
             headlineSize={resolvedHeadlineSize}
-            headline={headline}
+            headline={headline ?? ''}
+            titleId={titleId}
             leading={headerType === 'default' ? closeButton : undefined}
           />
           <div className="ui-sheet__body">{children}</div>
@@ -151,6 +221,8 @@ function Sheet({
     container ?? document.body
   )
 }
+
+Sheet.displayName = 'Sheet'
 
 export default Sheet
 export type { SheetProps }
