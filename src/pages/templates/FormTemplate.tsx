@@ -157,7 +157,6 @@ export default function FormTemplate({ onBack }: FormTemplateProps) {
         onClose={() => setBankSheetOpen(false)}
         headline="選擇銀行"
         Handle={false}
-        bodyPadding="none"
         container={pageEl ?? undefined}
       >
         {BANK_OPTIONS.map((option, index) => (

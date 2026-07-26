@@ -55,7 +55,7 @@ const SheetRender: React.FC<{ values: Record<string, any> }> = ({ values }) => {
           footer={renderFooter()}
           container={container}
         >
-          <p style={{ padding: 'var(--space-400) 0' }}>Description</p>
+          <p style={{ padding: 'var(--space-400)' }}>Description</p>
         </Sheet>
       )}
     </>

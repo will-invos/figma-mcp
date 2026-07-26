@@ -40,21 +40,14 @@
   flex-direction: column;
   animation: ui-sheet-slideup 0.3s ease-out;
   overflow: hidden;
-  /* 貼底面板：body / footer 內容保持在 home indicator / gesture bar 之上（有無 footer 皆適用） */
   padding-bottom: env(safe-area-inset-bottom, 0px);
 }
 
+/* 捲動容器，四周不留間距 —— 間距由內容自行負責，實作有內距內容時記得補上 var(--space-400) */
 .ui-sheet__body {
   flex: 1;
   overflow-y: auto;
-  padding: 0 var(--space-400);
   color: var(--color-content-default);
-}
-
-/* Use when children (e.g. ListItem) already carry their own horizontal inset */
-.ui-sheet__body--flush {
-  padding-left: 0;
-  padding-right: 0;
 }
 
 .ui-sheet__footer {

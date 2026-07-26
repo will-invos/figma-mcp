@@ -19,8 +19,6 @@ interface SheetProps {
   footer?: React.ReactNode
   /** Show the small drag handle at the top. Default: true. */
   Handle?: boolean
-  /** Body horizontal padding. Use 'none' when children (e.g. ListItem) already carry their own inset. Default: 'default'. */
-  bodyPadding?: 'default' | 'none'
   /** Portal container element. Defaults to document.body. Set this to render inside a themed container. */
   container?: Element
 }
@@ -33,7 +31,6 @@ function Sheet({
   children,
   footer,
   Handle = true,
-  bodyPadding = 'default',
   container,
 }: SheetProps) {
   const sheetRef = useRef<HTMLDivElement>(null)
@@ -146,13 +143,7 @@ function Sheet({
             headline={headline}
             leading={headerType === 'default' ? closeButton : undefined}
           />
-          <div
-            className={
-              bodyPadding === 'none' ? 'ui-sheet__body ui-sheet__body--flush' : 'ui-sheet__body'
-            }
-          >
-            {children}
-          </div>
+          <div className="ui-sheet__body">{children}</div>
           {footer && <div className="ui-sheet__footer">{footer}</div>}
         </div>
       </div>
