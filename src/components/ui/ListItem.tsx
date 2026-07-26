@@ -8,8 +8,9 @@ import './ListItem.css';
 
 interface ListItemProps {
   headline: string;
-  description?: string;
-  /** 'default' = 56px, 'rich' = 80px, 'compact' = 48px */
+  /** 第二行（type='rich' 才顯示）。收 node 是為了塞得下 <Tag> + 時間這種組合，不只純文字 */
+  description?: React.ReactNode;
+  /** 列高：default 56px、rich 80px、compact 48px */
   type?: 'default' | 'rich' | 'compact';
   trailing?: 'none' | 'drill-in' | 'text' | 'text-button' | 'cta' | 'switch' | 'checkbox' | 'icon' | 'spinner';
   trailingText?: string;

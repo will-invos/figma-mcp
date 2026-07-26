@@ -6,7 +6,7 @@ interface FieldGroupHeaderProps {
   className?: string
 }
 
-/** Standalone field group header — typically used inside <FieldGroup> automatically. */
+/** 一般由 <FieldGroup> 自動渲染，單獨使用的情境少 */
 const FieldGroupHeader = React.forwardRef<HTMLDivElement, FieldGroupHeaderProps>(
   ({ headline, description, className }, ref) => {
     const classes = ['ui-field-group__header', className].filter(Boolean).join(' ')

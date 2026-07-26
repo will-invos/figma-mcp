@@ -4,7 +4,7 @@ import './SearchField.css'
 interface SearchFieldProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type' | 'onChange'> {
   value?: string
   onChange?: (value: string) => void
-  /** Show clear (×) icon when the field has a value. */
+  /** 有值時顯示清除（×）鍵 */
   clearable?: boolean
 }
 

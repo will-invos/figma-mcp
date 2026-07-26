@@ -1,31 +1,44 @@
-/* ================================================================== *
- * Template：列表頁（設定 / 選單 / 清單）
- * large 標題 + 分組 ListItem + 底部 TabBar。元件選用見 CLAUDE.md 決策樹。
- * ================================================================== */
-import { useState } from 'react'
-import { NavigationBar, IconButton, ListHeader, ListItem, TabBar } from '@/components/ui'
+/*
+ * 範本：列表頁（票券 / 商品 / 圖文資料列表）
+ * NavigationBar（關閉 + large 標題 + 編輯）→ 圖文 ListItem（縮圖 + 標題 + Tag／到期時間）
+ * 元件選用見 CLAUDE.md 決策樹；日期時間格式照 design.md §2.3。
+ */
+import type { ReactNode } from 'react'
+import { NavigationBar, IconButton, ListItem, Tag } from '@/components/ui'
 
 interface ListTemplateProps {
-  onBack?: () => void
+  onClose?: () => void
 }
 
-export default function ListTemplate({ onBack }: ListTemplateProps) {
-  const [tab, setTab] = useState('settings')
+/* 示範用縮圖；實作時換成 API 回傳的商品圖 */
+const SAMPLE_THUMB = 'https://images.unsplash.com/photo-1556740738-b6a63e27c4df?w=128&h=128&fit=crop'
 
+/** 第二行：狀態 Tag（可省略）+ 到期時間 */
+function ItemMeta({ tag, expiredAt }: { tag?: ReactNode; expiredAt: string }) {
+  if (!tag) return <>{expiredAt}</>
+  return (
+    <span className="tpl-item-meta">
+      {tag}
+      <span>{expiredAt}</span>
+    </span>
+  )
+}
+
+export default function ListTemplate({ onClose }: ListTemplateProps) {
   return (
     <div className="tpl-page">
-      {/* large 標題列：左對齊大標，適合清單型頁面 */}
+      {/* large 標題列：關閉鍵 + 右側編輯鍵，標題另起一行 */}
       <NavigationBar
-        title="設定"
+        title="我的票券"
         titleSize="large"
         leading={
           <IconButton
             variant="ghost"
             colorType="neutral"
             size="medium"
-            aria-label="返回"
-            icon={<i className="icon-arrow-left" aria-hidden="true" />}
-            onClick={onBack}
+            aria-label="關閉"
+            icon={<i className="icon-cross" aria-hidden="true" />}
+            onClick={onClose}
           />
         }
         trailing={
@@ -33,64 +46,46 @@ export default function ListTemplate({ onBack }: ListTemplateProps) {
             variant="ghost"
             colorType="neutral"
             size="medium"
-            aria-label="搜尋"
-            icon={<i className="icon-magnifier" aria-hidden="true" />}
+            aria-label="編輯"
+            icon={<i className="icon-pencil" aria-hidden="true" />}
+            onClick={() => {}}
           />
         }
       />
 
-      <div className="tpl-page__body tpl-page__body--sunken">
-        {/* 分組一 */}
-        <ListHeader headline="帳號" size="small" />
+      <div className="tpl-page__body">
         <ListItem
-          headline="個人資料"
-          leadingIcon={<i className="icon-user" aria-hidden="true" />}
-          trailing="drill-in"
+          type="rich"
+          headline="【抽獎券】黑醋栗+金盞花葉黃素精華飲 60ml 18入 (抽1名)"
+          description={
+            <ItemMeta
+              tag={<Tag variant="light" colorType="primary" size="small" message="待填寫" />}
+              expiredAt="2026/06/01 23:59:59"
+            />
+          }
+          leadingExtra={<img className="tpl-thumb" src={SAMPLE_THUMB} alt="" />}
           onClick={() => {}}
         />
         <ListItem
-          headline="通知設定"
-          description="推播、電子郵件"
-          leadingIcon={<i className="icon-bell" aria-hidden="true" />}
-          trailing="drill-in"
+          type="rich"
+          headline="【兌換券】全家 Fami 霜淇淋（口味不限）"
+          description={
+            <ItemMeta
+              tag={<Tag variant="light" colorType="danger" size="small" message="已過期" />}
+              expiredAt="2026/06/01 23:59:59"
+            />
+          }
+          leadingExtra={<img className="tpl-thumb" src={SAMPLE_THUMB} alt="" />}
           onClick={() => {}}
         />
         <ListItem
-          headline="接收推播"
-          leadingIcon={<i className="icon-bell" aria-hidden="true" />}
-          trailing="switch"
-          trailingChecked
-          onTrailingChange={() => {}}
-        />
-
-        {/* 分組二 */}
-        <ListHeader headline="其他" size="small" />
-        <ListItem
-          headline="關於發票存摺"
-          trailing="text"
-          trailingText="v2.4.0"
-          showDivider={false}
+          type="rich"
+          headline="【募捐】浪愛發生－用金幣讓浪浪溫飽"
+          description={<ItemMeta expiredAt="2026/06/01 23:59:59" />}
+          leadingExtra={<img className="tpl-thumb" src={SAMPLE_THUMB} alt="" />}
+          onClick={() => {}}
         />
       </div>
-
-      <TabBar
-        activeKey={tab}
-        onChange={setTab}
-        items={[
-          {
-            key: 'home',
-            label: '首頁',
-            icon: <i className="icon-home-user" aria-hidden="true" />,
-            activeIcon: <i className="icon-home-user-filled" aria-hidden="true" />,
-          },
-          {
-            key: 'settings',
-            label: '設定',
-            icon: <i className="icon-scanner" aria-hidden="true" />,
-            activeIcon: <i className="icon-scanner-filled" aria-hidden="true" />,
-          },
-        ]}
-      />
     </div>
   )
 }

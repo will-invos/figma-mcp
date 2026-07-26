@@ -86,4 +86,9 @@ export const IconsStory: StoryDef = {
     size: { type: 'enum', options: ['12', '14', '16', '20', '24', '32', '40'], default: '24' },
   },
   Render: IconsRender,
+  // 這頁是 icon 一覽，沒有「根元件」可印；改示範 icon font 的用法
+  codeSnippet: (values) => {
+    const sizeClass = SIZE_CLASS[values.size as string] ?? ''
+    return `<i className="icon-plus${sizeClass ? ` ${sizeClass}` : ''}" aria-hidden="true" />`
+  },
 }

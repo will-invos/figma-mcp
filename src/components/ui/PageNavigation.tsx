@@ -3,26 +3,20 @@ import IconButton from './IconButton'
 import './PageNavigation.css'
 
 interface PageNavigationProps {
-  /** Center label — current page, month, section title, etc. */
+  /** 置中文字，例如發票期數、月份、段落標題 */
   label: React.ReactNode
   onPrev?: () => void
   onNext?: () => void
-  /** Disable the prev button. Defaults to true when `onPrev` is omitted. */
+  /** 沒傳 onPrev 時預設就是 disabled */
   prevDisabled?: boolean
-  /** Disable the next button. Defaults to true when `onNext` is omitted. */
+  /** 沒傳 onNext 時預設就是 disabled */
   nextDisabled?: boolean
-  /** Accessible label for the prev button. */
   prevAriaLabel?: string
-  /** Accessible label for the next button. */
   nextAriaLabel?: string
   className?: string
 }
 
-/**
- * Per Figma (Android UI Kit) 5474:21691 — Page Navigation.
- * A prev / label / next row for stepping through pages, months, sections, etc.
- * Built from `IconButton` (ghost / neutral) with chevron icons.
- */
+/** 上一頁 / 標題 / 下一頁的導覽列 */
 const PageNavigation = React.forwardRef<HTMLDivElement, PageNavigationProps>(
   (
     {

@@ -1,21 +1,10 @@
-/* ========================================
- * Basic Tag
- * Figma: Basic tag (node 3903:5379)
- *
- * Medium: px 8, py 4, gap 6, font 14/22 weight 510, radius/200, icon 14
- * Small:  px 6, py 2, gap 4, font 12/18 weight 510, radius/150, icon 12
- * ======================================== */
-
 .ui-tag {
   display: inline-flex;
   align-items: center;
   white-space: nowrap;
 }
 
-/* ========================================
- * Sizes (typography via text-label-* utility classes)
- * ======================================== */
-
+/* 字級由 Tag.tsx 掛 .text-label-* 決定，這裡只管尺寸 */
 .ui-tag--medium {
   padding: var(--space-100) var(--space-200);
   gap: var(--space-150);
@@ -54,20 +43,12 @@
   font-size: 12px;
 }
 
-/* ========================================
- * Icon slots
- * ======================================== */
-
 .ui-tag__icon {
   flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-
-/* ========================================
- * Light Variant
- * ======================================== */
 
 .ui-tag--light-neutral {
   background-color: var(--color-background-neutral-subtle);
@@ -98,10 +79,6 @@
   background-color: var(--color-background-prize-subtlest);
   color: var(--color-content-prize-bold);
 }
-
-/* ========================================
- * Bold Variant
- * ======================================== */
 
 .ui-tag--bold-neutral {
   background-color: var(--color-background-neutral-bold);

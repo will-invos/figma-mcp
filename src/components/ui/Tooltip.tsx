@@ -5,20 +5,15 @@ type TooltipPlacement = 'top' | 'bottom' | 'left' | 'right'
 type TooltipAlign = 'start' | 'center' | 'end'
 
 interface TooltipProps {
-  /** Content shown in the tooltip bubble. */
   content: React.ReactNode
-  /** Where the tooltip appears relative to the trigger. */
   placement?: TooltipPlacement
-  /** Alignment along the placement edge. */
   align?: TooltipAlign
-  /** Trigger element. */
   children: React.ReactNode
-  /** Force open state (controlled). */
+  /** 受控開關；不傳就由 hover / focus 決定 */
   open?: boolean
 }
 
-/* CSS border-triangle tail — rendered via .ui-tooltip__tail--{direction} rules.
-   Points toward the trigger (opposite of placement). Sharp-tipped (no rounding). */
+/* 尾巴的三角形由 .ui-tooltip__tail--{direction} 用 border 疊出來 */
 function TooltipTail({ direction }: { direction: 'up' | 'down' | 'left' | 'right' }) {
   return (
     <span
@@ -33,12 +28,12 @@ const Tooltip = React.forwardRef<HTMLSpanElement, TooltipProps>(
     const [hovered, setHovered] = useState(false)
     const open = controlledOpen ?? hovered
 
-    /* Tail points toward the trigger, i.e. opposite of placement direction. */
+    /* 尾巴指向觸發元素，方向與 placement 相反 */
     const tailDirection = (
       { top: 'down', bottom: 'up', left: 'right', right: 'left' } as const
     )[placement]
 
-    /* Tail comes after body for top/left (tail at end of flex), before body for bottom/right. */
+    /* top / left 時尾巴排在本體後面，bottom / right 時排在前面 */
     const tailFirst = placement === 'bottom' || placement === 'right'
 
     return (

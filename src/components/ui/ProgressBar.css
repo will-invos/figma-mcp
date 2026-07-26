@@ -1,8 +1,3 @@
-/* ProgressBar — per Figma Web 3:1985
-   - 8px tall, full-width by default
-   - Track: --color-background-neutral-subtle, --radius-full
-   - Fill:  --color-background-brand-default, --radius-full */
-
 .ui-progress-bar {
   position: relative;
   width: 100%;
@@ -25,7 +20,6 @@
   transition: width 0.3s ease;
 }
 
-/* Indeterminate: fixed-width bar slides across the track repeatedly. */
 .ui-progress-bar--indeterminate .ui-progress-bar__fill {
   width: 30%;
   animation: ui-progress-bar-indet 1.4s ease-in-out infinite;

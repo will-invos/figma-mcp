@@ -1,9 +1,3 @@
-/* ========================================
- * Checkbox Item
- * Figma: Checkbox item (node 6005:5565)
- * States: Enabled/Error/Disabled × Checked/Unchecked
- * ======================================== */
-
 .ui-checkbox {
   display: inline-flex;
   align-items: flex-start;
@@ -12,7 +6,6 @@
   user-select: none;
 }
 
-/* Visually hidden native input */
 .ui-checkbox__input {
   position: absolute;
   opacity: 0;
@@ -22,7 +15,6 @@
   pointer-events: none;
 }
 
-/* Indicator: 24×24 outer, 22×22 inner background centered */
 .ui-checkbox__indicator {
   flex-shrink: 0;
   width: 24px;
@@ -48,25 +40,21 @@
   box-sizing: border-box;
 }
 
-/* Checked: brand fill, no border visible */
 .ui-checkbox__input:checked + .ui-checkbox__indicator::before {
   background-color: var(--color-background-brand-default);
   border-color: var(--color-background-brand-default);
 }
 
-/* Error unchecked: red border, default background */
 .ui-checkbox--error .ui-checkbox__indicator::before {
   background-color: var(--color-background-default);
   border-color: var(--color-border-danger);
 }
 
-/* Error checked: keep brand fill, checkmark visible */
 .ui-checkbox--error .ui-checkbox__input:checked + .ui-checkbox__indicator::before {
   background-color: var(--color-background-brand-default);
   border-color: var(--color-background-brand-default);
 }
 
-/* Checkmark icon: 16×16 white, shown when checked */
 .ui-checkbox__indicator::after {
   content: '\f04d';
   font-family: 'invos';
@@ -87,14 +75,12 @@
   display: block;
 }
 
-/* Disabled state */
 .ui-checkbox--disabled {
   opacity: 0.4;
   pointer-events: none;
   cursor: not-allowed;
 }
 
-/* Content: label + optional description */
 .ui-checkbox__content {
   display: flex;
   flex-direction: column;

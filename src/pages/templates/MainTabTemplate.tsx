@@ -1,8 +1,8 @@
-/* ================================================================== *
- * Template：五個主要 tab 的頁面起手式
- * 從這份複製新頁面，再依需求修改。細節規則見 CLAUDE.md「新頁面起手式」。
- * 結構：NavigationBar（large 標題 + 頁內子分頁）→ 內容區（自由捲動）→ TabBar
- * ================================================================== */
+/*
+ * 範本：五個主要 tab 的頁面起手式
+ * NavigationBar（large 標題 + 頁內子分頁）→ 內容區（自由捲動）→ TabBar
+ * 從這份複製新頁面，再依需求修改；細節規則見 CLAUDE.md「新頁面起手式」。
+ */
 import { useState } from 'react'
 import { NavigationBar, IconButton, TabBar } from '@/components/ui'
 

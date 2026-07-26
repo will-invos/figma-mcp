@@ -10,23 +10,20 @@ interface CardItemDescRow {
 
 interface CardItemProps {
   headline?: string
-  /** Card layout size. Large = vertical hero, Medium = horizontal thumbnail. */
+  /** large 是直式主視覺，medium 是橫式縮圖 */
   size?: 'large' | 'medium'
-  /** Content type below headline. */
   content?: 'list-item' | 'text'
-  /** Image URL — hero image (large) or thumbnail (medium). */
+  /** large 當主視覺、medium 當縮圖 */
   imageUrl?: string
-  /** Show thumbnail on the left (medium only). Default true. */
+  /** 只有 medium 有效；large 一律顯示主視覺 */
   showThumbnail?: boolean
-  /** Description rows with optional leading icon (content='list-item'). */
+  /** content='list-item' 時使用 */
   descriptions?: CardItemDescRow[]
-  /** Plain description text (content='text'). */
+  /** content='text' 時使用 */
   description?: string
-  /** Show action button. Default true. */
   showButton?: boolean
-  /** Button label text. */
   buttonText?: string
-  /** Show bottom divider (medium only). Default true. */
+  /** 只有 medium 有效 */
   divider?: boolean
   onClick?: () => void
   className?: string
@@ -81,7 +78,6 @@ const CardItem = React.forwardRef<HTMLDivElement, CardItemProps>(
       />
     )
 
-    /* ── Large: vertical layout ── */
     if (isLarge) {
       return (
         <div ref={ref} className={classes} onClick={onClick}>
@@ -105,7 +101,6 @@ const CardItem = React.forwardRef<HTMLDivElement, CardItemProps>(
       )
     }
 
-    /* ── Medium: horizontal layout ── */
     return (
       <div ref={ref} className={classes} onClick={onClick}>
         <div className="ui-card-item__container">

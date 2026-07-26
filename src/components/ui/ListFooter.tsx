@@ -2,21 +2,21 @@ import React from 'react'
 import './ListFooter.css'
 
 interface ListFooterProps {
-  /** Caption text shown below the list. */
   footer: string
-  /** Visual state — danger turns text and icon red. */
   state?: 'default' | 'danger'
-  /** Show a leading info icon (16×16). */
   icon?: boolean
+  /** end 會靠右對齊（例如列表尾端的版號） */
+  align?: 'start' | 'end'
   className?: string
 }
 
 
 const ListFooter = React.forwardRef<HTMLDivElement, ListFooterProps>(
-  ({ footer, state = 'default', icon = true, className }, ref) => {
+  ({ footer, state = 'default', icon = true, align = 'start', className }, ref) => {
     const classes = [
       'ui-list-footer',
       state === 'danger' && 'ui-list-footer--danger',
+      align === 'end' && 'ui-list-footer--end',
       className,
     ].filter(Boolean).join(' ')
 

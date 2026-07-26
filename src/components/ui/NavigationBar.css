@@ -9,7 +9,6 @@
   color: var(--color-content-bold);
 }
 
-/* ===== Regular bar row (44px, centered title) ===== */
 .ui-nav-bar__bar {
   position: relative;
   display: flex;
@@ -18,7 +17,6 @@
   height: 44px;
 }
 
-/* Leading / Trailing slots — absolute positioned within the bar */
 .ui-nav-bar__leading {
   position: absolute;
   left: var(--space-100);
@@ -38,19 +36,13 @@
   color: var(--color-content-bold);
 }
 
-/* IconButton inside nav bar: fixed 48px tap target, flat (no hover bg).
-   Pair base class with its variant modifier so our rule carries higher
-   specificity (0,4,0) than IconButton's per-colorType hover rules (0,3,0). */
 .ui-nav-bar__leading .ui-icon-button,
 .ui-nav-bar__trailing .ui-icon-button {
   width: 48px;
   height: 44px;
   color: var(--color-content-default);
 }
-/* Ghost IconButtons are already flat and dim on hover/press — the nav bar
-   only needs to set the resting color above; no state override required. */
 
-/* Text button inside nav bar: use content-default color */
 .ui-nav-bar .ui-nav-bar__leading .ui-button--text {
   color: var(--color-content-default);
   margin: 0 var(--space-200) 0 var(--space-300);
@@ -60,7 +52,6 @@
   margin: 0 var(--space-300) 0 var(--space-200);
 }
 
-/* Avatar inside leading/trailing */
 .ui-nav-bar__leading > .ui-avatar {
   width: 28px;
   height: 28px;
@@ -72,7 +63,6 @@
   margin: 0 var(--space-300) 0 var(--space-200);
 }
 
-/* ===== Regular title (centered, Label-CN/Large) ===== */
 .ui-nav-bar__title {
   margin: 0;
   max-width: calc(100% - 120px);
@@ -87,7 +77,6 @@
   white-space: nowrap;
 }
 
-/* ===== Default + Large: column layout, row on top + title container below ===== */
 .ui-nav-bar--large {
   align-items: stretch;
 }
@@ -96,8 +85,6 @@
   height: 44px;
 }
 
-/* ===== Home / Search / Tabs + Large: 56px nav row (title left, trailing right).
-   Root stays column so the add-on / divider stack below the title row. ===== */
 .ui-nav-bar__nav {
   position: relative;
   display: flex;
@@ -107,14 +94,13 @@
   height: 56px;
   padding: 0 0 0 var(--space-400);
 }
-/* Trailing sits in __nav's space-between flow, not absolutely pinned. */
+
 .ui-nav-bar__nav .ui-nav-bar__trailing {
   position: static;
   flex-shrink: 0;
   padding-right: var(--space-100);
 }
 
-/* ===== Search type: search bar below nav bar ===== */
 .ui-nav-bar--search {
   padding-bottom: var(--space-200);
 }

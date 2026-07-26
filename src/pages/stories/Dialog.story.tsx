@@ -22,33 +22,39 @@ const demoImage = (
   />
 )
 
-const ExtraContent: React.FC<{ kind: string }> = ({ kind }) => {
-  const [text, setText] = useState('')
-  const [selected, setSelected] = useState('')
-  const [checked, setChecked] = useState(false)
+/** Render 會塞進來的互動狀態；code 區塊留空即可（handler 不會被印出來）。 */
+interface ExtraState {
+  text?: string
+  setText?: (v: string) => void
+  selected?: string
+  setSelected?: (v: string) => void
+  checked?: boolean
+  setChecked?: (v: boolean) => void
+}
 
+function extraNode(kind: string, state: ExtraState = {}) {
   switch (kind) {
     case 'textfield':
       return (
         <TextField
           placeholder="Placeholder"
-          value={text}
-          onChange={(e) => setText(e.target.value)}
+          value={state.text ?? ''}
+          onChange={(e) => state.setText?.(e.target.value)}
         />
       )
     case 'textarea':
       return (
         <TextArea
           placeholder="Please enter…"
-          value={text}
-          onChange={setText}
+          value={state.text ?? ''}
+          onChange={state.setText!}
         />
       )
     case 'select':
       return (
         <Select
-          value={selected}
-          onChange={(e) => setSelected(e.target.value)}
+          value={state.selected ?? ''}
+          onChange={(e) => state.setSelected?.(e.target.value)}
           placeholder="Please select"
           options={[
             { value: 'a', label: 'Option A' },
@@ -58,24 +64,30 @@ const ExtraContent: React.FC<{ kind: string }> = ({ kind }) => {
         />
       )
     case 'checkbox':
-      return <Checkbox checked={checked} onChange={setChecked} label="I agree to the terms" />
+      return <Checkbox checked={!!state.checked} onChange={state.setChecked!} label="I agree to the terms" />
     case 'switch':
       return (
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
           <span>Enable notifications</span>
-          <Switch checked={checked} onChange={setChecked} />
+          <Switch checked={!!state.checked} onChange={state.setChecked!} />
         </div>
       )
     default:
-      return null
+      return undefined
   }
 }
 
-const DialogRender: React.FC<{ values: Record<string, any> }> = ({ values }) => {
-  const [open, setOpen] = useState(false)
-  const [container, setContainer] = useState<HTMLDivElement | null>(null)
+const ExtraContent: React.FC<{ kind: string }> = ({ kind }) => {
+  const [text, setText] = useState('')
+  const [selected, setSelected] = useState('')
+  const [checked, setChecked] = useState(false)
+  return <>{extraNode(kind, { text, setText, selected, setSelected, checked, setChecked })}</>
+}
 
-  const close = () => setOpen(false)
+/** 控制項的值 → 實際傳給 Dialog 的 props（Render 與 code 區塊共用）。
+ *  `close` 由 Render 傳入；code 區塊給空 handler，序列化時只會印成 `() => {}`。
+ *  `interactive` 為 true 時 extraContent 用有狀態的 <ExtraContent>，code 區塊則直接印出欄位本身。 */
+function resolveProps(values: Record<string, any>, close: () => void = () => {}, interactive = false) {
   const primary = values.type === 'danger'
     ? { label: 'Delete', onClick: close, colorType: 'danger' as const }
     : { label: 'Confirm', onClick: close, colorType: 'primary' as const }
@@ -85,15 +97,34 @@ const DialogRender: React.FC<{ values: Record<string, any> }> = ({ values }) => 
   if (values.cta === '1-button') {
     actions = [primary]
   } else if (values.cta === '2-buttons-vertical') {
-    // Vertical: top = primary filled, bottom = secondary text
+    // 直排：上 primary filled、下 secondary text
     actions = [primary, secondary]
   } else if (values.type === 'danger') {
-    // Horizontal danger: primary on left, secondary on right
+    // 橫排 danger：primary 在左
     actions = [primary, secondary]
   } else {
-    // Horizontal default: secondary on left, primary on right
+    // 橫排 default：primary 在右
     actions = [secondary, primary]
   }
+
+  return {
+    type: values.type,
+    cta: values.cta,
+    title: values.title,
+    description: values.description,
+    image: values.image ? demoImage : undefined,
+    extraContent: values.extra === 'none'
+      ? undefined
+      : interactive ? <ExtraContent kind={values.extra} /> : extraNode(values.extra),
+    actions,
+  }
+}
+
+const DialogRender: React.FC<{ values: Record<string, any> }> = ({ values }) => {
+  const [open, setOpen] = useState(false)
+  const [container, setContainer] = useState<HTMLDivElement | null>(null)
+
+  const close = () => setOpen(false)
 
   return (
     <>
@@ -101,16 +132,10 @@ const DialogRender: React.FC<{ values: Record<string, any> }> = ({ values }) => 
       <div ref={setContainer} />
       {container && (
         <Dialog
+          {...resolveProps(values, close, true)}
           open={open}
           onClose={close}
-          type={values.type}
-          cta={values.cta}
-          title={values.title}
-          description={values.description}
-          image={values.image ? demoImage : undefined}
-          extraContent={values.extra !== 'none' ? <ExtraContent kind={values.extra} /> : undefined}
           container={container}
-          actions={actions}
         />
       )}
     </>
@@ -130,4 +155,5 @@ export const DialogStory: StoryDef = {
     extra:       { type: 'enum', options: ['none', 'textfield', 'textarea', 'select', 'checkbox', 'switch'], default: 'none' },
   },
   Render: DialogRender,
+  codeProps: (values) => ({ open: true, ...resolveProps(values) }),
 }

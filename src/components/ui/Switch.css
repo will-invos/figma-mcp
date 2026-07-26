@@ -1,13 +1,3 @@
-/* ========================================
- * Switch
- * Figma: Switch (node 3768:1688)
- * Track: 48×28, radius/600 (24px)
- * Knob: 24×24, radius/full, fixed/white
- * On: brand/default track, knob right
- * Off: neutral/default track, knob left
- * Disabled: opacity 0.4
- * ======================================== */
-
 .ui-switch {
   display: inline-flex;
   align-items: center;
@@ -15,7 +5,6 @@
   user-select: none;
 }
 
-/* Visually hidden native input */
 .ui-switch__input {
   position: absolute;
   opacity: 0;
@@ -25,7 +14,6 @@
   pointer-events: none;
 }
 
-/* Track */
 .ui-switch__track {
   position: relative;
   width: 48px;
@@ -35,7 +23,6 @@
   transition: background-color 0.2s;
 }
 
-/* Knob */
 .ui-switch__thumb {
   position: absolute;
   top: var(--space-50);
@@ -48,16 +35,14 @@
   transition: left 0.2s;
 }
 
-/* Checked: brand track + knob to right */
 .ui-switch__input:checked ~ .ui-switch__track {
   background-color: var(--color-background-brand-default);
 }
 
 .ui-switch__input:checked ~ .ui-switch__track .ui-switch__thumb {
-  left: 22px; /* 48 - 24 - 2 = 22 */
+  left: 22px; /* 軌道 48 − 旋鈕 24 − 上下留白 2 */
 }
 
-/* Disabled */
 .ui-switch--disabled {
   opacity: 0.4;
   pointer-events: none;

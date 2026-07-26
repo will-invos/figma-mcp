@@ -1,9 +1,3 @@
-/* Per Figma 10972:5455 — Chip bar
-   Container: bg white, padding 12 16, gap 8 between chips
-   Chip:
-     - Default: white bg, 1px #edeff3 border, text #3b3c43
-     - Selected: #2a2c35 bg, no border, text #f7f8f9
-     - Padding: 6 16, radius 999 (pill), gap 4 (between text/badges) */
 .ui-chip-bar {
   display: flex;
   align-items: center;

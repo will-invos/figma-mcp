@@ -36,10 +36,6 @@
   background-color: var(--color-background-brand-active);
 }
 
-/* ========================================
- * Has text — icon shrinks to 24px with a label underneath
- * ======================================== */
-
 .ui-fab--has-text {
   flex-direction: column;
   padding: var(--space-200);
@@ -60,10 +56,6 @@
   text-align: center;
   white-space: nowrap;
 }
-
-/* ========================================
- * States
- * ======================================== */
 
 .ui-fab:disabled,
 .ui-fab[data-loading] {

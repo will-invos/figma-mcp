@@ -1,17 +1,9 @@
 /*
- * UI Icons Font (invos)
- * 255 icons across 6 categories:
- *   Arrows, Symbol, Media, Document, Finance, Interface
+ * 圖示字型（invos）—— 由 `npm run icons:build` 產生，手改會被覆蓋。
+ * 共 255 個圖示，分成方向 / 符號 / 媒體 / 文件 / 金融 / 介面六類。
  *
- * Usage: <i class="icon-{name}"></i>
- * The icon inherits color from its parent via currentColor.
- *
- * Available sizes (use with icon class):
- *   .icon-size-xs  — 12px
- *   .icon-size-sm  — 14px
- *   .icon-size-md  — 16px (default)
- *   .icon-size-lg  — 20px
- *   .icon-size-xl  — 24px
+ * 用法：<i class="icon-{name}" aria-hidden="true" />
+ * 顏色繼承父層（走 currentColor），所以只要設父層的 color 就好。
  */
 
 @font-face {
@@ -37,7 +29,6 @@ i[class*=' icon-']::before {
   speak: never;
 }
 
-/* Size variants */
 i[class^='icon-'],
 i[class*=' icon-'] {
   display: inline-flex;
@@ -56,9 +47,7 @@ i.icon-size-xl  { font-size: 24px; }
 i.icon-size-2xl { font-size: 32px; }
 i.icon-size-3xl { font-size: 40px; }
 
-/* ========================================
- * Arrows
- * ======================================== */
+/* 方向（Arrows） */
 .icon-arrow-down::before { content: '\f0e6'; }
 .icon-arrow-down-left::before { content: '\f0ec'; }
 .icon-arrow-down-right::before { content: '\f0e9'; }
@@ -80,9 +69,7 @@ i.icon-size-3xl { font-size: 40px; }
 .icon-refresh::before { content: '\f000'; }
 .icon-switch::before { content: '\f0b1'; }
 
-/* ========================================
- * Symbol
- * ======================================== */
+/* 符號（Symbol） */
 .icon-check::before { content: '\f04d'; }
 .icon-check-bold::before { content: '\f053'; }
 .icon-check-circle::before { content: '\f04f'; }
@@ -102,9 +89,7 @@ i.icon-size-3xl { font-size: 40px; }
 .icon-star::before { content: '\f0c0'; }
 .icon-star-filled::before { content: '\f0c3'; }
 
-/* ========================================
- * Media
- * ======================================== */
+/* 媒體（Media） */
 .icon-camera::before { content: '\f065'; }
 .icon-camera-filled::before { content: '\f06e'; }
 .icon-camera-focus::before { content: '\f06b'; }
@@ -121,9 +106,7 @@ i.icon-size-3xl { font-size: 40px; }
 .icon-volumn-filled-off::before { content: '\f063'; }
 .icon-volumn-filled-on::before { content: '\f060'; }
 
-/* ========================================
- * Document
- * ======================================== */
+/* 文件（Document） */
 .icon-at-mark::before { content: '\f0ce'; }
 .icon-book::before { content: '\f09e'; }
 .icon-book-open::before { content: '\f0a1'; }
@@ -160,9 +143,7 @@ i.icon-size-3xl { font-size: 40px; }
 .icon-pin::before { content: '\f010'; }
 .icon-translation::before { content: '\f081'; }
 
-/* ========================================
- * Finance
- * ======================================== */
+/* 金融（Finance） */
 .icon-bill::before { content: '\f0a7'; }
 .icon-box-stack::before { content: '\f098'; }
 .icon-calendar-box::before { content: '\f080'; }
@@ -196,9 +177,7 @@ i.icon-size-3xl { font-size: 40px; }
 .icon-wallet::before { content: '\f05a'; }
 .icon-wallet-ios::before { content: '\f05d'; }
 
-/* ========================================
- * Interface
- * ======================================== */
+/* 介面（Interface） */
 .icon-alarm-clock::before { content: '\f0fe'; }
 .icon-alert::before { content: '\f0f2'; }
 .icon-alert-circle::before { content: '\f0f8'; }

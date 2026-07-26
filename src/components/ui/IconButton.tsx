@@ -5,22 +5,15 @@ import './IconButton.css';
 
 interface IconButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'children'> {
   variant?: 'filled' | 'outline' | 'ghost';
-  /** `fixed-white` is ghost-only (per Figma) — a white icon for use on photos /
-   *  colored backgrounds; stays white in both themes, press feedback via opacity. */
   colorType?: 'primary' | 'neutral' | 'danger' | 'prize' | 'donation' | 'fixed-white';
   size?: 'large' | 'medium' | 'small' | 'xsmall';
   loading?: boolean;
-  /** The icon element to render inside the button. */
   icon?: React.ReactNode;
-  /** Overlay a small red notification dot on the button. */
   badge?: boolean;
   'aria-label': string;
 }
 
-/**
- * Determines the spinner color for a given variant/colorType combination.
- * Matches the button's content color: white → inverse, blue → primary, dark → neutral.
- */
+/** loading 時 spinner 要跟 icon 同色，才不會在深色底上消失 */
 function resolveSpinnerColor(
   variant: IconButtonProps['variant'],
   colorType: IconButtonProps['colorType']

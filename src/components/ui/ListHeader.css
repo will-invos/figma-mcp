@@ -1,6 +1,3 @@
-/* ListHeader — per Figma 3813:6726
-   Three sizes: small (section subhead), medium (section title), large (page title) */
-
 .ui-list-header {
   display: flex;
   gap: var(--space-400);
@@ -12,8 +9,7 @@
   min-width: 0;
   margin: 0;
 }
-/* Layout-only slot (Figma "↳ Slot") — holds text or any element (Button, Tag…)
-   without imposing typography or color on swapped-in content. */
+
 .ui-list-header__trailing {
   display: flex;
   align-items: flex-end;
@@ -21,14 +17,10 @@
   gap: var(--space-200);
   flex-shrink: 0;
 }
-/* Default text fallback only — color is set per size below. */
 .ui-list-header__trailing-text {
   white-space: nowrap;
 }
 
-/* Typography is applied via text-* utility classes; CSS only handles layout + color. */
-
-/* Small */
 .ui-list-header--small {
   align-items: flex-end;
   padding-top: var(--space-400);
@@ -39,7 +31,6 @@
   color: var(--color-content-subtle);
 }
 
-/* Medium */
 .ui-list-header--medium {
   align-items: center;
   padding-top: var(--space-400);
@@ -52,7 +43,6 @@
   color: var(--color-content-default);
 }
 
-/* Large */
 .ui-list-header--large {
   align-items: flex-end;
   padding-top: var(--space-200);

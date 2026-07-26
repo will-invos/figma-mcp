@@ -12,10 +12,7 @@ interface ButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>
   text?: React.ReactNode;
 }
 
-/**
- * Determines the spinner color for a given variant/colorType combination.
- * Matches the button's text color: white text → inverse, blue → primary, dark → neutral.
- */
+/** loading 時 spinner 要跟文字同色，才不會在深色底上消失 */
 function resolveSpinnerColor(
   variant: ButtonProps['variant'],
   colorType: ButtonProps['colorType']
@@ -51,7 +48,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     },
     ref
   ) => {
-    // Outline has a single color scheme; filled/ghost/text use colorType sub-class
+    // outline 只有一套配色，不吃 colorType
     const variantColorClass =
       variant === 'outline'
         ? 'ui-button--outline'
@@ -77,7 +74,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         data-loading={loading || undefined}
         {...rest}
       >
-        {/* Always render content; loading hides it via visibility to preserve width */}
+        {/* 內容一律渲染，loading 時由 CSS 用 visibility 藏起來，寬度才不會跳動 */}
         {leadingIcon && (
           <span className="ui-button__leading">{leadingIcon}</span>
         )}

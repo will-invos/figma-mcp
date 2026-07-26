@@ -156,15 +156,19 @@
 | `--shadow-small` | `0 2px 4px` | 微投影 | Slider thumb、Switch thumb（小立體感）、DottedController overlap（`drop-shadow`，照片上的指示點） |
 | `--shadow-medium` | `0 4px 8px` | 中投影 | Tooltip（用 `filter: drop-shadow` 含三角尾巴）、Fab（懸浮於內容上） |
 | `--shadow-large` | `0 8px 16px` | 大投影 | SnackBar、InAppNotification（從頂端 / 底部浮起） |
-| `--shadow-sheet` | `0 -4px 8px` | 反向投影 | Sheet（向上發散） |
+| `--shadow-sheet` | `0 -4px 8px` | 反向投影 | 常駐型 Sheet（無遮罩、向上發散；目前 `<Sheet>` 元件尚未實作此變體） |
 | `--shadow-bold` | `0 0 16px` | **無方向 glow** | （目前未使用，保留給需要光暈強調的容器） |
 
-**層次原則**：
-1. **無陰影**（最常見）：頁面背景、CardItem、Banner、ListItem、NavigationBar、TabBar、Button、**Dialog、Toast** — 靠背景色、分隔線或 overlay 對比建立層級
-2. **小立體感**：Slider thumb、Switch thumb → `--shadow-small`
-3. **浮起 / 投影**：Tooltip、Sheet、SnackBar、InAppNotification、Fab → 對應 token
+**Sheet 陰影 vs 遮罩（兩者互斥，依 Sheet 型態二選一）**：
+- **互動型**（`<Sheet>` 元件目前唯一實作的型態）：底部覆蓋全螢幕黑色半透明遮罩，靠遮罩對比凸顯當前操作畫面，**不帶陰影**。
+- **常駐型**（如首頁載具條碼面板）：不覆蓋遮罩，改用 `--shadow-sheet` 向上發散陰影與下方內容分層。目前 codebase 尚未有對應元件變體，如需建置請先確認設計稿。
 
-> Dialog 靠半透明 overlay backdrop 把背景變暗，Toast 靠 `--color-background-toast` 半透明深底建立對比，**都不需要陰影**。`--shadow-bold` 是 **glow 風格**（無 y-offset），與其他向下投影 token 性質不同——適合放在多彩背景或照片上的強調容器，**不要拿來當一般卡片陰影**。Dark mode 陰影 opacity 自動加重。
+**層次原則**：
+1. **無陰影**（最常見）：頁面背景、CardItem、Banner、ListItem、NavigationBar、TabBar、Button、**Dialog、互動型 Sheet、Toast** — 靠背景色、分隔線或 overlay 對比建立層級
+2. **小立體感**：Slider thumb、Switch thumb → `--shadow-small`
+3. **浮起 / 投影**：Tooltip、SnackBar、InAppNotification、Fab、**常駐型 Sheet** → 對應 token
+
+> Dialog / 互動型 Sheet 靠半透明 overlay backdrop 把背景變暗，Toast 靠 `--color-background-toast` 半透明深底建立對比，這些**都不需要陰影**。`--shadow-bold` 是 **glow 風格**（無 y-offset），與其他向下投影 token 性質不同——適合放在多彩背景或照片上的強調容器，**不要拿來當一般卡片陰影**。Dark mode 陰影 opacity 自動加重。
 
 ---
 

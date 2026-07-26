@@ -1,5 +1,4 @@
 import IconButton from '@/components/ui/IconButton'
-import { PlusIcon } from './icons'
 import type { StoryDef } from './types'
 
 export const IconButtonStory: StoryDef = {
@@ -22,6 +21,6 @@ export const IconButtonStory: StoryDef = {
   },
   fixedProps: {
     'aria-label': 'action',
-    icon: <PlusIcon />,
+    icon: <i className="icon-plus" aria-hidden="true" />,
   },
 }

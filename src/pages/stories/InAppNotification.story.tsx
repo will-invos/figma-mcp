@@ -1,6 +1,7 @@
 import type { StoryDef } from './types'
 import Button from '@/components/ui/Button'
 import { useInAppNotification } from '@/components/ui'
+import { printExpression } from './codegen'
 
 const SAMPLE_HEADLINES: Record<string, string> = {
   default: '+100 金！完成問卷領咖啡',
@@ -75,4 +76,26 @@ export const InAppNotificationStory: StoryDef = {
     pressable: { type: 'boolean', default: false },
   },
   Render: InAppNotificationRender,
+  // 同 Toast，是 Provider + hook API
+  codeSnippet: (values) => {
+    const variant = values.variant as string
+    const trailing = values.trailing as string
+    return [
+      'const { show } = useInAppNotification()',
+      '',
+      `show(${printExpression(
+        {
+          variant,
+          headline: SAMPLE_HEADLINES[variant],
+          description: values.description ? SAMPLE_DESCRIPTIONS[variant] : undefined,
+          image: values.useImage ? <img src={SAMPLE_IMAGE_SRC} alt="" /> : undefined,
+          trailing,
+          button: trailing === 'button' ? { label: '前往', onClick: () => {} } : undefined,
+          iconButton: trailing === 'icon' ? { ariaLabel: '前往', onClick: () => {} } : undefined,
+          onPress: values.pressable ? () => {} : undefined,
+        },
+        ''
+      )})`,
+    ].join('\n')
+  },
 }

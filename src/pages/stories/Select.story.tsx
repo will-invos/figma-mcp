@@ -8,17 +8,26 @@ const options = [
   { label: 'Product', value: 'product' },
 ]
 
-const SelectRender: React.FC<{ values: Record<string, any> }> = ({ values }) => {
+const userIcon = <i className="icon-user" aria-hidden="true" />
+
+/** 控制項的值 → 實際傳給 Select 的 props（Render 與 code 區塊共用）。 */
+function resolveProps(values: Record<string, any>) {
   const { leadingIcon, ...rest } = values
+  return {
+    ...rest,
+    options,
+    leadingIcon: leadingIcon ? userIcon : undefined,
+  }
+}
+
+const SelectRender: React.FC<{ values: Record<string, any> }> = ({ values }) => {
   const [value, setValue] = useState('')
 
   return (
     <Select
-      {...rest}
-      options={options}
+      {...resolveProps(values)}
       value={value}
       onChange={(e) => setValue(e.target.value)}
-      leadingIcon={leadingIcon ? <i className="icon-user" aria-hidden="true" /> : undefined}
     />
   )
 }
@@ -36,4 +45,5 @@ export const SelectStory: StoryDef = {
     status:      { type: 'enum', options: ['default', 'error', 'disabled'], default: 'default' },
   },
   Render: SelectRender,
+  codeProps: resolveProps,
 }

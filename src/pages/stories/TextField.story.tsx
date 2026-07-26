@@ -3,11 +3,33 @@ import TextField from '@/components/ui/TextField'
 import IconButton from '@/components/ui/IconButton'
 import type { StoryDef } from './types'
 
+const userIcon = <i className="icon-user" aria-hidden="true" />
+
+const clearButton = (
+  <IconButton
+    variant="ghost"
+    colorType="neutral"
+    size="xsmall"
+    aria-label="Clear"
+    icon={<i className="icon-cross" aria-hidden="true" />}
+  />
+)
+
+/** 控制項的值 → 實際傳給 TextField 的 props（Render 與 code 區塊共用）。 */
+function resolveProps(values: Record<string, any>): Record<string, any> {
+  const { leadingIcon, trailingIcon, ...rest } = values
+  return {
+    ...rest,
+    leadingIcon: leadingIcon ? userIcon : undefined,
+    trailingIcon: trailingIcon ? clearButton : undefined,
+  }
+}
+
 const TextFieldRender: React.FC<{ values: Record<string, any> }> = ({ values }) => {
-  const { leadingIcon, trailingIcon, value: controlValue, ...rest } = values
+  const { value: controlValue, ...rest } = resolveProps(values)
   const [value, setValue] = useState(controlValue ?? '')
 
-  // Sync when Controls panel changes value
+  // 控制項面板改值時同步進來
   useEffect(() => { setValue(controlValue ?? '') }, [controlValue])
 
   return (
@@ -15,9 +37,8 @@ const TextFieldRender: React.FC<{ values: Record<string, any> }> = ({ values }) 
       {...rest}
       value={value}
       onChange={(e) => setValue(e.target.value)}
-      leadingIcon={leadingIcon ? <i className="icon-user" aria-hidden="true" /> : undefined}
       trailingIcon={
-        trailingIcon ? (
+        rest.trailingIcon ? (
           <IconButton
             variant="ghost"
             colorType="neutral"
@@ -47,4 +68,5 @@ export const TextFieldStory: StoryDef = {
     status:       { type: 'enum', options: ['default', 'error', 'disabled'], default: 'default' },
   },
   Render: TextFieldRender,
+  codeProps: resolveProps,
 }

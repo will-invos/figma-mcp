@@ -21,4 +21,6 @@ export const RadioStory: StoryDef = {
     disabled:    { type: 'boolean', default: false },
   },
   Render: RadioRender,
+  // 預覽會排兩顆示範互動，code 區塊只示範單一顆
+  codeProps: (values) => ({ ...values, name: 'radio-demo', value: 'a', children: 'Option A' }),
 }

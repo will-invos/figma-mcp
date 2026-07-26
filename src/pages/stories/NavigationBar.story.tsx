@@ -3,24 +3,23 @@ import NavigationBar from '@/components/ui/NavigationBar'
 import IconButton from '@/components/ui/IconButton'
 import Button from '@/components/ui/Button'
 import Avatar from '@/components/ui/Avatar'
-import { ArrowLeftIcon, CloseIcon, MoreIcon, SearchIconBig, ShareIcon } from './icons'
 import type { StoryDef } from './types'
 
 const leadingPresets: Record<string, React.ReactNode> = {
   none: undefined,
-  back: <IconButton variant="ghost" colorType="neutral" size="medium" aria-label="返回" icon={<ArrowLeftIcon />} />,
-  close: <IconButton variant="ghost" colorType="neutral" size="medium" aria-label="關閉" icon={<CloseIcon />} />,
+  back: <IconButton variant="ghost" colorType="neutral" size="medium" aria-label="返回" icon={<i className="icon-chevron-left" aria-hidden="true" />} />,
+  close: <IconButton variant="ghost" colorType="neutral" size="medium" aria-label="關閉" icon={<i className="icon-cross" aria-hidden="true" />} />,
   avatar: <Avatar name="Will" size="small" />,
   text: <Button variant="text" colorType="secondary" size="medium" text="取消" />,
 }
 
 const trailingPresets: Record<string, React.ReactNode> = {
   none: undefined,
-  icon: <IconButton variant="ghost" colorType="neutral" size="medium" aria-label="更多" icon={<MoreIcon />} />,
+  icon: <IconButton variant="ghost" colorType="neutral" size="medium" aria-label="更多" icon={<i className="icon-three-dots" aria-hidden="true" />} />,
   icons: (
     <>
-      <IconButton variant="ghost" colorType="neutral" size="medium" aria-label="搜尋" icon={<SearchIconBig />} />
-      <IconButton variant="ghost" colorType="neutral" size="medium" aria-label="分享" icon={<ShareIcon />} />
+      <IconButton variant="ghost" colorType="neutral" size="medium" aria-label="搜尋" icon={<i className="icon-magnifier" aria-hidden="true" />} />
+      <IconButton variant="ghost" colorType="neutral" size="medium" aria-label="分享" icon={<i className="icon-share-ios" aria-hidden="true" />} />
     </>
   ),
   text: <Button variant="text" colorType="primary" size="medium" text="完成" />,
@@ -33,19 +32,26 @@ const defaultTabs = [
   { label: 'Tab' },
 ]
 
-const NavigationBarRender: React.FC<{ values: Record<string, any> }> = ({ values }) => {
+/** 控制項的值 → 實際傳給 NavigationBar 的 props（Render 與 code 區塊共用）。 */
+function resolveProps(values: Record<string, any>) {
   const { leading, trailing, ...rest } = values
+  return {
+    ...rest,
+    leading: leadingPresets[leading],
+    trailing: trailingPresets[trailing],
+    tabs: rest.type === 'tabs' ? defaultTabs : undefined,
+  }
+}
+
+const NavigationBarRender: React.FC<{ values: Record<string, any> }> = ({ values }) => {
   const [searchValue, setSearchValue] = useState('')
   const [activeTab, setActiveTab] = useState(0)
 
   return (
     <NavigationBar
-      {...rest}
-      leading={leadingPresets[leading]}
-      trailing={trailingPresets[trailing]}
+      {...resolveProps(values)}
       searchValue={searchValue}
       onSearchChange={setSearchValue}
-      tabs={rest.type === 'tabs' ? defaultTabs : undefined}
       activeTab={activeTab}
       onTabChange={setActiveTab}
     />
@@ -71,4 +77,5 @@ export const NavigationBarStory: StoryDef = {
     divider:   { type: 'boolean', default: true },
   },
   Render: NavigationBarRender,
+  codeProps: resolveProps,
 }

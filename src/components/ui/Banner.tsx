@@ -4,18 +4,17 @@ import './Banner.css';
 interface BannerProps {
   colorType?: 'primary' | 'neutral' | 'success' | 'warning' | 'danger' | 'prize';
   variant?: 'default' | 'full-width';
-  /** Show the leading icon. Defaults to true (renders a default icon per colorType). */
+  /** 顯示前置 icon；未另外傳 icon 時會依 colorType 帶入預設圖示 */
   leadingIcon?: boolean;
-  /** Custom leading icon — overrides the default when provided. */
+  /** 自訂前置 icon，會蓋掉預設圖示 */
   icon?: React.ReactNode;
-  /** Show the trailing close icon. Defaults to true. */
+  /** 顯示後置的關閉 icon */
   trailingIcon?: boolean;
-  /** Called when the trailing icon is clicked. */
   onClose?: () => void;
   message: React.ReactNode;
 }
 
-/** Default leading icon SVG per colorType. Uses currentColor for proper color inheritance. */
+/** 各 colorType 的預設前置圖示 */
 const DEFAULT_LEADING_ICONS: Record<NonNullable<BannerProps['colorType']>, React.ReactNode> = {
   primary: (
     <i className="icon-loud-speaker"></i>
@@ -46,9 +45,9 @@ const Banner = React.forwardRef<HTMLDivElement, BannerProps>(
     {
       colorType = 'neutral',
       variant = 'default',
-      leadingIcon = true,
+      leadingIcon = false,
       icon,
-      trailingIcon = true,
+      trailingIcon = false,
       onClose,
       message,
     },

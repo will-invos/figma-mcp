@@ -6,7 +6,7 @@ import './Tabs.css'
 interface TabsItem {
   key: string
   label: string
-  /** Optional badge next to the label: 'dot' (unread marker) or a numeric count. */
+  /** 'dot' 是未讀標記，數字則顯示未讀數 */
   badge?: 'dot' | number
 }
 
@@ -14,12 +14,12 @@ interface TabsProps {
   items: TabsItem[]
   activeKey: string
   onChange: (key: string) => void
-  /** 'fill' (default) — tabs share equal flex to fill the row; 'compact' — tabs auto-size with spacing. */
+  /** fill：每個 tab 均分整列寬度；compact：依內容寬度排列並留間距 */
   type?: 'fill' | 'compact'
   className?: string
 }
 
-/** Section-level horizontal tabs (per Figma "Tabs" component, 10972:5454). */
+/** 內容區的分頁切換，區別於底部導覽的 TabBar */
 const Tabs = React.forwardRef<HTMLDivElement, TabsProps>(
   ({ items, activeKey, onChange, type = 'fill', className }, ref) => {
     const classes = ['ui-tabs', `ui-tabs--${type}`, className].filter(Boolean).join(' ')

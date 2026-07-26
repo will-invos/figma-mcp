@@ -1,6 +1,3 @@
-/* Sheet — shell styles only.
-   Header structure lives in SheetHeader.css */
-
 @keyframes ui-sheet-slideup {
   from { transform: translateY(100%); }
   to   { transform: translateY(0); }
@@ -38,17 +35,21 @@
   max-width: 480px;
   display: flex;
   flex-direction: column;
-  box-shadow: var(--shadow-sheet);
   animation: ui-sheet-slideup 0.3s ease-out;
   overflow: hidden;
-  /* 貼底面板：body / footer 內容保持在 home indicator / gesture bar 之上（有無 footer 皆適用） */
   padding-bottom: env(safe-area-inset-bottom, 0px);
 }
 
+/* 開啟時焦點會程式化移到 sheet 本身（tabindex="-1"）好讓輔助科技唸出對話框名稱，
+   它不在 Tab 順序內，所以不需要外框。 */
+.ui-sheet:focus {
+  outline: none;
+}
+
+/* 捲動容器，四周不留間距 —— 間距由內容自行負責，實作有內距內容時記得補上 var(--space-400) */
 .ui-sheet__body {
   flex: 1;
   overflow-y: auto;
-  padding: 0 var(--space-400);
   color: var(--color-content-default);
 }
 

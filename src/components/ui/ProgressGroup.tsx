@@ -3,25 +3,17 @@ import ProgressBar from './ProgressBar'
 import './ProgressGroup.css'
 
 interface ProgressGroupProps {
-  /** Progress 0–100. */
+  /** 0–100 */
   value: number
-  /**
-   * Text label position:
-   *   - 'top'  : two labels above the bar (leading on the left in brand color, trailing on the right in default color)
-   *   - 'aside': bar fills available width, trailing label sits to the right (brand color)
-   */
+  /** top：進度條上方左右各一段文字；aside：文字排在進度條右側 */
   textPosition?: 'top' | 'aside'
-  /** Left text shown above the bar in 'top' mode. Ignored in 'aside' mode. */
+  /** 只有 top 模式會用到，aside 模式忽略 */
   leadingText?: string
-  /** Right (top mode) or aside (aside mode) text. */
   trailingText?: string
   className?: string
 }
 
-/**
- * Per Figma 5867:21532 — single progress bar with text labels.
- * Two variants: text on top (two labels) or text on the side (single label).
- */
+/** 帶文字標籤的單條進度條 */
 const ProgressGroup = React.forwardRef<HTMLDivElement, ProgressGroupProps>(
   ({ value, textPosition = 'top', leadingText, trailingText, className }, ref) => {
     const classes = [

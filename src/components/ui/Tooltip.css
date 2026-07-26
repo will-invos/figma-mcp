@@ -1,13 +1,6 @@
-/* Per Figma 4115:7699 — Tooltip
-   - Body: rgba toast bg, padding 8/12, radius 8, text 16/24
-   - Tail: rounded-bump SVG (36×8 horizontal, 8×28 vertical)
-   - Shadow: medium drop-shadow on the whole composition (covers tail too)
-
-   Two-layer structure:
-   - .ui-tooltip__container — handles absolute positioning + centering
-     translate. NEVER animated, so the centering transform is preserved.
-   - .ui-tooltip__inner     — handles the fade/scale animation. Owns its
-     own transform property without conflict. */
+/* 分兩層是為了避開 transform 互搶：
+   - .ui-tooltip__container 只負責定位與置中的 translate，絕對不加動畫
+   - .ui-tooltip__inner     只負責淡入縮放，獨佔自己的 transform */
 
 .ui-tooltip {
   position: relative;
@@ -38,7 +31,7 @@
   white-space: nowrap;
 }
 
-/* CSS border-triangle tail. 12px base × 7px height, sharp tip. */
+/* 用 border 疊出尖角三角形，底 12px、高 8px */
 .ui-tooltip__tail {
   display: block;
   flex-shrink: 0;
@@ -71,7 +64,6 @@
   to   { opacity: 1; transform: scale(1); }
 }
 
-/* ===== Vertical placements (top / bottom) → column layout ===== */
 .ui-tooltip__container--top,
 .ui-tooltip__container--bottom {
   flex-direction: column;
@@ -79,7 +71,6 @@
 .ui-tooltip__container--top    { bottom: 100%; }
 .ui-tooltip__container--bottom { top: 100%; }
 
-/* horizontal alignment */
 .ui-tooltip__container--top.ui-tooltip__container--start,
 .ui-tooltip__container--bottom.ui-tooltip__container--start {
   left: 0;
@@ -97,7 +88,6 @@
   align-items: flex-end;
 }
 
-/* ===== Horizontal placements (left / right) → row layout ===== */
 .ui-tooltip__container--left,
 .ui-tooltip__container--right {
   flex-direction: row;
@@ -105,7 +95,6 @@
 .ui-tooltip__container--left  { right: 100%; }
 .ui-tooltip__container--right { left: 100%; }
 
-/* vertical alignment */
 .ui-tooltip__container--left.ui-tooltip__container--start,
 .ui-tooltip__container--right.ui-tooltip__container--start {
   top: 0;
@@ -123,15 +112,13 @@
   align-items: flex-end;
 }
 
-/* Scale-from origin: animation grows out of the tail toward the trigger,
-   so the tooltip feels like it's sprouting from the element it points at.
-   Set on the inner (animated) layer. */
+/* 縮放原點對著尾巴，看起來像從被指的元素長出來 */
 .ui-tooltip__container--top    .ui-tooltip__inner { transform-origin: bottom center; }
 .ui-tooltip__container--bottom .ui-tooltip__inner { transform-origin: top center; }
 .ui-tooltip__container--left   .ui-tooltip__inner { transform-origin: center right; }
 .ui-tooltip__container--right  .ui-tooltip__inner { transform-origin: center left; }
 
-/* Off-center alignments: shift origin toward the trigger corner. */
+/* 非置中對齊時，原點跟著移到靠近觸發點的那一角 */
 .ui-tooltip__container--top.ui-tooltip__container--start    .ui-tooltip__inner { transform-origin: bottom left; }
 .ui-tooltip__container--top.ui-tooltip__container--end      .ui-tooltip__inner { transform-origin: bottom right; }
 .ui-tooltip__container--bottom.ui-tooltip__container--start .ui-tooltip__inner { transform-origin: top left; }
@@ -141,9 +128,7 @@
 .ui-tooltip__container--right.ui-tooltip__container--start  .ui-tooltip__inner { transform-origin: top left; }
 .ui-tooltip__container--right.ui-tooltip__container--end    .ui-tooltip__inner { transform-origin: bottom left; }
 
-/* Off-center tail offset: pull the tail 8px away from the aligned edge so it
-   sits over the trigger's content, not at the extreme corner. Body stays flush
-   to the edge; only the tail shifts. */
+/* 尾巴往內縮 8px，才會落在觸發元素的內容上而不是最邊角；本體仍貼齊邊緣 */
 .ui-tooltip__container--top.ui-tooltip__container--start    .ui-tooltip__tail,
 .ui-tooltip__container--bottom.ui-tooltip__container--start .ui-tooltip__tail { margin-left: var(--space-200); }
 .ui-tooltip__container--top.ui-tooltip__container--end      .ui-tooltip__tail,

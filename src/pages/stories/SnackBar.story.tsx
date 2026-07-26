@@ -1,5 +1,4 @@
 import SnackBar from '@/components/ui/SnackBar'
-import { CheckCircleIcon } from './icons'
 import type { StoryDef } from './types'
 
 export const SnackBarStory: StoryDef = {
@@ -12,6 +11,6 @@ export const SnackBarStory: StoryDef = {
     trailing: { type: 'enum', options: ['none', 'button', 'spinner'], default: 'none' },
   },
   fixedProps: {
-    icon: <CheckCircleIcon />,
+    icon: <i className="icon-check-circle-filled" aria-hidden="true" />,
   },
 }

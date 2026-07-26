@@ -2,12 +2,11 @@ import React, { useState, useRef, useCallback, useEffect, useImperativeHandle } 
 import './TextArea.css'
 
 interface TextAreaProps {
-  /** Inner label (shown when variant is 'inner-label'). */
   label?: string
   placeholder?: string
   value?: string
   onChange?: (value: string) => void
-  /** 'default' = no label, 'inner-label' = floating label above value. */
+  /** inner-label：空且未對焦時 label 當佔位字，一對焦或有值就浮到上方 */
   variant?: 'default' | 'inner-label'
   status?: 'default' | 'error' | 'disabled'
   className?: string

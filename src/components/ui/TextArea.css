@@ -1,6 +1,4 @@
-/* TextArea — per Figma 10805:3912
-   Multi-line text input. Auto-grows with content.
-   Horizontal padding on textarea/label, not on the container. */
+/* 高度由 TextArea.tsx 的 autoGrow 撐開。左右內距寫在 textarea / label 上而不是容器，捲動時文字才不會露出邊界。 */
 
 .ui-textarea {
   position: relative;
@@ -16,13 +14,13 @@
   transition: border-color 0.15s, box-shadow 0.15s;
 }
 
-/* Focus: 1px border + 1px inset box-shadow = visual 2px without layout shift */
+/* 1px border + 1px inset shadow＝視覺 2px，比改 border-width 不會位移 */
 .ui-textarea:focus-within {
   border-color: var(--color-border-brand);
   box-shadow: inset 0 0 0 1px var(--color-border-brand);
 }
 
-/* Error border: only when NOT focused — focus should show brand border */
+/* 錯誤框線只在沒對焦時顯示，對焦時要讓位給品牌色 */
 .ui-textarea--error:not(:focus-within) {
   border-color: var(--color-border-danger);
   box-shadow: inset 0 0 0 1px var(--color-border-danger);
@@ -33,8 +31,7 @@
   pointer-events: none;
 }
 
-/* Inner label — always rendered, toggles between placeholder size and shrunk.
-   Typography (font-size/line-height/weight/family) comes from text-body-* utility classes. */
+/* label 一直存在，只在「當佔位字」與「縮小」兩種狀態間切換；字級由 .text-body-* 決定 */
 .ui-textarea__label {
   color: var(--color-content-subtle);
   padding: var(--space-150) var(--space-300) 0;
@@ -45,7 +42,6 @@
   color: var(--color-content-danger-default);
 }
 
-/* Placeholder state: label acts as placeholder when empty + unfocused */
 .ui-textarea__label--placeholder {
   padding-top: var(--space-400);
   color: var(--color-content-subtlest);
@@ -57,7 +53,6 @@
   color: var(--color-content-subtlest);
 }
 
-/* The actual textarea element — padding left/right here, not on container */
 .ui-textarea__input {
   resize: none;
   overflow: hidden;
@@ -80,13 +75,12 @@
   color: var(--color-content-subtle);
 }
 
-/* Inner-label visible: reduce top padding on textarea */
 .ui-textarea--inner-label .ui-textarea__input {
   padding-top: var(--space-50);
   padding-bottom: var(--space-400);
 }
 
-/* Inner-label placeholder state: hide textarea (label acts as visual placeholder) */
+/* 這個狀態下 label 就是視覺上的佔位字，textarea 先藏起來 */
 .ui-textarea--inner-label .ui-textarea__label--placeholder + .ui-textarea__input {
   height: 0;
   padding-top: 0;

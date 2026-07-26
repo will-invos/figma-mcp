@@ -3,9 +3,7 @@ import Spinner from './Spinner';
 import './Fab.css';
 
 interface FabProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'children'> {
-  /** The icon element to render inside the button. Defaults to the plus icon（add / create）. */
   icon?: React.ReactNode;
-  /** Short label below the icon — the Figma "Has text" variant. */
   text?: string;
   loading?: boolean;
   'aria-label': string;

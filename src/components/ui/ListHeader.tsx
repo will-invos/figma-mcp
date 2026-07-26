@@ -3,13 +3,10 @@ import './ListHeader.css'
 
 interface ListHeaderProps {
   headline: string
-  /**
-   * Optional trailing slot. A string/number renders as the default styled text
-   * (per Figma's fallback "Text"); any element (e.g. `<Button>`, `<Tag>`) is
-   * rendered as-is in a layout-only slot, free of the header's text styling.
-   */
+  /** 傳字串 / 數字會套用預設文字樣式；傳元素（<Button>、<Tag>…）則原樣輸出，
+   *  不會被 header 的字級與顏色影響 */
   trailing?: React.ReactNode
-  /** Visual size — maps to Figma Small / Medium / Large. */
+  /** small＝區塊小標、medium＝區塊標題、large＝頁面標題 */
   size?: 'small' | 'medium' | 'large'
   className?: string
 }
@@ -20,7 +17,7 @@ const HEADLINE_CLASS = {
   large:  'text-display-small',
 } as const
 
-/** Typography for the default text fallback only — not applied to swapped-in elements. */
+/** 只用在預設文字上；換成元素的 trailing 不會套 */
 const TRAILING_TEXT_CLASS = {
   small:  'text-body-medium',
   medium: 'text-body-large',

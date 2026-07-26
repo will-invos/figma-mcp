@@ -3,12 +3,11 @@ import React from 'react'
 interface FieldGroupHelpTextProps {
   text: string
   status?: 'default' | 'error'
-  /** Text alignment */
   align?: 'left' | 'right'
   className?: string
 }
 
-/** Standalone help-text row — typically rendered automatically by <FieldGroup> when helpText is provided. */
+/** 一般由 <FieldGroup> 在有 helpText 時自動渲染，單獨使用的情境少 */
 const FieldGroupHelpText = React.forwardRef<HTMLDivElement, FieldGroupHelpTextProps>(
   ({ text, status = 'default', align = 'left', className }, ref) => {
     const classes = [

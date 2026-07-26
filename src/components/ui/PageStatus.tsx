@@ -19,7 +19,7 @@ interface StatusPreset {
   description: string
 }
 
-/** Default illustration + copy per status, from Figma 6416:7094. */
+/** 各 status 的預設插圖與文案 */
 const PRESETS: Record<PageStatusType, StatusPreset> = {
   'disconnected': { illustration: disconnectedSrc, title: '沒有網路連線', description: '請檢查您的網路狀態，或是稍後再試' },
   'system-error': { illustration: systemErrorSrc, title: '系統忙碌中', description: '系統忙碌中，請稍後再試' },
@@ -29,26 +29,20 @@ const PRESETS: Record<PageStatusType, StatusPreset> = {
 }
 
 interface PageStatusProps {
-  /** Which status to show — sets the default illustration, title and description. */
+  /** 決定預設的插圖與文案 */
   status: PageStatusType
-  /** Override the default title for this status. */
+  /** 覆寫 status 帶入的標題 */
   title?: React.ReactNode
-  /** Override the default description for this status. */
   description?: React.ReactNode
-  /** Show the illustration. Defaults to true. */
   image?: boolean
-  /** Override the default illustration (e.g. a custom illustration / image). */
+  /** 覆寫 status 帶入的插圖 */
   illustration?: React.ReactNode
-  /** Action slot — typically a `<Button>`. Rendered below the text when provided. */
+  /** 動作區，通常放一顆 <Button> */
   action?: React.ReactNode
   className?: string
 }
 
-/**
- * Per Figma 6416:7094 — Page Status.
- * A full-width empty / error state: illustration + title + description + optional action.
- * `status` supplies faithful defaults; any part can be overridden.
- */
+/** 整頁的空狀態 / 錯誤狀態 */
 const PageStatus = React.forwardRef<HTMLDivElement, PageStatusProps>(
   ({ status, title, description, image = true, illustration, action, className }, ref) => {
     const preset = PRESETS[status]

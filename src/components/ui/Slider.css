@@ -1,5 +1,3 @@
-/* Per Figma 108:279 — One way Slider, Enabled
-   Container 24h, base 4px #edeff3 round, fill 4px #3560ff round, nob 24x24 white */
 .ui-slider {
   position: relative;
   display: flex;
@@ -36,7 +34,6 @@
   margin: 0;
 }
 
-/* Thumb: 24×24 white circle with subtle shadow, per Figma "Nob" vector */
 .ui-slider__input::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;

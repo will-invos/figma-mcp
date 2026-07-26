@@ -1,7 +1,3 @@
-/* ListFooter — per Figma 4332:8712
-   States: Default (subtle) / Danger (red)
-   Optional leading 16×16 info icon */
-
 .ui-list-footer {
   display: flex;
   gap: var(--space-200);
@@ -10,8 +6,14 @@
   color: var(--color-content-subtle);
 }
 
+/* icon 槽是 16×22，對齊 .text-body-medium 的 22px 行高 */
 .ui-list-footer__icon {
-  padding-top: var(--space-75);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 22px;
 }
 .ui-list-footer__icon i[class^='icon-'],
 .ui-list-footer__icon i[class*=' icon-'] {
@@ -25,7 +27,10 @@
   min-width: 0;
 }
 
-/* Danger state */
 .ui-list-footer--danger {
   color: var(--color-content-danger-default);
+}
+
+.ui-list-footer--end .ui-list-footer__text {
+  text-align: right;
 }

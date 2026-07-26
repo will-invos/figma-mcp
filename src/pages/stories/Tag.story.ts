@@ -2,15 +2,22 @@ import React from 'react'
 import Tag from '@/components/ui/Tag'
 import type { StoryDef } from './types'
 
-const TagRender: React.FC<{ values: Record<string, any> }> = ({ values }) => {
+const infoIcon = React.createElement('i', { className: 'icon-info', 'aria-hidden': 'true' })
+const crossIcon = React.createElement('i', { className: 'icon-cross', 'aria-hidden': 'true' })
+
+/** 控制項的值 → 實際傳給 Tag 的 props（Render 與 code 區塊共用）。 */
+function resolveProps(values: Record<string, any>) {
   const { leadingIcon, trailingIcon, message, ...props } = values
-  return React.createElement(Tag, {
+  return {
     message,
     ...props,
-    leadingIcon: leadingIcon ? React.createElement('i', { className: 'icon-info', 'aria-hidden': 'true' }) : undefined,
-    trailingIcon: trailingIcon ? React.createElement('i', { className: 'icon-cross', 'aria-hidden': 'true' }) : undefined,
-  })
+    leadingIcon: leadingIcon ? infoIcon : undefined,
+    trailingIcon: trailingIcon ? crossIcon : undefined,
+  }
 }
+
+const TagRender: React.FC<{ values: Record<string, any> }> = ({ values }) =>
+  React.createElement(Tag, resolveProps(values))
 
 export const TagStory: StoryDef = {
   component: Tag,
@@ -25,4 +32,5 @@ export const TagStory: StoryDef = {
     trailingIcon: { type: 'boolean', default: false },
   },
   Render: TagRender,
+  codeProps: resolveProps,
 }

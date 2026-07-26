@@ -1,7 +1,3 @@
-/* CardItem — per Figma 4752:11990
-   Two sizes: Large (vertical hero), Medium (horizontal thumbnail)
-   Two content modes: List item (icon+text rows), Text (plain description) */
-
 .ui-card-item {
   display: flex;
   flex-direction: column;
@@ -13,15 +9,14 @@
   cursor: pointer;
 }
 
-/* ===== Large: vertical layout ===== */
 .ui-card-item--large {
   gap: var(--space-200);
 }
 
-/* Hero image — full width, aspect ratio via padding, border + radius */
 .ui-card-item__hero {
   position: relative;
   width: 100%;
+  aspect-ratio: 2 / 1;
   border-radius: var(--radius-300);
   border: 1px solid var(--color-border-subtle);
   overflow: hidden;
@@ -30,12 +25,11 @@
   position: absolute;
   inset: 0;
   width: 100%;
-  height: auto;
+  height: 100%;
   object-fit: cover;
   display: block;
 }
 
-/* Body below hero */
 .ui-card-item__body {
   display: flex;
   flex-direction: column;
@@ -47,7 +41,6 @@
   margin: 0;
 }
 
-/* Bottom row: description + button side by side */
 .ui-card-item__bottom {
   display: flex;
   gap: var(--space-400);
@@ -59,7 +52,6 @@
   min-width: 0;
 }
 
-/* ===== Medium: horizontal layout ===== */
 .ui-card-item--medium {
   padding: 0 var(--space-400);
 }
@@ -71,7 +63,6 @@
   width: 100%;
 }
 
-/* Thumbnail */
 .ui-card-item__thumbnail {
   display: flex;
   align-items: center;
@@ -87,7 +78,6 @@
   display: block;
 }
 
-/* Content */
 .ui-card-item__content {
   flex: 1;
   min-width: 0;
@@ -98,13 +88,11 @@
   padding: var(--space-400) 0;
 }
 
-/* Medium title: Label-CN/Large 16/24 */
 .ui-card-item--medium .ui-card-item__title {
   color: var(--color-content-bold);
   margin: 0;
 }
 
-/* Description list (icon + text rows) */
 .ui-card-item__desc-list {
   display: flex;
   flex-direction: column;
@@ -138,12 +126,10 @@
   margin: 0;
 }
 
-/* Plain description (text content mode) */
 .ui-card-item__desc-plain .ui-card-item__desc-text {
   white-space: normal;
 }
 
-/* Action button */
 .ui-card-item__action {
   display: flex;
   align-items: center;
@@ -154,7 +140,6 @@
   padding: var(--space-400) 0;
 }
 
-/* Divider (medium only) */
 .ui-card-item__divider {
   position: absolute;
   bottom: 0;

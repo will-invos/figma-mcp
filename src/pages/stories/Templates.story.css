@@ -1,0 +1,19 @@
+/* storybook 專用：把整頁範本框成固定手機尺寸預覽。
+   範本本身不會用到這些規則，所以放在 story 這一側，templates.css 保持乾淨。 */
+
+.tpl-preview-frame {
+  width: 393px;
+  height: 760px;
+  overflow: hidden;
+  border: 1px solid var(--color-border-subtle);
+  /* 讓框內 position: fixed 的內容（如 Sheet portal）以此框為邊界，不會蓋滿整個瀏覽器視窗 */
+  contain: layout;
+}
+
+/* 框內的頁面改為填滿框、可捲動，取代原本的 100dvh / 置中 */
+.tpl-preview-frame .tpl-page {
+  min-height: 0;
+  height: 100%;
+  max-width: none;
+  margin: 0;
+}
