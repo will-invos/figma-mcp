@@ -4,11 +4,11 @@ import './Banner.css';
 interface BannerProps {
   colorType?: 'primary' | 'neutral' | 'success' | 'warning' | 'danger' | 'prize';
   variant?: 'default' | 'full-width';
-  /** Show the leading icon. Defaults to true (renders a default icon per colorType). */
+  /** Show the leading icon (renders a default icon per colorType). Defaults to false. */
   leadingIcon?: boolean;
   /** Custom leading icon — overrides the default when provided. */
   icon?: React.ReactNode;
-  /** Show the trailing close icon. Defaults to true. */
+  /** Show the trailing close icon. Defaults to false. */
   trailingIcon?: boolean;
   /** Called when the trailing icon is clicked. */
   onClose?: () => void;
@@ -46,9 +46,9 @@ const Banner = React.forwardRef<HTMLDivElement, BannerProps>(
     {
       colorType = 'neutral',
       variant = 'default',
-      leadingIcon = true,
+      leadingIcon = false,
       icon,
-      trailingIcon = true,
+      trailingIcon = false,
       onClose,
       message,
     },
