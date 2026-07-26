@@ -3,11 +3,11 @@ import './Badge.css';
 
 interface BadgeProps {
   variant?: 'dot' | 'number';
-  /** For 'number' variant only 'medium' and 'large' are used; 'small' falls back to 'medium'. */
+  /** number 版只吃 medium / large，傳 small 會退回 medium */
   size?: 'small' | 'medium' | 'large';
-  /** Shown when variant='number'. Values >99 render as '99+'. */
+  /** variant='number' 時顯示；超過 99 印成 '99+' */
   count?: number;
-  /** Outer white ring used for overlaying on icons. Defaults to true. */
+  /** 用底色畫一圈外環，疊在 icon 上時才分得出來 */
   border?: boolean;
 }
 

@@ -9,22 +9,14 @@
   font-family: var(--font-family);
 }
 
-/* ========================================
- * Dot variant — square red circle, optional white ring
- * ======================================== */
-
 .ui-badge--dot.ui-badge--small  { width: 8px;  height: 8px; }
 .ui-badge--dot.ui-badge--medium { width: 12px; height: 12px; }
 .ui-badge--dot.ui-badge--large  { width: 16px; height: 16px; }
 
-/* Ring thickness per dot size (per Figma). box-sizing: border-box keeps total size fixed. */
-.ui-badge--dot.ui-badge--bordered.ui-badge--small  { border: 1px solid var(--color-background-plain); }
-.ui-badge--dot.ui-badge--bordered.ui-badge--medium { border: 2px solid var(--color-background-plain); }
-.ui-badge--dot.ui-badge--bordered.ui-badge--large  { border: 2px solid var(--color-background-plain); }
-
-/* ========================================
- * Number variant — height-driven, padding for multi-digit
- * ======================================== */
+/* 外環用底色把 dot 從 icon 上「挖」出來；border-box 讓加了環之後總尺寸不變 */
+.ui-badge--dot.ui-badge--bordered.ui-badge--small  { border: 1px solid var(--color-background-default); }
+.ui-badge--dot.ui-badge--bordered.ui-badge--medium { border: 2px solid var(--color-background-default); }
+.ui-badge--dot.ui-badge--bordered.ui-badge--large  { border: 2px solid var(--color-background-default); }
 
 .ui-badge--number {
   color: var(--color-content-inverse-bold);
