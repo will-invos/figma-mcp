@@ -54,21 +54,30 @@ pnpm lint           # ESLint
 
 ### 1. 安裝（走 GitHub tag）
 
-在新專案的 `package.json` 加入：
+在新專案的 `package.json` 加入，`#` 後面換成最新 tag：
 
 ```json
 {
   "dependencies": {
-    "@invos/design-system": "github:will-invos/iv-design-system#v0.1.0",
+    "@invos/design-system": "github:will-invos/iv-design-system#<最新 tag>",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
   }
 }
 ```
 
+最新 tag 查法（或看 repo 的 Releases 頁）：
+
+```bash
+git ls-remote --tags --refs --sort=-v:refname \
+  https://github.com/will-invos/iv-design-system | head -1
+```
+
 ```bash
 npm install
 ```
+
+> 一律釘在 tag，不要用 branch 名（例如 `#master`）—— GitHub URL 依賴沒有版本範圍語意，指向 branch 會讓不同時間安裝的人拿到不同版本。
 
 > 原理：`npm install` 看到 GitHub URL 會 clone 該 tag、自動裝 devDeps、跑 `prepare` script（= `npm run build:lib`）把 `dist/` 建出來、再打包安裝。所以消費端不用額外做事，但首次安裝會比一般套件慢 30 秒～1 分鐘。
 
@@ -142,9 +151,11 @@ npm version patch     # 0.1.0 → 0.1.1（bug fix）
 
 修改消費端 `package.json`：
 
+把 `#` 後面的 tag 換成要升上去的版本（查法同上）：
+
 ```diff
-- "@invos/design-system": "github:will-invos/iv-design-system#v0.1.0",
-+ "@invos/design-system": "github:will-invos/iv-design-system#v0.1.1",
+- "@invos/design-system": "github:will-invos/iv-design-system#<目前的 tag>",
++ "@invos/design-system": "github:will-invos/iv-design-system#<最新 tag>",
 ```
 
 ```bash
