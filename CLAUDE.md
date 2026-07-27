@@ -2,25 +2,29 @@
 
 > Repo: `will-invos/iv-design-system` · npm 套件 `@invos/design-system`
 
-「發票存摺」行動端產品的設計系統，包含 UI Kit 與 design tokens。
-搭配 Figma MCP 快速建立或直接透過 AI agent 建立 Prototype 頁面，並讓工程開發銜接 APP 元件及設計系統。
+「發票存摺」行動端產品的設計系統，包含 UI Kit 與 design tokens。可搭配 Figma MCP 快速建立或直接透過 AI agent 建立 Prototype 頁面，並讓工程開發銜接 APP 元件及設計系統。
 
-## 兩份規範文件分工
-
-- **CLAUDE.md** — AI 行為規則：**該用什麼元件**、Figma 整合流程、新頁面起手式
-- **[design.md](./design.md)** — 設計準則：完整 token、色彩 / 排版 / 間距 / 動效規格、anti-patterns、AI prompt 範本
+- 本檔為指引該使用什麼元件與新頁面的範本。
+- 設計準則請參考 [design.md](./design.md)：完整 token、色彩 / 排版 / 間距 / 動效規格、anti-patterns。
+- 元件的內部實作規格另見 [docs/component-internals.md](./docs/component-internals.md)。
 
 ## Tech Stack
 
 - React 19、TypeScript、Vite
 - No CSS framework — plain CSS with design token CSS variables
-- No router library — hash-based routing in App.tsx
+- No router library — component explorer uses lightweight hash navigation in src/pages/Components.tsx.
 
 ## UI Kit 結構
 
 - 元件：`src/components/ui/`（每個元件配 `.css`）
 - Token：`src/components/ui/tokens/`（colors / radius / shadows / spacing / typography）
-- Stories：`src/pages/stories/`（各元件 props 範例）
+- Stories：`src/pages/stories/`（各元件 props 及頁面範例）
+
+**新增元件時一併註冊**，否則元件不會出現在 component explorer：
+
+1. `src/components/ui/index.ts` 補 default 與 type 兩個出口
+2. 新增 `src/pages/stories/{Component}.story.tsx`，export `{Component}Story`（`StoryDef` 型別）
+3. 在 `src/pages/stories/registry.ts` import 它，並放進 `sections` 對應分類
 
 ## Component Decision Tree
 
@@ -29,7 +33,7 @@
 | 需求 | 用哪個元件 |
 |------|-----------|
 | 主要動作按鈕 | `<Button variant="filled" colorType="primary">` |
-| 次要動作按鈕 | `<Button variant="filled" colorType="neutral">` 或 `<Button variant="outlibne">` |
+| 次要動作按鈕 | `<Button variant="filled" colorType="neutral">` 或 `<Button variant="outline">` |
 | 弱化動作（文字樣式） | `<Button variant="text">` 或 `<Button variant="ghost">` |
 | 只有 icon 的點擊 | `<IconButton aria-label="...">` |
 | 懸浮主要動作按鈕（FAB） | `<Fab aria-label="...">`（可加 `text` 顯示標籤） |
@@ -67,7 +71,7 @@
 | 輪播 / 分頁位置指示點 | `<DottedController>`（照片上用 `type="overlap"`） |
 | 提示氣泡（簡短說明） | `<Tooltip>` |
 
-**找不到對應？** 先查 `figma-tokens.json.componentKeys` 是否有 Figma 元件尚未實作；再考慮新增，避免自己組裝。
+找不到對應時，先確認是否新增元件，避免自己主動組裝。
 
 
 ## Figma Integration
@@ -78,44 +82,40 @@
 - **Library**: 🧰 iOS - UI Kit 2025（components）、🧰 Design System 2025（variables、text styles）
 - **Token reference**: `figma-tokens.json` — 完整 component / text style / variable collection keys
 
+> 以下兩節寫的是**必須完成的能力與順序**，不綁特定工具名稱 —— skill 名、MCP 函式名因 AI 執行環境而異，對應表見 [.claude/figma-executors.md](./.claude/figma-executors.md)。
+
 ### Figma → Code workflow
 
-當使用者貼 `figma.com/design/{fileKey}/...?node-id=123-456`：
+使用者貼 Figma 連結（`figma.com/design/{fileKey}/...?node-id=...`）時：
 
-1. 先載入 `figma:figma-design-to-code` skill（MCP 強制前置），由它負責解析 URL、呼叫 `mcp__figma__get_design_context`。注意 node-id 的 dash 要轉 colon：`123-456` → `123:456`。
-2. 拿到設計後，**翻成本專案元件**（以下是 skill 不知道的專案規則）：
+1. **對精確的 node 取得 design context** —— 不要對整個 page 取。
+2. **節點太大或回傳被截斷 → 先取 metadata 看結構，再逐區塊縮小範圍重取**，不要就著不完整的 context 硬猜。
+3. **取得 screenshot 當視覺基準** —— 後續驗證要對照它，不是只看 context 的數值。
+4. **翻譯成本專案元件與 token**（這段是專案規則，設計工具端不會知道）：
    - 元件：對照 `figma-tokens.json.componentKeys` 找已實作的 React 元件，再套用上方 Component Decision Tree
    - 顏色：raw hex 反查 `tokens/colors.css` 的 semantic token → `var(--color-*)`
    - 文字：換成 `tokens/typography.css` 的 `.text-*` class
-3. **絕對不要** 直接輸出 Tailwind class，即使 `get_design_context` 回傳 Tailwind。
-4. 沒對應元件 → 用最接近的頂替，並在 plan 註記 TODO。
+   - **絕對不要**直接輸出 Tailwind class，即使工具回傳的是 Tailwind
+   - 沒對應元件 → 用最接近的頂替，並在 plan 註記 TODO
+5. **實作後對照 screenshot 驗證外觀與行為** —— 版面結構、間距節奏、色彩層級、字級階層；狀態（hover / focus / error）與可點區。有落差就修；**未驗證不算完成**，也不要以「大致相符」交付。
 
 ### Code → Figma workflow
 
-**別用 `generate_figma_design`（HTML capture）** — 會丟失 variables、text styles、元件結構。要把 code 端頁面 / 元件建進 Figma 時：
+要把 code 端頁面 / 元件建進 Figma 時：
 
-1. 先載入 `figma:figma-use` skill（呼叫 `use_figma` 的強制前置）；建整頁 / 多區塊版面另加 `figma:figma-generate-design`，建元件庫加 `figma:figma-generate-library`。這些 skill 負責 Plugin API 的實際操作（import 元件、`setProperties`、套 text style、綁 variable）。
+1. **不要走 HTML 截圖 / 轉譯的路徑** —— 會丟失 variables、text styles、元件結構，產出的檔案設計師無法維護。必須用 Plugin API 逐層組裝：import 既有元件 → 設 properties → 套 text style → 綁 variable。
 2. 專案專屬：所有 key 都從 `figma-tokens.json` 拿 —— `componentKeys`（元件 set）、`textStyles`（文字樣式）、`variableCollections`（色彩 / 尺寸變數集，見下表）。
+3. 組完後**取 screenshot 與 code 端畫面對照**，確認不是「圖層對了但外觀跑掉」。
 
-### Variable Collections（Design System 2025）
-
-| Collection | Key |
-|------------|-----|
-| Semantic: Colors | `aca99ba7f5e3b863523761870ab4fa8d4b24c0be` |
-| Semantic: Sizes | `b2b4d349ff3e569ea2799606edbc77e3b5c1aa60` |
-| UI Kit Variables | `3f0026e1a1cdbbcf678f559cdc723a02f2f35530` |
+> 所有 Figma component/style/variable keys 一律讀取 figma-tokens.json，不要複製到其他文件。
 
 ### Figma 端 vs Code 端 text style
 
-`figma-tokens.json` 的 text styles（如 `iOS/Body-CN/Large`）是 **Figma 設計端資料**，Plugin API 套對應 text style 用。Code 端只有一組通用 class（`.text-body-large` 等不分 EN/CN），靠 browser 智能選字。
+`figma-tokens.json` 的 text styles（如 `iOS/Body-CN/Large`）是 **Figma 設計端資料**，Plugin API 套對應 text style 用。Code 端只有一組通用 class（`.text-body-large` 等不分 EN/CN）。
 
-### Fonts（Plugin API note）
+## 範本應用
 
-PingFang TC 在 remote Figma Plugin API 不可用。直接修改文字（非透過 `setProperties`）時用 `Noto Sans TC` 作為 fallback，再用 `textNode.textStyleId` 套對應 text style。
-
-## 新頁面起手式（給 AI）
-
-**先從範本複製**，不要從零建頁面。範本在 `src/pages/templates/`，涵蓋預設建立格式（外框、結構、token 用法都已就位）：
+範本在 `src/pages/templates/`，涵蓋預設建立格式（外框、結構、token 用法都已就位）：
 
 | 場景 | 複製這份 |
 |------|---------|
@@ -126,14 +126,4 @@ PingFang TC 在 remote Figma Plugin API 不可用。直接修改文字（非透�
 | 單筆資料詳情 | `DetailTemplate.tsx` |
 | 404 / 空狀態（斷線、無結果） | `NotFoundTemplate.tsx` |
 
-六份範本可在 storybook（`src/pages/Components.tsx`）側邊欄「頁面範本」分類預覽。範本是**參考用**，不是共用元件：外框規則寫在 `templates.css`（`.tpl-page` = max-width 480px 等），複製後把用到的規則搬進新頁面自己的 CSS，不要 import `templates.css`、也不要 import 範本元件。複製後照下列規則調整：
-
-1. 查 Component Decision Tree 找對應元件
-2. 從 `'@/components/ui'` barrel import（**不要深層 import**）
-3. **頁面 `max-width: 480px`**、viewport meta：`width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover`
-4. 結構：`NavigationBar` → 內容區（自由捲動）→ `TabBar`（可選）
-5. 顏色 / 字級 / 間距 / 圓角 / 陰影 / 動效 → 用 token，不寫 magic number；完整規格見 [design.md](./design.md)
-6. 金額（`$` 前綴）/ 發票期數（民國年 `115 年 7-8 月`）/ 日期（西元 `2026/07/31`）/ 時間（`18:30:25`）→ 照 [design.md §2.3](./design.md) 內容格式，不要自創
-7. `:hover` 包 `@media (hover: hover)`
-8. dark mode 不需特別處理（token 自動切換）
-9. 測試：Chrome DevTools 裝置模擬器（iPhone 14 Pro）
+範本僅供參考，非共用元件。外框規則寫在 `templates.css`，複製後把用到的規則搬進新頁面自己的 CSS，不要 import `templates.css`、也不要 import 範本元件。
