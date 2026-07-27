@@ -34,6 +34,7 @@ export default function SettingsTemplate({ onBack }: SettingsTemplateProps) {
       />
 
       <div className="tpl-page__body">
+        <ListHeader headline="會員資料" size="small" />
         <ListItem
           headline="會員資料"
           description="0987654321"
