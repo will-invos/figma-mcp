@@ -64,7 +64,16 @@
   padding: var(--space-400);
   display: flex;
   flex-direction: column;
-  gap: var(--space-400);
+}
+
+.tpl-card > * + * {
+  margin-top: var(--space-400);
+}
+
+/* 段落標題（h5 + .text-label-large）與它帶的內文貼近成一組，
+   照 design.md §3 的「標題↔描述微距」，不吃卡片預設的區塊節奏 */
+.tpl-card > h5 + * {
+  margin-top: var(--space-200);
 }
 
 /* 底部主要動作區（表單送出、置底 CTA），貼齊頁面底部 */
@@ -92,7 +101,7 @@
 .tpl-ordered-list {
   list-style: decimal;
   padding-inline-start: var(--space-500);
-  margin: 0;
+  margin-left: 0;
 }
 
 .tpl-ordered-list > li + li {
