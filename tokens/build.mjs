@@ -92,7 +92,7 @@ writeFileSync(
   `${SRC_TOKENS}colors.css`,
   header(`Color tokens（${colors.length} 色；dark 覆寫 ${darkOverrides} 個，未覆寫者沿用 light）`) + colorLightCss + '\n' + colorDarkCss
 )
-writeFileSync(`${SRC_TOKENS}spacing.css`, header('Spacing tokens（4px grid）') + (await renderCss(spaceTree, ':root')))
+writeFileSync(`${SRC_TOKENS}spacing.css`, header('Spacing tokens（4px 主節奏，含 2px half-step 與 1px 特殊值）') + (await renderCss(spaceTree, ':root')))
 writeFileSync(`${SRC_TOKENS}radius.css`, header('Radius tokens') + (await renderCss(radiusTree, ':root')))
 
 // ---------- 5. Native 輸出（格式對齊既有交付：iOS Asset Catalog colorsets、Android colors.xml） ----------

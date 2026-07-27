@@ -45,7 +45,7 @@
 - `intent`：`brand` / `success` / `danger` / `warning` / `prize` / `donation` / `neutral` / `link` / `inverse`
 - `variant`：`default` / `bold` / `subtle` / `subtlest` / `hover` / `active`
 
-> **色值不在本文件維護**：唯一來源是 [tokens/colors.css](./src/components/ui/tokens/colors.css)。
+> **色值不在本文件維護**。查「有哪些 token」讀 [tokens/colors.css](./src/components/ui/tokens/colors.css)；**要改色值不要改那個檔** —— 它是 `npm run tokens:build` 的產物，母版是 Figma variables（見 [tokens/README.md](./tokens/README.md)）。
 
 ### 1.2 文字色階（由深到淺）
 
@@ -124,7 +124,9 @@
 
 ## 3. 間距與佈局
 
-### 3.1 4px-grid token
+### 3.1 間距 token
+
+**4px 為主要節奏**，另提供 2px half-step（`--space-50`）與 1px 特殊值（`--space-25`）；不是嚴格的 4px grid，但一律優先用既有 token，不要自己算數值。
 
 | Token | 值 | 用途 |
 |-------|-----|------|
@@ -139,7 +141,7 @@
 ### 3.2 佈局約束
 
 - **頁面 max-width: 480px**，**不加桌機 breakpoint**（mobile-first）
-- viewport meta：`<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />`
+- **viewport 只由 app shell 的 HTML 設定**（本 repo 是 [index.html](./index.html)），頁面與元件**不得新增或覆寫**。預設**保留使用者縮放** —— 不要加 `maximum-scale=1` / `user-scalable=no`，那是無障礙反模式；要限制縮放必須有經無障礙評估的產品需求。設定值必須含 `viewport-fit=cover`，否則下一條 safe area 不生效
 - 頁面結構：`NavigationBar` (top) → 內容區（自由捲動）→ `TabBar` (bottom，可選)
 - **Safe area**：`viewport-fit=cover` 下內容會延伸到瀏海 / home indicator 底下。貼底 chrome（`TabBar`、`Sheet`）與貼頂懸浮元件（`InAppNotification`）已自帶 `env(safe-area-inset-*, 0px)` padding
 
@@ -225,6 +227,24 @@
 - **spring-like 進出場**（客製 `cubic-bezier`，**僅限 push notification 類**）→ InAppNotification 進場用 overshoot 曲線、退場用反向 ease；`prefers-reduced-motion` 自動降為 `0.15s linear` opacity-only
 
 > 一般元件不用 spring / bounce / 客製 cubic-bezier；觸控延遲約 100ms，動畫超過 0.3s 會感覺卡。客製曲線僅在 InAppNotification 這類「需要 spring 感」的進出場使用，且**必須**附 `prefers-reduced-motion` fallback。
+
+### 6.4 無障礙（Accessibility）
+
+**已由型別或元件保證** —— 沿用元件即符合，不需另外處理：
+
+- `IconButton` / `Fab` 的 `aria-label` 是 **TypeScript 必填**，漏了不會過編譯
+- `Sheet` 具備 focus trap、Esc 關閉、`aria-modal`
+- 觸控區下限見 §6.2
+
+**新增或修改元件時必須做到** —— 既有元件尚未全數達標，逐步補齊；**不要因為鄰居沒做就跟著省略**：
+
+- 優先用語意 HTML（`<section>` / `<h1>` / `<ul>` / `<label>`）。CLAUDE.md 的「不要用原生 HTML」只限**已有 UI Kit 對應的互動控制項**（button / input / checkbox / select…），結構標籤不在此列
+- icon-only 的可點擊元素一律要有讀得懂的 `aria-label`
+- 表單欄位要有可關聯的 label、說明與錯誤訊息（`<label for>`、`aria-describedby`）
+- **不可只靠顏色傳達狀態** —— error 必須另有文字或 icon（`FieldGroup` 的 helpText 會帶 `icon-alert-circle-filled`）
+- 自訂互動要能鍵盤操作，並有 `:focus-visible` 樣式
+- 非必要動效要遵守 `prefers-reduced-motion`（目前只有 `InAppNotification` 實作）
+- `Dialog` / `Sheet` 開啟後的 focus 落點與**關閉後的 focus restoration** 都要驗證（`Dialog` 目前只做了開啟時 focus 第一顆按鈕，未做 restoration）
 
 ---
 

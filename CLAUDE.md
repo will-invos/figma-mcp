@@ -8,6 +8,35 @@
 - 設計準則請參考 [design.md](./design.md)：完整 token、色彩 / 排版 / 間距 / 動效規格、anti-patterns。
 - 元件的內部實作規格另見 [docs/component-internals.md](./docs/component-internals.md)。
 
+## Source of truth
+
+同一件事有多處記載時，以下為權威來源：
+
+| 主題 | 權威來源 |
+|------|---------|
+| 公開元件與 props | `src/components/ui/index.ts` 與各元件的 TypeScript 型別 |
+| 顏色 / spacing / radius | **生成檔** —— Figma variables → `tokens/figma-dump/*.txt` → `tokens/tokens.json` → `npm run tokens:build` |
+| Typography / Shadow | **手維護** —— `tokens/typography.css`、`tokens/shadows.css`（不在 pipeline 內） |
+| Figma component / style / variable key | `figma-tokens.json` |
+| 設計意圖與使用原則 | [design.md](./design.md) |
+| 元件內部尺寸 / 邊框 / 內距實測 | [docs/component-internals.md](./docs/component-internals.md) |
+
+- **`colors.css` / `spacing.css` / `radius.css` 是產物，手改會被下次 `npm run tokens:build` 靜默覆蓋。** 查「有哪些 token」讀這三檔；**改值**走 Figma variables（流程見 [tokens/README.md](./tokens/README.md)）。
+- **文件與程式碼不一致時以程式碼為準**：依實際型別讓程式可編譯，**不要猜測、也不要默默建立近似 API**，並在回報中明確指出文件的規格落差。
+
+## 任務閱讀路徑
+
+不必每次載入全部文件，依任務讀對應幾份：
+
+| 任務 | 讀這些 |
+|------|--------|
+| 建立頁面 | 本檔 Component Decision Tree → `src/pages/templates/` 對應範本 → design.md 相關章節 |
+| 修改元件 | 元件 `.tsx` / `.css` → 對應 story → [docs/component-internals.md](./docs/component-internals.md) |
+| 修改 token | [tokens/README.md](./tokens/README.md) —— **禁止直接改生成檔** |
+| Figma → Code | 本檔「Figma Integration」→ `figma-tokens.json` → 執行器名稱見 [.claude/figma-executors.md](./.claude/figma-executors.md) |
+| Dark mode | [docs/dark-mode.md](./docs/dark-mode.md) |
+| 無障礙 | [design.md §6.4](./design.md) |
+
 ## Tech Stack
 
 - React 19、TypeScript、Vite
@@ -71,7 +100,12 @@
 | 輪播 / 分頁位置指示點 | `<DottedController>`（照片上用 `type="overlap"`） |
 | 提示氣泡（簡短說明） | `<Tooltip>` |
 
-找不到對應時，先確認是否新增元件，避免自己主動組裝。
+**找不到對應元件時**（這條流程也適用 Figma → Code）：
+
+1. 先確認真的沒有 —— 查 `src/components/ui/index.ts` 的 barrel export、元件型別、`src/pages/stories/`、`figma-tokens.json`
+2. **只有視覺差異** → 用既有元件的 props 調整，不要另做一個
+3. **互動語意不同**（例：設計稿要多選、系統只有單選元件）→ **不可用近似元件硬套**，語意錯誤比缺元件嚴重
+4. 依任務範圍提出新增元件，或在回報中明確標示缺口 —— **不得只留隱藏的 TODO 註解**
 
 
 ## Figma Integration
@@ -96,7 +130,7 @@
    - 顏色：raw hex 反查 `tokens/colors.css` 的 semantic token → `var(--color-*)`
    - 文字：換成 `tokens/typography.css` 的 `.text-*` class
    - **絕對不要**直接輸出 Tailwind class，即使工具回傳的是 Tailwind
-   - 沒對應元件 → 用最接近的頂替，並在 plan 註記 TODO
+   - 沒對應元件 → 走上方「找不到對應元件時」的流程判斷，不要一律拿最接近的頂替
 5. **實作後對照 screenshot 驗證外觀與行為** —— 版面結構、間距節奏、色彩層級、字級階層；狀態（hover / focus / error）與可點區。有落差就修；**未驗證不算完成**，也不要以「大致相符」交付。
 
 ### Code → Figma workflow
@@ -127,3 +161,15 @@
 | 404 / 空狀態（斷線、無結果） | `NotFoundTemplate.tsx` |
 
 範本僅供參考，非共用元件。外框規則寫在 `templates.css`，複製後把用到的規則搬進新頁面自己的 CSS，不要 import `templates.css`、也不要 import 範本元件。
+
+## Validation
+
+改完自己跑過再回報。本專案**沒有 test script**，不要嘗試 `npm test`。
+
+| 改動範圍 | 指令 |
+|---------|------|
+| 一般程式修改 | `npm run lint` → `npm run build` |
+| 套件輸出 / public API（`index.ts`、元件 props） | `npm run lint` → `npm run build:lib` |
+| Token | 依 [tokens/README.md](./tokens/README.md) 改來源 → `npm run tokens:build` → `npm run build:lib` |
+
+UI 改動另需在對應 story 目視驗證：light / dark 兩個主題、窄螢幕（375px）、互動狀態（focus / disabled / error / loading）。
