@@ -6,7 +6,6 @@
  * 不要直接 import 這支檔案。所有數值一律走 token，不寫 magic number。
  */
 
-/* 頁面外框：NavigationBar → 捲動內容區 → TabBar */
 .tpl-page {
   max-width: 480px;
   margin: 0 auto;
@@ -18,7 +17,6 @@
   color: var(--color-content-default);
 }
 
-/* 內容捲動區：夾在 NavigationBar 與 TabBar 之間，只有這一段會捲動 */
 .tpl-page__body {
   flex: 1 1 auto;
   overflow-y: auto;
@@ -26,19 +24,16 @@
   background-color: var(--color-background-sunken);
 }
 
-/* 內容直接鋪在頁面上（表單頁），不需要 sunken 底色襯出區塊 */
 .tpl-page__body--plain {
   background-color: var(--color-background-default);
 }
 
-/* 整頁只有一塊內容時垂直置中（404 / 空狀態頁的 PageStatus） */
 .tpl-page__body--center {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* 一般內容用的內距容器 */
 .tpl-section {
   padding: var(--space-400);
   display: flex;
@@ -46,9 +41,6 @@
   gap: var(--space-300);
 }
 
-/* 詳情頁的段落卡片：.tpl-card 是單張，.tpl-card-stack 負責堆疊。
-   間距下在卡片之間（不是 stack 的 gap），主視覺與其後的主標題卡片才能貼齊 ——
-   hero 是主標題的一部分，中間不留 sunken 縫。改這段前先確認這條前提還成立。 */
 .tpl-card-stack {
   min-height: 100%;
   display: flex;
@@ -70,13 +62,10 @@
   margin-top: var(--space-400);
 }
 
-/* 段落標題（h5 + .text-label-large）與它帶的內文貼近成一組，
-   照 design.md §3 的「標題↔描述微距」，不吃卡片預設的區塊節奏 */
 .tpl-card > h5 + * {
   margin-top: var(--space-200);
 }
 
-/* 底部主要動作區（表單送出、置底 CTA），貼齊頁面底部 */
 .tpl-actions {
   padding: var(--space-400);
   display: flex;
@@ -84,12 +73,10 @@
   gap: var(--space-200);
 }
 
-/* 讓 Button 依內容寬度靠左，不被 flex 拉滿 */
 .tpl-inline {
   align-self: flex-start;
 }
 
-/* 頁面主視覺（滿版 2:1） */
 .tpl-hero {
   display: block;
   width: 100%;
@@ -97,7 +84,6 @@
   object-fit: cover;
 }
 
-/* 編號列表：全站 reset 關掉了 list-style，這裡自己開回來 */
 .tpl-ordered-list {
   list-style: decimal;
   padding-inline-start: var(--space-500);
@@ -113,19 +99,16 @@
   text-decoration: underline;
 }
 
-/* 並排的單選 / 多選項（radio group、checkbox group） */
 .tpl-field-row {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-400);
 }
 
-/* 與上一個表單元件再拉開一段（例如置底的同意條款） */
 .tpl-field-offset {
   margin-top: var(--space-200);
 }
 
-/* ListItem 的縮圖 */
 .tpl-thumb {
   width: 64px;
   height: 64px;
@@ -134,7 +117,6 @@
   border: 1px solid var(--color-border-subtle);
 }
 
-/* ListItem description 第二行 —— Tag + 到期時間並排 */
 .tpl-item-meta {
   display: flex;
   align-items: center;
