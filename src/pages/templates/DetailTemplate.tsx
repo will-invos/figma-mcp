@@ -10,7 +10,7 @@ interface DetailTemplateProps {
 }
 
 /* 示範用主視覺；實作時換成 API 回傳的圖 */
-const SAMPLE_HERO = 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=960&h=480&fit=crop'
+const SAMPLE_HERO = 'https://images.unsplash.com/vector-1760346761989-f75afcd32e14?w=960&h=480&fit=crop'
 
 export default function DetailTemplate({ onBack }: DetailTemplateProps) {
   return (

@@ -11,7 +11,7 @@ interface ListTemplateProps {
 }
 
 /* 示範用縮圖；實作時換成 API 回傳的商品圖 */
-const SAMPLE_THUMB = 'https://images.unsplash.com/photo-1556740738-b6a63e27c4df?w=128&h=128&fit=crop'
+const SAMPLE_THUMB = 'https://images.unsplash.com/photo-1615397349754-cfa2066a298e?w=128&h=128&fit=crop'
 
 /** 第二行：狀態 Tag（可省略）+ 到期時間 */
 function ItemMeta({ tag, expiredAt }: { tag?: ReactNode; expiredAt: string }) {
