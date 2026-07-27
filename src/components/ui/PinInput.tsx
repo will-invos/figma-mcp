@@ -1,4 +1,5 @@
 import React, { useEffect, useId, useRef } from 'react'
+import { useFieldGroupHelpId } from './FieldGroupContext'
 import './PinInput.css'
 
 interface PinInputProps {
@@ -35,6 +36,7 @@ const PinInput = React.forwardRef<HTMLInputElement, PinInputProps>(
   ) => {
     const inputRefs = useRef<(HTMLInputElement | null)[]>([])
     const groupId = useId()
+    const helpId = useFieldGroupHelpId()
     const isDisabled = status === 'disabled'
     const isError = status === 'error'
 
@@ -118,6 +120,7 @@ const PinInput = React.forwardRef<HTMLInputElement, PinInputProps>(
         className="ui-pin-input"
         role="group"
         aria-label={ariaLabel || `${length}-digit code`}
+        aria-describedby={helpId}
       >
         {Array.from({ length }, (_, i) => {
           const cellClass = [

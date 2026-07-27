@@ -188,17 +188,19 @@
 
 /* trailing 用 ghost IconButton，本身就沒有背景且按下會變淡，這裡不需要再覆寫 */
 
+/* !important 是為了蓋掉 a11y.css 的全域 reduced-motion 歸零 ——
+   push 通知需要保留 0.15s opacity-only 淡入淡出，突然出現會讓人漏看 */
 @media (prefers-reduced-motion: reduce) {
   .ui-in-app-notification[data-state='entering'] {
-    animation: ui-in-app-notification-enter-rm 0.15s linear both;
+    animation: ui-in-app-notification-enter-rm 0.15s linear both !important;
   }
 
   .ui-in-app-notification[data-state='exiting'] {
-    animation: ui-in-app-notification-exit-rm 0.15s linear both;
+    animation: ui-in-app-notification-exit-rm 0.15s linear both !important;
   }
 
   .ui-in-app-notification[data-springback='true'] {
-    transition: opacity 0.15s linear;
+    transition: opacity 0.15s linear !important;
   }
 }
 

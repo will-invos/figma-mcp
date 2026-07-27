@@ -1,4 +1,5 @@
 import React, { useState, useRef, useCallback, useEffect, useImperativeHandle } from 'react'
+import { useFieldGroupHelpId } from './FieldGroupContext'
 import './TextArea.css'
 
 interface TextAreaProps {
@@ -15,6 +16,7 @@ interface TextAreaProps {
 const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
   ({ label, placeholder, value, onChange, variant = 'default', status = 'default', className }, ref) => {
     const disabled = status === 'disabled'
+    const helpId = useFieldGroupHelpId()
     const [focused, setFocused] = useState(false)
     const internalRef = useRef<HTMLTextAreaElement>(null)
     useImperativeHandle(ref, () => internalRef.current!)
@@ -61,6 +63,8 @@ const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
           onFocus={() => setFocused(true)}
           onBlur={(e) => { setFocused(false); setHasValue(e.target.value.length > 0) }}
           disabled={disabled}
+          aria-invalid={status === 'error' || undefined}
+          aria-describedby={helpId}
           rows={1}
         />
       </div>

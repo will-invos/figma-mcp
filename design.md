@@ -233,18 +233,20 @@
 **已由型別或元件保證** —— 沿用元件即符合，不需另外處理：
 
 - `IconButton` / `Fab` 的 `aria-label` 是 **TypeScript 必填**，漏了不會過編譯
-- `Sheet` 具備 focus trap、Esc 關閉、`aria-modal`
+- `Dialog` / `Sheet` 都會在開啟時把 focus 移進面板、關閉時還給原本的觸發元素；`Sheet` 另有 focus trap 與 `aria-modal`
+- **`prefers-reduced-motion` 由 [a11y.css](./src/components/ui/a11y.css) 全域處理** —— 所有 `ui-` 元件的 transition / animation 自動歸零，不需逐一寫。例外：`Spinner` 與 `ProgressBar` indeterminate 保持轉動（靜止就失去「處理中」的意義）；元件要保留自己的降級動效（如 `InAppNotification` 的 opacity-only 淡入）就在自己的 CSS 用 `!important`
+- 按鈕類（`Button` / `IconButton` / `Fab`）的 `:focus-visible` 外環同樣在 a11y.css；輸入欄家族用各自的 `:focus-within` 外框
+- `FieldGroup` 的 `helpText` 會自動接上底下輸入元件的 `aria-describedby`（`TextField` / `TextArea` / `Select` / `PinInput`）
 - 觸控區下限見 §6.2
 
-**新增或修改元件時必須做到** —— 既有元件尚未全數達標，逐步補齊；**不要因為鄰居沒做就跟著省略**：
+**新增或修改元件時必須做到**：
 
 - 優先用語意 HTML（`<section>` / `<h1>` / `<ul>` / `<label>`）。CLAUDE.md 的「不要用原生 HTML」只限**已有 UI Kit 對應的互動控制項**（button / input / checkbox / select…），結構標籤不在此列
 - icon-only 的可點擊元素一律要有讀得懂的 `aria-label`
-- 表單欄位要有可關聯的 label、說明與錯誤訊息（`<label for>`、`aria-describedby`）
+- 輸入元件要能被 `FieldGroup` 描述：用 `useFieldGroupHelpId()` 接 `aria-describedby`，error 狀態設 `aria-invalid`
 - **不可只靠顏色傳達狀態** —— error 必須另有文字或 icon（`FieldGroup` 的 helpText 會帶 `icon-alert-circle-filled`）
-- 自訂互動要能鍵盤操作，並有 `:focus-visible` 樣式
-- 非必要動效要遵守 `prefers-reduced-motion`（目前只有 `InAppNotification` 實作）
-- `Dialog` / `Sheet` 開啟後的 focus 落點與**關閉後的 focus restoration** 都要驗證（`Dialog` 目前只做了開啟時 focus 第一顆按鈕，未做 restoration）
+- 自訂互動要能鍵盤操作，且**有可見的對焦樣式** —— 寫了 `outline: none` 就必須自己補 `:focus-visible` 或 `:focus-within`
+- 新的 modal 類元件要驗證開啟後的 focus 落點與**關閉後的 focus restoration**（照 `Sheet` / `Dialog` 的寫法：存 `document.activeElement`，在 effect cleanup 時檢查 `isConnected` 再 focus 回去）
 
 ---
 

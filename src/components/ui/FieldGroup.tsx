@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useId, useMemo } from 'react'
 import FieldGroupHeader from './FieldGroupHeader'
 import FieldGroupHelpText from './FieldGroupHelpText'
+import FieldGroupContext from './FieldGroupContext'
 import './FieldGroup.css'
 
 interface FieldGroupProps {
@@ -24,12 +25,19 @@ const FieldGroup = React.forwardRef<HTMLDivElement, FieldGroupProps>(
       status === 'error' && 'ui-field-group--error',
       className,
     ].filter(Boolean).join(' ')
+
+    const generatedId = useId()
+    const helpId = helpText ? `${generatedId}-help` : undefined
+    const context = useMemo(() => ({ helpId }), [helpId])
+
     return (
-      <div ref={ref} className={classes}>
-        {headline && <FieldGroupHeader headline={headline} description={description} />}
-        <div className="ui-field-group__content">{children}</div>
-        {helpText && <FieldGroupHelpText text={helpText} status={status} align={helpTextAlign} />}
-      </div>
+      <FieldGroupContext.Provider value={context}>
+        <div ref={ref} className={classes}>
+          {headline && <FieldGroupHeader headline={headline} description={description} />}
+          <div className="ui-field-group__content">{children}</div>
+          {helpText && <FieldGroupHelpText id={helpId} text={helpText} status={status} align={helpTextAlign} />}
+        </div>
+      </FieldGroupContext.Provider>
     )
   }
 )
