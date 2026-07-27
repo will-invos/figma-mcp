@@ -75,7 +75,7 @@ function ThemeToggle() {
 
 ### 2. 跟隨系統偏好
 
-App 不提供 toggle，純粹跟著作業系統的 dark mode。
+App 內有可切換深淺模式的功能，Prototype 僅須跟著作業系統的設定值。
 
 ```tsx
 import { useEffect } from 'react'

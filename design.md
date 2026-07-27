@@ -1,8 +1,18 @@
 # Design Spec — @invos/design-system
 
-> 「發票存摺」行動端產品的設計準則。涵蓋視覺調性、色彩、排版、間距、圓角、陰影、互動與 anti-patterns。
-> 與 [CLAUDE.md](./CLAUDE.md) 互補：CLAUDE.md 規範「**該用什麼元件**」，本檔規範「**怎麼用、長什麼樣**」。
-> 元件的內部實作規格（尺寸 / 邊框 / 內距實測）另見 [docs/component-internals.md](./docs/component-internals.md)。
+「發票存摺」行動端產品的設計準則，涵蓋視覺調性、色彩、排版、間距、圓角、陰影、互動與 anti-patterns。
+
+## 適用範圍
+
+除非段落另有註明，本文件的 AI 守則適用於「使用既有 UI Kit 建立產品頁面」，不直接套用於：
+
+- `src/components/ui/tokens/` 的生成檔
+- UI Kit 元件內部的精確尺寸
+- component explorer / stories 的展示外框
+- SVG、圖片與測試用視覺素材
+
+維護元件時以 TypeScript props、元件 CSS、Figma 規格及
+`docs/component-internals.md` 為準。
 
 ---
 
@@ -13,7 +23,7 @@
 **核心任務**：雲端發票自動對獎與領獎、紙本掃描對獎、消費明細查詢、參與任務與兌換獎勵。
 
 - **整體調性**：「現代極簡」—乾淨、留白充足、藍色品牌色點綴，背景搭配科技感的輕量漸層色
-- **色彩語法**：大面積中性灰白底 + 藍色 (`#3560FF`) 為唯一主動作色，其他語意色僅用於提示
+- **色彩語法**：大面積中性灰白底 + 品牌藍（`brand`）為唯一主動作色，其他語意色僅用於提示
 - **形狀語法**：圓角偏大（按鈕 8–12、卡片 12–16），無銳角；按鈕、卡片、輸入欄統一節奏
 - **動效調性**：短促克制（0.15–0.3s），ease-in-out 為主
 
@@ -35,32 +45,32 @@
 - `intent`：`brand` / `success` / `danger` / `warning` / `prize` / `donation` / `neutral` / `link` / `inverse`
 - `variant`：`default` / `bold` / `subtle` / `subtlest` / `hover` / `active`
 
+> **色值不在本文件維護**。查「有哪些 token」讀 [tokens/colors.css](./src/components/ui/tokens/colors.css)；**要改色值不要改那個檔** —— 它是 `npm run tokens:build` 的產物，母版是 Figma variables（見 [tokens/README.md](./tokens/README.md)）。
+
 ### 1.2 文字色階（由深到淺）
 
-| Token | Hex | 場景 |
-|-------|-----|------|
-| `--color-content-bold` | `#101119` | 標題、最強調 |
-| `--color-content-default` | `#3b3c43` | **正文（預設）** |
-| `--color-content-subtle` | `#737380` | 次要說明、placeholder |
-| `--color-content-subtlest` | `#9b9baa` | 最弱層級、disabled |
-| `--color-content-plain` | `#000000` | 純黑（極少用） |
+| Token | 場景 |
+|-------|------|
+| `--color-content-bold` | 標題、最強調 |
+| `--color-content-default` | 正文（預設） |
+| `--color-content-subtle` | 次要說明、placeholder |
+| `--color-content-subtlest` | 最弱層級、disabled |
+| `--color-content-plain` | 純黑 / 純白（極少用） |
 
 `Inverse 系列`（`--color-content-inverse-*`）給深色容器（Toast、Sheet overlay 上的文字）用。
 
 ### 1.3 語意色（intents）
 
-每個 intent 都有 `default / bold / hover / active / subtle / subtlest` 6 階強弱。
-
-| Intent | default | 用途（發票存摺情境） |
-|--------|---------|--------------------|
-| `brand` | `#3560ff` | 主動作 |
-| `success` | `#00bd64` | 操作成功 |
-| `danger` | `#f4252d` | 嚴重警示、操作失敗、刪除 |
-| `warning` | `#ff8710` | 預設警示 |
-| `prize` | `#ffc423` | 中獎公告、獎金/獎項 |
-| `donation` | `#f61372` | 愛心碼、捐贈發票 |
-| `neutral` | `#737380` | 無情緒語意、中性操作 |
-| `link` | `#3560ff` | 文字連結 |
+| Intent | 用途（發票存摺情境） |
+|--------|--------------------|
+| `brand` | 主動作 |
+| `success` | 操作成功 |
+| `danger` | 嚴重警示、操作失敗、刪除 |
+| `warning` | 預設警示 |
+| `prize` | 中獎公告、獎金/獎項 |
+| `donation` | 愛心碼、捐贈發票 |
+| `neutral` | 無情緒語意、中性操作 |
+| `link` | 文字連結 |
 
 ### 1.4 Fixed 與 Dark Mode
 
@@ -114,14 +124,16 @@
 
 ## 3. 間距與佈局
 
-### 3.1 4px-grid token
+### 3.1 間距 token
+
+**4px 為主要節奏**，另提供 2px half-step（`--space-50`）與 1px 特殊值（`--space-25`）；不是嚴格的 4px grid，但一律優先用既有 token，不要自己算數值。
 
 | Token | 值 | 用途 |
 |-------|-----|------|
 | `--space-50 / 100` | 2 / 4 | 標題↔描述微距、tag 內距 |
 | `--space-150 / 200 / 250` | 6 / 8 / 10 | small/medium 按鈕 padding、icon↔text |
 | `--space-300` | 12 | large 按鈕 padding、緊湊內距 |
-| `--space-400` | 16 | **標準容器內距、欄位間距** |
+| `--space-400` | 16 | 標準容器內距、欄位間距 |
 | `--space-600` | 24 | 強調區塊、Dialog body |
 
 > 完整定義（含 `--space-25 / 500 / 700 / 800 / 900`）見 [tokens/spacing.css](./src/components/ui/tokens/spacing.css)。**自製容器三檔內距**：標準 16 / 緊湊 12 / 強調 24。
@@ -129,7 +141,7 @@
 ### 3.2 佈局約束
 
 - **頁面 max-width: 480px**，**不加桌機 breakpoint**（mobile-first）
-- viewport meta：`<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />`
+- **viewport 只由 app shell 的 HTML 設定**（本 repo 是 [index.html](./index.html)），頁面與元件**不得新增或覆寫**。預設**保留使用者縮放** —— 不要加 `maximum-scale=1` / `user-scalable=no`，那是無障礙反模式；要限制縮放必須有經無障礙評估的產品需求。設定值必須含 `viewport-fit=cover`，否則下一條 safe area 不生效
 - 頁面結構：`NavigationBar` (top) → 內容區（自由捲動）→ `TabBar` (bottom，可選)
 - **Safe area**：`viewport-fit=cover` 下內容會延伸到瀏海 / home indicator 底下。貼底 chrome（`TabBar`、`Sheet`）與貼頂懸浮元件（`InAppNotification`）已自帶 `env(safe-area-inset-*, 0px)` padding
 
@@ -216,6 +228,24 @@
 
 > 一般元件不用 spring / bounce / 客製 cubic-bezier；觸控延遲約 100ms，動畫超過 0.3s 會感覺卡。客製曲線僅在 InAppNotification 這類「需要 spring 感」的進出場使用，且**必須**附 `prefers-reduced-motion` fallback。
 
+### 6.4 無障礙（Accessibility）
+
+**已由型別或元件保證** —— 沿用元件即符合，不需另外處理：
+
+- `IconButton` / `Fab` 的 `aria-label` 是 **TypeScript 必填**，漏了不會過編譯
+- `Sheet` 具備 focus trap、Esc 關閉、`aria-modal`
+- 觸控區下限見 §6.2
+
+**新增或修改元件時必須做到** —— 既有元件尚未全數達標，逐步補齊；**不要因為鄰居沒做就跟著省略**：
+
+- 優先用語意 HTML（`<section>` / `<h1>` / `<ul>` / `<label>`）。CLAUDE.md 的「不要用原生 HTML」只限**已有 UI Kit 對應的互動控制項**（button / input / checkbox / select…），結構標籤不在此列
+- icon-only 的可點擊元素一律要有讀得懂的 `aria-label`
+- 表單欄位要有可關聯的 label、說明與錯誤訊息（`<label for>`、`aria-describedby`）
+- **不可只靠顏色傳達狀態** —— error 必須另有文字或 icon（`FieldGroup` 的 helpText 會帶 `icon-alert-circle-filled`）
+- 自訂互動要能鍵盤操作，並有 `:focus-visible` 樣式
+- 非必要動效要遵守 `prefers-reduced-motion`（目前只有 `InAppNotification` 實作）
+- `Dialog` / `Sheet` 開啟後的 focus 落點與**關閉後的 focus restoration** 都要驗證（`Dialog` 目前只做了開啟時 focus 第一顆按鈕，未做 restoration）
+
 ---
 
 ## 7. AI 守則（Do / Don't + 自我檢查）
@@ -244,38 +274,16 @@
 
 - [ ] CSS 無 hex / rgb / 命名色，且 `var(...)` 不帶 fallback
 - [ ] 字體只用 `var(--font-family)` / `var(--font-family-code)`，文字尺寸用 `.text-*` class
-- [ ] 間距 / 圓角 / 陰影都用 token，沒有 magic number
-- [ ] `:hover` 包在 `@media (hover: hover)` 內，沒自製 modal / sheet / toast / dropdown
-- [ ] Barrel import（`@/components/ui`），觸控區 ≥ 44×44，Loading 不抖動
-
----
-
-## 8. AI Prompt 範本
-
-**新建頁面**：
-```
-建立頁面 [purpose]：barrel import 元件、結構 NavigationBar → 內容區 → TabBar（可選）、
-max-width 480、不寫桌機 breakpoint、顏色用 var(--color-*)、字級用 .text-*、
-間距用 var(--space-*)、:hover 包 @media (hover: hover)、dark mode 不需處理。
-```
-
-**Figma → 程式碼**：完整流程（含 Plugin API 反向組裝、Variable Collection key、PingFang TC 限制）見 [CLAUDE.md「Figma Integration」](./CLAUDE.md)。重點：解析 nodeId（**dash → colon**）→ 呼叫 `get_design_context` → 對照 `figma-tokens.json` 翻譯成本專案元件 + token，**不要產出 Tailwind**。
-
-**狀態反饋色**：
-```
-[success/warning/danger/info] 提示：
-- 瞬時短訊（中央）→ useToast()
-- 操作結果（底部，可帶動作）→ <SnackBar action>
-- push 通知（頂部，帶 leading icon、可點擊跳轉）→ useInAppNotification()
-- 區塊內持續告示 → <Banner>
-- 表單錯誤 → TextField 自帶 error prop；顏色用 --color-*-{intent}-* token
-```
+- [ ] 色彩、文字層級、間距、圓角與陰影優先使用既有 token。結構性數值如 100%、1px border、aspect ratio、z-index，以及尚無對應 token 的元件內部尺寸，可在有明確理由時使用。
+- [ ] `:hover` 包在 `@media (hover: hover)` 內
+- [ ] 沒自製 modal / sheet / toast / dropdown
+- [ ] Barrel import（`@/components/ui`），觸控區 ≥ 44×44
 
 ---
 
 ## 附錄
 
-- [CLAUDE.md](./CLAUDE.md) — 元件決策樹 / Figma 整合 / anti-patterns
+- [CLAUDE.md](./CLAUDE.md) — 元件決策樹 / Figma 整合
 - [docs/component-internals.md](./docs/component-internals.md) — 元件內部規格（尺寸 / 邊框 / 內距，維護元件用）
 - [docs/dark-mode.md](./docs/dark-mode.md) — Dark mode 設定
 - [src/components/ui/tokens/](./src/components/ui/tokens/) — token 定義
