@@ -1,6 +1,9 @@
 // 在這裡 import token，使用端只要 `import '@invos/design-system/styles.css'`
 // 就能一次拿到 token + 元件樣式。
 import './tokens/index.css';
+// 跨元件無障礙基礎（focus 環、reduced-motion）。必須排在元件樣式之前，
+// 元件才能用 !important 覆寫自己的降級動效。
+import './a11y.css';
 
 export { default as Spinner } from './Spinner';
 export type { SpinnerProps } from './Spinner';

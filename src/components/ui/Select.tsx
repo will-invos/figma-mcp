@@ -1,4 +1,5 @@
 import React, { useId, useState, useCallback } from 'react';
+import { useFieldGroupHelpId } from './FieldGroupContext';
 import './Select.css';
 
 interface SelectOption {
@@ -41,6 +42,7 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
   ) => {
     const generatedId = useId();
     const selectId = id ?? generatedId;
+    const helpId = useFieldGroupHelpId();
 
     const isDisabled = status === 'disabled';
     const isError = status === 'error';
@@ -111,6 +113,7 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
             disabled={isDisabled}
             aria-haspopup="dialog"
             aria-invalid={isError || undefined}
+            aria-describedby={helpId}
             onClick={onPickerOpen}
           >
             {field}
@@ -129,6 +132,7 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
             className="ui-select__input"
             disabled={isDisabled}
             aria-invalid={isError || undefined}
+            aria-describedby={helpId}
             value={value}
             defaultValue={defaultValue}
             onChange={handleChange}

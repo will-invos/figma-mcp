@@ -1,0 +1,30 @@
+/*
+ * 跨元件的無障礙基礎規則（規格見 design.md §6.4）。
+ * 選擇器一律限定 ui- 前綴，不影響使用端自己的元素。
+ */
+
+/* 鍵盤 focus 環。多數元件為了去掉瀏覽器預設樣式寫了 outline: none，
+   這裡把 :focus-visible 的環補回來 —— 只有鍵盤操作會觸發，滑鼠點擊不會。
+   TextField / TextArea / Select / PinInput 各自有 :focus-within（或 cell :focus）
+   外框，不需要再加外環；SearchField 的無外框是刻意的。 */
+.ui-button:focus-visible,
+.ui-icon-button:focus-visible,
+.ui-fab:focus-visible {
+  outline: 2px solid var(--color-border-brand);
+  outline-offset: 2px;
+}
+
+/* prefers-reduced-motion：位移 / 縮放類動效壓到不可感知，避免前庭失調使用者不適。
+   例外：Spinner 與 ProgressBar indeterminate 靜止下來就失去「還在處理中」的意義。
+   元件若要保留自己的降級動效（如 InAppNotification 的 opacity-only 淡入），
+   在自己的 CSS 裡用 !important 宣告即可 —— 元件 CSS 的載入順序在本檔之後。 */
+@media (prefers-reduced-motion: reduce) {
+  [class*='ui-']:not(.ui-spinner, .ui-progress-bar__fill),
+  [class*='ui-']::before,
+  [class*='ui-']::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

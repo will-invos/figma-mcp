@@ -1,4 +1,5 @@
 import React, { useId, useState, useCallback } from 'react';
+import { useFieldGroupHelpId } from './FieldGroupContext';
 import './TextField.css';
 
 interface TextFieldProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'disabled' | 'type'> {
@@ -35,7 +36,7 @@ const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
   ) => {
     const generatedId = useId();
     const inputId = id ?? generatedId;
-    const helpId = undefined;
+    const helpId = useFieldGroupHelpId();
 
     const isDisabled = status === 'disabled';
     const isError = status === 'error';

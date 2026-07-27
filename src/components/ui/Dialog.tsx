@@ -48,11 +48,19 @@ function Dialog({
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, [open, onClose]);
 
+  // 開啟時把 focus 移進 dialog，關閉（或整個卸載）時還給原本的元素 ——
+  // 否則鍵盤使用者關掉 dialog 後 focus 會掉回 <body>，得從頭 Tab 一次。
+  const restoreFocusRef = useRef<HTMLElement | null>(null);
   useEffect(() => {
-    if (open && dialogRef.current) {
-      const firstBtn = dialogRef.current.querySelector('button');
-      firstBtn?.focus();
-    }
+    if (!open) return;
+    restoreFocusRef.current = document.activeElement as HTMLElement | null;
+    dialogRef.current?.querySelector('button')?.focus();
+    return () => {
+      const target = restoreFocusRef.current;
+      restoreFocusRef.current = null;
+      // 觸發元素可能已隨關閉一起卸載，此時不搶 focus
+      if (target?.isConnected) target.focus();
+    };
   }, [open]);
 
   if (!open) return null;

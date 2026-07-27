@@ -23,6 +23,7 @@
 | 文字輸入欄 default（TextField、TextArea、Select、PinInput） | `1px solid var(--color-border-default)` |
 | 文字輸入欄 focus | `border-color: var(--color-border-brand)` + `box-shadow: inset 0 0 0 1px var(--color-border-brand)`（1px border + 1px inset shadow，視覺 2px、避免 layout shift） |
 | 文字輸入欄 error | `border-color: var(--color-border-danger)` + 同樣 inset shadow（**僅 `:not(:focus)` 時生效**——focus 永遠優先顯示 brand 框） |
+| 按鈕類鍵盤對焦（Button、IconButton、Fab） | `outline: 2px solid var(--color-border-brand)` + `outline-offset: 2px`，統一寫在 `a11y.css` 的 `:focus-visible` |
 | Checkbox / Radio | 預設 `2px solid var(--color-border-default)`，選中 / 錯誤改 `border-color` |
 | 卡片 / 容器分隔（CardItem、ChipBar item） | `1px solid var(--color-border-subtle)` |
 | TabBar 上緣（chrome ↔ 內容） | `border-top: 1px solid var(--color-border-subtle)` |
