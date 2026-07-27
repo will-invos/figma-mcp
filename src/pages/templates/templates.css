@@ -46,12 +46,17 @@
   gap: var(--space-300);
 }
 
-/* 詳情頁的段落卡片：.tpl-card 是單張，.tpl-card-stack 負責堆疊 */
+/* 詳情頁的段落卡片：.tpl-card 是單張，.tpl-card-stack 負責堆疊。
+   間距下在卡片之間（不是 stack 的 gap），主視覺與其後的主標題卡片才能貼齊 ——
+   hero 是主標題的一部分，中間不留 sunken 縫。改這段前先確認這條前提還成立。 */
 .tpl-card-stack {
   min-height: 100%;
   display: flex;
   flex-direction: column;
-  gap: var(--space-400);
+}
+
+.tpl-card + .tpl-card {
+  margin-top: var(--space-400);
 }
 
 .tpl-card {
@@ -59,7 +64,16 @@
   padding: var(--space-400);
   display: flex;
   flex-direction: column;
-  gap: var(--space-400);
+}
+
+.tpl-card > * + * {
+  margin-top: var(--space-400);
+}
+
+/* 段落標題（h5 + .text-label-large）與它帶的內文貼近成一組，
+   照 design.md §3 的「標題↔描述微距」，不吃卡片預設的區塊節奏 */
+.tpl-card > h5 + * {
+  margin-top: var(--space-200);
 }
 
 /* 底部主要動作區（表單送出、置底 CTA），貼齊頁面底部 */
@@ -87,7 +101,7 @@
 .tpl-ordered-list {
   list-style: decimal;
   padding-inline-start: var(--space-500);
-  margin: 0;
+  margin-left: 0;
 }
 
 .tpl-ordered-list > li + li {

@@ -38,7 +38,7 @@ export default function DetailTemplate({ onBack }: DetailTemplateProps) {
 
           {/* 主標題卡片 */}
           <section className="tpl-card">
-            <h2 className="text-heading-medium">標題</h2>
+            <h2 className="text-heading-medium">主標題</h2>
             <p className="text-body-large">說明文字，補充這筆資料的重點描述。</p>
             <Button
               className="tpl-inline"
@@ -51,13 +51,22 @@ export default function DetailTemplate({ onBack }: DetailTemplateProps) {
 
           {/* 內容卡片（可複製多個） */}
           <section className="tpl-card">
-            <h3 className="text-heading-small">段落標題</h3>
+            <h3 className="text-heading-small">區塊標題</h3>
+
+            <h5 className="text-label-large">段落標題</h5>
             <p className="text-body-large">段落內容，放這個區塊要呈現的細節。</p>
+
+            <h5 className="text-label-large">段落標題</h5>
+            <p className="text-body-large">
+              <a className="tpl-link" href="#" target="_blank" rel="noopener noreferrer">
+                連結文字
+              </a>
+            </p>
           </section>
 
           {/* 項目列表卡片（條款、步驟說明等） */}
           <section className="tpl-card">
-            <h3 className="text-heading-small">段落標題</h3>
+            <h3 className="text-heading-small">區塊標題</h3>
             <ol className="text-body-large tpl-ordered-list">
               <li>列表項目，說明這個段落的第一點。</li>
               <li>列表項目較長時會自動換行，第二行會對齊文字而不是編號。</li>
