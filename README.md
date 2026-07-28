@@ -219,10 +219,12 @@ Code Connect 能讓 Figma Dev Mode 直接顯示 React 呼叫，但 publish 需�
 
 | 項目 | Key |
 |------|-----|
-| Figma file | `zbdxaNIbxN4Iujx6Qi1DlI` |
 | Component library | 🧰 iOS - UI Kit 2025 |
-| Variable / text style library | 🧰 Design System 2025 |
+| Variable / text style library | 🎨 Design System 2025 |
 | Semantic Colors collection | `aca99ba7f5e3b863523761870ab4fa8d4b24c0be` |
 | Semantic Sizes collection | `b2b4d349ff3e569ea2799606edbc77e3b5c1aa60` |
 
 所有元件 / 樣式 / 變數的 key 都存在 [figma-tokens.json](figma-tokens.json)。
+
+**沒有固定的 Figma 產出檔。** 上述 key 全部屬於兩個已發佈 library，在任何啟用了它們的檔案都能 import。
+Code → Figma 的目標檔依功能分開指定，動工前先確認這次要寫進哪個檔；該檔須同時啟用上面兩個 library。

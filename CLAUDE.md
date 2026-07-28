@@ -112,9 +112,11 @@
 
 ### Design System
 
-- **Figma file**: `zbdxaNIbxN4Iujx6Qi1DlI` (MCP-test)
-- **Library**: 🧰 iOS - UI Kit 2025（components）、🧰 Design System 2025（variables、text styles）
+- **Library**: 🧰 iOS - UI Kit 2025（components）、🎨 Design System 2025（variables、text styles）
 - **Token reference**: `figma-tokens.json` — 完整 component / text style / variable collection keys
+- **目標檔**：本專案**沒有固定的 Figma 產出檔**。`figma-tokens.json` 的 key 全部屬於上述兩個已發佈 library，在任何啟用了它們的檔案都能 import，因此不綁特定檔案。
+  - Code → Figma 的目標檔**由任務指定（依功能分開給）** —— 使用者沒給就先問，**不要自己挑一個檔**（寫錯檔案的產出設計師不會看到）。
+  - 前置條件：目標檔須同時啟用上述兩個 library，否則 import component / style / variable 三類呼叫都會失敗。
 
 > 以下兩節寫的是**必須完成的能力與順序**，不綁特定工具名稱 —— skill 名、MCP 函式名因 AI 執行環境而異，對應表見 [.claude/figma-executors.md](./.claude/figma-executors.md)。
 
