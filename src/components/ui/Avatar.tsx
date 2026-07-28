@@ -8,7 +8,7 @@ interface AvatarProps {
   initials?: string
   /** 同時用於無障礙標籤與縮寫來源 */
   name?: string
-  size?: 'xsmall' | 'small' | 'medium' | 'large' | 'xlarge'
+  size?: 'small' | 'medium' | 'large' | 'xlarge'
 }
 
 function deriveInitials(name?: string): string {
