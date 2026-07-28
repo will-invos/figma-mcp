@@ -63,15 +63,10 @@
   margin: 0 var(--space-300) 0 var(--space-200);
 }
 
+/* 字級走 .text-label-large、顏色走上方 .ui-nav-bar h1、margin 走全域 reset；
+   這裡只留置中標題避開左右按鈕所需的截斷。 */
 .ui-nav-bar__title {
-  margin: 0;
   max-width: calc(100% - 120px);
-  font-family: var(--font-family);
-  font-size: 16px;
-  font-weight: 500;
-  letter-spacing: 0.04em;
-  line-height: 24px;
-  color: var(--color-content-bold);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

@@ -94,7 +94,7 @@ const NavigationBar = React.forwardRef<HTMLElement, NavigationBarProps>(
         <header ref={ref} className={classes}>
           <div className="ui-nav-bar__bar">
             <div className="ui-nav-bar__leading">{leading}</div>
-            <h1 className="text-label-large">{title}</h1>
+            <h1 className="ui-nav-bar__title text-label-large">{title}</h1>
             <div className="ui-nav-bar__trailing">{trailing}</div>
           </div>
           {bottomAddon}
