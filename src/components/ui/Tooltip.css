@@ -10,7 +10,7 @@
 
 .ui-tooltip__container {
   position: absolute;
-  z-index: 1000;
+  z-index: var(--ui-z-tooltip);
   display: flex;
   pointer-events: none;
 }

@@ -144,6 +144,8 @@
 - **覆蓋層一律對齊頁面欄寬，不是視窗**：`Dialog`、`Sheet`、`Toast`、`SnackBar`、`InAppNotification` 都是 `position: fixed`，但寬度以 `--ui-page-max-width` 計算。桌機瀏覽器裡頁面是固定欄寬置中，以視窗算寬會讓覆蓋層比頁面寬、或剛好等寬而左右零間距。**新增覆蓋層元件時照這個通則走，不要再加個別的寬度 prop**
   - 需要左右間距的（Dialog 24 / SnackBar 與 InAppNotification 12）寫成 `calc(var(--ui-page-max-width) - 間距 * 2)` —— 直接用欄寬就等於貼齊頁面邊緣
   - `Sheet` 貼齊底部、滿欄寬是刻意的，所以直接用欄寬不減間距
+- **覆蓋層疊放順序（由高至低）**：`Toast` > `SnackBar` > `Dialog` > `Sheet` > `InAppNotification` > `Tooltip`。值統一在 [tokens/layout.css](./src/components/ui/tokens/layout.css) 的 `--ui-z-*`，**元件 CSS 不得寫死 z-index 數字**；新增覆蓋層元件時在那裡加變數並排進這條順序。對照表與各層理由見 [docs/component-internals.md](./docs/component-internals.md)
+  - `Dialog` 高於 `Sheet`（在表單 sheet 上問「要放棄編輯嗎？」是常見流程）；`SnackBar` 高於兩者（操作常發生在 sheet / dialog 裡，被遮罩蓋住就失去意義）；`InAppNotification` 低於 modal（push 通知不該蓋在決策畫面上）
 - **viewport 只由 app shell 的 HTML 設定**（本 repo 是 [index.html](./index.html)），頁面與元件**不得新增或覆寫**。預設**保留使用者縮放** —— 不要加 `maximum-scale=1` / `user-scalable=no`，那是無障礙反模式；要限制縮放必須有經無障礙評估的產品需求。設定值必須含 `viewport-fit=cover`，否則下一條 safe area 不生效
 - 頁面結構：`NavigationBar` (top) → 內容區（自由捲動）→ `TabBar` (bottom，可選)
 - **Safe area**：`viewport-fit=cover` 下內容會延伸到瀏海 / home indicator 底下。貼底 chrome（`TabBar`、`Sheet`）與貼頂懸浮元件（`InAppNotification`）已自帶 `env(safe-area-inset-*, 0px)` padding
