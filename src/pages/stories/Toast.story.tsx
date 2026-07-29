@@ -3,12 +3,20 @@ import Button from '@/components/ui/Button'
 import { useToast } from '@/components/ui'
 import { printExpression } from './codegen'
 
+/** 控制項的 auto 對應「不傳 blocking」，讓元件自己按 type 決定 */
+function resolveBlocking(value: string): boolean | undefined {
+  if (value === 'on') return true
+  if (value === 'off') return false
+  return undefined
+}
+
 const ToastRender: React.FC<{ values: Record<string, any> }> = ({ values }) => {
   const { show, update, dismiss } = useToast()
 
   const handleShow = () => {
+    const blocking = resolveBlocking(values.blocking)
     if (values.type === 'loading') {
-      const id = show({ type: 'loading' })
+      const id = show({ type: 'loading', blocking })
       setTimeout(() => dismiss(id), 3000)
     } else {
       // rich: 一直保持 rich 樣式，3s 後把預設 Spinner icon 換成 check icon。
@@ -19,6 +27,7 @@ const ToastRender: React.FC<{ values: Record<string, any> }> = ({ values }) => {
         message: values.text,
         action: values.button ? { label: 'Cancel', onClick: () => {} } : undefined,
         duration: 5000,
+        blocking,
       })
       setTimeout(
         () => update(id, { icon: <i className="icon-check" aria-hidden="true" /> }),
@@ -40,15 +49,21 @@ export const ToastStory: StoryDef = {
     type:   { type: 'enum', options: ['rich', 'loading'], default: 'rich' },
     text:   { type: 'string', default: 'Message', when: { type: 'rich' } },
     button: { type: 'boolean', default: true, when: { type: 'rich' } },
+    // auto = 不傳 blocking：loading 擋、rich 不擋
+    blocking: { type: 'enum', options: ['auto', 'on', 'off'], default: 'auto' },
   },
   Render: ToastRender,
   // Toast 是 Provider + hook API，不是渲染一個元件，所以自己組 snippet
+  // blocking 是 auto 時 resolveBlocking 回 undefined，printExpression 會自動略過該欄位
   codeSnippet: (values) =>
     values.type === 'loading'
       ? [
           'const { show, dismiss } = useToast()',
           '',
-          "const id = show({ type: 'loading' })",
+          `const id = show(${printExpression(
+            { type: 'loading', blocking: resolveBlocking(values.blocking) },
+            ''
+          )})`,
           'try {',
           '  await submitInvoice()',
           '} finally {',
@@ -63,6 +78,7 @@ export const ToastStory: StoryDef = {
               type: 'rich',
               message: values.text,
               action: values.button ? { label: 'Cancel', onClick: () => {} } : undefined,
+              blocking: resolveBlocking(values.blocking),
             },
             ''
           )})`,

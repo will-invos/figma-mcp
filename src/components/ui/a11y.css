@@ -5,8 +5,10 @@
 
 /* 鍵盤 focus 環。多數元件為了去掉瀏覽器預設樣式寫了 outline: none，
    這裡把 :focus-visible 的環補回來 —— 只有鍵盤操作會觸發，滑鼠點擊不會。
-   TextField / TextArea / Select / PinInput 各自有 :focus-within（或 cell :focus）
-   外框，不需要再加外環；SearchField 的無外框是刻意的。 */
+   TextArea / Select 各自有 :focus-within 外框、TextField 用 --focused class、
+   PinInput 用 cell :focus，都不需要再加外環；SearchField 的無外框是刻意的。
+   注意輸入欄的外框只代表「該欄的 input 對焦了」—— 欄位內另有可點控制項時
+   （如 TextField 的 trailingIcon），那顆按鈕的對焦指示走上面這條 :focus-visible。 */
 .ui-button:focus-visible,
 .ui-icon-button:focus-visible,
 .ui-fab:focus-visible {

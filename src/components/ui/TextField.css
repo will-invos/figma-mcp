@@ -21,14 +21,17 @@
   box-sizing: border-box;
 }
 
-/* 1px border + 1px inset shadow＝視覺 2px，比改 border-width 不會位移 */
-.ui-text-field__input-wrapper:focus-within {
+/* --focused 由 TSX 依 input 自己的 onFocus / onBlur 給，不用 :focus-within：
+   trailingIcon 多半是 IconButton，它拿到 focus 也會讓 :focus-within 成立，
+   結果 input 沒對焦卻亮框、error 的紅框還會被下面那條規則吃掉。
+   1px border + 1px inset shadow＝視覺 2px，比改 border-width 不會位移 */
+.ui-text-field--focused .ui-text-field__input-wrapper {
   border-color: var(--color-border-brand);
   box-shadow: inset 0 0 0 1px var(--color-border-brand);
 }
 
 /* 錯誤框線只在沒對焦時顯示，對焦時要讓位給品牌色 */
-.ui-text-field--error .ui-text-field__input-wrapper:not(:focus-within) {
+.ui-text-field--error:not(.ui-text-field--focused) .ui-text-field__input-wrapper {
   border-color: var(--color-border-danger);
   box-shadow: inset 0 0 0 1px var(--color-border-danger);
 }

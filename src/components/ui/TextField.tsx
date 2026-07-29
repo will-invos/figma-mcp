@@ -77,6 +77,9 @@ const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
     const rootClasses = [
       'ui-text-field',
       `ui-text-field--${variant}`,
+      // 對焦框由這個 class 驅動，不用 CSS 的 :focus-within —— trailingIcon 常是
+      // IconButton，它自己拿到 focus 會讓 :focus-within 成立，input 沒對焦卻亮框。
+      focused && 'ui-text-field--focused',
       shouldFloat && 'ui-text-field--float',
       isError && 'ui-text-field--error',
       isDisabled && 'ui-text-field--disabled',
@@ -123,6 +126,8 @@ const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
             />
           </div>
           {trailingIcon && (
+            // trailingIcon 通常是可點的 IconButton，點它不該連帶對焦 input，
+            // 所以不讓 click 冒泡到外框的 handleWrapperClick
             <div
               className="ui-text-field__trailing-icon"
               onClick={(e) => e.stopPropagation()}
