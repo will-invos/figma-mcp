@@ -67,8 +67,9 @@
   padding: var(--space-300) 0;
 }
 
-.ui-list-item__leading-icon i[class^='icon-'],
-.ui-list-item__leading-icon i[class*=' icon-'] {
+/* 同 trailing：用 > 限定直接放進來的裸 icon，不要伸進合成元件蓋掉它的尺寸 */
+.ui-list-item__leading-icon > i[class^='icon-'],
+.ui-list-item__leading-icon > i[class*=' icon-'] {
   width: 24px;
   height: 24px;
   font-size: 24px;
@@ -121,16 +122,26 @@
   color: var(--color-content-default);
 }
 
-.ui-list-item__trailing i[class^='icon-'],
-.ui-list-item__trailing i[class*=' icon-'] {
+/*
+ * 只作用在**直接**放進 slot 的裸 icon（trailing="icon" 傳一個 <i> 進來的情況）。
+ *
+ * 必須用 > 而不是後代選擇器 —— 後代選擇器會伸進 slot 裡的合成元件，把
+ * <IconButton> 內層的 <i> 一起塗成 brand 色、尺寸也壓成 24px，蓋掉該元件自己的配色。
+ *
+ * 注意：改用 :where() 降 specificity 解決不了這件事。IconButton 的顏色宣告在
+ * <button> 上、由 <i> 繼承，而這裡是直接宣告在 <i> 上 —— 直接宣告永遠贏過繼承值，
+ * 與 specificity 無關。唯一的解法是限制作用範圍。
+ */
+.ui-list-item__trailing > i[class^='icon-'],
+.ui-list-item__trailing > i[class*=' icon-'] {
   width: 24px;
   height: 24px;
   font-size: 24px;
   color: var(--color-content-brand-default);
 }
 
-.ui-list-item__chevron i[class^='icon-'],
-.ui-list-item__chevron i[class*=' icon-'] {
+.ui-list-item__chevron > i[class^='icon-'],
+.ui-list-item__chevron > i[class*=' icon-'] {
   color: var(--color-content-default);
 }
 
