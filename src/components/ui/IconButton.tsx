@@ -46,6 +46,10 @@ function resolveSpinnerColor(
   if (variant === 'filled') {
     switch (colorType) {
       case 'prize': return 'fixed-bold';
+      // primary 的底色是不反轉的品牌藍、icon 是恆白，spinner 也必須恆白 ——
+      // 原本一律回 inverse，dark mode 下會變成深色 spinner 疊在藍底上、幾乎看不見
+      case 'primary': return 'fixed-white';
+      // danger / donation 的底色在 dark mode 會反轉，icon 用 inverse-bold，spinner 跟著走
       default: return 'inverse';
     }
   }

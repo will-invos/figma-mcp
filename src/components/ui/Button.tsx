@@ -45,6 +45,11 @@ function resolveSpinnerColor(
       case 'white': return 'primary';
       case 'neutral': return 'neutral';
       case 'prize': return 'fixed-bold';
+      // danger / donation 的底色在 dark mode 會反轉（變亮），文字用 inverse-bold，
+      // spinner 要跟著走，否則 dark mode 下會是白 spinner 配深色文字
+      case 'danger':
+      case 'donation': return 'inverse';
+      // primary 的底色是不反轉的品牌藍，維持恆白
       default: return 'fixed-white';
     }
   }

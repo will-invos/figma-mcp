@@ -82,7 +82,7 @@
 
 .ui-tag--bold-neutral {
   background-color: var(--color-background-neutral-bold);
-  color: var(--color-content-fixed-white);
+  color: var(--color-content-inverse-bold);
 }
 
 .ui-tag--bold-primary {
@@ -92,17 +92,17 @@
 
 .ui-tag--bold-success {
   background-color: var(--color-background-success-default);
-  color: var(--color-content-fixed-white);
+  color: var(--color-content-inverse-bold);
 }
 
 .ui-tag--bold-danger {
   background-color: var(--color-background-danger-default);
-  color: var(--color-content-fixed-white);
+  color: var(--color-content-inverse-bold);
 }
 
 .ui-tag--bold-warning {
   background-color: var(--color-background-warning-default);
-  color: var(--color-content-fixed-white);
+  color: var(--color-content-inverse-bold);
 }
 
 .ui-tag--bold-prize {
