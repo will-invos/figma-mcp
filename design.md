@@ -224,7 +224,7 @@
 
 **Easing 按動效類型對應**（不要混用）：
 - **pop-in**（opacity + scale）→ `ease-in-out`：Dialog body、Toast、Tooltip
-- **slide-in**（位移進入）→ `ease-out`：Sheet 從底部滑上（`0.3s`）
+- **slide-in**（位移進入）→ `ease-out`：Sheet 從底部滑上（`0.3s`）、SnackBar 由下往上滑入（`0.25s`，`prefers-reduced-motion` 降為 `0.15s linear` 只淡入不位移）
 - **fade-only / 連續變化** → `ease`：Dialog overlay（`0.2s`）
 - **0.15s 狀態切換** → `linear`：hover、focus、color、background
 - **spring-like 進出場**（客製 `cubic-bezier`，**僅限 push notification 類**）→ InAppNotification 進場用 overshoot 曲線、退場用反向 ease；`prefers-reduced-motion` 自動降為 `0.15s linear` opacity-only
@@ -240,6 +240,7 @@
 - **`prefers-reduced-motion` 由 [a11y.css](./src/components/ui/a11y.css) 全域處理** —— 所有 `ui-` 元件的 transition / animation 自動歸零，不需逐一寫。例外：`Spinner` 與 `ProgressBar` indeterminate 保持轉動（靜止就失去「處理中」的意義）；元件要保留自己的降級動效（如 `InAppNotification` 的 opacity-only 淡入）就在自己的 CSS 用 `!important`
 - 按鈕類（`Button` / `IconButton` / `Fab`）的 `:focus-visible` 外環同樣在 a11y.css；輸入欄家族用各自的 `:focus-within` 外框
 - `FieldGroup` 的 `helpText` 會自動接上底下輸入元件的 `aria-describedby`（`TextField` / `TextArea` / `Select` / `PinInput`）
+- `Dialog` / `Sheet` 的 `inert` 會一併停掉 overlay 點擊、Esc、Tab 聚焦與下拉關閉 —— 請求進行中要鎖住畫面時用它，內容與已填的值都留在畫面上
 - 觸控區下限見 §6.2
 
 **新增或修改元件時必須做到**：
@@ -250,6 +251,8 @@
 - **不可只靠顏色傳達狀態** —— error 必須另有文字或 icon（`FieldGroup` 的 helpText 會帶 `icon-alert-circle-filled`）
 - 自訂互動要能鍵盤操作，且**有可見的對焦樣式** —— 寫了 `outline: none` 就必須自己補 `:focus-visible` 或 `:focus-within`
 - 新的 modal 類元件要驗證開啟後的 focus 落點與**關閉後的 focus restoration**（照 `Sheet` / `Dialog` 的寫法：存 `document.activeElement`，在 effect cleanup 時檢查 `isConnected` 再 focus 回去）
+- 通知類元件（會自動出現又消失的）要有 live region，且**整組只能有一層**：常駐的 viewport 容器掛 `role="status"`，裡面的 bar 本體傳 `role="none"`。理由有兩個 —— live region 必須先存在於 DOM，之後塞進去的內容才會被可靠朗讀（整塊連 role 一起插入不保證會唸）；巢狀 live region 會讓螢幕閱讀器唸兩次。照 `SnackBarProvider` 的寫法
+- **`inert` 擋不住 document 上的事件監聽** —— 它只擋指標與焦點。元件若把 Esc / Tab trap / 拖曳綁在 `document` 或子節點上，加 `inert` 時必須另外擋掉那些 effect（見 `Sheet` / `Dialog`）
 
 ---
 
@@ -269,7 +272,8 @@
 | 卡片 / 按鈕加陰影 | 卡片無陰影、按鈕用背景色狀態區分（**Fab 除外**：懸浮元件，用 `--shadow-medium`） |
 | 桌機 breakpoint `@media (min-width: 768px)` | mobile-first，max-width 480 |
 | `:hover` 不包 `@media (hover: hover)` | 包進去，避免 touch 裝置 sticky hover |
-| 自製 modal / sheet / toast / dropdown | 用 `Dialog` / `Sheet` / `Toast` / `Select` |
+| 自製 modal / sheet / toast / snackbar / dropdown | 用 `Dialog` / `Sheet` / `Toast` / `SnackBarProvider` / `Select` |
+| 自製覆蓋層的定位與顯示管理（portal、計時、佇列） | 用元件既有的 Provider；覆蓋層寬度一律走 `--ui-page-max-width` |
 | `<div onClick>` 假按鈕 | `<Button>` / `<IconButton>` |
 | `<input type="checkbox">` 原生 | `<Checkbox>` / `<Radio>` / `<Switch>` |
 | 從 `'@/components/ui/Button'` 深層 import | `import { Button } from '@/components/ui'` |
@@ -281,7 +285,7 @@
 - [ ] 字體只用 `var(--font-family)` / `var(--font-family-code)`，文字尺寸用 `.text-*` class
 - [ ] 色彩、文字層級、間距、圓角與陰影優先使用既有 token。結構性數值如 100%、1px border、aspect ratio、z-index，以及尚無對應 token 的元件內部尺寸，可在有明確理由時使用。
 - [ ] `:hover` 包在 `@media (hover: hover)` 內
-- [ ] 沒自製 modal / sheet / toast / dropdown
+- [ ] 沒自製 modal / sheet / toast / snackbar / dropdown
 - [ ] Barrel import（`@/components/ui`），觸控區 ≥ 44×44
 
 ---
