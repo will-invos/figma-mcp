@@ -90,7 +90,7 @@
 幾個關鍵理由：
 
 - **`Dialog` 高於 `Sheet`** —— 兩者同時出現本身要避免，但真的發生時不能卡死。先前 Dialog overlay(1000) 低於 Sheet container(1001)，只要 sheet 夠高，Dialog 會整個被蓋住、連按鈕都點不到（實測 900×713 視窗、sheet 內容 70vh，重疊區域中心命中 `.ui-sheet__body`）。
-- **`SnackBar` 高於 `Dialog` / `Sheet`** —— 這是唯一**刻意允許**與 modal 並存的情況：操作常常就發生在 sheet 或 dialog 裡（按下送出 → 告知已儲存），被遮罩蓋住就失去意義。`Toast` 同理且更高。
+- **`SnackBar` / `Toast` 高於 modal** —— 純粹是保險。設計上 `Dialog` **不與** `Toast` / `SnackBar` 同時出現（按下 Dialog 的動作 → Dialog 關閉 → 再用 SnackBar 告知結果），所以這個順序平常不會被用到；萬一被用到時，回饋不該被遮罩吃掉。
 - **`InAppNotification` 低於 modal** —— push 通知不該蓋在使用者正在做決策的畫面上。
 - **`Tooltip` 的值幾乎不影響全域** —— 它沒有 portal，是 `position: absolute` 在自己的 `relative` wrapper 內，z-index 只在該 stacking context 生效。列在這裡是為了表達意圖。
 
