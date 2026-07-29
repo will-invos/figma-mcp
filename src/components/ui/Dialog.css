@@ -24,7 +24,7 @@
   /* dialog 與外側的間距。overlay 保持 fixed（跟著視窗置中），
      間距與寬度上限由這裡的 padding + .ui-dialog 的 max-width 一起決定 —— 見下方註解。 */
   padding: 0 var(--space-600);
-  z-index: 1000;
+  z-index: var(--ui-z-dialog);
   animation: ui-dialog-overlay-fade-in 0.2s ease;
 }
 

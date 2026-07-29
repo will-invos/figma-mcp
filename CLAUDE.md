@@ -79,11 +79,11 @@
 | 多選 | `<Checkbox>` |
 | 滑桿 | `<Slider>` |
 | 表單分組容器 | `<FieldGroup>` + `<FieldGroupHeader>` + `<FieldGroupHelpText>` |
-| 全螢幕對話（需使用者決策） | `<Dialog>` |
-| 從底部滑上的面板（行動主要模式） | `<Sheet>` / 搭配 `<SheetHeader>` |
-| 即時通知（中央短訊） | `<Toast>`（Provider 模式、`useToast()`）|
-| 操作結果告知（底部、可含動作） | `<SnackBar>`（Provider 模式、`useSnackBar()`；貼齊頁面底部、連續呼叫排隊不疊加）|
-| 頂部 push 通知（含 leading icon、可點擊跳轉） | `<InAppNotification>`（Provider 模式、`useInAppNotification()`） |
+| **重要的確認動作**，需讓使用者暫停其他行為 | `<Dialog>`。動作按下後先關閉 Dialog，再用 `<SnackBar>` 告知結果 —— **不要讓 Dialog 與 Toast / SnackBar 同時出現** |
+| **簡單的**互動或資訊（更多選項、一至兩個欄位） | `<Sheet>` / 搭配 `<SheetHeader>`。**欄位一多、需要多步驟、或中途可能要確認，就改用完整頁面** —— 不要在 Sheet 上再疊一層 `<Dialog>` |
+| **處理中**（頁面載入等），且當下不希望使用者做任何操作 | `<Toast>`（Provider 模式、`useToast()`）。**不是一般短訊通知** —— 告知結果請用 `<SnackBar>` |
+| 告知**使用者操作的結果**（API 回傳成功 / 失敗） | `<SnackBar>`（Provider 模式、`useSnackBar()`；貼齊頁面底部、連續呼叫排隊不疊加）|
+| **系統主動推播**訊息（可區分種類、可點擊跳轉） | `<InAppNotification>`（Provider 模式、`useInAppNotification()`）。時機不可預期，所以刻意排在 modal 之下 |
 | 區塊內告示（警告、資訊） | `<Banner>` |
 | 整頁空狀態 / 錯誤狀態（斷線、無結果、404） | `<PageStatus status="...">` |
 | 頁面頂部標題列 | `<NavigationBar>`（regular / large / home / search / tabs）|

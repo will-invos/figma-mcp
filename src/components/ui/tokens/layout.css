@@ -17,4 +17,24 @@
    *   :root { --ui-page-max-width: 420px; }
    */
   --ui-page-max-width: 480px;
+
+  /*
+   * 覆蓋層疊放順序（2026-07-29 定案，由高至低）：
+   *   Toast > SnackBar > Dialog > Sheet > InAppNotification > Tooltip
+   *
+   * 集中在這裡而不是散在各元件 CSS —— 這是跨元件的契約，散開來的話下一個人
+   * 只能挑一個看起來沒衝突的數字，早晚又疊錯（Dialog 曾因為比 Sheet 面板低
+   * 而在 sheet 上完全被蓋住、連按鈕都點不到）。
+   *
+   * 每一族群各留一段（間隔 100），面板才能穩定壓過自己的遮罩又不跨族群互撞。
+   * 新增覆蓋層元件時在這裡加一個變數並排進上面那條順序，不要在元件 CSS 寫死數字。
+   */
+  --ui-z-tooltip: 700;
+  --ui-z-in-app-notification: 800;
+  --ui-z-sheet-overlay: 900;
+  /* 面板要壓過自己的遮罩，所以比 overlay 高一階 */
+  --ui-z-sheet: 901;
+  --ui-z-dialog: 1000;
+  --ui-z-snackbar: 1100;
+  --ui-z-toast: 1200;
 }

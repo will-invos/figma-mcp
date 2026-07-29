@@ -7,8 +7,9 @@
   /* 頁面欄寬減兩側間距 —— 直接用欄寬的話桌機上會貼齊頁面邊緣、零間距（同 Dialog） */
   max-width: calc(var(--ui-page-max-width) - var(--space-300) * 2);
   top: calc(env(safe-area-inset-top, 0px) + var(--space-200));
-  /* 疊放順序：低於 Dialog / Sheet / Tooltip（1000），高於一般內容；Toast（1100）在最上 */
-  z-index: 900;
+  /* 疊放順序見 tokens/layout.css —— push 通知刻意低於 Sheet / Dialog，
+     不該蓋在使用者正在做決策的 modal 上面 */
+  z-index: var(--ui-z-in-app-notification);
   pointer-events: none;
 }
 

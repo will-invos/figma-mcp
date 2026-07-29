@@ -29,8 +29,9 @@
   width: calc(100% - var(--space-300) * 2);
   /* 頁面欄寬減兩側間距 —— 直接用欄寬的話桌機上會貼齊頁面邊緣、零間距（同 Dialog） */
   max-width: calc(var(--ui-page-max-width) - var(--space-300) * 2);
-  /* 疊放順序：與 InAppNotification 同層（低於 Dialog / Sheet 的 1000） */
-  z-index: 900;
+  /* 疊放順序見 tokens/layout.css —— 高於 Dialog / Sheet，因為操作常常就發生在
+     sheet 或 dialog 裡（按下送出 → 告知已儲存），被遮罩蓋住就失去意義 */
+  z-index: var(--ui-z-snackbar);
   /* 沒有 snackbar 時不擋住底層的點擊 */
   pointer-events: none;
 }
