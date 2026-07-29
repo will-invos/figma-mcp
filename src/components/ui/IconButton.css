@@ -112,7 +112,7 @@
 
 .ui-icon-button--filled.ui-icon-button--filled-danger {
   background-color: var(--color-background-danger-default);
-  color: var(--color-content-fixed-white);
+  color: var(--color-content-inverse-bold);
 }
 @media (hover: hover) {
   .ui-icon-button--filled.ui-icon-button--filled-danger:hover {
@@ -138,7 +138,7 @@
 
 .ui-icon-button--filled.ui-icon-button--filled-donation {
   background-color: var(--color-background-donation-default);
-  color: var(--color-content-fixed-white);
+  color: var(--color-content-inverse-bold);
 }
 @media (hover: hover) {
   .ui-icon-button--filled.ui-icon-button--filled-donation:hover {
