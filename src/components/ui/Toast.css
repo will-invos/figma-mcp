@@ -9,6 +9,18 @@
   }
 }
 
+/* blocking toast 的點擊阻擋層。
+   刻意不上暗底 —— Toast 靠 --color-background-toast 的深底建立對比，
+   疊 overlay 會看起來像 Dialog / Sheet 的模態層（design.md §3 陰影與層級）。
+   touch-action: none 讓拖曳也擋掉，不然「處理中」還能滑動底層畫面。 */
+.ui-toast-scrim {
+  position: fixed;
+  inset: 0;
+  z-index: 1100;
+  background: transparent;
+  touch-action: none;
+}
+
 .ui-toast-container {
   position: fixed;
   top: 50%;

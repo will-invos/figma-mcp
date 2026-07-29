@@ -20,6 +20,17 @@ interface ToastMessage {
   action?: ToastAction
   /** 幾毫秒後自動關閉；loading 永不自動關閉 */
   duration?: number
+  /**
+   * 顯示期間擋住底層的點擊與拖曳。不傳的話：loading 擋、rich 不擋。
+   * loading 的語意就是「處理中，先不要操作」；rich 是純告知且會自動消失，
+   * 擋住只會把使用者的點擊無聲吃掉（連 action 按鈕在內都還是可點的）。
+   */
+  blocking?: boolean
+}
+
+/** blocking 沒指定時的預設：只有 loading 擋 */
+function resolveBlocking(toast: ToastMessage): boolean {
+  return toast.blocking ?? (toast.type ?? 'rich') === 'loading'
 }
 
 interface ToastContextValue {
@@ -105,39 +116,46 @@ function ToastProvider({ children }: { children: React.ReactNode }) {
     <ToastContext.Provider value={value}>
       {children}
       {createPortal(
-        <div className="ui-toast-container">
-          {toasts.map((toast) => (
-            <div key={toast.id} className={`ui-toast ui-toast--${toast.type ?? 'rich'}`}>
-              {toast.type === 'loading' ? (
-                <Spinner size="xxlarge" color="inverse" />
-              ) : (
-                <>
-                  <div className="ui-toast__body">
-                    <span className="ui-toast__icon">
-                      {toast.icon ?? <Spinner size="xxlarge" color="inverse" />}
-                    </span>
-                    {toast.message && (
-                      <p className="text-body-large ui-toast__text">{toast.message}</p>
+        <>
+          {/* 多個 toast 疊放時取聯集：只要有一個要擋，就出一層 scrim（不是每個 toast 各一層）。
+              scrim 排在 container 前面，兩者同 z-index，所以 toast 一定畫在 scrim 之上。 */}
+          {toasts.some(resolveBlocking) && (
+            <div className="ui-toast-scrim" aria-hidden="true" />
+          )}
+          <div className="ui-toast-container" role="status" aria-live="polite">
+            {toasts.map((toast) => (
+              <div key={toast.id} className={`ui-toast ui-toast--${toast.type ?? 'rich'}`}>
+                {toast.type === 'loading' ? (
+                  <Spinner size="xxlarge" color="inverse" />
+                ) : (
+                  <>
+                    <div className="ui-toast__body">
+                      <span className="ui-toast__icon">
+                        {toast.icon ?? <Spinner size="xxlarge" color="inverse" />}
+                      </span>
+                      {toast.message && (
+                        <p className="text-body-large ui-toast__text">{toast.message}</p>
+                      )}
+                    </div>
+                    {toast.action && (
+                      <Button
+                        variant="text"
+                        colorType="inverse"
+                        size="large"
+                        className="ui-toast__action"
+                        onClick={() => {
+                          toast.action!.onClick()
+                          dismiss(toast.id)
+                        }}
+                        text={toast.action.label}
+                      />
                     )}
-                  </div>
-                  {toast.action && (
-                    <Button
-                      variant="text"
-                      colorType="inverse"
-                      size="large"
-                      className="ui-toast__action"
-                      onClick={() => {
-                        toast.action!.onClick()
-                        dismiss(toast.id)
-                      }}
-                      text={toast.action.label}
-                    />
-                  )}
-                </>
-              )}
-            </div>
-          ))}
-        </div>,
+                  </>
+                )}
+              </div>
+            ))}
+          </div>
+        </>,
         document.body
       )}
     </ToastContext.Provider>
