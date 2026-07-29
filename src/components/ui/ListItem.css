@@ -37,14 +37,14 @@
   padding-bottom: var(--space-300);
 }
 
+/*
+ * 可點的列只有 cursor 提示，沒有 hover 底色 —— 與 CardItem / ListHeader /
+ * ListFooter / Tabs / TabBar 一致（清單與卡片類元件都不做 hover 回饋）。
+ * 這套 kit 以手機版網頁為前提，hover 只在桌機瀏覽器成立，
+ * 為它單獨做一組狀態會讓兩個平台看起來不一樣。
+ */
 .ui-list-item--clickable {
   cursor: pointer;
-}
-
-@media (hover: hover) {
-  .ui-list-item--clickable:hover {
-    background-color: var(--color-background-neutral-subtle);
-  }
 }
 
 .ui-list-item--disabled .ui-list-item__container {
