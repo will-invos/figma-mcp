@@ -29,8 +29,8 @@ interface RadioGroupProps {
 /**
  * 一組互斥選項。單顆 `<Radio>` 只管自己，跨選項的互斥、版面與整組錯誤態由這裡負責。
  *
- * `two-columns` 會把選項左右均分成兩欄、**先填滿左欄再填右欄**（與 Figma 一致），
- * 不是左右交錯。
+ * `two-columns` 依 Figma 是**橫向排列**（1│2 換行 3│4），不是先填滿左欄；
+ * 由 CSS grid 自動配置，所以這裡三種版面都只要平鋪選項。
  */
 const RadioGroup = React.forwardRef<HTMLDivElement, RadioGroupProps>(
   (
@@ -72,17 +72,6 @@ const RadioGroup = React.forwardRef<HTMLDivElement, RadioGroupProps>(
         {option.label}
       </Radio>
     );
-
-    // 兩欄：先填滿左欄再填右欄，奇數個時左欄多一個
-    if (layout === 'two-columns') {
-      const split = Math.ceil(options.length / 2);
-      return (
-        <div ref={ref} className={classes} role="radiogroup" {...rest}>
-          <div className="ui-radio-group__column">{options.slice(0, split).map(renderOption)}</div>
-          <div className="ui-radio-group__column">{options.slice(split).map(renderOption)}</div>
-        </div>
-      );
-    }
 
     return (
       <div ref={ref} className={classes} role="radiogroup" {...rest}>

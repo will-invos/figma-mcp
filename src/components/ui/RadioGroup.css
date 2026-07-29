@@ -10,18 +10,12 @@
   align-items: stretch;
 }
 
-/* 兩欄：左右均分，min-width: 0 才能讓長標籤在欄內換行而不撐破容器 */
+/* 兩欄：橫向排列（1│2 換行 3│4），交給 grid 自動配置。
+   minmax(0, 1fr) 而非 1fr —— 後者的最小尺寸是 auto，長標籤會把欄撐破。 */
 .ui-radio-group--two-columns {
-  flex-direction: row;
-  align-items: flex-start;
-}
-
-.ui-radio-group__column {
-  flex: 1 1 0;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-400);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
 }
 
 /* 並排：依內容寬度排列，選項多到放不下時換行，不擠壓文字 */
