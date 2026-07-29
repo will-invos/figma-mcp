@@ -19,18 +19,19 @@
     "uiKitVariables": "3f0026e1a1cdbbcf678f559cdc723a02f2f35530"
   },
   "textStyles": {
-    "_comment": "All keys from 🎨 Design System 2025. CSS classes in tokens/typography.css.",
+    "_comment": "英文樣式（iOS/Display、Heading、Body、Label、Code）的 key 已對 🎨 Design System 2025 逐一核對存在。CSS classes 見 tokens/typography.css。",
+    "_cnWarning": "⚠️ 所有 `-CN` 條目（Display-CN、Heading-CN、Body-CN、Label-CN 共 14 筆）的 key 在 🎨 Design System 2025 查不到；同名樣式存在於另一個較舊的 `🧰 Design System` library，但 key 也不一樣。它們的 css 欄位（.text-*-cn-*）在 typography.css 同樣不存在——code 端 EN/CN 不分家，只有一組通用 class。使用前必須先確認這批要保留、重新對應、還是整批移除，不要直接拿來套。",
 
     "_display": "— Display (H1, page headline) —",
-    "iOS/Display":              { "key": "aed21ad886757d6cc61f43a1962fb3d4d57618fd", "font": "SF Pro Medium 28",      "css": ".text-display" },
-    "iOS/Display-Regular":      { "key": "cb5ead1f3c2c0e08873e86fef5c61af7515ca457", "font": "SF Pro Regular 28",     "css": ".text-display-regular" },
+    "iOS/Display/Small":        { "key": "aed21ad886757d6cc61f43a1962fb3d4d57618fd", "font": "SF Pro Bold 28",        "css": ".text-display-small" },
+    "iOS/Display/Small-Light":  { "key": "cb5ead1f3c2c0e08873e86fef5c61af7515ca457", "font": "SF Pro Regular 28",     "css": ".text-display-small-light" },
     "iOS/Display-CN":           { "key": "7c00de91d9f041f5b16bea312c60cabbe46a64b1", "font": "PingFang TC Medium 28",  "css": ".text-display-cn" },
     "iOS/Display-CN-Regular":   { "key": "78c978f2a5b30d18b79ccae0f4d57cf419e40df0", "font": "PingFang TC Regular 28", "css": ".text-display-cn-regular" },
 
     "_heading": "— Heading (section/dialog titles) —",
-    "iOS/Heading/Large":        { "key": "56b328e483054136a021d791f031cf8d4ff41cf8", "font": "SF Pro Semibold 24",      "css": ".text-heading-large" },
-    "iOS/Heading/Medium":       { "key": "aff1248b6e0c619c7cc2008314876c6d5e96bcec", "font": "SF Pro Semibold 20",      "css": ".text-heading-medium" },
-    "iOS/Heading/Small":        { "key": "4ee01868964a147d0fd3f2548265a955dfb059e0", "font": "SF Pro Semibold 18",      "css": ".text-heading-small" },
+    "iOS/Heading/Large":        { "key": "56b328e483054136a021d791f031cf8d4ff41cf8", "font": "SF Pro Bold 24",          "css": ".text-heading-large" },
+    "iOS/Heading/Medium":       { "key": "aff1248b6e0c619c7cc2008314876c6d5e96bcec", "font": "SF Pro Bold 20",          "css": ".text-heading-medium" },
+    "iOS/Heading/Small":        { "key": "4ee01868964a147d0fd3f2548265a955dfb059e0", "font": "SF Pro Bold 18",          "css": ".text-heading-small" },
     "iOS/Heading-CN/Large":     { "key": "a528d10e526d94a0d8871c1636f21ac1256714fa", "font": "PingFang TC Semibold 24", "css": ".text-heading-cn-large" },
     "iOS/Heading-CN/Medium":    { "key": "1a168c32c18e96280ead912b435f312ba1f4a219", "font": "PingFang TC Semibold 20", "css": ".text-heading-cn-medium" },
     "iOS/Heading-CN/Small":     { "key": "13f670df4e9effdf1b5f94a2b05516349e0be76d", "font": "PingFang TC Semibold 18", "css": ".text-heading-cn-small" },
