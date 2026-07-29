@@ -9,19 +9,15 @@ const OPTIONS = [
   { value: 'd', label: '選項四' },
 ]
 
+/** 選取狀態要能實際切換才看得出互斥行為，所以自訂 Render 而非走預設渲染 */
 const RadioGroupRender: React.FC<{ values: Record<string, any> }> = ({ values }) => {
   const [selected, setSelected] = useState('a')
-  const { layout, status, disabled, withDescription } = values
-  const options = withDescription
-    ? OPTIONS.map((o, i) => (i === 0 ? { ...o, description: '這個選項有補充說明' } : o))
-    : OPTIONS
   return React.createElement(RadioGroup, {
-    options,
+    options: OPTIONS,
     value: selected,
     onChange: setSelected,
-    layout,
-    status,
-    disabled,
+    layout: values.layout,
+    disabled: values.disabled,
     'aria-label': '示範選項',
   })
 }
@@ -33,13 +29,8 @@ export const RadioGroupStory: StoryDef = {
   previewWidth: 360,
   props: {
     layout: { type: 'enum', options: ['column', 'two-columns', 'side-by-side'], default: 'column' },
-    status: { type: 'enum', options: ['default', 'error'], default: 'default' },
     disabled: { type: 'boolean', default: false },
-    withDescription: { type: 'boolean', default: false },
   },
   Render: RadioGroupRender,
-  codeProps: (values) => {
-    const { withDescription, ...rest } = values
-    return { ...rest, options: OPTIONS, value: 'a' }
-  },
+  codeProps: (values) => ({ ...values, options: OPTIONS, value: 'a' }),
 }
