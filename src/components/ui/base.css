@@ -1,0 +1,69 @@
+/*
+ * 元件自足化基礎規則 —— **發佈的樣式不得依賴使用端有 CSS reset**。
+ *
+ * 專案自己的 src/index.css 是完整 reset，但它不在 library build 的產出裡
+ * （vite.lib.config.ts 的 entry 只有 src/components/ui/index.ts），
+ * 所以元件在使用端拿不到那些規則。這支把元件真正依賴的部分補進套件內。
+ *
+ * 兩個刻意的設計：
+ *
+ * 1. **選擇器一律限定帶 ui- class 的元素**（同 a11y.css 的作法），
+ *    不碰使用端自己的 DOM —— 包含塞進 children 的內容。所以不寫
+ *    `[class*='ui-'] *` 這種後代選擇器，否則會把使用端傳進 Sheet / Dialog
+ *    的內容一起改掉。元件自己渲染的元素都帶 ui- class，涵蓋範圍足夠；
+ *    少數沒帶 class 的（icon 的 <i>、插圖的 <img>）由各元件 CSS 自行處理。
+ *
+ * 2. **整條選擇器包在 :where() 裡，specificity 歸零**。
+ *    `input[class*='ui-']` 的 specificity 是 (0,1,1)，會蓋掉
+ *    typography.css 的 `.text-body-large`(0,1,0) —— 那就變成 reset 反過來
+ *    砸壞元件樣式。包 :where() 之後任何元件規則都贏得過這裡。
+ *
+ * 新增元件時：需要的 reset 寫在這裡或元件自己的 CSS，不要假設使用端有 reset。
+ */
+
+/* 元件的固定尺寸（IconButton 的 52px、TabBar 的 height…）都是以 border-box 量的；
+   content-box 下 width + padding 會相加，尺寸全部走鐘。 */
+:where([class*='ui-']) {
+  box-sizing: border-box;
+  /* 瀏覽器對 <p> / <h1-h6> / <button> / <ul> 的預設 margin / padding。
+     元件的間距一律由自己的 gap / padding 決定，預設值疊上去就會多出來。 */
+  margin: 0;
+  padding: 0;
+}
+
+:where([class*='ui-'])::before,
+:where([class*='ui-'])::after {
+  box-sizing: border-box;
+}
+
+/* 沒有這條，所有 ui- 的 <button> 會長出瀏覽器預設的灰底與立體邊框 */
+:where(button[class*='ui-']) {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* 表單控制項不會自動繼承字型與文字色，預設會掉回瀏覽器的 13px system font */
+:where(input[class*='ui-']),
+:where(button[class*='ui-']),
+:where(textarea[class*='ui-']),
+:where(select[class*='ui-']) {
+  font: inherit;
+  color: inherit;
+}
+
+/* 標題字級 / 字重一律走 .text-* utility，不吃瀏覽器的 2em bold */
+:where(h1[class*='ui-']),
+:where(h2[class*='ui-']),
+:where(h3[class*='ui-']),
+:where(h4[class*='ui-']),
+:where(h5[class*='ui-']),
+:where(h6[class*='ui-']) {
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+:where(ul[class*='ui-']),
+:where(ol[class*='ui-']) {
+  list-style: none;
+}
