@@ -1,6 +1,6 @@
 {
   "name": "@invos/design-system",
-  "version": "0.11.0",
+  "version": "0.11.1",
   "description": "Mobile-web UI Kit with iOS-flavored design tokens; synced with Figma via MCP.",
   "private": true,
   "type": "module",
