@@ -102,7 +102,7 @@
 
 .ui-tag--bold-warning {
   background-color: var(--color-background-warning-default);
-  color: var(--color-content-fixed-white);
+  color: var(--color-content-inverse-bold);
 }
 
 .ui-tag--bold-prize {
