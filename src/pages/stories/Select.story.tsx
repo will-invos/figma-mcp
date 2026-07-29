@@ -39,7 +39,8 @@ export const SelectStory: StoryDef = {
   previewWidth: 360,
   props: {
     variant:     { type: 'enum', options: ['default', 'inner-label'], default: 'default' },
-    label:       { type: 'string', default: 'Label' },
+    // 同 TextField：label 只在 inner-label 模式渲染
+    label:       { type: 'string', default: 'Label', when: { variant: 'inner-label' } },
     placeholder: { type: 'string', default: 'Please select...' },
     leadingIcon: { type: 'boolean', default: false },
     status:      { type: 'enum', options: ['default', 'error', 'disabled'], default: 'default' },

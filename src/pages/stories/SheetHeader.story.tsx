@@ -46,9 +46,16 @@ export const SheetHeaderStory: StoryDef = {
      * 預設值省略，複製出去的程式碼會變成沒有標題的 header。
      */
     headlineSize: { type: 'enum', options: ['none', 'regular', 'large'], default: 'regular', required: true },
-    headline:     { type: 'string', default: 'Headline' },
-    leading:      { type: 'enum', options: ['none', 'close', 'back', 'search', 'text'], default: 'close' },
-    trailing:     { type: 'enum', options: ['none', 'more', 'close', 'text'], default: 'none' },
+    /*
+     * 以下三個的顯示條件對齊 SheetHeader.tsx 的 showNav / navShowsLeading /
+     * showLargeBlock —— headlineSize='none' 時整個 nav 與 large 區塊都不渲染，
+     * 傳了也不會顯示；leading 另外在 grabber + large 這一格也不渲染。
+     */
+    headline:     { type: 'string', default: 'Headline', when: (v) => v.headlineSize !== 'none' },
+    leading:      { type: 'enum', options: ['none', 'close', 'back', 'search', 'text'], default: 'close',
+                    when: (v) => v.headlineSize !== 'none' && !(v.type === 'grabber' && v.headlineSize === 'large') },
+    trailing:     { type: 'enum', options: ['none', 'more', 'close', 'text'], default: 'none',
+                    when: (v) => v.headlineSize !== 'none' },
   },
   Render: SheetHeaderRender,
   codeProps: resolveProps,

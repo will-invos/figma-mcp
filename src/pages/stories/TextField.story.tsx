@@ -60,7 +60,9 @@ export const TextFieldStory: StoryDef = {
   previewWidth: 360,
   props: {
     variant:      { type: 'enum', options: ['default', 'inner-label'], default: 'default' },
-    label:        { type: 'string', default: 'Label' },
+    // label 只在 inner-label 模式渲染（TextField.tsx 的 isInnerLabel && label）——
+    // default 模式仍印出來的話，複製的程式碼會帶一個沒有作用的 prop
+    label:        { type: 'string', default: 'Label', when: { variant: 'inner-label' } },
     placeholder:  { type: 'string', default: 'Placeholder' },
     value:        { type: 'string', default: '' },
     leadingIcon:  { type: 'boolean', default: false },
