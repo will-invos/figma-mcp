@@ -4,8 +4,8 @@
   right: 0;
   margin: 0 auto;
   width: calc(100% - var(--space-300) * 2);
-  /* 與 Dialog 同寬上限，平板上才不會被拉滿 */
-  max-width: 480px;
+  /* 頁面欄寬減兩側間距 —— 直接用欄寬的話桌機上會貼齊頁面邊緣、零間距（同 Dialog） */
+  max-width: calc(var(--ui-page-max-width) - var(--space-300) * 2);
   top: calc(env(safe-area-inset-top, 0px) + var(--space-200));
   /* 疊放順序：低於 Dialog / Sheet / Tooltip（1000），高於一般內容；Toast（1100）在最上 */
   z-index: 900;

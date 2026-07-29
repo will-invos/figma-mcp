@@ -97,6 +97,25 @@ createRoot(document.getElementById('root')!).render(
 
 沒引這行 → 元件完全沒樣式。
 
+**元件不需要你的專案有 CSS reset** —— `styles.css` 內含元件自足化所需的規則（box-sizing、margin、button 外觀），只作用在 `ui-` 前綴的元素上，不會動到你自己的 DOM。
+
+如果你希望**整個 App** 都套用設計系統的 reset 起點（自訂的 DOM 也一致），另外引入選用的 preflight：
+
+```tsx
+import '@invos/design-system/styles.css'
+import '@invos/design-system/preflight.css'  // 選用；會作用在全域
+```
+
+### 頁面欄寬
+
+設計系統以手機版網頁為前提，頁面欄寬上限 480px。覆蓋層（`Dialog`、`Sheet`、`Toast`、`SnackBar`、`InAppNotification`）雖然是 `position: fixed`，寬度都以這個欄寬計算而不是視窗 —— 桌機瀏覽器裡頁面固定欄寬置中時，覆蓋層才不會比頁面寬。
+
+你的頁面欄寬不是 480px 時**只要覆寫一個變數**，五個覆蓋層一起跟上：
+
+```css
+:root { --ui-page-max-width: 420px; }
+```
+
 ### 3. 在元件使用
 
 ```tsx

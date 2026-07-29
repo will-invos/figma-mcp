@@ -32,7 +32,8 @@
   border-radius: var(--radius-600) var(--radius-600) 0 0;
   max-height: 100dvh;
   width: 100%;
-  max-width: 480px;
+  /* 貼齊底部、滿欄寬是刻意的，所以直接用欄寬、不像 Dialog 那樣減間距 */
+  max-width: var(--ui-page-max-width);
   display: flex;
   flex-direction: column;
   animation: ui-sheet-slideup 0.3s ease-out;

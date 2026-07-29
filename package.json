@@ -17,6 +17,7 @@
       "import": "./dist/index.js"
     },
     "./styles.css": "./dist/index.css",
+    "./preflight.css": "./dist/preflight.css",
     "./package.json": "./package.json"
   },
   "files": [

@@ -63,7 +63,7 @@
   margin: 0 var(--space-300) 0 var(--space-200);
 }
 
-/* 字級走 .text-* utility、顏色走上方 .ui-nav-bar h1、margin 走全域 reset。
+/* 字級走 .text-* utility、顏色走上方 .ui-nav-bar h1、margin 走 base.css 的 ui- reset。
    這裡只負責單行截斷 —— 兩行會超出 44px / 56px 的固定列高。 */
 .ui-nav-bar__title {
   overflow: hidden;

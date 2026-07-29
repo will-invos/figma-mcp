@@ -28,8 +28,20 @@ interface SheetProps {
   children: React.ReactNode
   footer?: React.ReactNode
   Handle?: boolean
-  /** portal 目標，預設 document.body；想讓 sheet 跟著某個容器的主題與範圍走就傳它 */
+  /**
+   * portal 目標，預設 document.body。
+   *
+   * 兩個用途：讓 sheet 跟著某個容器的主題走；以及讓它落在使用端能一起停用的節點內 ——
+   * 想「整頁不可操作」時對頁面根節點加 `inert`，預設 portal 到 body 的 sheet 會落在
+   * 停用範圍外，變成可互動的圖層浮在阻擋層上。傳入 container 就不會有這個問題。
+   * overlay 與 container 仍是 position: fixed，所以傳 container **不會改變視覺定位**。
+   */
   container?: Element
+  /**
+   * 停用整個 sheet 的互動（含 overlay 點擊關閉、Esc、Tab 聚焦、下拉關閉），
+   * 內容與已填的值仍留在畫面上。請求進行中要鎖住畫面時用這個。
+   */
+  inert?: boolean
   /** 沒有可見 headline 時才需要，用來當對話框的無障礙名稱 */
   'aria-label'?: string
 }
@@ -43,6 +55,7 @@ function Sheet({
   footer,
   Handle = true,
   container,
+  inert = false,
   'aria-label': ariaLabel,
 }: SheetProps) {
   const sheetRef = useRef<HTMLDivElement>(null)
@@ -50,8 +63,9 @@ function Sheet({
 
   // Esc 關閉，並把 Tab 圈在 sheet 內：aria-modal 只對輔助科技隱藏背景，
   // 並不會阻止 Tab 走出去。
+  // inert 只擋得住指標與焦點，document 上的 keydown 照樣會進來，所以要另外擋。
   useEffect(() => {
-    if (!open) return
+    if (!open || inert) return
 
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
@@ -89,7 +103,7 @@ function Sheet({
 
     document.addEventListener('keydown', handleKeyDown)
     return () => document.removeEventListener('keydown', handleKeyDown)
-  }, [open, onClose])
+  }, [open, inert, onClose])
 
   // 開啟時把焦點移進 sheet，關閉時還給原本的觸發元素。
   // 對焦的是 sheet 根節點而不是第一個控制項，這樣螢幕閱讀器會先唸出對話框名稱，
@@ -111,7 +125,7 @@ function Sheet({
 
   // 下拉關閉：只有顯示 Handle 時才啟用（拖曳面是 grabber header）
   useEffect(() => {
-    if (!open || !Handle) return
+    if (!open || !Handle || inert) return
     const sheetEl = sheetRef.current
     if (!sheetEl) return
     const headerEl = sheetEl.querySelector<HTMLElement>('.ui-sheet-header--grabber')
@@ -174,7 +188,7 @@ function Sheet({
       headerEl.removeEventListener('pointerup', endDrag)
       headerEl.removeEventListener('pointercancel', endDrag)
     }
-  }, [open, Handle, onClose])
+  }, [open, Handle, inert, onClose])
 
   if (!open) return null
 
@@ -195,8 +209,12 @@ function Sheet({
 
   return createPortal(
     <>
-      <div className="ui-sheet-overlay" onClick={onClose} />
-      <div className="ui-sheet-container">
+      <div
+        className="ui-sheet-overlay"
+        inert={inert || undefined}
+        onClick={inert ? undefined : onClose}
+      />
+      <div className="ui-sheet-container" inert={inert || undefined}>
         <div
           ref={sheetRef}
           className="ui-sheet"

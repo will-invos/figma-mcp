@@ -1,0 +1,75 @@
+/*
+ * 全域 reset —— **選用**，不含在 styles.css 裡。
+ *
+ *   import '@invos/design-system/styles.css'     // 必要：token + 元件樣式
+ *   import '@invos/design-system/preflight.css'  // 選用：這支
+ *
+ * 元件本身不需要這支就能長對（那部分在 base.css，已包含在 styles.css 內）。
+ * 這支是給「整個 App 都照設計系統的前提寫」的使用端，讓自訂的 DOM 也有
+ * 一致的起點 —— 因為它會作用在全域，會動到使用端所有元素，所以做成選用。
+ *
+ * 內容與 repo 自己的 src/index.css 對齊；那支是本專案 explorer / story 用的，
+ * 不在套件產出內。兩邊都改到時要一起同步。
+ */
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  -moz-tab-size: 4;
+  tab-size: 4;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-family);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.5;
+  color: var(--color-content-default);
+  background-color: var(--color-background-neutral-subtle);
+}
+
+/* 字級 / 字重交給 .text-* utility，顏色統一走標題色（design.md §配色預設）。 */
+h1, h2, h3, h4, h5, h6 {
+  font-size: inherit;
+  font-weight: inherit;
+  color: var(--color-content-bold);
+}
+
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+img, svg, video, canvas, audio, iframe, embed, object {
+  display: block;
+  max-width: 100%;
+}
+
+input, button, textarea, select {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}

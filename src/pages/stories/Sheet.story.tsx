@@ -48,6 +48,7 @@ function resolveProps(values: Record<string, any>, state: SheetState = {}) {
     headline: values.headline,
     headlineSize: values.headlineSize,
     Handle: values.Handle,
+    inert: values.inert || undefined,
     footer: footerNode(values, state),
     children: <p style={{ padding: 'var(--space-400)' }}>Description</p>,
   }
@@ -85,6 +86,8 @@ export const SheetStory: StoryDef = {
     Handle:       { type: 'boolean', default: false },
     footer:       { type: 'boolean', default: true },
     footerType:   { type: 'enum', options: ['1-button', '2-buttons-horizontal', '2-buttons-vertical', 'checkbox-button'], default: '1-button', when: { footer: true } },
+    // 請求進行中鎖住整個 sheet：內容留在畫面上、值不遺失，但不能點也不能 Tab 進去
+    inert:        { type: 'boolean', default: false },
   },
   Render: SheetRender,
   codeProps: (values) => ({ open: true, ...resolveProps(values) }),

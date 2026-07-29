@@ -7,7 +7,9 @@
  */
 
 .tpl-page {
-  max-width: 480px;
+  /* 覆蓋層（Dialog / Sheet / Toast / SnackBar / InAppNotification）也讀這個變數
+     算自己的寬度，頁面欄寬與覆蓋層才不會各說各話。欄寬要改就覆寫這個變數。 */
+  max-width: var(--ui-page-max-width);
   margin: 0 auto;
   min-height: 100vh;
   min-height: 100dvh;

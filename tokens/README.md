@@ -21,7 +21,8 @@ dist/native/android/values/colors.xml + values-night/colors.xml（ARGB）
 | `figma-dump/colors.txt`、`sizes.txt` | 從 Figma 倒出的原始值（`name\|light\|dark`） | ❌ 由同步產生 |
 | `tokens.json` | 排序後的中繼母版，每次同步的 git diff 就看它 | ❌ 由 build 產生 |
 | `build.mjs` | dump → tokens.json → CSS | ✅ 管線邏輯在這 |
-| `src/components/ui/tokens/{colors,spacing,radius}.css` | 產出的 CSS（**已接管**，檔頭有產生警語） | ❌ 唯讀投影（typography.css、shadows.css 仍為手寫） |
+| `src/components/ui/tokens/{colors,spacing,radius}.css` | 產出的 CSS（**已接管**，檔頭有產生警語） | ❌ 唯讀投影（typography.css、shadows.css、layout.css 仍為手寫） |
+| `src/components/ui/tokens/layout.css` | 版面旋鈕（`--ui-page-max-width`），給使用端覆寫用，非 Figma variables | ✅ 手維護 |
 | `dist/native/ios-colors/` | Xcode Asset Catalog colorsets（iOS 工程師 copy 進 Assets.xcassets） | ❌ 唯讀投影 |
 | `dist/native/android/` | `values/` + `values-night/` 的 colors.xml（Android 工程師 copy 進 res/） | ❌ 唯讀投影 |
 

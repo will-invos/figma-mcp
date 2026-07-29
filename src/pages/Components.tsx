@@ -9,7 +9,9 @@ import './Components.css'
 function getStoryNameFromHash(): string {
   const hash = window.location.hash.replace(/^#/, '')
   const match = hash.match(/^\/components\/(.+)$/)
-  return match ? match[1] : ''
+  // 要 decode —— 名稱含空白或括號的 story（如 `SnackBar (Provider)`）在 location.hash
+  // 讀回來會是 %20 等編碼形式，不解回來就對不上 storyMap，會靜默掉回預設 story
+  return match ? decodeURIComponent(match[1]) : ''
 }
 
 function getDefaults(propDefs: Record<string, PropDef>): Record<string, any> {

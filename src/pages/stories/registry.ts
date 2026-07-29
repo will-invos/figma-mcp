@@ -53,7 +53,7 @@ import { SpinnerStory } from './Spinner.story'
 import { ProgressBarStory } from './ProgressBar.story'
 import { ProgressGroupStory } from './ProgressGroup.story'
 import { ToastStory } from './Toast.story.tsx'
-import { SnackBarStory } from './SnackBar.story.tsx'
+import { SnackBarStory, SnackBarProviderStory } from './SnackBar.story.tsx'
 import { TooltipStory } from './Tooltip.story.tsx'
 import { InAppNotificationStory } from './InAppNotification.story.tsx'
 
@@ -80,7 +80,7 @@ export const sections: StorySection[] = [
       },
       {
         name: 'Feedback',
-        stories: [BannerStory, SpinnerStory, ProgressBarStory, ProgressGroupStory, ToastStory, SnackBarStory, InAppNotificationStory, TooltipStory, PageStatusStory],
+        stories: [BannerStory, SpinnerStory, ProgressBarStory, ProgressGroupStory, ToastStory, SnackBarStory, SnackBarProviderStory, InAppNotificationStory, TooltipStory, PageStatusStory],
       },
       {
         name: 'Overlay',

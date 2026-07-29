@@ -65,6 +65,18 @@
   width: 100%;
   box-sizing: border-box;
 }
+
+/*
+ * wrap="off"：一行就是一行，過長的一行橫向捲動而不折行。
+ * overflow-y 必須關掉 —— 高度由 autoGrow 撐到剛好，留著 auto 會多出一條沒用的縱向捲軸。
+ * 橫向捲軸佔掉的高度由 TextArea.tsx 的 autoGrow 補回去，不然最後一行會被裁掉。
+ */
+.ui-textarea--nowrap .ui-textarea__input {
+  white-space: pre;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
 .ui-textarea__input::placeholder {
   color: var(--color-content-subtlest);
 }

@@ -1,9 +1,11 @@
+/* 底色刻意不設 —— 由外層容器決定，chip bar 才能直接放進卡片、Sheet 等各種底色上 */
 .ui-chip-bar {
   display: flex;
   align-items: center;
   gap: var(--space-200);
+  /* 內距刻意沒有 prop 可調（kit 沒有純間距 prop 的慣例，且 Figma 未確認有無 no-inset 變體）。
+     放進本身已有內距的容器要對齊時，用公開的 className 覆寫這一條即可。 */
   padding: var(--space-300) var(--space-400);
-  background: var(--color-background-default);
 }
 .ui-chip-bar--scroll {
   overflow-x: auto;
