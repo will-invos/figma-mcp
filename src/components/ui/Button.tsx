@@ -2,9 +2,23 @@ import React from 'react';
 import Spinner from './Spinner';
 import './Button.css';
 
-interface ButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'children'> {
-  variant?: 'filled' | 'outline' | 'ghost' | 'text';
-  colorType?: 'primary' | 'neutral' | 'danger' | 'prize' | 'donation' | 'white' | 'inverse' | 'secondary';
+type ButtonVariant = 'filled' | 'outline' | 'ghost' | 'text';
+
+/**
+ * 每個 variant 只有這些 colorType 有對應樣式，對齊 Figma「Style × Type」共 12 組
+ * （🧰 iOS - UI Kit 2025 · Button）。不在表內的組合沒有 CSS，會渲染成沒有配色的裸按鈕，
+ * 所以用 union 在編譯期擋掉，而不是留給執行期靜默失敗。
+ */
+type ButtonColorByVariant = {
+  filled: 'primary' | 'neutral' | 'danger' | 'prize' | 'donation' | 'white';
+  outline: 'primary';
+  ghost: 'primary' | 'inverse';
+  text: 'primary' | 'secondary' | 'inverse';
+};
+
+type ButtonColorType = ButtonColorByVariant[ButtonVariant];
+
+interface ButtonBaseProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'children'> {
   size?: 'large' | 'medium' | 'small';
   loading?: boolean;
   leadingIcon?: React.ReactNode;
@@ -12,10 +26,19 @@ interface ButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>
   text?: React.ReactNode;
 }
 
+/** filled 是預設值所以 variant 可省略；其餘三個必須明寫，才不會讓省略時落到別的配色集合。 */
+type ButtonStyleProps =
+  | { variant?: 'filled'; colorType?: ButtonColorByVariant['filled'] }
+  | { variant: 'outline'; colorType?: ButtonColorByVariant['outline'] }
+  | { variant: 'ghost'; colorType?: ButtonColorByVariant['ghost'] }
+  | { variant: 'text'; colorType?: ButtonColorByVariant['text'] };
+
+type ButtonProps = ButtonBaseProps & ButtonStyleProps;
+
 /** loading 時 spinner 要跟文字同色，才不會在深色底上消失 */
 function resolveSpinnerColor(
-  variant: ButtonProps['variant'],
-  colorType: ButtonProps['colorType']
+  variant: ButtonVariant | undefined,
+  colorType: ButtonColorType | undefined
 ): 'primary' | 'inverse' | 'neutral' | 'fixed-bold' | 'fixed-white' {
   if (variant === 'filled') {
     switch (colorType) {
@@ -48,7 +71,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     },
     ref
   ) => {
-    // outline 只有一套配色，不吃 colorType
+    // outline 在 Figma 只有 Primary 一種，CSS 也只有 .ui-button--outline，不帶 colorType 後綴
     const variantColorClass =
       variant === 'outline'
         ? 'ui-button--outline'
@@ -95,4 +118,4 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 Button.displayName = 'Button';
 
 export default Button;
-export type { ButtonProps };
+export type { ButtonProps, ButtonStyleProps };

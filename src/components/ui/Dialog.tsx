@@ -1,14 +1,20 @@
 import { useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { Button } from './index';
+import type { ButtonStyleProps } from './Button';
 import './Dialog.css';
 
-interface DialogAction {
+/**
+ * Dialog 動作就是一顆 Button，配色沿用 Button 的 Style × Type 限制。
+ * 非 filled 的三種樣式在設計上只用 primary，故此處收斂得比 Button 更窄。
+ */
+type DialogAction = {
   label: string;
   onClick: () => void;
-  variant?: 'filled' | 'outline' | 'ghost' | 'text';
-  colorType?: 'primary' | 'danger' | 'neutral';
-}
+} & (
+  | { variant?: 'filled'; colorType?: 'primary' | 'neutral' | 'danger' }
+  | { variant: 'outline' | 'ghost' | 'text'; colorType?: 'primary' }
+);
 
 interface DialogProps {
   open: boolean;
@@ -67,61 +73,47 @@ function Dialog({
 
   const isVertical = cta === '2-buttons-vertical';
 
-  const renderActions = () => {
-    if (isVertical) {
-      // 直排：上面 filled primary/danger，下面固定 text primary
-      return (
-        <div className="ui-dialog__actions--vertical">
-          {actions.map((action, i) => {
-            const isTop = i === 0;
-            return (
-              <Button
-                key={i}
-                variant={isTop ? (action.variant ?? 'filled') : 'text'}
-                colorType={isTop ? (action.colorType ?? 'primary') : 'primary'}
-                size="large"
-                onClick={action.onClick}
-                text={action.label}
-              />
-            );
-          })}
-        </div>
-      );
+  /**
+   * 整組回傳而不是分別回傳 variant 與 colorType —— 拆成兩個值會讓型別失去兩者的搭配關係，
+   * 就無法在編譯期擋掉 Figma 沒有的組合。
+   */
+  const resolveActionStyle = (action: DialogAction, i: number): ButtonStyleProps => {
+    // 直排：下面那顆固定 text primary，不吃 action 自己的指定
+    if (isVertical && i > 0) return { variant: 'text', colorType: 'primary' };
+
+    // 非 filled 樣式在 dialog 只用 primary
+    switch (action.variant) {
+      case 'outline': return { variant: 'outline', colorType: 'primary' };
+      case 'ghost': return { variant: 'ghost', colorType: 'primary' };
+      case 'text': return { variant: 'text', colorType: 'primary' };
     }
 
-    return (
-      <div className="ui-dialog__actions">
-        {actions.map((action, i) => {
-          // default：最後一顆是 primary，其餘 neutral
-          // danger：第一顆是 danger，其餘 neutral
-          let variant = action.variant;
-          let colorType = action.colorType;
+    if (action.colorType) return { variant: 'filled', colorType: action.colorType };
+    if (isVertical) return { variant: 'filled', colorType: 'primary' };
 
-          if (!variant && !colorType) {
-            if (type === 'danger') {
-              variant = i === 0 ? 'filled' : 'filled';
-              colorType = i === 0 ? 'danger' : 'neutral';
-            } else {
-              const isLast = i === actions.length - 1;
-              variant = 'filled';
-              colorType = isLast ? 'primary' : 'neutral';
-            }
-          }
-
-          return (
-            <Button
-              key={i}
-              variant={variant ?? 'filled'}
-              colorType={colorType ?? 'primary'}
-              size="large"
-              onClick={action.onClick}
-              text={action.label}
-            />
-          );
-        })}
-      </div>
-    );
+    // 未指定時：danger 版型第一顆 danger、default 版型最後一顆 primary，其餘一律 neutral
+    return {
+      variant: 'filled',
+      colorType:
+        type === 'danger'
+          ? i === 0 ? 'danger' : 'neutral'
+          : i === actions.length - 1 ? 'primary' : 'neutral',
+    };
   };
+
+  const renderActions = () => (
+    <div className={isVertical ? 'ui-dialog__actions--vertical' : 'ui-dialog__actions'}>
+      {actions.map((action, i) => (
+        <Button
+          key={i}
+          {...resolveActionStyle(action, i)}
+          size="large"
+          onClick={action.onClick}
+          text={action.label}
+        />
+      ))}
+    </div>
+  );
 
   return createPortal(
     <div className="ui-dialog-overlay" onClick={onClose}>

@@ -1,10 +1,17 @@
 {
-  "figmaFileKey": "zbdxaNIbxN4Iujx6Qi1DlI",
-  "figmaFileUrl": "https://www.figma.com/design/zbdxaNIbxN4Iujx6Qi1DlI/MCP-test",
+  "_targetFile": "本檔不記 Figma 檔案 key。所有 key 都屬於下方 libraries 的已發佈 library，在任何啟用了這些 library 的檔案都能 import。Code → Figma 的目標檔由任務指定（每次功能分開給），動工前先向使用者確認，不要自行挑一個檔。",
   "libraries": {
-    "designSystem": "🧰 Design System 2025",
+    "_precondition": "目標檔必須啟用需要用到的 library，否則 importComponentSetByKeyAsync / importStyleByKeyAsync / getVariablesInLibraryCollectionAsync 都會失敗。",
+    "_naming": "Design System 用 🎨、兩套 UI Kit 用 🧰。search_design_system 以 libraryName 精確比對時 emoji 必須一字不差（寫錯會零命中且不報錯）；建議改用下方 libraryKey 走 includeLibraryKeys。",
+    "designSystem": "🎨 Design System 2025",
     "uiKit": "🧰 iOS - UI Kit 2025",
-    "libraryKey_iOS_UIKit_2025": "lk-7322d0b146bd6149458bf482bdb367fedb2d5f9f0e1f2e334d8eb2b80e1b93bf5279ddc05934cd61c19df7032c4935b8c059ce8f4a0b137ce7f50e6aa6e05059"
+    "androidUiKit": "🧰 Android - UI Kit 2025",
+    "libraryKey_DesignSystem_2025": "lk-c42fa6922b69859434bf314fec464786ef1ea280486d5c1d754ab3cff8b462b4e11dcbb0c34396b2b624f42d48e12d6db1f12be7e1c56db333690b9e9050eace",
+    "libraryKey_iOS_UIKit_2025": "lk-7322d0b146bd6149458bf482bdb367fedb2d5f9f0e1f2e334d8eb2b80e1b93bf5279ddc05934cd61c19df7032c4935b8c059ce8f4a0b137ce7f50e6aa6e05059",
+    "libraryKey_Android_UIKit_2025": "lk-324c75e1b0154b00f2d0a7803a656b15f44535da87b6aa4843eeaa21a94f722fdbe29ebcf407519601248dfa662a55b845de26b7207e73647506c6810ddd4cc8",
+    "sourceFile_Android_UIKit_2025": "6Cu3CJgevutj0TxUkNbaON",
+    "_scope": "做 prototype 一律只用 🧰 iOS - UI Kit 2025，因此下方 componentKeys 只收這一套，這是刻意的範圍而不是缺漏。",
+    "_androidNote": "Android UI Kit 是獨立且內容完整的一套（「UI kit」頁 node 3740:4759，21 個 section、66 個元件），但**不在 prototype 範圍內**，不要拿它建頁面、也不需要建 component key。上面的 key 只供跨平台交接時對照用（例：確認 Android 設計端有哪些元件 vs Compose 端實作了哪些）。"
   },
   "variableCollections": {
     "semanticColors": "aca99ba7f5e3b863523761870ab4fa8d4b24c0be",
@@ -12,7 +19,7 @@
     "uiKitVariables": "3f0026e1a1cdbbcf678f559cdc723a02f2f35530"
   },
   "textStyles": {
-    "_comment": "All keys from 🧰 Design System 2025. CSS classes in tokens/typography.css.",
+    "_comment": "All keys from 🎨 Design System 2025. CSS classes in tokens/typography.css.",
 
     "_display": "— Display (H1, page headline) —",
     "iOS/Display":              { "key": "aed21ad886757d6cc61f43a1962fb3d4d57618fd", "font": "SF Pro Medium 28",      "css": ".text-display" },
