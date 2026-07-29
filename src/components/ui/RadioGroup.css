@@ -1,0 +1,36 @@
+/* 選項間距三種版面一致，都是 --space-400；差別只在排列方向與寬度分配 */
+.ui-radio-group {
+  display: flex;
+  gap: var(--space-400);
+  padding-top: var(--space-100);
+}
+
+.ui-radio-group--column {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+/* 兩欄：左右均分，min-width: 0 才能讓長標籤在欄內換行而不撐破容器 */
+.ui-radio-group--two-columns {
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.ui-radio-group__column {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-400);
+}
+
+/* 並排：依內容寬度排列，選項多到放不下時換行，不擠壓文字 */
+.ui-radio-group--side-by-side {
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.ui-radio-group--side-by-side > .ui-radio {
+  flex: 0 0 auto;
+}
