@@ -3,8 +3,17 @@
   display: flex;
   align-items: center;
   gap: var(--space-200);
-  /* 內距刻意沒有 prop 可調（kit 沒有純間距 prop 的慣例，且 Figma 未確認有無 no-inset 變體）。
-     放進本身已有內距的容器要對齊時，用公開的 className 覆寫這一條即可。 */
+  /*
+   * 內距刻意沒有 prop 可調，兩個理由：
+   * 1. Figma 的 Chip bar **沒有** no-inset / full-bleed 變體（2026-07-29 向設計師確認）——
+   *    加 prop 等於自創設計稿上不存在的樣式
+   * 2. 這個 kit 沒有純間距 prop 的慣例（ListItem 的 type、Tabs 的 type 都是
+   *    Figma 變體名稱，只是剛好會改到間距）
+   *
+   * 放進本身已有內距的容器要對齊時，用公開的 className 覆寫這一條即可 ——
+   * 那是 props 之外的合法逃生門，不是覆寫內部 class。
+   * 要改這個決定，先回去確認 Figma 有沒有新增變體，不要直接加 prop。
+   */
   padding: var(--space-300) var(--space-400);
 }
 .ui-chip-bar--scroll {
