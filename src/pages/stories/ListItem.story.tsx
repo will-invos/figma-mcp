@@ -4,17 +4,17 @@ import IconButton from '@/components/ui/IconButton'
 import type { StoryDef } from './types'
 
 /**
- * 裸 icon：24px 與 brand 色由 ListItem 供給，不用自己包 <span> 上色。
+ * 單純的 icon：24px 與 brand 色由 ListItem 供給，不用自己包 <span> 上色。
  * 包了 wrapper 反而拿不到 —— slot 只負責「直接放進來」的 icon。
  */
-const bareIcon = <i className="icon-check" aria-hidden="true" />
+const iconNode = <i className="icon-check" aria-hidden="true" />
 
 /**
- * 合成元件放進同一個 slot 時要保有自己的配色與尺寸。
+ * 可點的 icon（IconButton）放進同一個 slot 時要保有自己的配色與尺寸。
  * 這個案例是回歸測試：ListItem 曾用後代選擇器把 slot 內任何 icon 塗成 brand 色、
  * 尺寸壓成 24px，蓋掉 IconButton 的 danger 配色。
  */
-const dangerIconButton = (
+const iconButtonNode = (
   <IconButton
     variant="ghost"
     colorType="danger"
@@ -26,15 +26,18 @@ const dangerIconButton = (
 
 /** 控制項的值 → 實際傳給 ListItem 的 props（Render 與 code 區塊共用）。 */
 function resolveProps(values: Record<string, any>) {
-  // trailingIconKind 只是 story 的控制項、不是 ListItem 的 prop，
-  // 要從 spread 拿掉否則 code 區塊會印出一個不存在的 prop
-  const { trailingIconKind, ...rest } = values
+  /*
+   * 控制項的 trailingIcon 是個字串（要放哪一種 node），真正的 prop 收的是 node，
+   * 所以先取出來、不要讓字串跟著 spread 進去 —— 否則 code 區塊會印出
+   * trailingIcon="icon" 這種假的用法。同 Dialog story 的 extra / ChipBar 的 badge。
+   */
+  const { trailingIcon: trailingIconKind, ...rest } = values
   return {
     headline: values.headline,
     ...rest,
     trailingIcon:
       values.trailing === 'icon'
-        ? trailingIconKind === 'icon-button' ? dangerIconButton : bareIcon
+        ? trailingIconKind === 'icon-button' ? iconButtonNode : iconNode
         : undefined,
   }
 }
@@ -62,8 +65,9 @@ export const ListItemStory: StoryDef = {
     description: { type: 'string', default: 'Description' },
     trailing:    { type: 'enum', options: ['none', 'drill-in', 'text', 'text-button', 'cta', 'icon', 'switch', 'checkbox', 'spinner'], default: 'drill-in' },
     trailingText:{ type: 'string', default: 'Text' },
-    // icon-button 用來確認合成元件不會被 slot 的樣式蓋掉配色（應為 danger 紅，不是 brand 藍）
-    trailingIconKind: { type: 'enum', options: ['bare', 'icon-button'], default: 'bare', when: { trailing: 'icon' } },
+    // trailing="icon" 時要放哪一種：單純 icon，或一顆可點的 IconButton。
+    // icon-button 同時是回歸測試 —— 它應顯示 danger 紅，不該被 slot 樣式塗成 brand 藍。
+    trailingIcon:{ type: 'enum', options: ['icon', 'icon-button'], default: 'icon', when: { trailing: 'icon' } },
     disabled:    { type: 'boolean', default: false },
     showDivider: { type: 'boolean', default: true },
   },
