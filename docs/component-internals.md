@@ -46,6 +46,37 @@
 
 ---
 
+## 4. 覆蓋層寬度與間距
+
+全部以 `--ui-page-max-width`（預設 480）計算，不以視窗計算 —— 原則見 [design.md §3.2](../design.md)。
+
+| 元件 | 寬度 | 兩側間距 | 定位 |
+|------|------|---------|------|
+| `Dialog` | `calc(var(--ui-page-max-width) - --space-600 * 2)` = 432 | 24（overlay 的 padding；窄螢幕時由它收出間距） | fixed 置中 |
+| `Sheet` | `var(--ui-page-max-width)` = 480 | 0（貼齊底部滿欄寬是刻意的） | fixed 貼底 |
+| `Toast` | 同 Dialog（432） | 24 | fixed 置中；`align-items: center` 讓 toast 保持自然寬度 |
+| `SnackBar` viewport | `calc(var(--ui-page-max-width) - --space-300 * 2)` = 456 | 12 | fixed 貼底 + `env(safe-area-inset-bottom)` |
+| `InAppNotification` viewport | 同 SnackBar（456） | 12 | fixed 貼頂 + `env(safe-area-inset-top)` |
+
+**寫成 `calc(欄寬 - 間距 * 2)` 而不是直接用欄寬**：頁面本身的 max-width 也是這個變數，等寬的話覆蓋層會剛好貼齊頁面左右邊緣、零間距。
+
+z-index 疊放：`InAppNotification` / `SnackBar` 900 → `Dialog` overlay 1000 / `Sheet` overlay 1000、container 1001 → `Toast` 1100。
+
+---
+
+## 5. 跨元件基礎樣式（載入順序）
+
+`src/components/ui/index.ts` 的 import 順序決定 CSS 串接順序，**不能調動**：
+
+1. `tokens/index.css` —— 變數與 `.text-*` utility
+2. `base.css` —— 自足化 reset。選擇器限定 `ui-` 前綴並包 `:where()`，specificity 為 0，任何元件規則都蓋得過它
+3. `a11y.css` —— `:focus-visible` 外環、`prefers-reduced-motion`；元件要保留自己的降級動效得用 `!important`
+4. 各元件 CSS（由元件模組 import 帶入）
+
+`preflight.css` **不在這條鏈上** —— 它是全域 reset，由使用端自行決定要不要 `import '@invos/design-system/preflight.css'`，並由 `vite.lib.config.ts` 的 `emitPreflightCss` 單獨輸出。
+
+---
+
 ## 附錄
 
 - [design.md](../design.md) — 設計準則 / 怎麼用（引用者看這份）

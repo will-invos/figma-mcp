@@ -16,7 +16,7 @@
 |------|---------|
 | 公開元件與 props | `src/components/ui/index.ts` 與各元件的 TypeScript 型別 |
 | 顏色 / spacing / radius | **生成檔** —— Figma variables → `tokens/figma-dump/*.txt` → `tokens/tokens.json` → `npm run tokens:build` |
-| Typography / Shadow | **手維護** —— `tokens/typography.css`、`tokens/shadows.css`（不在 pipeline 內） |
+| Typography / Shadow / 版面 | **手維護** —— `tokens/typography.css`、`tokens/shadows.css`、`tokens/layout.css`（不在 pipeline 內） |
 | Figma component / style / variable key | `figma-tokens.json` |
 | 設計意圖與使用原則 | [design.md](./design.md) |
 | 元件內部尺寸 / 邊框 / 內距實測 | [docs/component-internals.md](./docs/component-internals.md) |
@@ -46,7 +46,8 @@
 ## UI Kit 結構
 
 - 元件：`src/components/ui/`（每個元件配 `.css`）
-- Token：`src/components/ui/tokens/`（colors / radius / shadows / spacing / typography）
+- Token：`src/components/ui/tokens/`（colors / layout / radius / shadows / spacing / typography）
+- 跨元件基礎樣式：`base.css`（自足化 reset）、`a11y.css`（focus 環、reduced-motion）、`preflight.css`（選用的全域 reset，不含在 `styles.css` 內）
 - Stories：`src/pages/stories/`（各元件 props 及頁面範例）
 
 **新增元件時一併註冊**，否則元件不會出現在 component explorer：
@@ -54,6 +55,8 @@
 1. `src/components/ui/index.ts` 補 default 與 type 兩個出口
 2. 新增 `src/pages/stories/{Component}.story.tsx`，export `{Component}Story`（`StoryDef` 型別）
 3. 在 `src/pages/stories/registry.ts` import 它，並放進 `sections` 對應分類
+
+**發佈的樣式不得依賴使用端有 CSS reset。** `src/index.css` 是本 repo explorer 用的完整 reset，**不在 library build 的產出裡**（`vite.lib.config.ts` 的 entry 只有 `src/components/ui/index.ts`），使用端拿不到。元件需要的 reset 一律寫進 `base.css`（限定 `ui-` 前綴、包 `:where()` 讓 specificity 歸零）或元件自己的 CSS —— 不要假設 `* { margin: 0; box-sizing: border-box }` 存在。
 
 ## Component Decision Tree
 
@@ -79,7 +82,7 @@
 | 全螢幕對話（需使用者決策） | `<Dialog>` |
 | 從底部滑上的面板（行動主要模式） | `<Sheet>` / 搭配 `<SheetHeader>` |
 | 即時通知（中央短訊） | `<Toast>`（Provider 模式、`useToast()`）|
-| 操作結果告知（底部、可含動作） | `<SnackBar>` |
+| 操作結果告知（底部、可含動作） | `<SnackBar>`（Provider 模式、`useSnackBar()`；貼齊頁面底部、連續呼叫排隊不疊加）|
 | 頂部 push 通知（含 leading icon、可點擊跳轉） | `<InAppNotification>`（Provider 模式、`useInAppNotification()`） |
 | 區塊內告示（警告、資訊） | `<Banner>` |
 | 整頁空狀態 / 錯誤狀態（斷線、無結果、404） | `<PageStatus status="...">` |
