@@ -1,3 +1,51 @@
+@keyframes ui-snackbar-slideup {
+  from {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* reduced-motion 的降級：只淡入、不位移。a11y.css 會把動效壓到不可感知，
+   所以這裡要用 !important 才蓋得回來（元件 CSS 載入順序在 a11y.css 之後）。 */
+@keyframes ui-snackbar-fadein {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/*
+ * SnackBarProvider 的固定容器。一直掛在 DOM 上（裡面沒有 snackbar 時也是），
+ * 因為它同時是 live region —— 細節見 SnackBarProvider.tsx。
+ */
+.ui-snackbar-viewport {
+  position: fixed;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  bottom: calc(env(safe-area-inset-bottom, 0px) + var(--space-300));
+  width: calc(100% - var(--space-300) * 2);
+  /* 頁面欄寬減兩側間距 —— 直接用欄寬的話桌機上會貼齊頁面邊緣、零間距（同 Dialog） */
+  max-width: calc(var(--ui-page-max-width) - var(--space-300) * 2);
+  /* 疊放順序：與 InAppNotification 同層（低於 Dialog / Sheet 的 1000） */
+  z-index: 900;
+  /* 沒有 snackbar 時不擋住底層的點擊 */
+  pointer-events: none;
+}
+
+.ui-snackbar-viewport .ui-snackbar {
+  pointer-events: auto;
+  animation: ui-snackbar-slideup 0.25s ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ui-snackbar-viewport .ui-snackbar {
+    animation: ui-snackbar-fadein 0.15s linear both !important;
+  }
+}
+
 .ui-snackbar {
   display: flex;
   align-items: center;
@@ -7,7 +55,7 @@
   background: var(--color-background-toast);
   box-shadow: var(--shadow-large);
   width: 100%;
-  max-width: 480px;
+  max-width: var(--ui-page-max-width);
   box-sizing: border-box;
 }
 

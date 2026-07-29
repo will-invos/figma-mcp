@@ -146,6 +146,13 @@ export type { TooltipProps } from './Tooltip';
 export { default as SnackBar } from './SnackBar';
 export type { SnackBarProps } from './SnackBar';
 
+export { SnackBarProvider, useSnackBar } from './SnackBarProvider';
+export type {
+  SnackBarOptions,
+  SnackBarItem,
+  SnackBarContextValue,
+} from './SnackBarProvider';
+
 export { default as ProgressBar } from './ProgressBar';
 export type { ProgressBarProps } from './ProgressBar';
 
