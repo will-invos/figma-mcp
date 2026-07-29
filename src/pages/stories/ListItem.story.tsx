@@ -62,9 +62,11 @@ export const ListItemStory: StoryDef = {
   props: {
     type:        { type: 'enum', options: ['default', 'rich', 'compact'], default: 'default' },
     headline:    { type: 'string', default: 'Headline' },
-    description: { type: 'string', default: 'Description' },
+    // 只有 rich 會渲染第二行；其餘 type 傳了也不會顯示，印在 code 區塊只會讓人以為有效
+    description: { type: 'string', default: 'Description', when: { type: 'rich' } },
     trailing:    { type: 'enum', options: ['none', 'drill-in', 'text', 'text-button', 'cta', 'icon', 'switch', 'checkbox', 'spinner'], default: 'drill-in' },
-    trailingText:{ type: 'string', default: 'Text' },
+    // 只有這三種 trailing 會用到文字（text 直接顯示、text-button / cta 當按鈕文字）
+    trailingText:{ type: 'string', default: 'Text', when: (v) => ['text', 'text-button', 'cta'].includes(v.trailing) },
     // trailing="icon" 時要放哪一種：單純 icon，或一顆可點的 IconButton。
     // icon-button 同時是回歸測試 —— 它應顯示 danger 紅，不該被 slot 樣式塗成 brand 藍。
     trailingIcon:{ type: 'enum', options: ['icon', 'icon-button'], default: 'icon', when: { trailing: 'icon' } },
