@@ -40,7 +40,12 @@ export const SheetHeaderStory: StoryDef = {
   previewWidth: 360,
   props: {
     type:         { type: 'enum', options: ['grabber', 'default'], default: 'grabber' },
-    headlineSize: { type: 'enum', options: ['none', 'regular', 'large'], default: 'regular' },
+    /*
+     * 元件的預設是 'none'（不顯示標題），但 story 刻意預設 'regular' 才看得到東西。
+     * 這種「story 預設 ≠ 元件預設」的情況要標 required，否則 codegen 會把它當
+     * 預設值省略，複製出去的程式碼會變成沒有標題的 header。
+     */
+    headlineSize: { type: 'enum', options: ['none', 'regular', 'large'], default: 'regular', required: true },
     headline:     { type: 'string', default: 'Headline' },
     leading:      { type: 'enum', options: ['none', 'close', 'back', 'search', 'text'], default: 'close' },
     trailing:     { type: 'enum', options: ['none', 'more', 'close', 'text'], default: 'none' },
