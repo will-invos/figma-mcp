@@ -32,10 +32,16 @@
   align-items: center;
   gap: var(--space-300);
   pointer-events: none;
+  /* 寬度上限對齊頁面欄寬減兩側間距（同 Dialog）。沒有上限時 .ui-toast__text 的
+     white-space: nowrap 會讓長訊息一路撐出視窗，ellipsis 永遠不會生效。
+     align-items: center 讓 toast 各自維持自然寬度，不會被拉滿。 */
+  width: calc(var(--ui-page-max-width) - var(--space-600) * 2);
+  max-width: calc(100% - var(--space-600) * 2);
 }
 
 .ui-toast {
   pointer-events: auto;
+  max-width: 100%;
   background: var(--color-background-toast);
   border-radius: var(--radius-400);
   padding: var(--space-600);

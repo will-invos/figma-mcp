@@ -21,6 +21,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  /* dialog 與外側的間距。overlay 保持 fixed（跟著視窗置中），
+     間距與寬度上限由這裡的 padding + .ui-dialog 的 max-width 一起決定 —— 見下方註解。 */
+  padding: 0 var(--space-600);
   z-index: 1000;
   animation: ui-dialog-overlay-fade-in 0.2s ease;
 }
@@ -31,7 +34,12 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  max-width: 480px;
+  /*
+   * 以「頁面欄寬減兩側間距」為上限，而不是直接用欄寬 —— 頁面 max-width 也是
+   * --ui-page-max-width，寫成等寬的話桌機上 dialog 會剛好貼齊頁面左右邊緣、零間距。
+   * 窄螢幕由 overlay 的 padding 收出同樣的間距（此時這條 max-width 不成立）。
+   */
+  max-width: calc(var(--ui-page-max-width) - var(--space-600) * 2);
   border-radius: var(--radius-400);
   overflow: hidden;
   animation: ui-dialog-pop 0.2s ease-in-out;

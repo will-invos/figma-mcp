@@ -1,0 +1,20 @@
+/*
+ * 版面設定 —— 手維護，不在 Figma variables 的範圍內（同 typography.css / shadows.css）。
+ *
+ * 這裡的變數是**給使用端覆寫的旋鈕**，不是 Figma 倒出的 design token，
+ * 所以命名用 `--ui-` 前綴（對齊 class 命名空間）而不是 `--color-` / `--space-`。
+ */
+
+:root {
+  /*
+   * 頁面欄寬上限（design.md §4「頁面 max-width: 480px，不加桌機 breakpoint」）。
+   *
+   * 所有以視窗定位的覆蓋層 —— Dialog、Sheet、Toast、SnackBar、InAppNotification ——
+   * 都以這個值算自己的寬度，而不是各自寫死 480px。桌機瀏覽器裡頁面是固定欄寬置中，
+   * 覆蓋層若以視窗算寬就會比頁面寬（或剛好等寬、左右零間距）。
+   *
+   * 使用端的頁面欄寬不是 480 時，只要覆寫這一個變數，五個覆蓋層一起跟上：
+   *   :root { --ui-page-max-width: 420px; }
+   */
+  --ui-page-max-width: 480px;
+}
