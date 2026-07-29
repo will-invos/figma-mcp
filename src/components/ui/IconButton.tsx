@@ -3,9 +3,22 @@ import Spinner from './Spinner';
 import Badge from './Badge';
 import './IconButton.css';
 
-interface IconButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'children'> {
-  variant?: 'filled' | 'outline' | 'ghost';
-  colorType?: 'primary' | 'neutral' | 'danger' | 'prize' | 'donation' | 'fixed-white';
+type IconButtonVariant = 'filled' | 'outline' | 'ghost';
+
+/**
+ * 每個 variant 只有這些 colorType 有對應樣式，對齊 Figma「Style × Type」共 9 組
+ * （🧰 iOS - UI Kit 2025 · Icon button）。不在表內的組合沒有 CSS，會渲染成沒有配色的裸按鈕，
+ * 所以用 union 在編譯期擋掉，而不是留給執行期靜默失敗。
+ */
+type IconButtonColorByVariant = {
+  filled: 'primary' | 'neutral' | 'danger' | 'prize' | 'donation';
+  outline: 'primary';
+  ghost: 'primary' | 'neutral' | 'fixed-white';
+};
+
+type IconButtonColorType = IconButtonColorByVariant[IconButtonVariant];
+
+interface IconButtonBaseProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'children'> {
   size?: 'large' | 'medium' | 'small' | 'xsmall';
   loading?: boolean;
   icon?: React.ReactNode;
@@ -13,10 +26,18 @@ interface IconButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElem
   'aria-label': string;
 }
 
+/** filled 是預設值所以 variant 可省略；其餘兩個必須明寫，才不會讓省略時落到別的配色集合。 */
+type IconButtonStyleProps =
+  | { variant?: 'filled'; colorType?: IconButtonColorByVariant['filled'] }
+  | { variant: 'outline'; colorType?: IconButtonColorByVariant['outline'] }
+  | { variant: 'ghost'; colorType?: IconButtonColorByVariant['ghost'] };
+
+type IconButtonProps = IconButtonBaseProps & IconButtonStyleProps;
+
 /** loading 時 spinner 要跟 icon 同色，才不會在深色底上消失 */
 function resolveSpinnerColor(
-  variant: IconButtonProps['variant'],
-  colorType: IconButtonProps['colorType']
+  variant: IconButtonVariant | undefined,
+  colorType: IconButtonColorType | undefined
 ): 'primary' | 'inverse' | 'neutral' | 'fixed-bold' | 'fixed-white' {
   if (colorType === 'fixed-white') return 'fixed-white';
   if (colorType === 'neutral') return 'neutral';
@@ -44,6 +65,7 @@ const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
     },
     ref
   ) => {
+    // outline 在 Figma 只有 Primary 一種，CSS 也只有 .ui-icon-button--outline，不帶 colorType 後綴
     const variantColorClass =
       variant === 'outline'
         ? `ui-icon-button--${variant}`
@@ -85,4 +107,4 @@ const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
 IconButton.displayName = 'IconButton';
 
 export default IconButton;
-export type { IconButtonProps };
+export type { IconButtonProps, IconButtonStyleProps };
