@@ -60,6 +60,7 @@ import { InAppNotificationStory } from './InAppNotification.story.tsx'
 // 浮層
 import { DialogStory } from './Dialog.story.tsx'
 import { SheetStory } from './Sheet.story.tsx'
+import { SheetHeaderStory } from './SheetHeader.story.tsx'
 
 /** 側邊欄頂層區塊（可收合）→ category → story */
 export const sections: StorySection[] = [
@@ -84,7 +85,7 @@ export const sections: StorySection[] = [
       },
       {
         name: 'Overlay',
-        stories: [DialogStory, SheetStory],
+        stories: [DialogStory, SheetStory, SheetHeaderStory],
       },
     ],
   },

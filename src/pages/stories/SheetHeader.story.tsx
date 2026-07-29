@@ -40,10 +40,22 @@ export const SheetHeaderStory: StoryDef = {
   previewWidth: 360,
   props: {
     type:         { type: 'enum', options: ['grabber', 'default'], default: 'grabber' },
-    headlineSize: { type: 'enum', options: ['none', 'regular', 'large'], default: 'regular' },
-    headline:     { type: 'string', default: 'Headline' },
-    leading:      { type: 'enum', options: ['none', 'close', 'back', 'search', 'text'], default: 'close' },
-    trailing:     { type: 'enum', options: ['none', 'more', 'close', 'text'], default: 'none' },
+    /*
+     * 元件的預設是 'none'（不顯示標題），但 story 刻意預設 'regular' 才看得到東西。
+     * 這種「story 預設 ≠ 元件預設」的情況要標 required，否則 codegen 會把它當
+     * 預設值省略，複製出去的程式碼會變成沒有標題的 header。
+     */
+    headlineSize: { type: 'enum', options: ['none', 'regular', 'large'], default: 'regular', required: true },
+    /*
+     * 以下三個的顯示條件對齊 SheetHeader.tsx 的 showNav / navShowsLeading /
+     * showLargeBlock —— headlineSize='none' 時整個 nav 與 large 區塊都不渲染，
+     * 傳了也不會顯示；leading 另外在 grabber + large 這一格也不渲染。
+     */
+    headline:     { type: 'string', default: 'Headline', when: (v) => v.headlineSize !== 'none' },
+    leading:      { type: 'enum', options: ['none', 'close', 'back', 'search', 'text'], default: 'close',
+                    when: (v) => v.headlineSize !== 'none' && !(v.type === 'grabber' && v.headlineSize === 'large') },
+    trailing:     { type: 'enum', options: ['none', 'more', 'close', 'text'], default: 'none',
+                    when: (v) => v.headlineSize !== 'none' },
   },
   Render: SheetHeaderRender,
   codeProps: resolveProps,

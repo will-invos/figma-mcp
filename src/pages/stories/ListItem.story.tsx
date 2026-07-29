@@ -64,7 +64,10 @@ export const ListItemStory: StoryDef = {
     headline:    { type: 'string', default: 'Headline' },
     // 只有 rich 會渲染第二行；其餘 type 傳了也不會顯示，印在 code 區塊只會讓人以為有效
     description: { type: 'string', default: 'Description', when: { type: 'rich' } },
-    trailing:    { type: 'enum', options: ['none', 'drill-in', 'text', 'text-button', 'cta', 'icon', 'switch', 'checkbox', 'spinner'], default: 'drill-in' },
+    // 預設必須與元件的預設一致（ListItem.tsx 是 trailing = 'none'）——
+    // codegen 會省略「與預設相同」的 enum prop，兩邊不一致的話 code 區塊
+    // 會漏印 trailing，複製出去的程式碼渲染不出預覽看到的樣子
+    trailing:    { type: 'enum', options: ['none', 'drill-in', 'text', 'text-button', 'cta', 'icon', 'switch', 'checkbox', 'spinner'], default: 'none' },
     // 只有這三種 trailing 會用到文字（text 直接顯示、text-button / cta 當按鈕文字）
     trailingText:{ type: 'string', default: 'Text', when: (v) => ['text', 'text-button', 'cta'].includes(v.trailing) },
     // trailing="icon" 時要放哪一種：單純 icon，或一顆可點的 IconButton。
