@@ -1,0 +1,89 @@
+.ui-category-tag {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+/* 字級由 CategoryTag.tsx 掛 .text-label-* 決定，這裡只管尺寸 —— 與 Tag 同一組節奏 */
+.ui-category-tag--medium {
+  padding: var(--space-100) var(--space-200);
+  gap: var(--space-150);
+  border-radius: var(--radius-200);
+}
+
+.ui-category-tag--medium .ui-category-tag__icon,
+.ui-category-tag--medium .ui-category-tag__icon > i[class^='icon-'] {
+  width: 14px;
+  height: 14px;
+  font-size: 14px;
+}
+
+.ui-category-tag--small {
+  padding: var(--space-50) var(--space-150);
+  gap: var(--space-100);
+  border-radius: var(--radius-150);
+}
+
+.ui-category-tag--small .ui-category-tag__icon,
+.ui-category-tag--small .ui-category-tag__icon > i[class^='icon-'] {
+  width: 12px;
+  height: 12px;
+  font-size: 12px;
+}
+
+.ui-category-tag__icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 消費分類 —— 實色底 + 反白字 */
+.ui-category-tag--shopping {
+  background-color: var(--color-background-category-shopping);
+  color: var(--color-content-inverse-bold);
+}
+
+.ui-category-tag--food {
+  background-color: var(--color-background-category-food);
+  color: var(--color-content-inverse-bold);
+}
+
+.ui-category-tag--transportation {
+  background-color: var(--color-background-category-transportation);
+  color: var(--color-content-inverse-bold);
+}
+
+.ui-category-tag--entertainment {
+  background-color: var(--color-background-category-entertainment);
+  color: var(--color-content-inverse-bold);
+}
+
+.ui-category-tag--life {
+  background-color: var(--color-background-category-life);
+  color: var(--color-content-inverse-bold);
+}
+
+.ui-category-tag--other {
+  background-color: var(--color-background-category-other);
+  color: var(--color-content-inverse-bold);
+}
+
+/* 發票屬性 —— 捐贈與中獎有專屬色；中獎是亮黃底，字走 fixed-bold 才有對比 */
+.ui-category-tag--donation {
+  background-color: var(--color-background-donation-default);
+  color: var(--color-content-inverse-bold);
+}
+
+.ui-category-tag--prize {
+  background-color: var(--color-background-prize-default);
+  color: var(--color-content-fixed-bold);
+}
+
+/* 來源屬性 —— 弱化為中性底，避免與消費分類搶視覺 */
+.ui-category-tag--manual,
+.ui-category-tag--carrier,
+.ui-category-tag--scanner {
+  background-color: var(--color-background-neutral-subtle);
+  color: var(--color-content-default);
+}

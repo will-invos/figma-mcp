@@ -1,0 +1,30 @@
+/* 選項間距三種版面一致，都是 --space-400；差別只在排列方向與寬度分配 */
+.ui-radio-group {
+  display: flex;
+  gap: var(--space-400);
+  padding-top: var(--space-100);
+}
+
+.ui-radio-group--column {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+/* 兩欄：橫向排列（1│2 換行 3│4），交給 grid 自動配置。
+   minmax(0, 1fr) 而非 1fr —— 後者的最小尺寸是 auto，長標籤會把欄撐破。 */
+.ui-radio-group--two-columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+}
+
+/* 並排：依內容寬度排列，選項多到放不下時換行，不擠壓文字 */
+.ui-radio-group--side-by-side {
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.ui-radio-group--side-by-side > .ui-radio {
+  flex: 0 0 auto;
+}

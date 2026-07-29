@@ -27,6 +27,7 @@ import { TextAreaStory } from './TextArea.story'
 import { SelectStory } from './Select.story.tsx'
 import { CheckboxStory } from './Checkbox.story'
 import { RadioStory } from './Radio.story'
+import { RadioGroupStory } from './RadioGroup.story'
 import { SwitchStory } from './Switch.story'
 import { SliderStory } from './Slider.story.tsx'
 import { SearchFieldStory } from './SearchField.story.tsx'
@@ -34,6 +35,7 @@ import { FieldGroupStory } from './FieldGroup.story.tsx'
 
 // 顯示
 import { TagStory } from './Tag.story'
+import { CategoryTagStory } from './CategoryTag.story'
 import { ChipBarStory } from './ChipBar.story.tsx'
 import { BadgeStory } from './Badge.story'
 import { AvatarStory } from './Avatar.story'
@@ -70,11 +72,11 @@ export const sections: StorySection[] = [
       },
       {
         name: 'Forms',
-        stories: [ButtonStory, IconButtonStory, FabStory, TextFieldStory, TextAreaStory, PinInputStory, SelectStory, CheckboxStory, RadioStory, SwitchStory, SliderStory, SearchFieldStory, FieldGroupStory],
+        stories: [ButtonStory, IconButtonStory, FabStory, TextFieldStory, TextAreaStory, PinInputStory, SelectStory, CheckboxStory, RadioStory, RadioGroupStory, SwitchStory, SliderStory, SearchFieldStory, FieldGroupStory],
       },
       {
         name: 'Display',
-        stories: [TagStory, ChipBarStory, BadgeStory, AvatarStory, ListItemStory, ListHeaderStory, ListFooterStory, CardItemStory, DottedControllerStory, IconsStory],
+        stories: [TagStory, CategoryTagStory, ChipBarStory, BadgeStory, AvatarStory, ListItemStory, ListHeaderStory, ListFooterStory, CardItemStory, DottedControllerStory, IconsStory],
       },
       {
         name: 'Feedback',
