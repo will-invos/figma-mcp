@@ -36,11 +36,11 @@
   color: var(--color-content-bold);
 }
 
+/* 導覽列的點擊區比 IconButton 預設寬一點；配色交給 IconButton 自己的 variant */
 .ui-nav-bar__leading .ui-icon-button,
 .ui-nav-bar__trailing .ui-icon-button {
   width: 48px;
   height: 44px;
-  color: var(--color-content-default);
 }
 
 .ui-nav-bar .ui-nav-bar__leading .ui-button--text {

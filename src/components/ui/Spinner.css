@@ -69,6 +69,11 @@
   --_spinner-track: color-mix(in srgb, var(--color-border-boldest) 40%, transparent);
 }
 
+.ui-spinner--danger {
+  --_spinner-arc: var(--color-border-danger);
+  --_spinner-track: color-mix(in srgb, var(--color-border-danger) 40%, transparent);
+}
+
 .ui-spinner--inverse {
   --_spinner-arc: var(--color-border-inverse-plain);
   --_spinner-track: color-mix(in srgb, var(--color-border-inverse-plain) 40%, transparent);

@@ -6,7 +6,7 @@ export const SpinnerStory: StoryDef = {
   name: 'Spinner',
   category: 'Feedback',
   props: {
-    color: { type: 'enum', options: ['primary', 'neutral', 'inverse', 'fixed-bold'], default: 'primary' },
+    color: { type: 'enum', options: ['primary', 'neutral', 'danger', 'inverse', 'fixed-bold'], default: 'primary' },
     size:  { type: 'enum', options: ['xxsmall', 'xsmall', 'small', 'medium', 'large', 'xlarge', 'xxlarge'], default: 'medium' },
   },
 }

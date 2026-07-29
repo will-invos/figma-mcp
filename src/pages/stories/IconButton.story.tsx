@@ -11,7 +11,7 @@ export const IconButtonStory: StoryDef = {
       optionsByDep: { variant: {
         filled:  ['primary', 'neutral', 'danger', 'prize', 'donation'],
         outline: ['primary'],
-        ghost:   ['primary', 'neutral', 'fixed-white'],
+        ghost:   ['primary', 'neutral', 'danger', 'fixed-white'],
       }},
     },
     size:      { type: 'enum', options: ['large', 'medium', 'small', 'xsmall'], default: 'medium' },

@@ -6,14 +6,14 @@ import './IconButton.css';
 type IconButtonVariant = 'filled' | 'outline' | 'ghost';
 
 /**
- * 每個 variant 只有這些 colorType 有對應樣式，對齊 Figma「Style × Type」共 9 組
+ * 每個 variant 只有這些 colorType 有對應樣式，對齊 Figma「Style × Type」共 10 組
  * （🧰 iOS - UI Kit 2025 · Icon button）。不在表內的組合沒有 CSS，會渲染成沒有配色的裸按鈕，
  * 所以用 union 在編譯期擋掉，而不是留給執行期靜默失敗。
  */
 type IconButtonColorByVariant = {
   filled: 'primary' | 'neutral' | 'danger' | 'prize' | 'donation';
   outline: 'primary';
-  ghost: 'primary' | 'neutral' | 'fixed-white';
+  ghost: 'primary' | 'neutral' | 'danger' | 'fixed-white';
 };
 
 type IconButtonColorType = IconButtonColorByVariant[IconButtonVariant];
@@ -38,9 +38,11 @@ type IconButtonProps = IconButtonBaseProps & IconButtonStyleProps;
 function resolveSpinnerColor(
   variant: IconButtonVariant | undefined,
   colorType: IconButtonColorType | undefined
-): 'primary' | 'inverse' | 'neutral' | 'fixed-bold' | 'fixed-white' {
+): 'primary' | 'inverse' | 'neutral' | 'danger' | 'fixed-bold' | 'fixed-white' {
   if (colorType === 'fixed-white') return 'fixed-white';
   if (colorType === 'neutral') return 'neutral';
+  // ghost + danger 的 icon 是紅字，filled + danger 是紅底白字，兩者 spinner 色不同
+  if (variant === 'ghost' && colorType === 'danger') return 'danger';
   if (variant === 'filled') {
     switch (colorType) {
       case 'prize': return 'fixed-bold';

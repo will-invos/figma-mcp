@@ -165,23 +165,51 @@
 
 .ui-icon-button--ghost {
   background-color: transparent;
-  transition: opacity 0.15s;
+  transition: opacity 0.15s, color 0.15s;
 }
+
+/*
+ * ghost 任何狀態都不長背景，hover / pressed 的回饋分兩種：
+ * 有 hover / active 色階的 primary、danger 走換色；
+ * neutral、fixed-white 沒有色階，改用整體變淡 80% / 60%。
+ */
 @media (hover: hover) {
-  .ui-icon-button--ghost:hover {
+  .ui-icon-button--ghost-neutral:hover,
+  .ui-icon-button--ghost-fixed-white:hover {
     opacity: 0.8;
   }
 }
-.ui-icon-button--ghost:active {
+.ui-icon-button--ghost-neutral:active,
+.ui-icon-button--ghost-fixed-white:active {
   opacity: 0.6;
 }
 
 .ui-icon-button--ghost.ui-icon-button--ghost-primary {
   color: var(--color-content-brand-default);
 }
+@media (hover: hover) {
+  .ui-icon-button--ghost.ui-icon-button--ghost-primary:hover {
+    color: var(--color-content-brand-hover);
+  }
+}
+.ui-icon-button--ghost.ui-icon-button--ghost-primary:active {
+  color: var(--color-content-brand-active);
+}
 
 .ui-icon-button--ghost.ui-icon-button--ghost-neutral {
-  color: var(--color-content-neutral-default);
+  color: var(--color-content-default);
+}
+
+.ui-icon-button--ghost.ui-icon-button--ghost-danger {
+  color: var(--color-content-danger-default);
+}
+@media (hover: hover) {
+  .ui-icon-button--ghost.ui-icon-button--ghost-danger:hover {
+    color: var(--color-content-danger-hover);
+  }
+}
+.ui-icon-button--ghost.ui-icon-button--ghost-danger:active {
+  color: var(--color-content-danger-active);
 }
 
 .ui-icon-button--ghost.ui-icon-button--ghost-fixed-white {
