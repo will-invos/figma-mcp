@@ -147,7 +147,9 @@
 
 ### Figma 端 vs Code 端 text style
 
-`figma-tokens.json` 的 text styles（如 `iOS/Body-CN/Large`）是 **Figma 設計端資料**，Plugin API 套對應 text style 用。Code 端只有一組通用 class（`.text-body-large` 等不分 EN/CN）。
+`figma-tokens.json` 的 text styles（如 `iOS/Body/Large`）是 **Figma 設計端資料**，Plugin API 套對應 text style 用；code 端的對應 class 記在同一筆的 `css` 欄位。
+
+**中英文不分兩套。** Figma 與 code 端都只有一組樣式，中文字型交給 OS 自行挑選（見 [design.md §2](./design.md)）。過去曾有 `-CN` 平行樣式，已移除——**不要再建，也不要在 Figma 端挑 `-CN` 版本**。
 
 ## 範本應用
 
