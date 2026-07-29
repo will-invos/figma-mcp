@@ -141,13 +141,42 @@ export default function LoginPage() {
 
 完整元件清單與決策樹請見 Kit 內的 [CLAUDE.md](CLAUDE.md)（被 `npm install` 時一起裝進 `node_modules/@invos/design-system/`，AI 會自動讀到）。
 
+#### 通知類元件要先掛 Provider
+
+`Toast`、`SnackBar`、`InAppNotification` 是 Provider + hook 的形式（自帶 portal、計時與佇列管理）。**沒掛 Provider 就呼叫對應的 hook 會 throw**：
+
+```tsx
+import { InAppNotificationProvider, ToastProvider, SnackBarProvider } from '@invos/design-system'
+
+createRoot(document.getElementById('root')!).render(
+  <InAppNotificationProvider>
+    <ToastProvider>
+      <SnackBarProvider>
+        <App />
+      </SnackBarProvider>
+    </ToastProvider>
+  </InAppNotificationProvider>
+)
+```
+
+```tsx
+const { show } = useSnackBar()
+show({ text: '已儲存', status: 'success' })   // 貼齊頁面底部，3 秒後自動關閉
+```
+
+三者的差別：`Toast` 畫面正中央、可多則並存堆疊、支援 loading 與擋住底層操作；`SnackBar` 貼齊底部、一次一則排隊；`InAppNotification` 貼齊頂部、可點擊跳轉。**不要自己寫 portal 版本** —— 定位、計時、佇列與 live region 都已經在 Provider 內處理好。
+
 ### 4. Viewport（行動網頁）
 
 ```html
 <!-- index.html -->
 <meta name="viewport"
-      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 ```
+
+- `viewport-fit=cover` 是必要的，否則貼底 / 貼頂元件（`TabBar`、`Sheet`、`SnackBar`、`InAppNotification`）的 `env(safe-area-inset-*)` 不生效
+- **不要加 `maximum-scale=1` / `user-scalable=no`** —— 那會關掉使用者縮放，是無障礙反模式（見 [design.md §3.2](design.md)）。要限制縮放必須有經無障礙評估的產品需求
+- viewport 只在 app shell 的 HTML 設定一次，頁面與元件不得新增或覆寫
 
 ### 5. 升級版本
 
