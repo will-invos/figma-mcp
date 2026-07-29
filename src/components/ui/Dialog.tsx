@@ -11,6 +11,13 @@ import './Dialog.css';
 type DialogAction = {
   label: string;
   onClick: () => void;
+  /**
+   * 顯示 spinner 並鎖住這顆按鈕（行為同 Button 的 loading）。
+   * 只要有任一 action 在 loading，點 overlay 與按 Esc 都不會關閉 dialog ——
+   * 否則使用者仍能在請求進行中把 dialog 關掉，剛填的內容一併消失。
+   */
+  loading?: boolean;
+  disabled?: boolean;
 } & (
   | { variant?: 'filled'; colorType?: 'primary' | 'neutral' | 'danger' }
   | { variant: 'outline' | 'ghost' | 'text'; colorType?: 'primary' }
@@ -27,8 +34,20 @@ interface DialogProps {
   actions: DialogAction[];
   image?: React.ReactNode;
   extraContent?: React.ReactNode;
-  /** portal 目標，預設 document.body；想讓 dialog 跟著某個容器的主題與範圍走就傳它 */
+  /**
+   * portal 目標，預設 document.body。
+   *
+   * 兩個用途：讓 dialog 跟著某個容器的主題走；以及讓它落在使用端能一起停用的節點內 ——
+   * 想「整頁不可操作」時對頁面根節點加 `inert`，預設 portal 到 body 的 dialog 會落在
+   * 停用範圍外，變成可互動的圖層浮在阻擋層上。傳入 container 就不會有這個問題。
+   * overlay 仍是 position: fixed，所以傳 container **不會改變視覺定位**。
+   */
   container?: Element;
+  /**
+   * 停用整個 dialog 的互動（含 overlay 點擊關閉、Esc、Tab 聚焦），內容仍留在畫面上。
+   * 不想改 portal 結構、又要在請求進行中鎖住畫面時用這個。
+   */
+  inert?: boolean;
 }
 
 function Dialog({
@@ -42,17 +61,23 @@ function Dialog({
   image,
   extraContent,
   container,
+  inert = false,
 }: DialogProps) {
   const dialogRef = useRef<HTMLDivElement>(null);
 
+  // 有 action 在進行中就不讓關 —— 關掉的話使用者剛填的內容會一起消失
+  const busy = actions.some((action) => action.loading);
+  // inert 只擋得住指標與焦點，document 上的 keydown 照樣會進來，所以要另外擋
+  const locked = inert || busy;
+
   useEffect(() => {
-    if (!open) return;
+    if (!open || locked) return;
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
     };
     document.addEventListener('keydown', handleKeyDown);
     return () => document.removeEventListener('keydown', handleKeyDown);
-  }, [open, onClose]);
+  }, [open, locked, onClose]);
 
   // 開啟時把 focus 移進 dialog，關閉（或整個卸載）時還給原本的元素 ——
   // 否則鍵盤使用者關掉 dialog 後 focus 會掉回 <body>，得從頭 Tab 一次。
@@ -109,6 +134,9 @@ function Dialog({
           {...resolveActionStyle(action, i)}
           size="large"
           onClick={action.onClick}
+          loading={action.loading}
+          // 有一顆在 loading 時其餘按鈕一併鎖住，避免按下第二個請求
+          disabled={action.disabled || (busy && !action.loading)}
           text={action.label}
         />
       ))}
@@ -116,7 +144,11 @@ function Dialog({
   );
 
   return createPortal(
-    <div className="ui-dialog-overlay" onClick={onClose}>
+    <div
+      className="ui-dialog-overlay"
+      inert={inert || undefined}
+      onClick={locked ? undefined : onClose}
+    >
       <div
         ref={dialogRef}
         className="ui-dialog"

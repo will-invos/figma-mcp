@@ -56,6 +56,7 @@ function resolveProps(values: Record<string, any>, state: FieldState = {}) {
     headline: values.headline,
     helpText: values.helpText ? values.helpTextBody : undefined,
     helpTextAlign: values.helpTextAlign,
+    helpTextIcon: values.helpTextIcon,
     status: values.status,
     children: fieldNode(values, state),
   }
@@ -84,6 +85,8 @@ export const FieldGroupStory: StoryDef = {
     helpText:       { type: 'boolean', default: true },
     helpTextBody:   { type: 'string', default: 'Help text', when: { helpText: true } },
     helpTextAlign:  { type: 'enum', options: ['left', 'right'], default: 'left', when: { helpText: true } },
+    // 關掉後文字左緣會與輸入框左緣對齊；純說明性的註腳用（設計稿沒有 icon 時）
+    helpTextIcon:   { type: 'boolean', default: true, when: { helpText: true } },
     status:         { type: 'enum', options: ['default', 'error'], default: 'default' },
   },
   Render: FieldGroupRender,

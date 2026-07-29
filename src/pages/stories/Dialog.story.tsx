@@ -88,9 +88,11 @@ const ExtraContent: React.FC<{ kind: string }> = ({ kind }) => {
  *  `close` 由 Render 傳入；code 區塊給空 handler，序列化時只會印成 `() => {}`。
  *  `interactive` 為 true 時 extraContent 用有狀態的 <ExtraContent>，code 區塊則直接印出欄位本身。 */
 function resolveProps(values: Record<string, any>, close: () => void = () => {}, interactive = false) {
+  // loading 期間：這顆顯示 spinner，另一顆自動 disabled，點 overlay 與 Esc 也不會關閉
+  const loading = values.loading || undefined
   const primary = values.type === 'danger'
-    ? { label: 'Delete', onClick: close, colorType: 'danger' as const }
-    : { label: 'Confirm', onClick: close, colorType: 'primary' as const }
+    ? { label: 'Delete', onClick: close, colorType: 'danger' as const, loading }
+    : { label: 'Confirm', onClick: close, colorType: 'primary' as const, loading }
   const secondary = { label: 'Cancel', onClick: close, colorType: 'neutral' as const }
 
   let actions
@@ -153,6 +155,8 @@ export const DialogStory: StoryDef = {
     cta:         { type: 'enum', options: ['2-buttons-horizontal', '2-buttons-vertical', '1-button'], default: '2-buttons-horizontal' },
     image:       { type: 'boolean', default: false },
     extra:       { type: 'enum', options: ['none', 'textfield', 'textarea', 'select', 'checkbox', 'switch'], default: 'none' },
+    // 請求進行中：主要動作顯示 spinner，其餘按鈕與 overlay / Esc 關閉一併鎖住
+    loading:     { type: 'boolean', default: false },
   },
   Render: DialogRender,
   codeProps: (values) => ({ open: true, ...resolveProps(values) }),
