@@ -43,6 +43,13 @@
 | `SheetHeader` | 水平 `--space-400`、頂部 `--space-300` | — |
 | `Dialog` body / footer | body 全 24、footer `0 24 24` | body 主軸 `--space-600`、content 內 `--space-400`、actions `--space-400` |
 | `FieldGroup` header / help | header `--space-200 0`（無水平）、help 頂部 `--space-200` | header `--space-50`、help `--space-200` |
+| `ChipBar` | `--space-300 --space-400`（12 / 16）；**無 prop 可調**，見下 | item 間 `--space-200` |
+
+> **`ChipBar` 的內距不做成 prop**（2026-07-29 定案）：Figma 的 Chip bar **沒有** no-inset / full-bleed 變體（已向設計師確認），加 prop 等於自創設計稿上不存在的樣式；且這個 kit 沒有純間距 prop 的慣例 —— `ListItem` 的 `type`、`Tabs` 的 `type` 都是 Figma 變體名稱，只是剛好會改到間距。
+>
+> 放進本身已有內距的容器（卡片、Sheet）需要讓第一顆 chip 對齊時，用公開的 `className` 覆寫 `padding`。要推翻這個決定，先確認 Figma 是否新增了變體，並用該變體的名稱命名 prop。
+>
+> `ChipBar` 也刻意不設 `background` —— 底色由外層容器決定，才能放在各種底色上。
 
 ---
 
