@@ -83,10 +83,14 @@
 | `--ui-z-in-app-notification` | 800 | `.ui-in-app-notification__viewport` |
 | `--ui-z-tooltip` | 700 | `.ui-tooltip__container` |
 
+> **前提：設計上盡量不讓這些元件同時出現**（見 [design.md §3.2](../design.md)）。要在 `Sheet` 上問問題就先關掉 `Sheet` 再開 `Dialog`；需要中途確認的流程一開始就該用完整頁面而不是 `Sheet`。
+>
+> **這張表是保險，不是設計許可** —— 它保證萬一同時出現時不會卡死（上層被下層蓋住、按鈕點不到），但不代表可以把疊加當成正常設計。
+
 幾個關鍵理由：
 
-- **`Dialog` 必須高於 `Sheet`** —— 「在表單 sheet 上問『要放棄編輯嗎？』」是常見流程。先前 Dialog overlay(1000) 低於 Sheet container(1001)，只要 sheet 夠高，Dialog 會整個被蓋住、連按鈕都點不到。
-- **`SnackBar` 高於 `Dialog` / `Sheet`** —— 操作常常就發生在 sheet 或 dialog 裡（按下送出 → 告知已儲存），被遮罩蓋住就失去意義。
+- **`Dialog` 高於 `Sheet`** —— 兩者同時出現本身要避免，但真的發生時不能卡死。先前 Dialog overlay(1000) 低於 Sheet container(1001)，只要 sheet 夠高，Dialog 會整個被蓋住、連按鈕都點不到（實測 900×713 視窗、sheet 內容 70vh，重疊區域中心命中 `.ui-sheet__body`）。
+- **`SnackBar` 高於 `Dialog` / `Sheet`** —— 這是唯一**刻意允許**與 modal 並存的情況：操作常常就發生在 sheet 或 dialog 裡（按下送出 → 告知已儲存），被遮罩蓋住就失去意義。`Toast` 同理且更高。
 - **`InAppNotification` 低於 modal** —— push 通知不該蓋在使用者正在做決策的畫面上。
 - **`Tooltip` 的值幾乎不影響全域** —— 它沒有 portal，是 `position: absolute` 在自己的 `relative` wrapper 內，z-index 只在該 stacking context 生效。列在這裡是為了表達意圖。
 

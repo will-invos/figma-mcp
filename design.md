@@ -144,8 +144,10 @@
 - **覆蓋層一律對齊頁面欄寬，不是視窗**：`Dialog`、`Sheet`、`Toast`、`SnackBar`、`InAppNotification` 都是 `position: fixed`，但寬度以 `--ui-page-max-width` 計算。桌機瀏覽器裡頁面是固定欄寬置中，以視窗算寬會讓覆蓋層比頁面寬、或剛好等寬而左右零間距。**新增覆蓋層元件時照這個通則走，不要再加個別的寬度 prop**
   - 需要左右間距的（Dialog 24 / SnackBar 與 InAppNotification 12）寫成 `calc(var(--ui-page-max-width) - 間距 * 2)` —— 直接用欄寬就等於貼齊頁面邊緣
   - `Sheet` 貼齊底部、滿欄寬是刻意的，所以直接用欄寬不減間距
-- **覆蓋層疊放順序（由高至低）**：`Toast` > `SnackBar` > `Dialog` > `Sheet` > `InAppNotification` > `Tooltip`。值統一在 [tokens/layout.css](./src/components/ui/tokens/layout.css) 的 `--ui-z-*`，**元件 CSS 不得寫死 z-index 數字**；新增覆蓋層元件時在那裡加變數並排進這條順序。對照表與各層理由見 [docs/component-internals.md](./docs/component-internals.md)
-  - `Dialog` 高於 `Sheet`（在表單 sheet 上問「要放棄編輯嗎？」是常見流程）；`SnackBar` 高於兩者（操作常發生在 sheet / dialog 裡，被遮罩蓋住就失去意義）；`InAppNotification` 低於 modal（push 通知不該蓋在決策畫面上）
+- **覆蓋層盡量不要同時出現在畫面上** —— 這是**設計層面的第一原則**，優先於下面的 z-index。要在 `Sheet` 上問使用者一個問題時，**正確做法是先關掉 Sheet 再開 `Dialog`**；如果那個流程複雜到需要中途確認（多步驟、可能放棄編輯），那它一開始就不該是 Sheet，**應該用完整頁面呈現**。兩層 modal 疊在一起會讓使用者不知道關掉上層之後會回到哪裡
+- **疊放順序（由高至低）**：`Toast` > `SnackBar` > `Dialog` > `Sheet` > `InAppNotification` > `Tooltip`。值統一在 [tokens/layout.css](./src/components/ui/tokens/layout.css) 的 `--ui-z-*`，**元件 CSS 不得寫死 z-index 數字**；新增覆蓋層元件時在那裡加變數並排進這條順序。對照表見 [docs/component-internals.md](./docs/component-internals.md)
+  - 這條順序是**保險，不是設計許可** —— 它保證萬一同時出現時不會出現「上層被下層蓋住、按鈕點不到」這種卡死，但不代表可以把疊加當成正常設計
+  - 唯一**刻意允許**同時出現的是回饋類：`Toast` / `SnackBar` 高於 modal（操作常發生在 sheet / dialog 裡，被遮罩蓋住就失去意義）。`InAppNotification` 低於 modal（push 通知不該蓋在使用者正在做決策的畫面上）
 - **viewport 只由 app shell 的 HTML 設定**（本 repo 是 [index.html](./index.html)），頁面與元件**不得新增或覆寫**。預設**保留使用者縮放** —— 不要加 `maximum-scale=1` / `user-scalable=no`，那是無障礙反模式；要限制縮放必須有經無障礙評估的產品需求。設定值必須含 `viewport-fit=cover`，否則下一條 safe area 不生效
 - 頁面結構：`NavigationBar` (top) → 內容區（自由捲動）→ `TabBar` (bottom，可選)
 - **Safe area**：`viewport-fit=cover` 下內容會延伸到瀏海 / home indicator 底下。貼底 chrome（`TabBar`、`Sheet`）與貼頂懸浮元件（`InAppNotification`）已自帶 `env(safe-area-inset-*, 0px)` padding
@@ -275,6 +277,7 @@
 | 桌機 breakpoint `@media (min-width: 768px)` | mobile-first，max-width 480 |
 | `:hover` 不包 `@media (hover: hover)` | 包進去，避免 touch 裝置 sticky hover |
 | 自製 modal / sheet / toast / snackbar / dropdown | 用 `Dialog` / `Sheet` / `Toast` / `SnackBarProvider` / `Select` |
+| `Sheet` 開著時再疊一層 `Dialog` | 先關 `Sheet` 再開 `Dialog`；會需要中途確認的流程改用完整頁面，不要用 `Sheet` |
 | 自製覆蓋層的定位與顯示管理（portal、計時、佇列） | 用元件既有的 Provider；覆蓋層寬度一律走 `--ui-page-max-width` |
 | `<div onClick>` 假按鈕 | `<Button>` / `<IconButton>` |
 | `<input type="checkbox">` 原生 | `<Checkbox>` / `<Radio>` / `<Switch>` |
@@ -288,6 +291,7 @@
 - [ ] 色彩、文字層級、間距、圓角與陰影優先使用既有 token。結構性數值如 100%、1px border、aspect ratio、z-index，以及尚無對應 token 的元件內部尺寸，可在有明確理由時使用。
 - [ ] `:hover` 包在 `@media (hover: hover)` 內
 - [ ] 沒自製 modal / sheet / toast / snackbar / dropdown
+- [ ] 沒有兩層 modal 疊在一起（`Sheet` + `Dialog`）—— 回饋類的 `Toast` / `SnackBar` 不算
 - [ ] Barrel import（`@/components/ui`），觸控區 ≥ 44×44
 
 ---

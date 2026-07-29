@@ -80,7 +80,7 @@
 | 滑桿 | `<Slider>` |
 | 表單分組容器 | `<FieldGroup>` + `<FieldGroupHeader>` + `<FieldGroupHelpText>` |
 | 全螢幕對話（需使用者決策） | `<Dialog>` |
-| 從底部滑上的面板（行動主要模式） | `<Sheet>` / 搭配 `<SheetHeader>` |
+| 從底部滑上的面板（行動主要模式） | `<Sheet>` / 搭配 `<SheetHeader>`。**流程需要多步驟或中途確認（可能要問「要放棄編輯嗎」）就不要用 Sheet，改用完整頁面** —— 不要在 Sheet 上再疊一層 `<Dialog>` |
 | 即時通知（中央短訊） | `<Toast>`（Provider 模式、`useToast()`）|
 | 操作結果告知（底部、可含動作） | `<SnackBar>`（Provider 模式、`useSnackBar()`；貼齊頁面底部、連續呼叫排隊不疊加）|
 | 頂部 push 通知（含 leading icon、可點擊跳轉） | `<InAppNotification>`（Provider 模式、`useInAppNotification()`） |
