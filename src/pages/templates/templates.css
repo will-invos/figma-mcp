@@ -40,7 +40,9 @@
   padding: var(--space-400);
   display: flex;
   flex-direction: column;
-  gap: var(--space-300);
+  /* 欄位（FieldGroup）之間 16px；FieldGroup 內部 label / 輸入框 / help 是 8px，
+     兩層拉開才看得出哪個 label 屬於哪個欄位。 */
+  gap: var(--space-400);
 }
 
 .tpl-card-stack {

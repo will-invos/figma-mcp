@@ -83,16 +83,15 @@
     },
     "FieldGroup": {
       "setKey": "648cb01e6fc7bd70866556ac6bce51efdfe1f13f",
-      "defaultVariant": { "Status": "Enabled" },
-      "booleanProps": ["Show help text#3938:196", "Show header#3938:197"]
-    },
-    "FieldGroupHeader": {
-      "compKey": "cbbb5741ba92f0546233c1fc70a0cc4de40a7650",
-      "textProps": ["↳ Headline#3813:21", "↳ Description#3929:45"]
+      "defaultVariant": { "State": "Enabled" },
+      "booleanProps": ["Help text#3938:196", "Label#11278:3"],
+      "textProps": ["↳ Label#11278:0"],
+      "slotProps": ["Slot#11278:6"]
     },
     "FieldGroupHelpText": {
       "setKey": "c261cdbb19ae5d55e60943c437b272f3aa73cc14",
-      "defaultVariant": { "Status": "Default", "Align": "Left" },
+      "defaultVariant": { "State": "Default", "Align": "Left" },
+      "booleanProps": ["Icon#3850:0"],
       "textProps": ["↳ Help text#3850:3"]
     },
     "RadioItem": {

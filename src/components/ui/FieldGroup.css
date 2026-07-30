@@ -1,19 +1,12 @@
+/* label / 內容 / help text 之間一律 --space-200，容器本身不留內距 */
 .ui-field-group {
   display: flex;
   flex-direction: column;
+  gap: var(--space-200);
   width: 100%;
 }
-.ui-field-group__header {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-50);
-  padding: var(--space-200) 0;
-}
-.ui-field-group__header .ui-field-group__label {
+.ui-field-group__label {
   color: var(--color-content-bold);
-}
-.ui-field-group__header .ui-field-group__description {
-  color: var(--color-content-default);
 }
 .ui-field-group__content {
   display: flex;
@@ -23,7 +16,6 @@
   display: flex;
   align-items: flex-start;
   gap: var(--space-200);
-  padding-top: var(--space-200);
   color: var(--color-content-subtle);
 }
 .ui-field-group__help-icon {

@@ -53,7 +53,7 @@ function fieldNode(values: Record<string, any>, state: FieldState = {}) {
 /** 控制項的值 → 實際傳給 FieldGroup 的 props（Render 與 code 區塊共用）。 */
 function resolveProps(values: Record<string, any>, state: FieldState = {}) {
   return {
-    headline: values.headline,
+    label: values.label,
     helpText: values.helpText ? values.helpTextBody : undefined,
     helpTextAlign: values.helpTextAlign,
     helpTextIcon: values.helpTextIcon,
@@ -81,7 +81,7 @@ export const FieldGroupStory: StoryDef = {
   previewWidth: 360,
   props: {
     field:          { type: 'enum', options: ['textfield', 'textarea', 'checkbox', 'radio', 'select'], default: 'textfield' },
-    headline:       { type: 'string', default: 'Headline' },
+    label:          { type: 'string', default: 'Label' },
     helpText:       { type: 'boolean', default: true },
     helpTextBody:   { type: 'string', default: 'Help text', when: { helpText: true } },
     helpTextAlign:  { type: 'enum', options: ['left', 'right'], default: 'left', when: { helpText: true } },
