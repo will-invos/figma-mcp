@@ -20,10 +20,16 @@
   pointer-events: none;
 }
 
+/*
+ * --ui-icon-button-inset 是 icon 到觸控區邊界的距離，等於該尺寸的 padding。
+ * 放進 ListItem 這種「icon 要貼齊 24px 框」的 slot 時，外面用負 margin 吃掉它，
+ * 觸控區維持原尺寸、視覺上不多出一圈。改 padding 時記得一起改。
+ */
 .ui-icon-button--large {
   width: 52px;
   height: 52px;
-  padding: var(--space-300);
+  --ui-icon-button-inset: var(--space-300);
+  padding: var(--ui-icon-button-inset);
   border-radius: var(--radius-full);
   font-size: 28px;
 }
@@ -39,7 +45,8 @@
 .ui-icon-button--medium {
   width: 40px;
   height: 40px;
-  padding: var(--space-200);
+  --ui-icon-button-inset: var(--space-200);
+  padding: var(--ui-icon-button-inset);
   border-radius: var(--radius-full);
   font-size: 24px;
 }
@@ -55,7 +62,8 @@
 .ui-icon-button--small {
   width: 32px;
   height: 32px;
-  padding: var(--space-150);
+  --ui-icon-button-inset: var(--space-150);
+  padding: var(--ui-icon-button-inset);
   border-radius: var(--radius-full);
   font-size: 20px;
 }
@@ -71,7 +79,8 @@
 .ui-icon-button--xsmall {
   width: 24px;
   height: 24px;
-  padding: var(--space-100);
+  --ui-icon-button-inset: var(--space-100);
+  padding: var(--ui-icon-button-inset);
   border-radius: var(--radius-full);
   font-size: 16px;
 }

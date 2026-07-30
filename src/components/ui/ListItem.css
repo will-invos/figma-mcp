@@ -75,6 +75,24 @@
   font-size: 24px;
 }
 
+/*
+ * icon slot 的規格是「icon 四周不留間距」——bare icon 天生就是 24px 方框，
+ * 但 IconButton 自帶一圈 padding 撐觸控區（medium 40px = 24 + 8×2），
+ * 直接放進來會上下把列撐高 16px、右側離螢幕邊多 8px。
+ *
+ * 用負 margin 把那圈 padding 吃回來：觸控區仍是 40px（可點範圍不縮），
+ * 版面上只佔 icon 本身的 24px，跟 bare icon 對齊在同一條線上。
+ * 值取自 IconButton 自己宣告的 --ui-icon-button-inset，兩邊不會各改各的。
+ *
+ * 只作用在 ghost —— 它任何狀態都不長背景，那圈 padding 純粹是觸控區，拉齊沒有副作用。
+ * filled / outline 的圓形底色或外框是看得見的實體，把 padding 吃掉會讓圓圈溢出
+ * 列的 16px 邊界、貼到螢幕邊，所以維持原樣（同 trailing="cta" 保留按鈕外框的邏輯）。
+ */
+.ui-list-item__leading-icon > .ui-icon-button--ghost,
+.ui-list-item__trailing > .ui-icon-button--ghost {
+  margin: calc(-1 * var(--ui-icon-button-inset, 0px));
+}
+
 .ui-list-item__leading-extra {
   flex-shrink: 0;
   display: flex;
