@@ -1,7 +1,5 @@
 # Token Pipeline
 
-> Figma variables 是唯一母版，這裡的一切都是它的投影。方案背景與定案見 [docs/cross-platform-handoff.md §3](../docs/cross-platform-handoff.md)。
-
 ```
 Figma variables（設計師改這裡）
    │ ① 同步：請 AI 用 MCP 整批倒出（見下方「同步指令」）→ figma-dump/*.txt
