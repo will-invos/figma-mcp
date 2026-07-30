@@ -104,9 +104,6 @@ export type { DividerProps } from './Divider';
 export { default as FieldGroup } from './FieldGroup';
 export type { FieldGroupProps } from './FieldGroup';
 
-export { default as FieldGroupHeader } from './FieldGroupHeader';
-export type { FieldGroupHeaderProps } from './FieldGroupHeader';
-
 export { default as FieldGroupHelpText } from './FieldGroupHelpText';
 export type { FieldGroupHelpTextProps } from './FieldGroupHelpText';
 

@@ -21,7 +21,7 @@ interface RadioGroupProps {
   disabled?: boolean;
   /** 同組 radio 的 name；未傳自動產生 */
   name?: string;
-  /** 沒有外層 FieldGroupHeader 時，用它替整組命名 */
+  /** 沒有外層 FieldGroup label 時，用它替整組命名 */
   'aria-label'?: string;
   className?: string;
 }

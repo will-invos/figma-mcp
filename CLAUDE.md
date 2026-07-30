@@ -78,7 +78,7 @@
 | 單選 | `<Radio>` |
 | 多選 | `<Checkbox>` |
 | 滑桿 | `<Slider>` |
-| 表單分組容器 | `<FieldGroup>` + `<FieldGroupHeader>` + `<FieldGroupHelpText>` |
+| 表單分組容器 | `<FieldGroup label="..." helpText="...">`（label / helpText 由 FieldGroup 自己渲染，`<FieldGroupHelpText>` 只在單獨使用時才需要） |
 | **重要的確認動作**，需讓使用者暫停其他行為 | `<Dialog>`。動作按下後先關閉 Dialog，再用 `<SnackBar>` 告知結果 —— **不要讓 Dialog 與 Toast / SnackBar 同時出現** |
 | **簡單的**互動或資訊（更多選項、一至兩個欄位） | `<Sheet>` / 搭配 `<SheetHeader>`。**欄位一多、需要多步驟、或中途可能要確認，就改用完整頁面** —— 不要在 Sheet 上再疊一層 `<Dialog>` |
 | **處理中**（頁面載入等），且當下不希望使用者做任何操作 | `<Toast>`（Provider 模式、`useToast()`）。**不是一般短訊通知** —— 告知結果請用 `<SnackBar>` |

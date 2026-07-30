@@ -76,7 +76,7 @@ export default function FormTemplate({ onBack }: FormTemplateProps) {
 
       <div className="tpl-page__body tpl-page__body--plain">
         <div className="tpl-section">
-          <FieldGroup headline="戶名">
+          <FieldGroup label="戶名">
             <TextField
               placeholder="請輸入戶名"
               value={holder}
@@ -86,7 +86,7 @@ export default function FormTemplate({ onBack }: FormTemplateProps) {
 
           {/* 選項需要更大的點擊區 / 圖文排版時，用 onPickerOpen 把展開交給 Sheet 選單，
               取代原生下拉；欄位外觀與其他 Select 一致 */}
-          <FieldGroup headline="銀行">
+          <FieldGroup label="銀行">
             <Select
               options={BANK_OPTIONS}
               placeholder="請選擇銀行"
@@ -95,7 +95,7 @@ export default function FormTemplate({ onBack }: FormTemplateProps) {
             />
           </FieldGroup>
 
-          <FieldGroup headline="帳戶類型">
+          <FieldGroup label="帳戶類型">
             <div className="tpl-field-row">
               <Radio
                 name="account-type"
@@ -118,7 +118,7 @@ export default function FormTemplate({ onBack }: FormTemplateProps) {
 
           {/* 錯誤時 FieldGroup / TextField 同步轉 error，helpText 沿用同一句規則轉為錯誤色 */}
           <FieldGroup
-            headline="帳號"
+            label="帳號"
             helpText="請輸入 10–14 位數字，不含符號"
             status={accountError ? 'error' : 'default'}
           >
