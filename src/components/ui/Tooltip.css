@@ -15,12 +15,16 @@
   pointer-events: none;
 }
 
+/* container 保持 pointer-events: none 讓周圍留白不擋底下內容，
+   inner 自己開回來才能點擊關閉 */
 .ui-tooltip__inner {
   display: flex;
   flex-direction: inherit;
   align-items: inherit;
   filter: drop-shadow(var(--shadow-medium));
   animation: ui-tooltip-fade 0.15s ease-in-out;
+  pointer-events: auto;
+  cursor: pointer;
 }
 
 .ui-tooltip__body {
@@ -128,12 +132,13 @@
 .ui-tooltip__container--right.ui-tooltip__container--start  .ui-tooltip__inner { transform-origin: top left; }
 .ui-tooltip__container--right.ui-tooltip__container--end    .ui-tooltip__inner { transform-origin: bottom left; }
 
-/* 尾巴往內縮 8px，才會落在觸發元素的內容上而不是最邊角；本體仍貼齊邊緣 */
+/* 尾巴往內縮 12px，才會落在觸發元素的內容上而不是最邊角；本體仍貼齊邊緣。
+   Figma 上下（12px）與左右（8px）內縮值不同，2026-07-31 定案統一為 space-300 */
 .ui-tooltip__container--top.ui-tooltip__container--start    .ui-tooltip__tail,
-.ui-tooltip__container--bottom.ui-tooltip__container--start .ui-tooltip__tail { margin-left: var(--space-200); }
+.ui-tooltip__container--bottom.ui-tooltip__container--start .ui-tooltip__tail { margin-left: var(--space-300); }
 .ui-tooltip__container--top.ui-tooltip__container--end      .ui-tooltip__tail,
-.ui-tooltip__container--bottom.ui-tooltip__container--end   .ui-tooltip__tail { margin-right: var(--space-200); }
+.ui-tooltip__container--bottom.ui-tooltip__container--end   .ui-tooltip__tail { margin-right: var(--space-300); }
 .ui-tooltip__container--left.ui-tooltip__container--start   .ui-tooltip__tail,
-.ui-tooltip__container--right.ui-tooltip__container--start  .ui-tooltip__tail { margin-top: var(--space-200); }
+.ui-tooltip__container--right.ui-tooltip__container--start  .ui-tooltip__tail { margin-top: var(--space-300); }
 .ui-tooltip__container--left.ui-tooltip__container--end     .ui-tooltip__tail,
-.ui-tooltip__container--right.ui-tooltip__container--end    .ui-tooltip__tail { margin-bottom: var(--space-200); }
+.ui-tooltip__container--right.ui-tooltip__container--end    .ui-tooltip__tail { margin-bottom: var(--space-300); }

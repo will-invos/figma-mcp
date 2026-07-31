@@ -9,7 +9,7 @@ interface TooltipProps {
   placement?: TooltipPlacement
   align?: TooltipAlign
   children: React.ReactNode
-  /** 受控開關；不傳就由 hover / focus 決定 */
+  /** 受控開關；不傳就由 hover / focus 決定（點擊 tooltip 可提前關閉）。受控時點擊不會關閉，由外部自行處理 */
   open?: boolean
 }
 
@@ -27,6 +27,12 @@ const Tooltip = React.forwardRef<HTMLSpanElement, TooltipProps>(
   ({ content, placement = 'top', align = 'center', children, open: controlledOpen }, ref) => {
     const [hovered, setHovered] = useState(false)
     const open = controlledOpen ?? hovered
+
+    /* 點擊 tooltip 本體關閉；擋掉冒泡避免誤觸底下或外層的點擊行為 */
+    const handleTooltipClick = (e: React.MouseEvent) => {
+      e.stopPropagation()
+      setHovered(false)
+    }
 
     /* 尾巴指向觸發元素，方向與 placement 相反 */
     const tailDirection = (
@@ -51,7 +57,7 @@ const Tooltip = React.forwardRef<HTMLSpanElement, TooltipProps>(
             className={`ui-tooltip__container ui-tooltip__container--${placement} ui-tooltip__container--${align}`}
             role="tooltip"
           >
-            <span className="ui-tooltip__inner">
+            <span className="ui-tooltip__inner" onClick={handleTooltipClick}>
               {tailFirst && <TooltipTail direction={tailDirection} />}
               <span className="text-body-large ui-tooltip__body">{content}</span>
               {!tailFirst && <TooltipTail direction={tailDirection} />}
