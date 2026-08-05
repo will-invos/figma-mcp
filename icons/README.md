@@ -28,9 +28,15 @@ native 團隊 `npm run icons:build` 後，從 `icons/dist/` copy：
 
 ## Web（現況，未由本管線產生）
 
-web 仍用既有 icon font（`src/components/ui/icons/invos.woff2`，255 glyph，`<i class="icon-name">`）。
-**font 已略舊**：SVG 源 273 顆 > font 255 顆，差 18 顆（多為品牌 logo：facebook/google/line/threads 等 + 少數新 icon）。
-web font 重生（SVG → woff2 + ui-icons.css）尚未納入本管線 —— 屬 opt-in（動到二進位字型檔、需視覺回歸），要做再議。
+web 用 icon font（`src/components/ui/icons/invos.woff2`，271 glyph，`<i class="icon-name">`）。
+重生流程（SVG → woff2/woff/ttf + ui-icons.css）不在 `icons:build` 內，需要時手動執行：
+
+1. 從 `ui-icons.css` 反推 `{name: codepoint}` 對照表 —— **既有 codepoint 必須原樣固定**，新 icon 從最大值之後遞增配號
+2. SVG 先過 `oslllo-svg-fixer` 重算輪廓（字型只支援 nonzero winding，`fill-rule="evenodd"` 或同向重疊子路徑的鏤空會被填實 —— 2026-08 重生時有 12 顆中招）
+3. 用 `fantasticon` 產 woff2/woff/ttf（config 指定 `codepoints`），手動把新增 class 補進 `ui-icons.css`
+4. 視覺回歸：新字型逐 glyph rasterize 與 SVG 源逐像素比對（bbox 對齊後），再目視確認
+
+**彩色 icon 不能進字型**（單色限制、白色鏤空會糊掉）：`coin-ib` / `coin-in`（字型用 `-mono` 版）、`pi-wallet`（無單色版，缺席）。
 
 ## 來源瑕疵（`icons:build` 會列出，建議 Figma 端修）
 

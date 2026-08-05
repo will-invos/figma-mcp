@@ -1,6 +1,6 @@
 /*
  * 圖示字型（invos）—— 由 `npm run icons:build` 產生，手改會被覆蓋。
- * 共 255 個圖示，分成方向 / 符號 / 媒體 / 文件 / 金融 / 介面六類。
+ * 共 271 個圖示，分成方向 / 符號 / 媒體 / 文件 / 金融 / 介面 / 品牌七類。
  *
  * 用法：<i class="icon-{name}" aria-hidden="true" />
  * 顏色繼承父層（走 currentColor），所以只要設父層的 color 就好。
@@ -254,6 +254,7 @@ i.icon-size-3xl { font-size: 40px; }
 .icon-home-user-filled::before { content: '\f076'; }
 .icon-info::before { content: '\f06a'; }
 .icon-info-filled::before { content: '\f06d'; }
+.icon-key::before { content: '\f106'; }
 .icon-keyboard::before { content: '\f056'; }
 .icon-list::before { content: '\f04c'; }
 .icon-list-check::before { content: '\f054'; }
@@ -272,6 +273,8 @@ i.icon-size-3xl { font-size: 40px; }
 .icon-mobile::before { content: '\f028'; }
 .icon-mobile-add::before { content: '\f02c'; }
 .icon-mobile-barcode::before { content: '\f02a'; }
+.icon-mobile-vibration::before { content: '\f10b'; }
+.icon-mobile-vibration-off::before { content: '\f10c'; }
 .icon-moon::before { content: '\f026'; }
 .icon-phone::before { content: '\f018'; }
 .icon-phone-ring::before { content: '\f01a'; }
@@ -310,6 +313,21 @@ i.icon-size-3xl { font-size: 40px; }
 .icon-ticket::before { content: '\f084'; }
 .icon-trash-can::before { content: '\f07e'; }
 .icon-trophy::before { content: '\f07b'; }
+.icon-twinkle::before { content: '\f10f'; }
 .icon-user::before { content: '\f06f'; }
 .icon-user-cog::before { content: '\f075'; }
 .icon-user-group::before { content: '\f072'; }
+
+/* 品牌（Brand） */
+.icon-apple::before { content: '\f0ff'; }
+.icon-facebook::before { content: '\f102'; }
+.icon-facebook-filled::before { content: '\f103'; }
+.icon-google::before { content: '\f104'; }
+.icon-instagram::before { content: '\f105'; }
+.icon-line::before { content: '\f107'; }
+.icon-linkedin::before { content: '\f108'; }
+.icon-medium::before { content: '\f109'; }
+.icon-meta::before { content: '\f10a'; }
+.icon-threads::before { content: '\f10e'; }
+.icon-twitter-x::before { content: '\f110'; }
+.icon-youtube::before { content: '\f111'; }
