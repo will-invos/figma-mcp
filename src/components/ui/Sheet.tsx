@@ -2,6 +2,7 @@ import React, { useEffect, useId, useRef } from 'react'
 import { createPortal } from 'react-dom'
 import IconButton from './IconButton'
 import SheetHeader from './SheetHeader'
+import { useScrollLock } from './scrollLock'
 import './Sheet.css'
 
 /** 拖超過 sheet 高度的這個比例就當作要關閉 */
@@ -60,6 +61,9 @@ function Sheet({
 }: SheetProps) {
   const sheetRef = useRef<HTMLDivElement>(null)
   const titleId = useId()
+
+  // 開啟期間鎖住背景頁面捲動 —— overlay 擋得住點擊，但擋不住捲動穿透
+  useScrollLock(open)
 
   // Esc 關閉，並把 Tab 圈在 sheet 內：aria-modal 只對輔助科技隱藏背景，
   // 並不會阻止 Tab 走出去。

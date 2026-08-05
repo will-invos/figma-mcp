@@ -2,6 +2,7 @@ import React, { createContext, useCallback, useContext, useEffect, useMemo, useR
 import { createPortal } from 'react-dom'
 import Button from './Button'
 import Spinner from './Spinner'
+import { useScrollLock } from './scrollLock'
 import './Toast.css'
 
 interface ToastAction {
@@ -21,16 +22,16 @@ interface ToastMessage {
   /** 幾毫秒後自動關閉；loading 永不自動關閉 */
   duration?: number
   /**
-   * 顯示期間擋住底層的點擊與拖曳。不傳的話：loading 擋、rich 不擋。
-   * loading 的語意就是「處理中，先不要操作」；rich 是純告知且會自動消失，
-   * 擋住只會把使用者的點擊無聲吃掉（連 action 按鈕在內都還是可點的）。
+   * 顯示期間擋住底層的點擊、拖曳與捲動，預設開啟（rich / loading 皆同）。
+   * Toast 的語意就是「正在處理，先別動」，希望使用者停在當前頁面 ——
+   * 純告知結果請改用 SnackBar。顯式傳 false 可放行底層操作。
    */
   blocking?: boolean
 }
 
-/** blocking 沒指定時的預設：只有 loading 擋 */
+/** blocking 沒指定時的預設：一律擋 */
 function resolveBlocking(toast: ToastMessage): boolean {
-  return toast.blocking ?? (toast.type ?? 'rich') === 'loading'
+  return toast.blocking ?? true
 }
 
 interface ToastContextValue {
@@ -111,6 +112,10 @@ function ToastProvider({ children }: { children: React.ReactNode }) {
   )
 
   const value = useMemo(() => ({ show, update, dismiss }), [show, update, dismiss])
+
+  // blocking toast 顯示期間鎖住背景頁面捲動 —— scrim 的 touch-action 擋得住觸控拖曳，
+  // 但擋不住鍵盤 / 滾輪捲動
+  useScrollLock(toasts.some(resolveBlocking))
 
   return (
     <ToastContext.Provider value={value}>

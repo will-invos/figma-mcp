@@ -26,6 +26,8 @@
   padding: 0 var(--space-600);
   z-index: var(--ui-z-dialog);
   animation: ui-dialog-overlay-fade-in 0.2s ease;
+  /* 手指在 overlay 上滑動不帶動背景 —— 與 scrollLock 的 body overflow 鎖互為配套 */
+  touch-action: none;
 }
 
 .ui-dialog {

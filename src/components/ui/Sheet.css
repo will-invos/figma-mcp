@@ -14,6 +14,8 @@
   background: var(--color-background-overlay-default);
   z-index: var(--ui-z-sheet-overlay);
   animation: ui-sheet-fadein 0.2s ease;
+  /* 手指在 overlay 上滑動不帶動背景 —— 與 scrollLock 的 body overflow 鎖互為配套 */
+  touch-action: none;
 }
 
 .ui-sheet-container {
@@ -51,6 +53,8 @@
 .ui-sheet__body {
   flex: 1;
   overflow-y: auto;
+  /* 內容捲到頂 / 底之後不讓捲動鏈到背景頁面 */
+  overscroll-behavior: contain;
   color: var(--color-content-default);
 }
 

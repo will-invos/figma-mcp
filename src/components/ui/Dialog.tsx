@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { Button } from './index';
 import type { ButtonStyleProps } from './Button';
+import { useScrollLock } from './scrollLock';
 import './Dialog.css';
 
 /**
@@ -69,6 +70,9 @@ function Dialog({
   const busy = actions.some((action) => action.loading);
   // inert 只擋得住指標與焦點，document 上的 keydown 照樣會進來，所以要另外擋
   const locked = inert || busy;
+
+  // 開啟期間鎖住背景頁面捲動 —— overlay 擋得住點擊，但擋不住捲動穿透
+  useScrollLock(open);
 
   useEffect(() => {
     if (!open || locked) return;

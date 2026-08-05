@@ -3,7 +3,7 @@ import Button from '@/components/ui/Button'
 import { useToast } from '@/components/ui'
 import { printExpression } from './codegen'
 
-/** 控制項的 auto 對應「不傳 blocking」，讓元件自己按 type 決定 */
+/** 控制項的 auto 對應「不傳 blocking」，走元件預設（一律擋） */
 function resolveBlocking(value: string): boolean | undefined {
   if (value === 'on') return true
   if (value === 'off') return false
@@ -49,7 +49,7 @@ export const ToastStory: StoryDef = {
     type:   { type: 'enum', options: ['rich', 'loading'], default: 'rich' },
     text:   { type: 'string', default: 'Message', when: { type: 'rich' } },
     button: { type: 'boolean', default: true, when: { type: 'rich' } },
-    // auto = 不傳 blocking：loading 擋、rich 不擋
+    // auto = 不傳 blocking：一律擋（點擊 + 捲動）
     blocking: { type: 'enum', options: ['auto', 'on', 'off'], default: 'auto' },
   },
   Render: ToastRender,

@@ -94,6 +94,14 @@
 - **`InAppNotification` 低於 modal** —— push 通知不該蓋在使用者正在做決策的畫面上。
 - **`Tooltip` 的值幾乎不影響全域** —— 它沒有 portal，是 `position: absolute` 在自己的 `relative` wrapper 內，z-index 只在該 stacking context 生效。列在這裡是為了表達意圖。
 
+### 背景捲動鎖（scroll lock）
+
+`Dialog` / `Sheet` 開啟、或有 blocking `Toast`（預設即 blocking）期間，元件會自動鎖住 `body` 捲動，使用端不需自行處理。實作在 [scrollLock.ts](../src/components/ui/scrollLock.ts)（未公開 export）：
+
+- **ref-count 計數** —— 多層覆蓋同開時，最後一層關閉才還原 `body` 的 `overflow`；鎖定時同步補 scrollbar 等寬的 `padding-right`，避免桌面上版面向右跳動。
+- **CSS 配套** —— 只鎖 `overflow` 擋不住觸控的捲動穿透：`.ui-dialog-overlay` / `.ui-sheet-overlay` / `.ui-toast-scrim` 都有 `touch-action: none`，`Sheet` 的可捲區 `.ui-sheet__body` 另加 `overscroll-behavior: contain` 防止捲到頂 / 底之後鏈到背景。
+- 使用端**不要另外改 `body` 的 `overflow`**，會和還原邏輯互相覆蓋。
+
 ---
 
 ## 5. 跨元件基礎樣式（載入順序）
