@@ -7,6 +7,7 @@
 - 本檔為指引該使用什麼元件與新頁面的範本。
 - 設計準則請參考 [design.md](./design.md)：完整 token、色彩 / 排版 / 間距 / 動效規格、anti-patterns。
 - 元件的內部實作規格另見 [docs/component-internals.md](./docs/component-internals.md)。
+- 消費端（引用此套件的專案）的使用規範見 [docs/usage.md](./docs/usage.md) 與 [docs/component-usage.md](./docs/component-usage.md)——Decision Tree 與元件使用細則都在那兩份，本 repo 也讀同一份。
 
 ## Source of truth
 
@@ -20,6 +21,7 @@
 | Figma component / style / variable key | `figma-tokens.json` |
 | 設計意圖與使用原則 | [design.md](./design.md) |
 | 元件內部尺寸 / 邊框 / 內距實測 | [docs/component-internals.md](./docs/component-internals.md) |
+| 元件使用語意（何時用、怎麼組合） | [docs/component-usage.md](./docs/component-usage.md)（來源：Figma UI Kit Guideline） |
 
 - **`colors.css` / `spacing.css` / `radius.css` 是產物，手改會被下次 `npm run tokens:build` 靜默覆蓋。** 查「有哪些 token」讀這三檔；**改值**走 Figma variables（流程見 [tokens/README.md](./tokens/README.md)）。
 - **文件與程式碼不一致時以程式碼為準**：依實際型別讓程式可編譯，**不要猜測、也不要默默建立近似 API**，並在回報中明確指出文件的規格落差。
@@ -30,7 +32,7 @@
 
 | 任務 | 讀這些 |
 |------|--------|
-| 建立頁面 | 本檔 Component Decision Tree → `src/pages/templates/` 對應範本 → design.md 相關章節 |
+| 建立頁面 | [docs/usage.md](./docs/usage.md) Decision Tree → [docs/component-usage.md](./docs/component-usage.md) 對應元件章節 → `src/pages/templates/` 對應範本 → design.md 相關章節 |
 | 修改元件 | 元件 `.tsx` / `.css` → 對應 story → [docs/component-internals.md](./docs/component-internals.md) |
 | 修改 token | [tokens/README.md](./tokens/README.md) —— **禁止直接改生成檔** |
 | Figma → Code | 本檔「Figma Integration」→ `figma-tokens.json` → 執行器名稱見 [.claude/figma-executors.md](./.claude/figma-executors.md) |
@@ -60,48 +62,11 @@
 
 ## Component Decision Tree
 
-下列場景 → 使用的元件。**永遠優先使用這份設計系統內的元件，不要用原生 HTML 或自製版本**。
-
-| 需求 | 用哪個元件 |
-|------|-----------|
-| 主要動作按鈕 | `<Button variant="filled" colorType="primary">` |
-| 次要動作按鈕 | `<Button variant="filled" colorType="neutral">` 或 `<Button variant="outline">` |
-| 弱化動作（文字樣式） | `<Button variant="text">` 或 `<Button variant="ghost">` |
-| 只有 icon 的點擊 | `<IconButton aria-label="...">` |
-| 懸浮主要動作按鈕（FAB） | `<Fab aria-label="...">`（可加 `text` 顯示標籤） |
-| 單行輸入欄位 | `<TextField>` |
-| 多行輸入欄位 | `<TextArea>` |
-| 下拉選單 | `<Select>`（選項要圖文排版 / 大點擊區時，用 `onPickerOpen` 把展開交給 `<Sheet>` + `<ListItem>` 選單） |
-| 搜尋輸入 | `<SearchField>` |
-| OTP / 驗證碼 | `<PinInput>` |
-| 切換 on/off | `<Switch>` |
-| 單選 | `<Radio>` |
-| 多選 | `<Checkbox>` |
-| 滑桿 | `<Slider>` |
-| 表單分組容器 | `<FieldGroup label="..." helpText="...">`（label / helpText 由 FieldGroup 自己渲染，`<FieldGroupHelpText>` 只在單獨使用時才需要） |
-| **重要的確認動作**，需讓使用者暫停其他行為 | `<Dialog>`。動作按下後先關閉 Dialog，再用 `<SnackBar>` 告知結果 —— **不要讓 Dialog 與 Toast / SnackBar 同時出現** |
-| **簡單的**互動或資訊（更多選項、一至兩個欄位） | `<Sheet>` / 搭配 `<SheetHeader>`。**欄位一多、需要多步驟、或中途可能要確認，就改用完整頁面** —— 不要在 Sheet 上再疊一層 `<Dialog>` |
-| **處理中**（頁面載入等），且當下不希望使用者做任何操作 | `<Toast>`（Provider 模式、`useToast()`）。**不是一般短訊通知** —— 告知結果請用 `<SnackBar>` |
-| 告知**使用者操作的結果**（API 回傳成功 / 失敗） | `<SnackBar>`（Provider 模式、`useSnackBar()`；貼齊頁面底部、連續呼叫排隊不疊加）|
-| **系統主動推播**訊息（可區分種類、可點擊跳轉） | `<InAppNotification>`（Provider 模式、`useInAppNotification()`）。時機不可預期，所以刻意排在 modal 之下 |
-| 區塊內告示（警告、資訊） | `<Banner>` |
-| 整頁空狀態 / 錯誤狀態（斷線、無結果、404） | `<PageStatus status="...">` |
-| 頁面頂部標題列 | `<NavigationBar>`（regular / large / home / search / tabs）|
-| 底部 tab 導覽 | `<TabBar>` |
-| 分頁切換（內容區） | `<Tabs>` |
-| 上一頁 / 下一頁導覽（含置中標題） | `<PageNavigation>` |
-| 日期選擇 | 原生 `<input type="date">`（已定案：雙平台採原生 picker，**不要自製、不要拿 `<Select>` 頂替**） |
-| 列表項（設定、選單） | `<ListItem>` |
-| 卡片（內容 + 描述） | `<CardItem>` |
-| 列表的 header / footer | `<ListHeader>` / `<ListFooter>` |
-| 分隔線 | `<Divider>` |
-| 標籤（可多個） | `<Tag>` / 可選取的 chips 列用 `<ChipBar>` |
-| 數字徽章（通知未讀數） | `<Badge>` |
-| 使用者頭像 | `<Avatar>` |
-| 載入指示器 | `<Spinner>` |
-| 進度條 | `<ProgressBar>` / 多條用 `<ProgressGroup>` |
-| 輪播 / 分頁位置指示點 | `<DottedController>`（照片上用 `type="overlap"`） |
-| 提示氣泡（簡短說明） | `<Tooltip>` |
+完整「需求 → 元件」對照表在 [docs/usage.md](./docs/usage.md#component-decision-tree)
+——隨套件發佈，消費端與本 repo 讀同一張表，**只維護那一份**。
+選對元件之後的使用細則（樣式層級、組合限制、狀態語意）見
+[docs/component-usage.md](./docs/component-usage.md)。
+**永遠優先使用這份設計系統內的元件，不要用原生 HTML 或自製版本。**
 
 **找不到對應元件時**（這條流程也適用 Figma → Code）：
 
@@ -109,7 +74,6 @@
 2. **只有視覺差異** → 用既有元件的 props 調整，不要另做一個
 3. **互動語意不同**（例：設計稿要多選、系統只有單選元件）→ **不可用近似元件硬套**，語意錯誤比缺元件嚴重
 4. 依任務範圍提出新增元件，或在回報中明確標示缺口 —— **不得只留隱藏的 TODO 註解**
-
 
 ## Figma Integration
 
