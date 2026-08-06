@@ -83,9 +83,9 @@ cp node_modules/@invos/design-system/docs/invos-ui-reviewer.agent.md .claude/age
 | 分頁切換（內容區） | `<Tabs>`。**功能分群一律先用 Tabs**，不要直接用 `<ChipBar>` | [Tabs](./component-usage.md#tabs) |
 | 上一頁 / 下一頁導覽（含置中標題） | `<PageNavigation>` | — |
 | 日期選擇 | 原生 `<input type="date">`（已定案：雙平台採原生 picker，**不要自製、不要拿 `<Select>` 頂替**） | — |
-| 列表項（設定、選單） | `<ListItem>` | [Radio](./component-usage.md#radio) / [Checkbox](./component-usage.md#checkbox) |
+| 列表項（設定、選單） | `<ListItem>`（右側操作用 `trailing`：drill-in / switch / checkbox / icon…） | [ListItem](./component-usage.md#listitem) |
 | 卡片（內容 + 描述） | `<CardItem>` | — |
-| 列表的 header / footer | `<ListHeader>` / `<ListFooter>` | — |
+| 列表的 header / footer | `<ListHeader>` / `<ListFooter>` | [ListItem](./component-usage.md#listitem) |
 | 分隔線 | `<Divider>` | — |
 | 標籤（可多個） | `<Tag>` / 可選取的 chips 列用 `<ChipBar>` —— **只用於內容分群；功能分群請先用 `<Tabs>`** | [Tag](./component-usage.md#tag) / [ChipBar](./component-usage.md#chipbar) |
 | 數字徽章（通知未讀數） | `<Badge>` | — |
