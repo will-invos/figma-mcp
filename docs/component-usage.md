@@ -16,6 +16,9 @@
 - `variant="text"` vs `ghost`：text 邊界貼合內容（無 padding）、圖文間距更緊、按下改字色不改背景。
   要貼齊文字基線時用 text，要有可點面積時用 ghost。
 - 深色模式下主按鈕字色仍為白色——由 token 處理，**不要自己覆寫**。
+- `variant="filled" colorType="white"` 是白底固定色（`--color-background-fixed-white`），
+  給彩色 / 照片 / 深色底圖上的按鈕用，**不隨主題翻轉**，也不屬於上面的主次層級分類。
+  一般頁面不要用它當主要按鈕。
 
 ❌ 一排四顆 primary ／ ❌ 混三種次要樣式 ／ ❌ `width: 120px`
 
@@ -24,8 +27,9 @@
 - **同一區塊不要把 `<Button>` 與 `<IconButton>` 並排混用。** 空間夠就全部用文字按鈕，
   需要緊湊排列就全部用 icon 按鈕。
 - `size` 四檔：`large` / `medium` / `small` / `xsmall`。
-- `badge`（紅點）表示該按鈕後方的頁面有更新或新功能。只在 enabled 狀態顯示；
-  **`size="xsmall"` 不支援紅點**，不要在該尺寸傳 `badge`。
+- `badge`（紅點）表示該按鈕後方的頁面有更新或新功能。只在 enabled 狀態顯示（loading 時元件會自動收起）。
+  **設計規範規定 `size="xsmall"` 不放紅點** —— 元件技術上做得出來（會渲染成 small badge），
+  但那個尺寸太小、視覺上擠在一起，不要用。
 - 用無外框（`variant="ghost"`）表示選取狀態時：未選用**輪廓**樣式 icon、已選用**填滿**樣式 icon。
 - icon 必須清楚對應它觸發的操作。`aria-label` 是 TypeScript 必填，寫得讓人讀得懂。
 - 懸浮主操作用 `<Fab>`（自帶 `--shadow-medium`），**不要拿 IconButton 自己加陰影**。
