@@ -7,8 +7,10 @@
 
 ## Button
 
-- **一組按鈕最多兩種樣式層級。** 主要層級：`variant="filled"` 搭 `primary` / `danger` / `prize` / `donation`；
-  次要層級：`filled` + `neutral`、`variant="outline"`、`variant="ghost"`。
+- **一組按鈕最多兩種樣式層級。**
+  - 主要層級：`variant="filled"` 搭 `primary` / `prize` / `danger` / `donation`
+  - 次要層級：`variant="filled" colorType="neutral"`、`variant="outline"`、`variant="ghost"`、
+    `variant="filled" colorType="white"`
 - 多顆按鈕並排時**不要全用 primary**——沒有層級等於沒有主次。全部用次要層級是允許的。
 - **需要三個以上的操作 → 改用 `<Sheet>` 或 `<TabBar>`**，不要一排三顆按鈕。
 - **不要給固定寬度**：讓它依文案縮放，或 `width: 100%` 撐滿。寫死寬度在使用者放大系統字級時會破版。
@@ -16,9 +18,8 @@
 - `variant="text"` vs `ghost`：text 邊界貼合內容（無 padding）、圖文間距更緊、按下改字色不改背景。
   要貼齊文字基線時用 text，要有可點面積時用 ghost。
 - 深色模式下主按鈕字色仍為白色——由 token 處理，**不要自己覆寫**。
-- `variant="filled" colorType="white"` 是白底固定色（`--color-background-fixed-white`），
-  給彩色 / 照片 / 深色底圖上的按鈕用，**不隨主題翻轉**，也不屬於上面的主次層級分類。
-  一般頁面不要用它當主要按鈕。
+- `colorType="white"` 屬次要層級，但底色是固定白（`--color-background-fixed-white`）、
+  **不隨主題翻轉**——給彩色 / 照片 / 深色底圖上的按鈕用，一般頁面背景上不要用。
 
 ❌ 一排四顆 primary ／ ❌ 混三種次要樣式 ／ ❌ `width: 120px`
 
@@ -38,9 +39,12 @@
 
 - **`actions` 最多 2 個。** 需要三個以上操作 → 改用 `<Sheet>`。
 - `title` 簡短（十個字內、最多兩行），細節放 `description`。
-- **破壞性且不可復原**（刪除帳號 / 刪除發票 / 刪除票券）→ `type="danger"`。
+- **破壞性操作 → `type="danger"`**，使用時機如：**登出、刪除帳號、刪除發票、刪除票券**。
   元件會把第一顆 action 設為 danger 並排在左側，降低誤觸。
-- **可以再建立的行為不是 danger**（登出、移除會員卡、歸戶載具）→ 用 `type="default"`，主要按鈕維持在右側。
+- **可以再建立、影響有限的行為不用 danger**（移除會員卡、歸戶載具）→ `type="default"`，主要按鈕維持在右側。
+
+  > 「登出」列入 danger 是本專案的決定，與 Figma guideline（把登出歸在「可以再次被建立」而排除）不同。
+  > 之後回頭對 Figma 時不要改回去。
 - 純確認（只是「我知道了」）→ 該顆 action 用 `colorType="neutral"`。
   捐贈 / 愛心碼相關 → `colorType="donation"`。
 - 版型用 `cta`：`"1-button"` 撐滿全寬、`"2-buttons-horizontal"` 均分寬度、`"2-buttons-vertical"` 縱向（主要在最上）。
@@ -62,7 +66,7 @@
 ## SnackBar
 
 - 用 `useSnackBar().show()`，**不要自己 render `<SnackBar>` 或做 portal**——定位、計時、佇列都在 Provider 內。
-- 一則只能一個操作。`buttonText` 簡短，**四個中文字以內**。
+- 一則只能一個操作。`buttonText` **上限四個中文字**，超過就換更短的說法。
 - SnackBar 貼齊頁面底部：頁面若有貼底 CTA、工具列或 FAB，**要自行留出空間避免遮擋**。
 - 連續呼叫會排隊依序顯示，**不會堆疊**，不需要自己做節流或防抖。
 - 圖示用填滿造型（`status="success" | "error"` 已對應好），不要換成線性 icon。
