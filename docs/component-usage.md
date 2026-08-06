@@ -9,26 +9,21 @@
 
 - **一組按鈕最多兩種樣式層級。**
   - 主要層級：`variant="filled"` 搭 `primary` / `prize` / `danger` / `donation`
-  - 次要層級：`variant="filled" colorType="neutral"`、`variant="outline"`、`variant="ghost"`、
-    `variant="filled" colorType="white"`
+  - 次要層級：`variant="filled" colorType="neutral"`、`variant="outline"`、`variant="ghost"`、`variant="filled" colorType="white"`
 - 多顆按鈕並排時**不要全用 primary**——沒有層級等於沒有主次。全部用次要層級是允許的。
 - 預設依文案縮放寬度，或 width: 100% 撐滿。盡可能不要給固定寬度。
 - 文案保持一行、簡短；超過會以省略號截斷。
-- `variant="text"` vs `ghost`：text 邊界貼合內容（無 padding）、圖文間距更緊、按下改字色不改背景。
-  要貼齊文字基線時用 text，要有可點面積時用 ghost。
+- `variant="text"` vs `ghost`：text 邊界貼合內容（無 padding）、圖文間距更緊、按下改字色不改背景。要貼齊文字基線時用 text，要有可點面積時用 ghost。
 - 深色模式下主按鈕字色仍為白色——由 token 處理，**不要自己覆寫**。
-- `colorType="white"` 屬次要層級，但底色是固定白（`--color-background-fixed-white`）、
-  **不隨主題翻轉**——給彩色 / 照片 / 深色底圖上的按鈕用，一般頁面背景上不要用。
-
-❌ 一排四顆 primary ／ ❌ 混三種次要樣式
+- `colorType="white"` 屬次要層級，但底色是固定白（`--color-background-fixed-white`）、**不隨主題翻轉**——給彩色 / 照片 / 深色底圖上的按鈕用，一般頁面背景上不要用。
+- 不可一組有多個主要按鈕。
+- 不可一組按鈕混三種樣式。
 
 ## IconButton
 
-- **同一區塊不要把 `<Button>` 與 `<IconButton>` 並排混用。** 空間夠就全部用文字按鈕，
-  需要緊湊排列就全部用 icon 按鈕。
+- **同一區塊不要把 `<Button>` 與 `<IconButton>` 並排混用。** 空間夠就全部用文字按鈕，需要緊湊排列就全部用 icon 按鈕。
 - `size` 四檔：`large` / `medium` / `small` / `xsmall`。
-- `badge`（紅點）表示該按鈕後方的頁面有更新或新功能。只在 enabled 狀態顯示（loading 時元件會自動收起）。
-  **設計規範規定 `size="xsmall"` 不放紅點** —— 元件技術上做得出來（會渲染成 small badge），但那個尺寸太小、視覺上擠在一起，不要用。
+- `badge`（紅點）表示該按鈕後方的頁面有更新或新功能。只在 enabled 狀態顯示（loading 時元件會自動收起）。**設計規範規定 `size="xsmall"` 不放紅點** —— 元件技術上做得出來（會渲染成 small badge），但那個尺寸太小、視覺上擠在一起，不要用。
 - 用無外框（`variant="ghost"`）表示選取狀態時：未選用**輪廓**樣式 icon、已選用**填滿**樣式 icon。
 - icon 必須清楚對應它觸發的操作。`aria-label` 是 TypeScript 必填，寫得讓人讀得懂。
 - 懸浮主操作用 `<Fab>`（自帶 `--shadow-medium`），**不要拿 IconButton 自己加陰影**。
@@ -37,8 +32,7 @@
 
 - **`actions` 最多 2 個。** 需要三個以上操作 → 改用 `<Sheet>`。
 - `title` 簡短（十個字內、最多兩行），細節放 `description`。
-- **破壞性操作 → `type="danger"`**，使用時機如：**登出、刪除帳號、刪除發票、刪除票券**。
-  元件會把第一顆 action 設為 danger 並排在左側，降低誤觸。
+- **破壞性操作 → `type="danger"`**，使用時機如：**登出、刪除帳號、刪除發票、刪除票券**。元件會把第一顆 action 設為 danger 並排在左側，降低誤觸。
 - **可以再建立、影響有限的行為不用 danger**（移除會員卡、歸戶載具）→ `type="default"`，主要按鈕維持在右側。
 - 純確認（只是「我知道了」）→ 該顆 action 用 `colorType="neutral"`。
 - 捐贈 / 愛心碼相關 → `colorType="donation"`。
@@ -50,8 +44,7 @@
 
 - 高度最高為視窗高，超過時請支援內容捲動，避免版面超出視窗。
 - **`Handle`（橫桿）與關閉按鈕擇一，不同時存在。** 有 CTA `footer` 時用關閉按鈕，給使用者放棄的路徑。
-- `headlineSize` 優先 `"large"`；空間真的不夠才用 `"regular"`，或不給 `headline`
-  （此時要傳 `aria-label` 當無障礙名稱）。
+- `headlineSize` 優先 `"large"`；空間真的不夠才用 `"regular"`，或不給 `headline`（此時要傳 `aria-label` 當無障礙名稱）。
 - header 左側是關閉鈕，**其他功能按鈕放 `<SheetHeader trailing>`**（右側）。
 - body 四周保持 `var(--space-400)`；放 `<ListItem>` 時**不要再加**，元件自帶內距。
 - `footer` 一到兩顆 CTA，兩顆可橫向或縱向排列。CTA footer 也可以單獨常駐在頁面底部。
@@ -82,15 +75,12 @@
 - **`items` 至少 2 個**，不要只放一個 tab。
 - **超過 4 個改 `type="compact"`**：指示條縮到文字寬、整列可橫向捲動。
 - 只放文字，**不放 icon**；label 一行，超過以省略號呈現。
-- `badge` 可用 `'dot'` 或數字，**同一列不要混用兩種**。tab 被點擊後視為已讀，應清掉該筆 badge。
-  數字上限顯示 99+。
-- **分隔線**：作為功能分群（接在 `<NavigationBar>` 下）→ 導覽列與 Tabs 之間**不要**分隔線；
-  作為頁面內錨點 → 導覽列下方**要有**分隔線。
+- `badge` 可用 `'dot'` 或數字，**同一列不要混用兩種**。tab 被點擊後視為已讀，應清掉該筆 badge。數字上限顯示 99+。
+- **分隔線**：作為功能分群（接在 `<NavigationBar>` 下）→ 導覽列與 Tabs 之間**不要**分隔線；作為頁面內錨點 → 導覽列下方**要有**分隔線。
 
 ## ChipBar
 
-- **只用於「內容」分群**（例如「為你推薦 / 購物回饋 / 中獎名單」）。
-  **功能面的分群一律先用 `<Tabs>`，不要跳過 Tabs 直接用 ChipBar。**
+- **只用於「內容」分群**（例如「為你推薦 / 購物回饋 / 中獎名單」）。**功能面的分群一律先用 `<Tabs>`，不要跳過 Tabs 直接用 ChipBar。**
 - 使用順序次於 Tabs；兩者同時存在時，ChipBar 排在 Tabs 下方。
 - badge 規則同 Tabs：`'dot'` 與數字**不混用**，點擊後清除。
 - 超出螢幕寬度用 `scrollable`，讓整列可左右拖移。
@@ -111,9 +101,7 @@
 
 ## TextField / TextArea / Select
 
-- **表單欄位一律包 `<FieldGroup label="…">`。** label 與 helpText 由 FieldGroup 渲染
-  （標題在欄位上方、說明在下方，`aria-describedby` 自動接好），此時輸入元件維持預設
-  `variant="default"`，**不要再傳自己的 `label`**。
+- **表單欄位一律包 `<FieldGroup label="…">`。** label 與 helpText 由 FieldGroup 渲染（標題在欄位上方、說明在下方，`aria-describedby` 自動接好），此時輸入元件維持預設 `variant="default"`，**不要再傳自己的 `label`**。
 - **不包 FieldGroup 而單獨使用輸入元件時 → 必須傳 `variant="inner-label"` 與 `label`**，讓標題內建在欄位裡（空值且未對焦時當佔位字，一對焦或有值就浮到上方），使用者輸入中仍看得到欄位名。
 - **同一表單不要混用兩種做法**：要嘛整份都包 FieldGroup，要嘛整份都用 `inner-label`。
 - **`variant="inner-label"` 已經有標題，不要再加 `leadingIcon`。**
@@ -139,12 +127,10 @@
   | 顯示值 / 次要動作 / 主要動作 | `"text"` / `"text-button"` / `"cta"` |
   | 處理中 | `"spinner"` |
 
-- 列高由 `type` 決定：`"default"` 56 / `"rich"` 80 / `"compact"` 48。
-  **`description` 只有 `type="rich"` 才會顯示** —— 要兩行內容卻忘了改 type 是最常見的錯。
+- 預設列高由 `type` 決定：`"default"` 56 / `"rich"` 80 / `"compact"` 48，但可以隨著內容增加高度。
 - `description` 收 node，塞得下 `<Tag>` + 時間這種組合。
 - **內距是元件自帶的**：放進 `<Sheet>` body 或列表容器時不要再加 padding。
-- 分隔線用 `showDivider`（預設開）控制，**不要自己補 `<Divider>`**；分組標題 / 註腳用
-  `<ListHeader>` / `<ListFooter>`。
+- 分隔線用 `showDivider`（預設開）控制，**不要自己補 `<Divider>`**；分組標題 / 註腳用 `<ListHeader>` / `<ListFooter>`。
 
 ## Radio
 
