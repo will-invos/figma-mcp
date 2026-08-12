@@ -11,7 +11,8 @@
    （如 TextField 的 trailingIcon），那顆按鈕的對焦指示走上面這條 :focus-visible。 */
 .ui-button:focus-visible,
 .ui-icon-button:focus-visible,
-.ui-fab:focus-visible {
+.ui-fab:focus-visible,
+.ui-chip-bar__item:focus-visible {
   outline: 2px solid var(--color-border-brand);
   outline-offset: 2px;
 }
