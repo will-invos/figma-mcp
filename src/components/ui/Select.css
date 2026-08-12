@@ -20,12 +20,16 @@
   transition: border-color 0.15s, box-shadow 0.15s;
 }
 
-/* onPickerOpen 模式下 wrapper 是 <button>，要清掉瀏覽器預設樣式才會跟 <label> 版一致 */
+/* onPickerOpen 模式下 wrapper 是 <button>，要清掉瀏覽器預設樣式才會跟 <label> 版一致。
+   outline 也要清 —— focus 落在 wrapper 本身，UA 的深色 focus ring 會疊在下面
+   :focus-within 的 brand 外框外側，鍵盤操作就會看到兩層框（原生 select 版的 outline
+   清在 .ui-select__input 上，所以沒這問題）。焦點指示由 :focus-within 負責。 */
 button.ui-select__input-wrapper {
   width: 100%;
   font: inherit;
   color: inherit;
   text-align: left;
+  outline: none;
 }
 
 /* 1px border + 1px inset shadow＝視覺 2px，比改 border-width 不會位移 */

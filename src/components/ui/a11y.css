@@ -7,6 +7,9 @@
    這裡把 :focus-visible 的環補回來 —— 只有鍵盤操作會觸發，滑鼠點擊不會。
    TextArea / Select 各自有 :focus-within 外框、TextField 用 --focused class、
    PinInput 用 cell :focus，都不需要再加外環；SearchField 的無外框是刻意的。
+   這幾個元件反而要自己清掉 UA 預設 outline —— 焦點落在哪個元素就清在哪個元素上，
+   否則會與 :focus-within 外框疊成兩層（Select 的 onPickerOpen 模式焦點在 wrapper
+   button 上，清在 button.ui-select__input-wrapper；原生下拉版清在 .ui-select__input）。
    注意輸入欄的外框只代表「該欄的 input 對焦了」—— 欄位內另有可點控制項時
    （如 TextField 的 trailingIcon），那顆按鈕的對焦指示走上面這條 :focus-visible。 */
 .ui-button:focus-visible,
