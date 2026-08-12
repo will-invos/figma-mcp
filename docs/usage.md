@@ -67,7 +67,7 @@ cp node_modules/@invos/design-system/docs/invos-ui-reviewer.agent.md .claude/age
 | 搜尋輸入 | `<SearchField>` | [輸入欄家族](./component-usage.md#textfield--textarea--select) |
 | OTP / 驗證碼 | `<PinInput>` | [輸入欄家族](./component-usage.md#textfield--textarea--select) |
 | 切換 on/off | `<Switch>` | [Checkbox](./component-usage.md#checkbox) |
-| 單選（**表單內**） | `<Radio>` —— **Radio 只用在表單**；表單以外的單選一律用 `<ChipBar>` | [Radio](./component-usage.md#radio) |
+| 單選（**表單內**） | `<RadioGroup options={…}>` —— 兩顆以上的互斥選項都走這裡，**不要自己排 `<Radio>`**；單顆 `<Radio>` 只在互斥邏輯由外層負責時用。**Radio 只用在表單**，表單以外的單選一律用 `<ChipBar>` | [Radio](./component-usage.md#radio) · [RadioGroup](./component-usage.md#radiogroup) |
 | 多選 | `<Checkbox>` | [Checkbox](./component-usage.md#checkbox) |
 | 滑桿 | `<Slider>` | — |
 | 表單分組容器 | `<FieldGroup label="..." helpText="...">` —— **表單欄位一律包這層**，label / helpText 由 FieldGroup 自己渲染（`<FieldGroupHelpText>` 只在單獨使用時才需要）。不包 FieldGroup 而直接用輸入元件時，改傳 `variant="inner-label"` | [輸入欄家族](./component-usage.md#textfield--textarea--select) |
@@ -88,7 +88,7 @@ cp node_modules/@invos/design-system/docs/invos-ui-reviewer.agent.md .claude/age
 | 列表項（設定、選單） | `<ListItem>`（右側操作用 `trailing`：drill-in / switch / checkbox / icon…） | [ListItem](./component-usage.md#listitem) |
 | 卡片（內容 + 描述） | `<CardItem>` | — |
 | 列表的 header / footer | `<ListHeader>` / `<ListFooter>` | [ListItem](./component-usage.md#listitem) |
-| 分隔線 | `<Divider>` | — |
+| 分隔線 | **區塊與區塊之間**用 `<Divider>`（滿版）；**列與列之間**用 `<ListItem showDivider>`（元件自帶、內縮 16），**不要自己縮排 `<Divider>`** | [Divider](./component-usage.md#divider) |
 | 標籤（**唯讀**、可多個） | `<Tag>` —— 純標示、不可點。**可選取的橫向標籤列請用 `<ChipBar>`** | [Tag](./component-usage.md#tag) |
 | 數字徽章（通知未讀數） | `<Badge>` | — |
 | 使用者頭像 | `<Avatar>` | — |
