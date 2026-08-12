@@ -73,9 +73,9 @@ UI Kit 的每一支元件，在 iOS 與 Android 上目前有沒有可以直接�
 | 元件 | iOS | Android | 現況 | 處理方式 |
 |------|:---:|:---:|------|---------|
 | Banner | ✅ | ✅ | 兩端都有，且都支援多種語意色 | 無需處理 |
-| Dialog | ✅ | ⚠️ | 兩端都是自訂實作、都有插圖與危險操作樣式；Android 的按鈕**只能左右並排，做不出上下直排** | 危險操作若設計為直排按鈕，**Android 目前做不到**，已列入待修 |
-| Toast | ⚠️ | ❌ | iOS 有元件但兩種狀態都強制帶文字，沒有「只轉圈不顯示文字」的狀態；**Android 用的是系統 Toast，設計系統完全管不到外觀** | Android 的畫面正中遮罩式 Toast **目前不存在**。設計稿若用到需標記為新增需求 |
-| SnackBar | ✅ | ⚠️ | 兩端都有，但 Android 那份放在設計系統範圍外 | 外觀可用，**但不保證跟著設計系統一起改版** |
+| Dialog | ✅ | ✅ | 兩端都是自訂實作，都有插圖與危險操作樣式。Android 的按鈕只能左右並排，**但直排版型目前沒有實際應用，已裁決不修** | 危險操作照現況用橫排即可，**設計稿不需標直排**（見複核報告 C-08） |
+| Toast | ✅ | ✅ | **rich 與 loading 兩態兩端都有，數值幾乎全中**。rich（spinner + 階段文字 + 取消）用在**匯款帳戶頁等 API 回傳**：iOS `ToastView`、Android `SyncProgressToast`；loading（只有 spinner）就是**打 API 等待回應時的置中轉圈**：iOS 走 `ProgressHUDManager`（222 處）、Android 走 `LoadingComponent`。**唯一落差是 loading 的圓角**——設計系統 16、兩端都是 8，**已裁決以 16 為準、兩端改**；spinner 顏色也一併統一為 `border-inverse-plain`。<br>另有一支 `ToastUtil` 雖然叫 Toast，35 處全是「歸戶成功」「條碼格式不符」這類**操作結果通知**——語意上屬於 SnackBar | 兩種 Toast 都**直接標即可，不需附規格**。結果通知一律標 SnackBar（見複核報告 C-05、C-10） |
+| SnackBar | ✅ | ⚠️ | 兩端都有。**Android 有兩套**：Compose 畫面用的那套（53 處）與設計系統逐項吻合，View / XML 畫面用的那套（25 處）三個顏色都是舊色，**深色模式下兩者一深一淺**。兩套都放在 `app` 而不是設計系統模組，所以設計系統改版時不會被一起盤點 | 直接標「SnackBar」即可，**深色模式的不一致已列入待修**（見複核報告 C-23） |
 | InAppNotification | ✅ | ❌ | iOS 有完整實作，Android 完全沒有 | 這是唯一一支 iOS 有、Android 全無的元件。**需先確認產品是否真的需要雙平台一致** |
 | Tooltip | ✅ | ✅ | 兩端都有，且都有浮動與行內兩種 | 方向數量未逐一核對，設計稿請標明指向 |
 | Spinner | ⚠️ | ✅ | Android 有共用載入元件；iOS 各元件內各自使用系統轉圈，沒有統一入口 | iOS 載入指示器**尺寸與顏色由各元件自訂**，設計稿要指定時需個別標註 |
@@ -85,8 +85,8 @@ UI Kit 的每一支元件，在 iOS 與 Android 上目前有沒有可以直接�
 
 | 元件 | iOS | Android | 現況 | 處理方式 |
 |------|:---:|:---:|------|---------|
-| NavigationBar | ⚠️ | ✅ | Android 有完整的一般／大標題兩種樣式；iOS **三套導覽列並存**，沒有統一版本 | iOS 設計稿要指明用哪一套，否則不同畫面的導覽列會長得不一樣 |
-| TabBar | ⚠️ | ⚠️ | 兩端都有底部導覽，但**樣式是否被封裝、選中圖示與數量標記的行為都未確認** | 底部標籤字級（10 或 12）仍待裁決，行為規格建議一次補齊 |
+| NavigationBar | ⚠️ | ✅ | **Android 收得很乾淨**：`core/designsystem` 有一支底層 `AppBar`，對外三個入口——`TopBackAppBar`（返回）／`TopCloseAppBar`（關閉）／`TopTitleAppBar`（無返回），每支都有 **Regular／Large 兩種樣式** 與 **Default／Home 兩種型**（Large-Home 就是標題靠左那種），34 個畫面共用；只有登入與 OTP 兩頁還吃 2019 的 XML `invos_simple_toolbar`（色票對、字級硬寫 16 bold）。<br>**iOS 沒有共用元件**（`INVOSUI` 裡沒有任何導覽列），**四條路徑並存**：①**系統列 token 版** `ViewControllerNavigationDecoratable`（2023，34 檔，`labelLarge` + `content-bold` + `background-default`，SwiftUI 畫面經 `SwiftUINavigationBar` 也走這條）②**系統列 2019 舊版** `SwiftBaseViewController.setupNavgationBar`（6 畫面：城市地圖、帳號授權 ×2、推薦好友、選擇會員卡、Logging，硬寫 17pt semibold、預設白字、舊色 `backgroundInvosMedium` / `primaryBlack`）③**自刻 UIView 列** `PlainNavBarView`（2026/5，4 畫面：消費分析 ×2、會員卡詳情、會員卡排序，高 56、17pt semibold、字色固定 `foreverWhite`，給彩底頁用）④**三個主 tab 各自的自刻列**（`HomeCustomNavBarView` / `InvoiceBookCustomNavBarView` / `CarrierCustomNavBarView`，高 56、`display` 大標題靠左、色票正確）。<br>兩處全平台落差：**iOS 完全沒有系統大標題**（`prefersLargeTitles` 全部為 false），大標題只存在於 ④ 手刻的三座 tab 列；**iOS 導覽列一律沒有底線**（三處 appearance 全把 `shadowColor` 關掉，四支自刻列也沒畫線），Android 的 `showDivider` 預設是 true。另有兩項數值差異屬平台慣例／規格未落地：**一般列高 iOS 44、Android 64（M3）**；**大標題字重規格是 Bold 700，iOS 與 Android 都做成 Medium 500** | **設計稿標「一般標題／大標題」＋「底線有／無」即可，不要標高度與字重**——高度按平台慣例走，字重待裁決（規格 700、兩端都 500，建議改規格為 500）。**iOS 要指明走哪一條**：彩底頁（分析、會員卡）是 ③、主 tab 是 ④、其餘走 ①；**②那 6 個舊畫面改動時外觀會從 17pt 白字變 16pt `content-bold`，需重新出圖**。<br>**兩項需另外處理**：iOS 沒有大標題導覽列——設計稿要用大標題就得標明是手刻，或提出收斂需求；iOS 導覽列底線畫不出來——標了底線 iOS 做不到（與 [component-usage.md](./component-usage.md) 分隔線形態① 相關）。**iOS 四條路徑收斂成一支共用元件建議列入待修**（尚未編號）。search／tabs 兩型兩端都是在畫面層自己把搜尋欄或 Tabs 接在導覽列下方，不是元件參數，設計稿照常標即可 |
+| TabBar | ⚠️ | ⚠️ | **兩端都是平台原生容器，而且整個 app 各只有一座**：iOS 是 `UITabBarController` 子類（`InvoiceMainViewController`）、Android 是 Material `BottomNavigationView`（`activity_main.xml`）。樣式都已收斂在單一處（iOS `setupTabBarAppearance()`，換主題時重跑；Android `MainActivity.initView()`），**五個分頁的順序與圖示兩端一致**，**選中圖示都有線框／實心兩套**（iOS `selectedImage`、Android selector drawable，都是 24），**顏色三邊逐項吻合**（未選 `content-subtlest`、選中圖示 `content-brand-default`、選中文字 `content-bold`、底色 `background-default`）。落差三處：**標籤字級 iOS 走系統預設（10、選中不變粗）、Android 明寫 12sp 且選中轉粗**；**紅點兩端都沒用 token**（iOS 把 `●` 字元塞進系統 badge、上系統紅，Android 用舊色 `invosError`），**帶數字的版本兩端都沒有在用**；**上緣分隔線 Android 明畫 1dp `border-subtle`、iOS 用系統預設 hairline** | **不必做成共用元件**——兩端都只有一座、樣式已集中在一處，再封裝沒有實益。設計稿標「底部導覽」即可，不需附版面規格。**字級仍待裁決**（設計系統目前是 10、Android 是 12；建議收斂為 12，iOS 要改需明寫 font）；紅點色與分隔線色的落差併入待修（紅點見複核報告 C-19） |
 | Tabs | ✅ | ✅ | 兩端都有分頁切換列 | **Tabs 是導覽**（分頁切換、頁面內章節錨點）；篩選與選參數屬於 ChipBar，不要拿 Tabs 頂替（判準見 [usage.md](./usage.md)） |
 | PageNavigation | ❌ | ❌ | 兩端都沒有 | 需確認產品是否用得到 |
 | Sheet | ✅ | ✅ | 兩端都有底部彈出面板 | 無需處理 |
@@ -194,7 +194,7 @@ Figma 標示會跟主題走的共 **17 個**；**兩個平台實際實作的是 
 ## 這份表沒有回答的事
 
 - **只查到「元件存不存在」與「主要變體對不對得上」**，沒有逐一核對每個屬性的數值。標 ✅ 的元件仍可能有間距或字級差異。
-- **未逐項核對**：Tooltip 的方向數量、PageStatus 的狀態種類與文案、ListItem 的尾端元素、TabBar 的選中圖示與數量標記。
+- **未逐項核對**：Tooltip 的方向數量、PageStatus 的狀態種類與文案、ListItem 的尾端元素。
 - 樣式層級的落差（字重、字距、等寬字）不在這張表裡，見雙平台對齊複核報告。
 
 ## 維護方式
