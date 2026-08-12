@@ -67,7 +67,7 @@ cp node_modules/@invos/design-system/docs/invos-ui-reviewer.agent.md .claude/age
 | 搜尋輸入 | `<SearchField>` | [輸入欄家族](./component-usage.md#textfield--textarea--select) |
 | OTP / 驗證碼 | `<PinInput>` | [輸入欄家族](./component-usage.md#textfield--textarea--select) |
 | 切換 on/off | `<Switch>` | [Checkbox](./component-usage.md#checkbox) |
-| 單選 | `<Radio>` | [Radio](./component-usage.md#radio) |
+| 單選（**表單內**） | `<Radio>` —— **Radio 只用在表單**；表單以外的單選一律用 `<ChipBar>` | [Radio](./component-usage.md#radio) |
 | 多選 | `<Checkbox>` | [Checkbox](./component-usage.md#checkbox) |
 | 滑桿 | `<Slider>` | — |
 | 表單分組容器 | `<FieldGroup label="..." helpText="...">` —— **表單欄位一律包這層**，label / helpText 由 FieldGroup 自己渲染（`<FieldGroupHelpText>` 只在單獨使用時才需要）。不包 FieldGroup 而直接用輸入元件時，改傳 `variant="inner-label"` | [輸入欄家族](./component-usage.md#textfield--textarea--select) |
@@ -80,20 +80,41 @@ cp node_modules/@invos/design-system/docs/invos-ui-reviewer.agent.md .claude/age
 | 整頁空狀態 / 錯誤狀態（斷線、無結果、404） | `<PageStatus status="...">` | — |
 | 頁面頂部標題列 | `<NavigationBar>`（regular / large / home / search / tabs）| — |
 | 底部 tab 導覽 | `<TabBar>` | — |
-| 分頁切換（內容區） | `<Tabs>`。**功能分群一律先用 Tabs**，不要直接用 `<ChipBar>` | [Tabs](./component-usage.md#tabs) |
+| 切到另一塊內容，或跳到本頁的某個章節 | `<Tabs>` —— **導覽用**。兩種形態：分頁切換、頁面內章節錨點 | [Tabs](./component-usage.md#tabs) |
+| 篩選內容（橫向標籤列） | `<ChipBar>` —— **取值用**。同一種內容篩子集，**單選**，超寬用 `scrollable` | [ChipBar](./component-usage.md#chipbar) |
+| 選一個參數或模式 | `<ChipBar>` —— 表單以外的單選都走這裡，不要用 `<Radio>`，也不要拿 `<Tabs>` 頂替 | [ChipBar](./component-usage.md#chipbar) |
 | 上一頁 / 下一頁導覽（含置中標題） | `<PageNavigation>` | — |
 | 日期選擇 | 原生 `<input type="date">`（已定案：雙平台採原生 picker，**不要自製、不要拿 `<Select>` 頂替**） | — |
 | 列表項（設定、選單） | `<ListItem>`（右側操作用 `trailing`：drill-in / switch / checkbox / icon…） | [ListItem](./component-usage.md#listitem) |
 | 卡片（內容 + 描述） | `<CardItem>` | — |
 | 列表的 header / footer | `<ListHeader>` / `<ListFooter>` | [ListItem](./component-usage.md#listitem) |
 | 分隔線 | `<Divider>` | — |
-| 標籤（可多個） | `<Tag>` / 可選取的 chips 列用 `<ChipBar>` —— **只用於內容分群；功能分群請先用 `<Tabs>`** | [Tag](./component-usage.md#tag) / [ChipBar](./component-usage.md#chipbar) |
+| 標籤（**唯讀**、可多個） | `<Tag>` —— 純標示、不可點。**可選取的橫向標籤列請用 `<ChipBar>`** | [Tag](./component-usage.md#tag) |
 | 數字徽章（通知未讀數） | `<Badge>` | — |
 | 使用者頭像 | `<Avatar>` | — |
 | 載入指示器 | `<Spinner>` | — |
 | 進度條 | `<ProgressBar>` / 多條用 `<ProgressGroup>` | — |
 | 輪播 / 分頁位置指示點 | `<DottedController>`（照片上用 `type="overlap"`） | — |
 | 提示氣泡（簡短說明） | `<Tooltip>` | [Tooltip](./component-usage.md#tooltip) |
+
+### `<Tabs>` 還是 `<ChipBar>`
+
+兩者的 props 幾乎相同，程式端不會擋誤用，**只能靠語意判斷**。問一句「點下去我在做什麼」：
+
+- **「我要去哪裡」→ `<Tabs>`。** 頁面結構本來就長那樣，我只是在其中移動。
+- **「我要什麼條件」→ `<ChipBar>`。** 頁面結構不變，變的是內容的篩選條件或某個值。
+
+拿不定時看第二個判準：**這列項目是設計時就固定的，還是跟著資料長的？**
+固定（分頁名、章節名——要改得改設計）用 `<Tabs>`；跟資料長（分類清單、期數清單——後端多一筆就多一顆）用 `<ChipBar>`。
+
+| 例子 | 用哪個 | 為什麼 |
+|------|--------|--------|
+| 任務 ↔ 商城 | `<Tabs>` | 去另一塊內容，兩邊版面與資料結構都不同 |
+| 任務詳情頁的段落捷徑 | `<Tabs>` | 內容沒換，但仍是導覽——跳到本頁的另一個章節 |
+| 商城的餐飲 / 交通 | `<ChipBar>` | 都是商品列表，只是篩掉一部分 |
+| 電子 / 傳統發票、對獎期數 | `<ChipBar>` | 選的是參數，不是內容分群 |
+
+兩者同時存在時，`<Tabs>` 在上、`<ChipBar>` 在下。
 
 ## 找不到對應元件時
 
