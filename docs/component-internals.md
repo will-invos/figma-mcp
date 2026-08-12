@@ -27,8 +27,12 @@
 | Checkbox / Radio | 預設 `2px solid var(--color-border-default)`，選中 / 錯誤改 `border-color` |
 | 卡片 / 容器分隔（CardItem、ChipBar item） | `1px solid var(--color-border-subtle)` |
 | TabBar 上緣（chrome ↔ 內容） | `border-top: 1px solid var(--color-border-subtle)` |
+| 條碼 / QR 之類的內容容器邊框 | `1px solid var(--color-border-subtle)` —— **容器邊框一律 subtle，不要用 `--color-border-divider`** |
 
-> Divider 元件用 `background-color + height`（不是 border）。
+> Divider 元件用 `background-color + height`（不是 border），而且**色票依方向不同**：
+> 水平（列間 / 區塊間）`--color-border-subtle`、垂直（文字之間）`--color-border-divider`。
+> `--color-border-divider` 是半透明 10%，**只服務文字之間的垂直分隔**，容器邊框與水平分隔都不要用它。
+> 使用語意見 [component-usage.md](./component-usage.md#divider)。
 
 ---
 
