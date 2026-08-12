@@ -15,7 +15,8 @@
 .ui-button:focus-visible,
 .ui-icon-button:focus-visible,
 .ui-fab:focus-visible,
-.ui-chip-bar__item:focus-visible {
+.ui-chip-bar__item:focus-visible,
+.ui-page-navigation__label--button:focus-visible {
   outline: 2px solid var(--color-border-brand);
   outline-offset: 2px;
 }
