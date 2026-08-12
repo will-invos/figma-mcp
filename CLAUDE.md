@@ -21,7 +21,8 @@
 | Figma component / style / variable key | `figma-tokens.json` |
 | 設計意圖與使用原則 | [design.md](./design.md) |
 | 元件內部尺寸 / 邊框 / 內距實測 | [docs/component-internals.md](./docs/component-internals.md) |
-| 元件使用語意（何時用、怎麼組合） | [docs/component-usage.md](./docs/component-usage.md)（來源：Figma UI Kit Guideline） |
+| 元件使用語意（何時用、怎麼組合） | [docs/component-usage.md](./docs/component-usage.md) —— **本檔即權威**，與 Figma UI Kit Guideline 不一致時以本檔為準 |
+| 元件在 iOS / Android 是否有對應實作 | [docs/ui-mapping.md](./docs/ui-mapping.md)（快照，會過期——標註核對日期） |
 
 - **`colors.css` / `spacing.css` / `radius.css` 是產物，手改會被下次 `npm run tokens:build` 靜默覆蓋。** 查「有哪些 token」讀這三檔；**改值**走 Figma variables（流程見 [tokens/README.md](./tokens/README.md)）。
 - **文件與程式碼不一致時以程式碼為準**：依實際型別讓程式可編譯，**不要猜測、也不要默默建立近似 API**，並在回報中明確指出文件的規格落差。
@@ -37,6 +38,7 @@
 | 修改 token | [tokens/README.md](./tokens/README.md) —— **禁止直接改生成檔** |
 | Figma → Code | 本檔「Figma Integration」→ `figma-tokens.json` → 執行器名稱見 [.claude/figma-executors.md](./.claude/figma-executors.md) |
 | Dark mode | [docs/dark-mode.md](./docs/dark-mode.md) |
+| 交接給 App 工程端 | [docs/ui-mapping.md](./docs/ui-mapping.md) —— 先確認該元件雙平台有沒有對應實作 |
 | 無障礙 | [design.md §6.4](./design.md) |
 
 ## Tech Stack
