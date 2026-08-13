@@ -14,14 +14,14 @@
 
 本專案使用 @invos/design-system。**寫任何 UI 之前**，先讀
 `node_modules/@invos/design-system/docs/usage.md` 並遵循其中規範。
-完成頁面後用 `invos-ui-reviewer` agent 對改動的頁面檔案自查。
+完成頁面後用 `usage-reviewer` agent 對改動的頁面檔案自查。
 ```
 
 **2. 複製 review agent 殼：**
 
 ```bash
 mkdir -p .claude/agents
-cp node_modules/@invos/design-system/docs/invos-ui-reviewer.agent.md .claude/agents/invos-ui-reviewer.md
+cp node_modules/@invos/design-system/docs/usage-reviewer.agent.md .claude/agents/usage-reviewer.md
 ```
 
 之後升級套件，本文件與審查清單都隨 `node_modules` 更新，入口與 agent 殼不必再動。

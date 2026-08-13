@@ -1,6 +1,6 @@
 # @invos/design-system 頁面用法審查清單
 
-> 供消費端專案的 `invos-ui-reviewer` agent 使用：對**頁面程式碼**（`.tsx` + 對應 `.css`）逐條檢查。
+> 供消費端專案的 `usage-reviewer` agent 使用：對**頁面程式碼**（`.tsx` + 對應 `.css`）逐條檢查。
 > 審的是「用法」，不是設計系統元件的內部實作。
 
 ## 審查流程

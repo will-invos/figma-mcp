@@ -1,5 +1,5 @@
 ---
-name: invos-ui-reviewer
+name: usage-reviewer
 description: Review page code against @invos/design-system usage rules (component choice, tokens, overlay semantics)
 tools: Read, Glob, Grep
 model: sonnet
