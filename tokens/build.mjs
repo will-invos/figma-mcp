@@ -50,9 +50,21 @@ const WEB_EXCLUDE = [
 ]
 const webInclude = (name) => !WEB_EXCLUDE.some((re) => re.test(name))
 
+// 顏色排除清單 —— 套用到**所有輸出**（web CSS 與 native），但 tokens.json 母版仍全收
+const COLOR_EXCLUDE = [
+  // 六套主題色盤（apple / girl / green / lake / lavender / rock，共 90 色）。
+  // 2026-08-13 定案：設計系統、iOS、Android 三邊皆 0 引用 —— 兩端的換主題是
+  // 伺服器下發 JSON 覆寫 15 個 Brand token（iOS ThemeManager、Android ThemePack），
+  // 跟這批色票的名字無關。色盤只保留在 Figma，不再輸出給任何使用端。
+  /^color\/(background|content|border)\/theme\//,
+]
+const colorInclude = (name) => !COLOR_EXCLUDE.some((re) => re.test(name))
+const outColors = colors.filter((t) => colorInclude(t.name))
+const colorsExcluded = colors.length - outColors.length
+
 const colorLightTree = {}, colorDarkTree = {}, spaceTree = {}, radiusTree = {}
 let excluded = 0, darkOverrides = 0
-for (const t of colors) {
+for (const t of outColors) {
   insert(colorLightTree, t.name, t.light)
   if (t.dark !== t.light) { insert(colorDarkTree, t.name, t.dark); darkOverrides++ }
 }
@@ -90,7 +102,7 @@ const colorLightCss = await renderCss(colorLightTree, ':root')
 const colorDarkCss = await renderCss(colorDarkTree, '[data-theme="dark"]')
 writeFileSync(
   `${SRC_TOKENS}colors.css`,
-  header(`Color tokens（${colors.length} 色；dark 覆寫 ${darkOverrides} 個，未覆寫者沿用 light）`) + colorLightCss + '\n' + colorDarkCss
+  header(`Color tokens（${outColors.length} 色；dark 覆寫 ${darkOverrides} 個，未覆寫者沿用 light）`) + colorLightCss + '\n' + colorDarkCss
 )
 writeFileSync(`${SRC_TOKENS}spacing.css`, header('Spacing tokens（4px 主節奏，含 2px half-step 與 1px 特殊值）') + (await renderCss(spaceTree, ':root')))
 writeFileSync(`${SRC_TOKENS}radius.css`, header('Radius tokens') + (await renderCss(radiusTree, ':root')))
@@ -131,7 +143,7 @@ const colorEntry = (c, appearance) => ({
   },
   idiom: 'universal',
 })
-for (const t of colors) {
+for (const t of outColors) {
   const light = parseColor(t.light), dark = parseColor(t.dark)
   const dir = `${iosDir}/${camelName(t.name)}.colorset`
   mkdirSync(dir, { recursive: true })
@@ -147,7 +159,7 @@ const argb = (c) => {
   return `#${hex(c.a * 255)}${hex(c.r)}${hex(c.g)}${hex(c.b)}`
 }
 function androidXml(mode) {
-  const rows = colors.map((t) => `    <color name="${camelName(t.name)}">${argb(parseColor(t[mode]))}</color>`)
+  const rows = outColors.map((t) => `    <color name="${camelName(t.name)}">${argb(parseColor(t[mode]))}</color>`)
   return `<?xml version="1.0" encoding="utf-8"?>\n<resources>\n${rows.join('\n')}\n</resources>\n`
 }
 mkdirSync(`${HERE}dist/native/android/values`, { recursive: true })
@@ -156,5 +168,5 @@ writeFileSync(`${HERE}dist/native/android/values/colors.xml`, androidXml('light'
 writeFileSync(`${HERE}dist/native/android/values-night/colors.xml`, androidXml('dark'))
 
 console.log(`✅ tokens.json：colors ${colors.length}、sizes ${sizes.length}（母版全收）`)
-console.log(`✅ src/components/ui/tokens/{colors,spacing,radius}.css 已接管（dark 覆寫 ${darkOverrides}；排除 ${excluded} 個大間距）`)
-console.log(`✅ dist/native/：iOS colorsets ×${colors.length}、Android values(+night)/colors.xml`)
+console.log(`✅ src/components/ui/tokens/{colors,spacing,radius}.css 已接管（dark 覆寫 ${darkOverrides}；排除 ${excluded} 個大間距、${colorsExcluded} 個主題色）`)
+console.log(`✅ dist/native/：iOS colorsets ×${outColors.length}、Android values(+night)/colors.xml`)
