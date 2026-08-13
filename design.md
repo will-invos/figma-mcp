@@ -97,7 +97,7 @@
 
 | Class | Size/Line | Weight | 用途 |
 |-------|-----------|--------|------|
-| `.text-display-small` | 28/36 | 700 | 頁面大標、Large nav title |
+| `.text-display-small` | 28/42 | 700 | 頁面大標、Large nav title |
 | `.text-heading-{large/medium/small}` | 24/20/18 | 700 | Dialog / 卡片 / 子區段標題 |
 | `.text-body-{xlarge/large/medium/small}` | 18/16/14/12 | 400 | 強調內文 / **預設正文** / 描述 / 註解 |
 | `.text-label-{large/medium/small}` | 16/14/12 | 500 | Button large/medium/small、欄位 label / Tag / Badge |
