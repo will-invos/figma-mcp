@@ -152,7 +152,8 @@ Tabs 的項目是設計時固定的結構，**改它要改設計**；跟著資�
 - **同一表單不要混用兩種做法**：要嘛整份都包 FieldGroup，要嘛整份都用 `inner-label`。
 - **`variant="inner-label"` 已經有標題，不要再加 `leadingIcon`。**
 - `leadingIcon` 是示意欄位內容的裝飾；`trailingIcon` 是可點的按鈕（例如顯示 / 隱藏密碼）。
-- **helpText 與錯誤訊息不同時出現，錯誤優先。** helpText 走 `<FieldGroup helpText>`，錯誤時建議帶 icon；提示字數限制這類可對齊右方。
+- **helpText 與錯誤訊息不同時出現，錯誤優先。** helpText 走 `<FieldGroup helpText>`，錯誤時建議帶 icon。
+- **字數上限用 help text 顯示，不做計數器元件**：`<FieldGroup helpText="0/200" helpTextAlign="right" helpTextIcon={false}>`。**不要靜默截斷**——使用者要看得到還剩多少。
 - 多行內容用 `<TextArea>`（可設最大高度、超過上下捲動；也可能是固定高度，可左右捲動），不要用 TextField 硬改。
 - OTP / 驗證碼用 `<PinInput>`，**不要用多個 TextField 拼**。
 - 搜尋用 `<SearchField>`（填滿背景、無邊框、左側常駐搜尋 icon、有值時顯示清除鈕），**不要拿 TextField 加 icon 頂替**。
