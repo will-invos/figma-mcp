@@ -15,7 +15,7 @@ function formatPeriod(period: number): string {
   return `${year} 年 ${start}-${end} 月`
 }
 
-const PageNavigationRender: React.FC<{ values: Record<string, any> }> = () => {
+const PageNavigationRender: React.FC<{ values: Record<string, any> }> = ({ values }) => {
   const [period, setPeriod] = useState(LATEST)
   return (
     <PageNavigation
@@ -24,6 +24,9 @@ const PageNavigationRender: React.FC<{ values: Record<string, any> }> = () => {
       nextAriaLabel="下一期"
       onPrev={period > EARLIEST ? () => setPeriod((p) => p - 1) : undefined}
       onNext={period < LATEST ? () => setPeriod((p) => p + 1) : undefined}
+      divider={values.divider}
+      // 實際使用時這裡開期數選單；story 只需要證明標籤變成可點的按鈕
+      onLabelClick={values.labelClickable ? () => {} : undefined}
     />
   )
 }
@@ -33,11 +36,21 @@ export const PageNavigationStory: StoryDef = {
   name: 'PageNavigation',
   category: 'Chrome',
   previewWidth: 360,
-  props: {},
+  props: {
+    divider: { type: 'boolean', default: false },
+    labelClickable: { type: 'boolean', default: false },
+  },
   Render: PageNavigationRender,
-  codeProps: () => ({
-    label: formatPeriod(LATEST),
-    prevAriaLabel: '上一期',
-    nextAriaLabel: '下一期',
-  }),
+  codeSnippet: (values) =>
+    [
+      '<PageNavigation',
+      `  label={${JSON.stringify(formatPeriod(LATEST))}}`,
+      '  prevAriaLabel="上一期"',
+      '  nextAriaLabel="下一期"',
+      '  onPrev={() => setPeriod((p) => p - 1)}',
+      '  onNext={() => setPeriod((p) => p + 1)}',
+      ...(values.divider ? ['  divider'] : []),
+      ...(values.labelClickable ? ['  onLabelClick={() => setPickerOpen(true)}'] : []),
+      '/>',
+    ].join('\n'),
 }
