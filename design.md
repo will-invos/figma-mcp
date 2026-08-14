@@ -42,8 +42,22 @@
 ```
 
 - `group`：`content`（文字 / icon）/ `background` / `border` / `shadow`
-- `intent`：`brand` / `success` / `danger` / `warning` / `prize` / `donation` / `neutral` / `link` / `inverse`
-- `variant`：`default` / `bold` / `subtle` / `subtlest` / `hover` / `active`
+- `intent`：`brand` / `success` / `danger` / `warning` / `prize` / `donation` / `neutral` / `link` / `inverse` / `secondary` / `category`
+- `variant`：`default` / `bold` / `boldest` / `subtle` / `subtlest` / `hover` / `active`；`neutral` 另有複合狀態 `bold-hover` / `bold-active` / `subtle-hover` / `subtle-active`
+
+**兩個 intent 有使用限制**：
+
+- **`secondary`（青色系）是裝飾強調用色，不是第二動作色。** 主動作一律 `brand`（見 §0），需要次要按鈕請用 `neutral`。
+- **`category` 是六大消費分類的固定色**，不可換色、不可挪作他用，見 §1.3。
+
+**並非所有 token 都走三段式**，照上面的公式推名字會猜錯。另有兩類：
+
+- **兩段式（group + role，無 intent）**：`background-default` / `sunken` / `disable` / `plain`、`content-bold` / `default` / `subtle` / `subtlest` / `plain`、`border-default` / `bold` / `boldest` / `subtle` / `divider` / `plain`、`shadow-default` / `bold` / `sheet`
+- **結構型群組**：`fixed-*`（恆色，見 §1.4）、`overlay-*`、`transparent-*`、`skeleton*`、`brand-gradient-*`（見下）、`shadow-glow-default`、`background-elevated-brand`
+
+> 兩類都不推名字，**完整清單一律讀 [tokens/colors.css](./src/components/ui/tokens/colors.css)**。
+
+**品牌漸層**：`--color-{background|content}-brand-gradient-primary` / `-secondary` 是**主要品牌漸層的雙色端**——藍到青，成對使用，就是 §0 說的「科技感的輕量漸層」。這兩個 token **在 dark mode 不反轉**（只定義在 `:root`），與會反轉的 `secondary` 色組是兩回事，不要互相替代。
 
 > **色值不在本文件維護**。查「有哪些 token」讀 [tokens/colors.css](./src/components/ui/tokens/colors.css)；**要改色值不要改那個檔** —— 它是 `npm run tokens:build` 的產物，母版是 Figma variables（見 [tokens/README.md](./tokens/README.md)）。
 
@@ -69,14 +83,35 @@
 | `warning` | 預設警示 |
 | `prize` | 中獎公告、獎金/獎項 |
 | `donation` | 愛心碼、捐贈發票 |
-| `neutral` | 無情緒語意、中性操作 |
+| `neutral` | 無情緒語意、中性操作；次要按鈕 |
 | `link` | 文字連結 |
+| `secondary` | 品牌漸層與裝飾強調 —— **不當動作色**，詳見 §1.1 |
+| `category` | 消費分類固定色，詳見下表 |
+
+**消費分類固定色（`category`）**
+
+消費明細、分類篩選、統計圖表都用這組，`background` / `content` / `border` 三個 group 都有。
+**色與分類是固定綁定，不可換色、不可拿來表達其他語意**（例：不要用 `category-life` 的綠當成功色）。
+
+| Category | 中文 | 典型用途 |
+|----------|------|---------|
+| `food` | 餐飲 | 分類標籤、明細列表、統計圖表 |
+| `life` | 居家 | 同上 |
+| `shopping` | 購物 | 同上 |
+| `transportation` | 交通 | 同上 |
+| `entertainment` | 娛樂 | 同上 |
+| `other` | 其他 | 未歸類 / 無法辨識的消費 |
+| `all` | 全部 | 篩選器的「全部」、統計圖表的合計 |
+
+> 標籤本身**優先用 `<CategoryTag>` 元件**——文案與圖示由 `category` prop 決定且不開放覆寫，不要自己組色塊配文字。
+> 只有元件涵蓋不到的場景（統計圖表的資料色、分類卡片的外框）才直接取 token。
 
 ### 1.4 Fixed 與 Dark Mode
 
 - **`fixed-*` token 在 dark mode 不反轉**，用於恆色背景上的恆色前景（例：品牌藍按鈕上的恆白字、prize 黃底上的深字）。
 - 切換靠 `<html data-theme="dark">`（**必須**掛在 `<html>` 或 `<body>`，不能掛 `#root`，否則 Portal 元件吃不到）。詳見 [docs/dark-mode.md](./docs/dark-mode.md)。
-- 內容階層、語意色在 dark mode 自動反轉並變淺一階以維持可讀性；陰影 opacity 自動加重。
+- 內容階層、語意色在 dark mode 自動反轉並變淺一階以維持可讀性。
+- **向下投影的陰影色（`shadow-default` / `shadow-sheet` / `shadow-bold`）在 dark mode opacity 加重**，才壓得住深底。`--color-shadow-glow-default` 是白色 glow，方向相反（dark mode 轉淡），不適用這條。
 
 ---
 
@@ -187,7 +222,7 @@
 2. **小立體感**：Slider thumb、Switch thumb → `--shadow-small`
 3. **浮起 / 投影**：Tooltip、SnackBar、InAppNotification、Fab、**常駐型 Sheet** → 對應 token
 
-> Dialog / 互動型 Sheet 靠半透明 overlay backdrop 把背景變暗，Toast 靠 `--color-background-toast` 半透明深底建立對比，這些**都不需要陰影**。`--shadow-bold` 是 **glow 風格**（無 y-offset），與其他向下投影 token 性質不同——適合放在多彩背景或照片上的強調容器，**不要拿來當一般卡片陰影**。Dark mode 陰影 opacity 自動加重。
+> Dialog / 互動型 Sheet 靠半透明 overlay backdrop 把背景變暗，Toast 靠 `--color-background-toast` 的半透明底色與頁面反差建立對比（light mode 是深底淺字，dark mode 反轉成淺底深字，文字請用 `--color-content-inverse-*` 跟著反轉），這些**都不需要陰影**。`--shadow-bold` 是 **glow 風格**（無 y-offset），與其他向下投影 token 性質不同——適合放在多彩背景或照片上的強調容器，**不要拿來當一般卡片陰影**。Dark mode 向下投影的 opacity 加重（`glow` 例外，見 §1.4）。
 
 ### 4.1 覆蓋層各自的用途
 
