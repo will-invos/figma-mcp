@@ -277,6 +277,22 @@
 
 > Loading 保持元件寬度（`visibility: hidden` + 絕對定位 `Spinner`），不抖動。
 
+**例外：停用區塊內還有必須可用的互動子元素時**（目前只有 `Checkbox` —— 同意條款的 label 內含連結，勾選停用時條款仍要能點開讀），上面那組寫法兩項都不能用：
+
+- `pointer-events: none` 會連子元素一起關掉。停用是由原生 `disabled` 的 input 保證的，label 的點擊本來就不會觸發它，這行只是多餘的副作用。
+- 整塊 `opacity` 會建立群組，子層無法用 `opacity: 1` 還原。改成**分部位淡化**：非文字部位（方框、icon）各自 `opacity: 0.4`，文字用 `color: color-mix(in srgb, <原色 token> 40%, transparent)`。連結有自己的 `color`，就不會被波及。
+
+```css
+.ui-checkbox--disabled { cursor: not-allowed; }
+.ui-checkbox--disabled .ui-checkbox__indicator { opacity: 0.4; }
+.ui-checkbox--disabled .ui-checkbox__label {
+  color: color-mix(in srgb, var(--color-content-default) 40%, transparent);
+}
+.ui-checkbox--disabled a { cursor: pointer; }
+```
+
+> 視覺結果與整塊 `opacity: 0.4` 相同（半透明文字疊在底色上算出同一個色），差別只在連結不受影響。**沒有 disabled 專用色票**，一律用 `color-mix` 從原色推導。
+
 ### 6.2 觸控區
 
 最小可點擊區：web / iOS **44×44px**（iOS HIG）、Android 原生端 **48×48dp**（Material 標準）；小尺寸元件（Tag、Badge）若可點擊，加透明 padding 擴大命中區。

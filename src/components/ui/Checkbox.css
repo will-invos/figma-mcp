@@ -75,10 +75,31 @@
   display: block;
 }
 
+/* disabled 的兩個副作用都要繞開 label 內的連結（「我已閱讀並同意服務條款」這種
+ * 情境即使 checkbox 停用，條款仍要能點、也要看得清楚）：
+ * 1. 不用 pointer-events: none —— 那會把連結一起關掉。原生 disabled input 本來
+ *    就不會被 label 的點擊觸發，勾選狀態不會因此變動。
+ * 2. 不用整塊 opacity —— opacity 會建立群組、子層無法還原。改成方框自己淡化、
+ *    文字用 color-mix 調淡，連結因為有自己的 color 就不受影響。 */
 .ui-checkbox--disabled {
-  opacity: 0.4;
-  pointer-events: none;
   cursor: not-allowed;
+}
+
+.ui-checkbox--disabled .ui-checkbox__indicator {
+  opacity: 0.4;
+}
+
+.ui-checkbox--disabled .ui-checkbox__label {
+  color: color-mix(in srgb, var(--color-content-default) 40%, transparent);
+}
+
+.ui-checkbox--disabled .ui-checkbox__description {
+  color: color-mix(in srgb, var(--color-content-subtle) 40%, transparent);
+}
+
+/* label 內的連結維持自己的游標，不跟著整列變成 not-allowed。 */
+.ui-checkbox--disabled a {
+  cursor: pointer;
 }
 
 .ui-checkbox__content {

@@ -121,6 +121,19 @@
 
 ---
 
+## 6. Disabled 淡化
+
+| 元件 | 寫法 |
+|------|------|
+| Button、IconButton、Fab、ListItem 等 | 整塊 `opacity: 0.4` + `pointer-events: none` + `cursor: not-allowed`（[design.md §6.1](../design.md)） |
+| `Checkbox` | **分部位淡化**：`.ui-checkbox__indicator` 用 `opacity: 0.4`；`.ui-checkbox__label` / `.ui-checkbox__description` 用 `color-mix(in srgb, var(--color-content-default) \| var(--color-content-subtle) 40%, transparent)`。wrapper 只留 `cursor: not-allowed`，另給 `a` 補回 `cursor: pointer` |
+
+> `Checkbox` 例外的原因：label 可放連結（同意條款），`pointer-events: none` 會讓連結不能點、整塊 `opacity` 會讓它跟著變淡，而 opacity 群組無法從子層還原。停用效果由原生 `disabled` 的 input 保證，不靠 `pointer-events`。使用語意見 [component-usage.md](./component-usage.md#checkbox)。
+>
+> 其他元件維持原寫法 —— 它們的停用範圍內沒有需要保持可用的互動子元素。`Radio` 的 `children` 同為 `ReactNode`，若日後要在其中放連結，比照 `Checkbox` 改。
+
+---
+
 ## 附錄
 
 - [design.md](../design.md) — 設計準則 / 怎麼用（引用者看這份）
