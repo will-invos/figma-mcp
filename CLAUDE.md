@@ -1,6 +1,6 @@
 # Project: @invos/design-system
 
-> Repo: `will-invos/iv-design-system` · npm 套件 `@invos/design-system`
+> Repo: `will-invos/invos-design-system` · npm 套件 `@invos/design-system`
 
 「發票存摺」行動端產品的設計系統，包含 UI Kit 與 design tokens。可搭配 Figma MCP 快速建立或直接透過 AI agent 建立 Prototype 頁面，並讓工程開發銜接 APP 元件及設計系統。
 

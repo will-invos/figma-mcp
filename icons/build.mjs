@@ -31,7 +31,7 @@ const androidDir = `${DIST}android/drawable`
 mkdirSync(iosDir, { recursive: true })
 mkdirSync(androidDir, { recursive: true })
 // Asset Catalog 根需要一個 Contents.json
-writeFileSync(`${iosDir}/Contents.json`, JSON.stringify({ info: { author: 'iv-design-system', version: 1 } }, null, 2) + '\n')
+writeFileSync(`${iosDir}/Contents.json`, JSON.stringify({ info: { author: 'invos-design-system', version: 1 } }, null, 2) + '\n')
 
 const manifest = []
 for (const f of svgs) {
@@ -45,7 +45,7 @@ for (const f of svgs) {
   writeFileSync(`${setDir}/${base}.svg`, iosSvg)
   writeFileSync(`${setDir}/Contents.json`, JSON.stringify({
     images: [{ filename: `${base}.svg`, idiom: 'universal' }],
-    info: { author: 'iv-design-system', version: 1 },
+    info: { author: 'invos-design-system', version: 1 },
     properties: { 'preserves-vector-representation': true, 'template-rendering-intent': 'template' },
   }, null, 2) + '\n')
 

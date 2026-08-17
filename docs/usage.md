@@ -122,7 +122,7 @@ cp node_modules/@invos/design-system/docs/usage-reviewer.agent.md .claude/agents
    （`node_modules/@invos/design-system/dist/src/components/ui/index.d.ts`）
 2. **只有視覺差異** → 用既有元件的 props 調整，不要另做一個
 3. **互動語意不同**（例：設計稿要多選、系統只有單選元件）→ **不可用近似元件硬套**，語意錯誤比缺元件嚴重
-4. **明確回報缺口**給設計系統維護者（repo：`will-invos/iv-design-system`）——
+4. **明確回報缺口**給設計系統維護者（repo：`will-invos/invos-design-system`）——
    **不得只留隱藏的 TODO 註解，也不要自製近似元件**
 
 ## Token 規則

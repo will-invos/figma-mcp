@@ -149,7 +149,7 @@ for (const t of outColors) {
   mkdirSync(dir, { recursive: true })
   writeFileSync(`${dir}/Contents.json`, JSON.stringify({
     colors: [colorEntry(light, null), colorEntry(light, 'light'), colorEntry(dark, 'dark')],
-    info: { author: 'iv-design-system tokens pipeline', version: 1 },
+    info: { author: 'invos-design-system tokens pipeline', version: 1 },
   }, null, 2) + '\n')
 }
 

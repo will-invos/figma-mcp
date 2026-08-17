@@ -1,6 +1,6 @@
 # @invos/design-system
 
-> Repo: [`will-invos/iv-design-system`](https://github.com/will-invos/iv-design-system) — npm 套件名稱 `@invos/design-system`
+> Repo: [`will-invos/invos-design-system`](https://github.com/will-invos/invos-design-system) — npm 套件名稱 `@invos/design-system`
 
 一套 iOS 風格、**行動網頁為主**的 React UI Kit，可供內部多個專案共用。
 
@@ -59,7 +59,7 @@ pnpm lint           # ESLint
 ```json
 {
   "dependencies": {
-    "@invos/design-system": "github:will-invos/iv-design-system#<最新 tag>",
+    "@invos/design-system": "github:will-invos/invos-design-system#<最新 tag>",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
   }
@@ -70,7 +70,7 @@ pnpm lint           # ESLint
 
 ```bash
 git ls-remote --tags --refs --sort=-v:refname \
-  https://github.com/will-invos/iv-design-system | head -1
+  https://github.com/will-invos/invos-design-system | head -1
 ```
 
 ```bash
@@ -202,8 +202,8 @@ npm version patch     # 0.1.0 → 0.1.1（bug fix）
 把 `#` 後面的 tag 換成要升上去的版本（查法同上）：
 
 ```diff
-- "@invos/design-system": "github:will-invos/iv-design-system#<目前的 tag>",
-+ "@invos/design-system": "github:will-invos/iv-design-system#<最新 tag>",
+- "@invos/design-system": "github:will-invos/invos-design-system#<目前的 tag>",
++ "@invos/design-system": "github:will-invos/invos-design-system#<最新 tag>",
 ```
 
 ```bash
